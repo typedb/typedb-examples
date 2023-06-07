@@ -12,7 +12,7 @@ For brand-new users. Learn simple but powerful features with examples that are e
 
 COMING SOON!
 
-### Jupyter Notebook quickstart
+### Jupyter Notebook
 
 COMING SOON!
 
