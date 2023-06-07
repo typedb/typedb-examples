@@ -1,0 +1,22 @@
+# Example 10:
+
+# As Filip is unable to approve his own request, he asks his colleague Amos in Finance to approve the request for him,
+# which triggers the following query:
+
+match
+$u isa user, has email "amos.burton@vaticle.com";
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "approve order";
+$ac ($po, $o) isa access;
+$p ($u, $ac) isa permission, has validity true;
+
+# This successfully returns a result, which allows Amos to approve Filip's permission.
+
+#--------------------------------------------------
+# Exercise 10:
+
+# Edit this query to record the fact that Amos exercised this permission in the database.
+# Keyword hints: insert
+# Type hints: access-history, access-time
+
+#--------------------------------------------------

@@ -1,0 +1,24 @@
+# Example 05:
+
+# Let's say we want to give Filip some additional permissions. He's going to be managing a lot of hardware purchases for
+# the department, so we're going to give him permission to manage purchase orders:
+
+match
+$u isa user, has email "filip.inaros@vaticle.com";
+$a isa application, has name "Sage";
+$os isa operation-set, has name "manage order";
+$ac ($a, $os) isa access;
+insert
+(subject: $u, access: $ac) isa direct-permission;
+
+# Now if we run the previous query again to list his permissions (Example 04), we'll see that he's gained several new
+# ones.
+
+#--------------------------------------------------
+# Exercise 05:
+
+# Write a new query that shows what individual permissions a user will get through the operation set "manage order".
+# Keyword hints: match
+# Type hints: operation-set, operation, name
+
+#--------------------------------------------------

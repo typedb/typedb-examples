@@ -1,0 +1,25 @@
+# Example 06:
+
+# Before Filip can begin making purchase orders, we've got to make sure we've got the correct controls in place to
+# prevent any potential policy breaches. One kind of policy is a segregation-of-duty policy. This represents a set of
+# two actions that no user can be permitted to perform, for example submitting a purchase order and then approving it.
+# Let's define this policy in terms of the operations we have in the database:
+
+match
+$o1 isa operation, has name "submit order";
+$o2 isa operation, has name "approve order";
+insert
+(action: $o1, action: $o2) isa dynamic-segregation-policy, has name "independent order approval";
+
+# In this case we've chosen to make it a dynamic policy. This means that users can have both permissions, but should not
+# be able to exercise both of them for the same object. We could alternatively have defined a static policy, which would
+# simply block users from being able to have both permission simultaneously.
+
+#--------------------------------------------------
+# Exercise 06:
+
+# Edit this query to define a static segregation policy that prevents users from both approving and merging pull
+# requests. You'll need to do another query first to find out what the names of the two relevant operations are.
+# Type hints: pull-request, access, static-segregation-policy
+
+#--------------------------------------------------

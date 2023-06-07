@@ -1,0 +1,26 @@
+# Example 08:
+
+# Because Filip excercised his permission to submit a purchase order, we need to record this fact in the database:
+
+match
+$u isa user, has email "filip.inaros@vaticle.com";
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "submit order";
+$ac ($po, $o) isa access;
+insert
+(subject: $u, access: $ac) isa access-history, has access-time 2023-05-16T11:20:38;
+
+# The four lines in the match clause of this query are identical to the first four lines in the query we used to check
+# his permission (Example 07). This is because the roleplayers in an access history relation are the same as those in a
+# permission, so we can always identify exactly which permission was excercised from the access history relation. We
+# also insert the timestamp of the time the permission was exercised so that we have an audit trail.
+
+#--------------------------------------------------
+# Exercise 08:
+
+# Write a new query to show all accesses performed. Make sure to show the user's email, the target object's type, the
+# object's ID, the name of the operation performed on it, and the time of the access.
+# Keyword hints: match, isa!, sub
+# Type hints: user, email, object, id, operation, name, access, access-history, access-time
+
+#--------------------------------------------------

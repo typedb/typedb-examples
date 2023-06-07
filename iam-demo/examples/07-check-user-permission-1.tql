@@ -1,0 +1,24 @@
+# Example 07:
+
+# Now that we've set up the necessary policy, Filip can start submitting purchase orders for approval. His first order
+# is the one with reference "MCRN-02". When he attempts to submit that order, the system will trigger a check to see if
+# he has the appropriate permission with the following query:
+
+match
+$u isa user, has email "filip.inaros@vaticle.com";
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "submit order";
+$ac ($po, $o) isa access;
+$p ($u, $ac) isa permission, has validity true;
+
+# This successfully returns a result, meaning that Filip has permission to submit the order.
+
+#--------------------------------------------------
+# Exercise 07:
+
+# Use TypeDB Studio's explanations feature to find out how Filip inheritted this permission. To switch on
+# explanations, toggle the "snapshot", "infer", and "explain" buttons to on. After executing the query, double-click on
+# an inferred concept (one with a green outline) to find out how it was inferred from a rule. After using the
+# explanations feature, remember to close the transaction with the "⨉" button.
+
+#--------------------------------------------------

@@ -1,0 +1,102 @@
+# Exercise 01 solution:
+
+match
+$u isa employee, has full-name $fn, has email $e;
+
+#--------------------------------------------------
+# Exercise 02 solution:
+
+match
+$u isa user, has full-name $fn;
+$ug isa user-group, has id $id;
+$gm ($ug, $u) isa group-membership;
+group $fn;
+count;
+
+#--------------------------------------------------
+# Exercise 03 solution:
+
+match
+$e isa employee, has email "filip.inaros@vaticle.com";
+insert
+$e has email "filip@vaticle.com";
+
+#--------------------------------------------------
+# Exercise 04 solution:
+
+match
+$e isa employee, has email "filip.inaros@vaticle.com";
+$o isa directory, has path "root/engineering/typedb-cloud";
+$a isa operation, has name $n;
+$ac ($o, $a) isa access;
+$p ($e, $ac) isa permission;
+get $n;
+
+#--------------------------------------------------
+# Exercise 05 solution:
+
+match
+$o isa operation, has name $n;
+$os isa operation-set, has name "manage order";
+$sm ($os, $o) isa set-membership;
+
+#--------------------------------------------------
+# Exercise 06 solution:
+
+# Query to retrieve action names:
+match
+$a isa action, has name $n;
+$o isa pull-request;
+($a, $o) isa access;
+get $n;
+
+# Query to insert policy:
+match
+$o1 isa operation, has name "approve pull request";
+$o2 isa operation, has name "merge pull request";
+insert
+(action: $o1, action: $o2) isa static-segregation-policy, has name "independent pull request merging";
+
+#--------------------------------------------------
+# Exercise 07 solution:
+
+# If we explain the inheritted permission, we can see that a direct permission appears on the graph between the Sage ERP
+# application and the "manage order" operation set. We also see that memberships appear indicating that the "submit
+# order" operation is a member of "manage order", and that purchase order MCRN-02 is a member of Sage. This means that
+# Filip inheritted permission to approve order MCRN-02 from his permission to manage orders on Sage, which was the
+# permission we gave him earlier in Example 05.
+
+#--------------------------------------------------
+# Exercise 08 solution:
+
+match
+$u isa user, has email $e;
+$o isa! $type, has id $id;
+$type sub object;
+$op isa operation, has name $n;
+$ac ($o, $op) isa access;
+$h ($u, $ac) isa access-history, has access-time $at;
+
+#--------------------------------------------------
+# Exercise 09 solution:
+
+match
+$u isa user, has full-name $n;
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "approve order";
+$ac ($po, $o) isa access;
+$p ($u, $ac) isa permission, has validity true;
+get $n;
+
+#--------------------------------------------------
+# Exercise 10 solution:
+
+match
+$u isa user, has email "amos.burton@vaticle.com";
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "approve order";
+$ac ($po, $o) isa access;
+insert
+($u, $ac) isa access-history, has access-time 2023-05-16T15:07:47;
+
+#--------------------------------------------------
