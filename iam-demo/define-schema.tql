@@ -106,7 +106,7 @@ object plays access:object;
 action plays access:action;
 
 permission sub relation,
-    # permission abstract; [https://github.com/vaticle/typeql/issues/274]
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
     relates subject,
     relates access,
     owns review-date,
@@ -140,7 +140,7 @@ access plays access-history:access;
 # Policy and violation relations:
 
 segregation-policy sub relation,
-    # abstract; [https://github.com/vaticle/typeql/issues/274]
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
     relates action,
     owns name;
 
@@ -337,12 +337,13 @@ rule automatic-permission-validity:
         $p has validity true;
     };
 
-rule dummy-access-to-make-concludable:
+rule no-object-no-action:
     when {
-        $dobj isa object, has name $d1; $d1 = "dummy"; $d1 != "dummy";
-        $dact isa action, has name $d2; $d2 = "dummy"; $d2 != "dummy";
+        $o isa object, has id $id-o; $id-o = "";
+        $a isa action, has id $id-a; $id-a = "";
+        $id-o is $id-a;
     } then {
-        (object: $dobj, action: $dact) isa access;
+        (object: $o, action: $a) isa access;
     };
 
 #--------------------------------------------------
