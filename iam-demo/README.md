@@ -1,4 +1,4 @@
-# TypeDB IAM Demo
+# Identity and access management
 
 ## Introduction
 

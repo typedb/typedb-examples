@@ -8,11 +8,15 @@ general difficult levels are also provided for guidance.
 
 For brand-new users. Learn simple but powerful features with examples that are easy to follow.
 
-### TypeDB Basics Tutorial
+### Basic exercises
 
 COMING SOON!
 
-### TypeDB Jupyter Quickstart
+### Jupyter Notebook quickstart
+
+COMING SOON!
+
+### World development indicators
 
 COMING SOON!
 
@@ -20,10 +24,14 @@ COMING SOON!
 
 For users with some experience. Learn more complex features while assuming knowledge of the basics.
 
-### [TypeDB IAM Demo](https://github.com/james-whiteside/typedb-examples/tree/master/iam-demo)
+### [Identity and access management](https://github.com/james-whiteside/typedb-examples/tree/master/iam-demo)
 
 Learn how to use TypeDB as the database for an identity and access management (IAM) system. Uses a flexible data model
 to automate permission inheritance and policy enforcement at the schema level using rule-inference.
+
+### Cyber threat intelligence
+
+COMING SOON!
 
 ## Advanced
 
