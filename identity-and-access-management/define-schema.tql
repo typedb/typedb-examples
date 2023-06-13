@@ -1,0 +1,349 @@
+#
+# Copyright (C) 2023 Vaticle
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+define
+
+#--------------------------------------------------
+# Core entities:
+
+subject sub entity,
+    abstract,
+    owns credential;
+
+user sub subject,
+    abstract;
+
+user-group sub subject,
+    abstract;
+
+object sub entity,
+    abstract,
+    owns object-type;
+
+resource sub object,
+    abstract;
+
+resource-collection sub object,
+    abstract;
+
+action sub entity,
+    abstract,
+    owns name,
+    owns object-type;
+
+operation sub action;
+
+operation-set sub action;
+
+#--------------------------------------------------
+# Membership and ownership relations:
+
+membership sub relation,
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    relates parent,
+    relates member;
+
+group-membership sub membership,
+    relates group as parent;
+
+collection-membership sub membership,
+    relates collection as parent;
+
+set-membership sub membership,
+    relates set as parent;
+
+user-group plays group-membership:group;
+subject plays group-membership:member;
+resource-collection plays collection-membership:collection;
+object plays collection-membership:member;
+operation-set plays set-membership:set;
+action plays set-membership:member;
+
+ownership sub relation,
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    relates owned,
+    relates owner;
+
+group-ownership sub ownership,
+    relates group as owned,
+    owns ownership-type;
+
+object-ownership sub ownership,
+    relates object as owned,
+    owns ownership-type;
+
+user-group plays group-ownership:group;
+subject plays group-ownership:owner;
+object plays object-ownership:object;
+subject plays object-ownership:owner;
+
+#--------------------------------------------------
+# Access and permission relations:
+
+access sub relation,
+    relates object,
+    relates action;
+
+object plays access:object;
+action plays access:action;
+
+permission sub relation,
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    relates subject,
+    relates access,
+    owns review-date,
+    owns validity;
+
+direct-permission sub permission;
+
+inherited-permission sub permission;
+
+subject plays permission:subject;
+access plays permission:access;
+
+change-request sub relation,
+    relates requester,
+    relates requestee,
+    relates change;
+
+subject plays change-request:requester;
+subject plays change-request:requestee;
+access plays change-request:change;
+
+access-history sub relation,
+    relates subject,
+    relates access,
+    owns access-time;
+
+subject plays access-history:subject;
+access plays access-history:access;
+
+#--------------------------------------------------
+# Policy and violation relations:
+
+segregation-policy sub relation,
+    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    relates action,
+    owns name;
+
+static-segregation-policy sub segregation-policy;
+
+dynamic-segregation-policy sub segregation-policy;
+
+action plays segregation-policy:action;
+
+violation sub relation,
+    abstract;
+
+segregation-violation sub violation,
+    relates subject,
+    relates object,
+    relates policy;
+
+subject plays segregation-violation:subject;
+object plays segregation-violation:object;
+segregation-policy plays segregation-violation:policy;
+
+#--------------------------------------------------
+# Core subtype entities:
+
+employee sub user,
+    owns full-name,
+    owns email;
+
+contractor sub user,
+    owns full-name,
+    owns email;
+
+business-unit sub user-group,
+    owns name;
+
+user-role sub user-group,
+    owns name;
+
+user-account sub user-group,
+    owns email;
+
+file sub resource,
+    owns path;
+
+purchase-order sub resource,
+    owns reference;
+
+customer-account sub resource,
+    owns email;
+
+record sub resource,
+    owns primary-key;
+
+pull-request sub resource,
+    owns hash;
+
+directory sub resource-collection,
+    owns path;
+
+application sub resource-collection,
+    owns name;
+
+database sub resource-collection,
+    owns name;
+
+table sub resource-collection,
+    owns name;
+
+branch sub resource-collection,
+    owns name;
+
+repository sub resource-collection,
+    owns name;
+
+#--------------------------------------------------
+# Attributes:
+
+credential sub attribute, value string;
+object-type sub attribute, value string;
+id sub attribute, abstract, value string;
+name sub id, value string;
+ownership-type sub attribute, value string;
+review-date sub attribute, value datetime;
+validity sub attribute, value boolean;
+email sub id, value string;
+path sub id, value string;
+reference sub id, value string;
+primary-key sub id, value string;
+hash sub id, value string;
+full-name sub attribute, value string;
+access-time sub attribute, value datetime;
+
+#--------------------------------------------------
+# Rules:
+
+rule transitive-group-membership:
+    when {
+        (group: $g1, member: $g2) isa group-membership;
+        (group: $g2, member: $s) isa group-membership;
+        $g1 has id $g1-id;
+        $g2 has id $g2-id;
+        $s has id $s-id;
+    } then {
+        (group: $g1, member: $s) isa group-membership;
+    };
+
+rule transitive-collection-membership:
+    when {
+        (collection: $c1, member: $c2) isa collection-membership;
+        (collection: $c2, member: $o) isa collection-membership;
+        $c1 has id $c1-id;
+        $c2 has id $c2-id;
+        $o has id $o-id;
+    } then {
+        (collection: $c1, member: $o) isa collection-membership;
+    };
+
+rule transitive-set-membership:
+    when {
+        (set: $s1, member: $s2) isa set-membership;
+        (set: $s2, member: $a) isa set-membership;
+        $s1 has id $s1-id;
+        $s2 has id $s2-id;
+        $a has id $a-id;
+    } then {
+        (set: $s1, member: $a) isa set-membership;
+    };
+
+rule permission-inheritance:
+    when {
+        $s isa subject;
+        $ac (object: $o, action: $a) isa access;
+        $ac2 (object: $o2, action: $a2) isa access;
+        (subject: $s2, access: $ac2) isa direct-permission;
+        $s has id $s-id;
+        $o has id $o-id;
+        $a has id $a-id;
+        $s2 has id $s2-id;
+        $o2 has id $o2-id;
+        $a2 has id $a2-id;
+        {
+            (group: $s2, member: $s) isa group-membership;
+        }  or {
+            $s2 is $s;
+        };
+        {
+            (set: $a2, member: $a) isa set-membership;
+        } or {
+            $a2 is $a;
+        };
+        {
+            (collection: $o2, member: $o) isa collection-membership;
+        } or {
+            $o2 is $o;
+        };
+    } then {
+        (subject: $s, access: $ac) isa inherited-permission;
+    };
+
+rule segregation-violation-detection:
+    when {
+        $po(action: $a1, action: $a2) isa static-segregation-policy;
+        $ac1(object: $o, action: $a1) isa access;
+        $ac2(object: $o, action: $a2) isa access;
+        $p1(subject: $s, access: $ac1) isa permission;
+        $p2(subject: $s, access: $ac2) isa permission;
+    } then {
+        (subject: $s, object: $o, policy: $po) isa segregation-violation;
+    };
+
+rule automatic-permission-invalidity:
+    when {
+        $ac1(object: $o, action: $a1) isa access;
+        $ac2(object: $o, action: $a2) isa access;
+        $p1(subject: $s, access: $ac1) isa permission;
+        {
+            $po(action: $a1, action: $a2) isa static-segregation-policy;
+            $p2(subject: $s, access: $ac2) isa permission;
+        } or {
+            $po(action: $a1, action: $a2) isa dynamic-segregation-policy;
+            $p2(subject: $s, access: $ac2) isa access-history;
+        };
+    } then {
+        $p1 has validity false;
+    };
+
+rule automatic-permission-validity:
+    when {
+        $p isa permission;
+        not {
+            $p has validity false;
+        };
+    } then {
+        $p has validity true;
+    };
+
+rule no-object-no-action:
+    when {
+        $o isa object, has id $id-o; $id-o = "";
+        $a isa action, has id $id-a; $id-a = "";
+        $id-o is $id-a;
+    } then {
+        (object: $o, action: $a) isa access;
+    };
+
+#--------------------------------------------------

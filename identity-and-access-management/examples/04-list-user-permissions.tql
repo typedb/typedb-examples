@@ -1,0 +1,56 @@
+# Example 04:
+
+# Now we're going to check what permissions our newly inserted user Filip has:
+
+match
+$e isa employee, has email "filip.inaros@vaticle.com";
+$o isa object, has id $id;
+$a isa action, has name $n;
+$ac ($o, $a) isa access;
+$p ($e, $ac) isa permission;
+
+# This won't return any results with rule-inference switched off as we haven't explicitly given him any permissions, but
+# if we run it with rule-inference switched on, we see that Filip automatically inherits all the permissions he should
+# as a member of the Cloud Team. This is thanks to a set of rules encoded into our schema that automate permission
+# inheritance for us:
+#
+# rule subject-permission-inheritance:
+#     when {
+#         $s isa subject;
+#         (group: $g, member: $s) isa group-membership;
+#         (subject: $g, access: $ac) isa permission;
+#     } then {
+#         (subject: $s, access: $ac) isa inherited-permission;
+#     };
+#
+# rule object-permission-inheritance:
+#     when {
+#         $o isa object;
+#         (collection: $c, member: $o) isa collection-membership;
+#         $ac-c(object: $c, action: $a) isa access;
+#         $ac-o(object: $o, action: $a) isa access;
+#         (subject: $s, access: $ac-c) isa permission;
+#     } then {
+#         (subject: $s, access: $ac-o) isa inherited-permission;
+#     };
+#
+# rule action-permission-inheritance:
+#     when {
+#         $a isa action;
+#         (set: $se, member: $a) isa set-membership;
+#         $ac-s(object: $o, action: $se) isa access;
+#         $ac-a(object: $o, action: $a) isa access;
+#         (subject: $s, access: $ac-s) isa permission;
+#     } then {
+#         (subject: $s, access: $ac-a) isa inherited-permission;
+#     };
+
+#--------------------------------------------------
+# Exercise 04:
+
+# Edit this query to return only a list of operations that Filip can perform on the directory
+# "root/engineering/typedb-cloud".
+# Keyword hints: get
+# Type hints: directory, path, operation
+
+#--------------------------------------------------

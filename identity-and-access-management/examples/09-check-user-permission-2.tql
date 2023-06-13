@@ -1,0 +1,46 @@
+# Example 09:
+
+# Filip is new, so he doesn't realise that he can't approve his own requests. When he tries to do so, the following
+# query is triggered:
+
+match
+$u isa user, has email "filip.inaros@vaticle.com";
+$po isa purchase-order, has reference "MCRN-02";
+$o isa operation, has name "approve order";
+$ac ($po, $o) isa access;
+$p ($u, $ac) isa permission, has validity true;
+
+# This time, we get no results returned. This is because the dynamic segregation policy we defined has automatically
+# flagged this permission as being invalid because Filip was the one who submitted this purchase order. This logic is
+# encoded in the schema with the following rule:
+#
+# rule automatic-permission-invalidity:
+#     when {
+#         $ac1(object: $o, action: $a1) isa access;
+#         $ac2(object: $o, action: $a2) isa access;
+#         $p1(subject: $s, access: $ac1) isa permission;
+#         {
+#             $po(action: $a1, action: $a2) isa static-segregation-policy;
+#             $p2(subject: $s, access: $ac2) isa permission;
+#         } or {
+#             $po(action: $a1, action: $a2) isa dynamic-segregation-policy;
+#             $p2(subject: $s, access: $ac2) isa access-history;
+#         };
+#     } then {
+#         $p1 has validity false;
+#     };
+#
+# This rule flags permissions as invalid under one of two conditions: if a subject simultaneously holds two permissions
+# defined under a static segregation policy; or if a subject has at any point held two permissions defined under a
+# dynamic segregation policy and has exercised one of them. The permissions flagged by this rule are only flagged for
+# the specific combination of subject and object that have violated the policy, in this case Filip and Order MCRN-02.
+# This means that Filip is still free to approve other orders, and other users are still free to approve this one.
+
+#--------------------------------------------------
+# Exercise 09:
+
+# Edit this query to only list the names of users that are able to approve this purchase order for Filip.
+# Keyword hints: get
+# Type hints: full-name
+
+#--------------------------------------------------

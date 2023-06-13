@@ -1,0 +1,22 @@
+# Example 03:
+
+# Now let's insert a new user and add them to the Cloud Team:
+
+match
+$bu isa business-unit, has name "Cloud";
+insert
+$e isa employee, has full-name "Filip Inaros", has email "filip.inaros@vaticle.com";
+(group: $bu, member: $e) isa group-membership;
+
+# Here we're doing a match-insert query. First we match the existing group Cloud, then we insert the new user and give
+# him membership of the user group.
+
+#--------------------------------------------------
+# Exercise 03:
+
+# Write a new query to give Filip a second email address: "filip@vaticle.com". Try re-running Example 01 afterwards to
+# see the results of these queries.
+# Keyword hints: match, insert
+# Type hints: employee, email
+
+#--------------------------------------------------

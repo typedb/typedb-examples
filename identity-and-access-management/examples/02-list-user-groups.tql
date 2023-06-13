@@ -1,0 +1,39 @@
+# Example 02:
+# Now let's see what user groups the users are members of:
+
+match
+$u isa user, has full-name $fn;
+$ug isa user-group, has id $id;
+$gm ($ug, $u) isa group-membership;
+
+# In this example we've taken advantage of two of TypeDB's strong-typing features: polymorphism and type-inference. If
+# we examine the query, we can see that we ask for each user group's ID, and as group IDs are of different types, we
+# perform a polymorphic query on their shared supertype to return them all. We can also see that, when we've defined
+# our group membership, we've declared the roleplayers but not the roles they play. This is because there is only one
+# logical way that the roleplayers can play these roles, so we let TypeDB's type inference firgure that out for us.
+#
+# When we run this query, we get a few results, but let's try toggling the inference button at the top to switch on
+# TypeDB's rule-inference. Now if we run the query again, we get many more results shown in a green outline. This is
+# because of a rule encoded into the schema:
+#
+# rule transitive-group-membership:
+#     when {
+#         (group: $g1, member: $g2) isa group-membership;
+#         (group: $g2, member: $s) isa group-membership;
+#     } then {
+#         (group: $g1, member: $s) isa group-membership;
+#     };
+#
+# This rule makes membership of user groups transitive. Take Clarissa Mao for example. She is a member of the web admin
+# user role, and that role is a member of the web editor user role. This is because all web admins are also web editors
+# by default, and can do anything a web editor can (and more). We know that this means Clarissa is a web editor, but we
+# haven't written this fact to the database. With rule-inference, we don't need to, because we can encapsulate the
+# business logic of transitive membership in a high-level rule and let TypeDB do the legwork for us.
+
+#--------------------------------------------------
+# Exercise 02:
+
+# Edit this query to list the number of user groups each person is in by name. Try running it with inference off and on.
+# Keyword hints: group, count
+
+#--------------------------------------------------
