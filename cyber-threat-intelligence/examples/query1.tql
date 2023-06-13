@@ -1,0 +1,7 @@
+# Example 01:
+
+# We are querying for a list of id_unkown in the database:
+
+match 
+
+$t isa id_unknown, has $all;
