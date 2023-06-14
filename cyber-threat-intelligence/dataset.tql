@@ -4,6 +4,12 @@
 # https://oasiss-open.github.io/cti-documentation/stix/examples.html
 
 
+# Clean old data:
+
+match $t isa thing; delete $t isa thing;
+match $t isa threat_actor; insert $t has full-name "Bravo";
+
+
 # Example from: https://oasis-open.github.io/cti-documentation/examples/identifying-a-threat-actor-profile
 # Identifying a Threat Actor Profile
 insert 
