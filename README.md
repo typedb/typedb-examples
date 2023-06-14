@@ -29,9 +29,9 @@ For users with some experience. Learn more complex features while assuming knowl
 Learn how to use TypeDB as the database for an identity and access management (IAM) system. Uses a flexible data model
 to automate permission inheritance and policy enforcement at the schema level using rule-inference.
 
-### Cyber threat intelligence
+### [Cyber threat intelligence](https://github.com/vaticle/typedb-examples/tree/master/cyber-threat-intelligence)
 
-COMING SOON!
+A guided tutorial to learn how to use TypeDB in a Cyber Threat Intelligence (CTI) context in order to identify threats using powerful queries and inferenced ruling.
 
 ## Advanced
 

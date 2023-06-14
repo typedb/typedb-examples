@@ -1,0 +1,18 @@
+match
+$t isa id_unknown, has name "Adversary Bravo";
+insert
+$bravo_ta isa threat_actor, 
+    has spec_version "2.1",
+    has stix_id "bravo_threat", 
+    has created 2022-05-07T14:22:14.760, 
+    has modified 2022-05-07T14:22:14.760, 
+    has name "Bravo Attacker", 
+    has threat_actor_types "spy", 
+    has threat_actor_types "criminal";
+(attributing: $bravo_ta, attributed: $bravo_id) isa attributed_to,
+    has spec_version "2.1",
+    has stix_id "bravo_rel", 
+    has created 2023-02-29T18:18:08.661, 
+    has modified 2023-02-29T18:18:08.661;;
+
+
