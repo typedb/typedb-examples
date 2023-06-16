@@ -1,6 +1,22 @@
+# Example 03:
+
+# Now let's insert a new targets relation between a specific malware and a specific id_unknown:
+
 match
-$t isa id_unknown, has name "Adversary Bravo";
-$bravo_ta isa threat_actor, has stix_id "bravo_threat";
+$bravo_id isa id_unknown, has name "Adversary Bravo";
+$bravo_ma isa malware, has stix_id "bravo_malware";
 
 insert
-(targeting: $bravo_ta, targeted: $t) isa targets;
+(targeting: $bravo_ma, targeted: $bravo_id) isa targets,
+    has stix_id "bravo_targets";
+    
+#--------------------------------------------------
+# Exercise 04:
+
+# Write a new query to find the attack_pattern with stix_id "attack_pattern_bravo" 
+# as well as the malware with stix_id "bravo_malware"
+# and then, create a uses relationship to descibe the fact that the attack_pattern is using the malware
+# Keyword hints: match, insert
+# Type hints: attack_pattern, malware, uses
+
+#--------------------------------------------------

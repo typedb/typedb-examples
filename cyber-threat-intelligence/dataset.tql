@@ -205,7 +205,7 @@ $data2 isa observed_data,
 insert
 $bravo_ta isa threat_actor, 
     has spec_version "2.1",
-    has stix_id "threat_actor__9a8a0d25_7636_429b_a99e_b2a73cd0f11f", 
+    has stix_id "threat_actor_bravo", 
     has created 2015-05-07T14:22:14.760, 
     has modified 2015-05-07T14:22:14.760, 
     has name "Adversary Bravo", 
@@ -235,26 +235,26 @@ $phishing isa attack_pattern,
 
 $bravo_id isa id_unknown, 
     has spec_version "2.1",
-    has stix_id "identity__1621d4d4_b67d_41e3_9670_f01faf20d111",
+    has stix_id "bravo_id_unknown",
     has created 2015-05-10T16:27:17.760, 
     has modified 2015-05-10T16:27:17.760, 
     has name "Adversary Bravo", 
     has description "Adversary Bravo is a threat actor that utilizes phishing attacks.";
-(used_by: $bravo_ta, used: $poison_ivy) isa uses, 
-    has spec_version "2.1",
-    has stix_id "relationship__d44019b6_b8f7_4cb3_837e_7fd3c5724b87",
-    has created 2020-02-29T18:18:08.661,
-    has modified 2020-02-29T18:18:08.661;
-(used_by: $bravo_ta, used: $phishing) isa uses,
-    has spec_version "2.1",
-    has stix_id "relationship__3cd2d6f9_0ded_486b_8dca_606283a8997f", 
-    has created 2020-02-29T18:18:08.661,
-    has modified 2020-02-29T18:18:08.661;
-(attributing: $bravo_ta, attributed: $bravo_id) isa attributed_to,
-    has spec_version "2.1",
-    has stix_id "relationship__56e5f1c8_08f3_4e24_9e8e_f87d844672ec", 
-    has created 2020-02-29T18:18:08.661, 
-    has modified 2020-02-29T18:18:08.661;
+# (using: $bravo_ta, used: $poison_ivy) isa uses, 
+#     has spec_version "2.1",
+#     has stix_id "relationship__d44019b6_b8f7_4cb3_837e_7fd3c5724b87",
+#     has created 2020-02-29T18:18:08.661,
+#     has modified 2020-02-29T18:18:08.661;
+# (using: $bravo_ta, used: $phishing) isa uses,
+#     has spec_version "2.1",
+#     has stix_id "relationship__3cd2d6f9_0ded_486b_8dca_606283a8997f", 
+#     has created 2020-02-29T18:18:08.661,
+#     has modified 2020-02-29T18:18:08.661;
+# (attributing: $bravo_ta, attributed: $bravo_id) isa attributed_to,
+#     has spec_version "2.1",
+#     has stix_id "relationship__56e5f1c8_08f3_4e24_9e8e_f87d844672ec", 
+#     has created 2020-02-29T18:18:08.661, 
+#     has modified 2020-02-29T18:18:08.661;
 
 # Example from: https://oasis-open.github.io/cti-documentation/examples/malware-indicator-for-file-hash
 # Malware Indicator for File Hash
@@ -287,6 +287,14 @@ $ma isa malware, has name "Poison Ivy",
 # Example from: https://oasis-open.github.io/cti-documentation/examples/defining-campaign-ta-is
 # Defining Campaigns vs. Threat Actors vs. Intrusion Sets
 insert
+
+$bravo_at isa attack_pattern,
+    has spec_version "2.1",
+    has stix_id "attack_pattern_bravo",
+    has created 2015-05-10T16:27:16.760,
+    has modified 2015-05-10T16:27:16.760,
+    has name "Attack Pattern Bravo";
+
 $bpp_ta isa threat_actor, 
     has spec_version "2.1",
     has stix_id "threat-actor--56f3f0db-b5d5-431c-ae56-c18f02caf500", 
@@ -425,13 +433,13 @@ $ato6 has spec_version "2.1",
     has created 2020-02-29T17:41:44.939,
     has modified 2020-02-29T17:41:44.939;
 
-$ato7 (used_by: $is1, used: $at1) isa uses;
+$ato7 (using: $is1, used: $at1) isa uses;
 $ato7 has spec_version "2.1",
     has stix_id "relationship--06964095-5750-41fe-a9af-6c6a9d995489",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato8 (used_by: $is1, used: $at2) isa uses;
+$ato8 (using: $is1, used: $at2) isa uses;
 $ato8 has spec_version "2.1",
     has stix_id "relationship--4fe5dab1-fd6d-41aa-b8b1-d3118a708284",
     has created 2020-02-29T17:41:44.940,
@@ -449,13 +457,13 @@ $ato10 has spec_version "2.1",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato11 (used_by: $ca1, used: $at1) isa uses;
+$ato11 (using: $ca1, used: $at1) isa uses;
 $ato11 has spec_version "2.1",
     has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0a",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato12 (used_by: $ca2, used: $at2) isa uses;
+$ato12 (using: $ca2, used: $at2) isa uses;
 $ato12 has spec_version "2.1",
     has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0b",
     has created 2020-02-29T17:41:44.940,
@@ -485,15 +493,16 @@ $ato16 has spec_version "2.1",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato17 (used_by: $bpp_ta, used: $at1) isa uses;
+$ato17 (using: $bpp_ta, used: $at1) isa uses;
 $ato17 has spec_version "2.1",
     has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b10",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato18 (used_by: $bpp_ta, used: $at2) isa uses;
+$ato18 (using: $bpp_ta, used: $at2) isa uses;
 $ato18 has spec_version "2.1",
     has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b11",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
+
 
