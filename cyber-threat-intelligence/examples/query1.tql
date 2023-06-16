@@ -5,3 +5,11 @@
 match 
 
 $t isa id_unknown, has $all;
+
+#--------------------------------------------------
+# Exercise 01:
+
+# Edit this query to show only the name and description of our id_unknown.
+# Type hints: name, description
+
+#--------------------------------------------------

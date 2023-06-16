@@ -1,5 +1,7 @@
-match
-$t isa id_unknown, has name "Adversary Bravo";
+# Example 03:
+
+# Now let's insert a new threat actor, a new malware and add them an attributed_to relation:
+
 insert
 $bravo_ta isa threat_actor, 
     has spec_version "2.1",
@@ -9,10 +11,24 @@ $bravo_ta isa threat_actor,
     has name "Bravo Attacker", 
     has threat_actor_types "spy", 
     has threat_actor_types "criminal";
-(attributing: $bravo_ta, attributed: $bravo_id) isa attributed_to,
+    
+$bravo_ma isa malware,
     has spec_version "2.1",
-    has stix_id "bravo_rel", 
-    has created 2023-02-29T18:18:08.661, 
-    has modified 2023-02-29T18:18:08.661;;
+    has stix_id "bravo_malware",
+    has created 2022-05-07T14:22:14.760,
+    has modified 2022-05-07T14:22:14.760,
+    has description "Bravo Malware";   
 
+(attributing: $bravo_ta, attributed: $bravo_ma) isa attributed_to,
+    has spec_version "2.1",
+    has stix_id "bravo_threat_attributed_to_bravo_id"; 
 
+#--------------------------------------------------
+# Exercise 03:
+
+# Write a new query to give bravo_threat a third threat_actor_types: "insider". Try re-running Example 03 to
+# see the results of this addition queries.
+# Keyword hints: match, insert
+# Type hints: threat_actor, threat_actor_types
+
+#--------------------------------------------------

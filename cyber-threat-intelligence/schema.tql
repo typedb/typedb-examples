@@ -94,7 +94,7 @@ attack_pattern sub stix_domain_object,
     # Rel
     plays delivers:delivering,
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
 
     # RRel
     plays indicates:indicated,
@@ -112,7 +112,7 @@ campaign sub stix_domain_object,
     # Rel
     plays targets:targeting,
     plays attributed_to:attributing,
-    plays uses:used_by,
+    plays uses:using,
     plays compromises:compromising,
     plays originates_from:originating,
 
@@ -148,8 +148,10 @@ identity sub stix_domain_object,
 
     # Rel
     plays located_at:locating,
+    plays uses:using,
 
     # RRel
+    plays uses:used,
     plays targets:targeted,
     plays attributed_to:attributed,
     plays impersonates:impersonated;
@@ -193,7 +195,7 @@ infrastructure sub stix_domain_object,
 
     # Rel
     plays delivers:delivering,
-    plays uses:used_by,
+    plays uses:using,
     plays located_at:locating,
     plays communicates_with:communicating,
     plays consist_of:consisting,
@@ -227,7 +229,7 @@ intrusion_set sub stix_domain_object,
 
     # Rel
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
     plays attributed_to:attributing,
     plays compromises:compromising,
     plays originates_from:originating,
@@ -253,7 +255,7 @@ malware sub stix_domain_object,
 
     # Rel
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
     plays originates_from:originating,
     plays controls:controlling,
     plays hosts:hosting,
@@ -267,6 +269,7 @@ malware sub stix_domain_object,
     plays communicates_with:communicating,
 
     # RRel
+    plays attributed_to:attributed,
     plays controls:controlled,
     plays remediates:remediated,
     plays mitigates:mitigated,
@@ -361,7 +364,7 @@ threat_actor sub stix_domain_object,
 
     # Rel
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
     plays attributed_to:attributing,
     plays compromises:compromising,
     plays located_at:locating,
@@ -386,7 +389,7 @@ tool sub stix_domain_object,
     # Rel
     plays delivers:delivering,
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
     plays have:having,
     plays drops:dropping,
 
@@ -409,7 +412,7 @@ custom_object sub stix_domain_object,
     # Rel
     plays delivers:delivering,
     plays targets:targeting,
-    plays uses:used_by,
+    plays uses:using,
 
     # RRel
     plays uses:used,
@@ -463,7 +466,7 @@ attributed_to sub stix_core_relationship,
     relates attributed as target;
 
 uses sub stix_core_relationship,
-    relates used_by as source,
+    relates using as source,
     relates used as target;
 
 indicates sub stix_core_relationship,
@@ -1419,8 +1422,6 @@ environment_variable sub stix_attribute_string,
 startup sub stix_attribute_string,
     plays startup_info:info;
 
-
-
 issuer sub stix_attribute_string;
 serial_number sub stix_attribute_string;
 signature_algorithm sub stix_attribute_string;
@@ -1547,13 +1548,11 @@ is_multipart sub stix_attribute_boolean;
 aslr_enabled sub stix_attribute_boolean;
 revoked sub stix_attribute_boolean;
 
-
 stix_attribute_timestamp sub attribute,
     value datetime,
 
     plays granular_marking:marked,
     abstract;
-
 
 date sub stix_attribute_timestamp;
 ctime sub stix_attribute_timestamp;
@@ -1586,42 +1585,11 @@ validity_not_after sub stix_attribute_timestamp;
 private_key_usage_period_not_after sub stix_attribute_timestamp;
 private_key_usage_period_not_before sub stix_attribute_timestamp;
 
-
 custom_attribute sub attribute, value string, 
     plays granular_marking:marked,
     owns attribute_type; 
 
 attribute_type sub attribute, value string;
-
-
-rule transitive_use:
-when {
-    $x isa stix_domain_object, has name $name1;
-    $y isa stix_domain_object, has name $name2;
-    $z isa stix_domain_object, has name $name3;
-    $use1 (used_by: $x, used: $y) isa uses;
-    $use2 (used_by: $y, used: $z) isa uses;
-} then {
-    (used_by: $x, used: $z) isa uses;
-};
-
-rule attributed_to_when_using:
-when {
-    (attributing: $x, attributed: $y) isa attributed_to;
-    (used_by: $y, used: $z) isa uses;
-} then {
-    (used_by: $x, used: $z) isa uses;
-};
-
-rule attributed_to_when_targeting:
-when {
-    (attributing: $x, attributed: $y) isa attributed_to;
-    (targeting: $y, targeted: $z) isa targets;
-} then {
-    (targeting: $x, targeted: $z) isa targets;
-};
-
-
 
 rule linked_list_item:
 when {
@@ -1637,7 +1605,6 @@ when {
     (list: $x, element: $z) isa list_element;
 };
 
-
 rule last_element_linked_list:
 when {
     (list: $x, element: $y) isa list_element;
@@ -1651,6 +1618,36 @@ when {
 } then {
     (list: $x, last: $y) isa last_element;
 };
+
+rule transitive_use:
+when {
+    $x isa stix_domain_object, has name $name1;
+    $y isa stix_domain_object, has name $name2;
+    $z isa stix_domain_object, has name $name3;
+    $use1 (using: $x, used: $y) isa uses;
+    $use2 (using: $y, used: $z) isa uses;
+} then {
+    (using: $x, used: $z) isa uses;
+};
+
+rule attributed_to_when_using:
+when {
+    (attributing: $z, attributed: $x) isa attributed_to;
+    (using: $x, used: $y) isa uses;
+} then {
+    (using: $z, used: $y) isa uses;
+};
+
+rule attributed_to_when_targeting:
+when {
+    (attributing: $z, attributed: $x) isa attributed_to;
+    (targeting: $x, targeted: $y) isa targets;
+} then {
+    (targeting: $z, targeted: $y) isa targets;
+};
+
+
+
 
 
 

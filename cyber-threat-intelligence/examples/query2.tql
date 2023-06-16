@@ -5,3 +5,11 @@
 match 
 
 $t isa identity, has $all;
+
+#--------------------------------------------------
+# Exercise 02:
+
+# Edit this query to list only id_unknown and identity.
+# Keyword hints: negation, not
+
+#--------------------------------------------------

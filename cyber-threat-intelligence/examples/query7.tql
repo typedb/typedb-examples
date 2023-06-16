@@ -1,0 +1,12 @@
+# Example 07:
+
+# Now let's research the attack we described earlier using the id_unknown and threat_actor stix_id
+
+match
+
+$e has external_id $eid;
+$a isa attack_pattern, has name $an;
+$i isa intrusion_set, has name $in;
+$rel (referencing: $a, referenced: $e) isa external_references;
+$u (used: $a, using: $i) isa uses;
+

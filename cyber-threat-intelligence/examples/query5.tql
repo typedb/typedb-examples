@@ -1,3 +1,19 @@
+# Example 05:
+
+# Now let's research the attack we described earlier using the id_unknown and threat_actor stix_id
+
 match
 
-$t($x, $y) isa uses;
+$t($x, $y) isa targets;
+$c($a, $b) isa attributed_to;
+$b has stix_id "bravo_threat";
+$x has stix_id "bravo_id_unknown";
+
+
+#--------------------------------------------------
+# Exercise 05:
+
+# Try to run again the same query activating inference
+# Keyword hints: infer
+
+#--------------------------------------------------

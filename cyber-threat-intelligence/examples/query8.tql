@@ -1,0 +1,6 @@
+match 
+$e isa external_reference;
+$e has $eid;
+$a isa attack_pattern;
+$rel (referencing: $a, referenced: $e) isa external_references;
+
