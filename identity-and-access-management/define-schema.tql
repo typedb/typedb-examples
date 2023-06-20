@@ -22,7 +22,7 @@
 define
 
 #--------------------------------------------------
-# Core entities:
+# Core entity types:
 
 subject sub entity,
     abstract,
@@ -54,7 +54,7 @@ operation sub action;
 operation-set sub action;
 
 #--------------------------------------------------
-# Membership and ownership relations:
+# Membership and ownership relation types:
 
 membership sub relation,
     abstract,
@@ -107,7 +107,7 @@ object plays object-ownership:object;
 subject plays object-ownership:object-owner;
 
 #--------------------------------------------------
-# Access and permission relations:
+# Access and permission relation types:
 
 access sub relation,
     relates object,
@@ -147,7 +147,7 @@ subject plays access-history:subject;
 access plays access-history:access;
 
 #--------------------------------------------------
-# Policy and violation relations:
+# Policy and violation relation types:
 
 segregation-policy sub relation,
     relates action,
@@ -172,7 +172,7 @@ object plays segregation-violation:object;
 segregation-policy plays segregation-violation:policy;
 
 #--------------------------------------------------
-# Core subtype entities:
+# Core entity subtypes:
 
 employee sub user,
     owns full-name,
@@ -225,7 +225,7 @@ repository sub resource-collection,
     owns name;
 
 #--------------------------------------------------
-# Attributes:
+# Attribute types:
 
 credential sub attribute, value string;
 object-type sub attribute, value string;
@@ -244,6 +244,10 @@ access-time sub attribute, value datetime;
 
 #--------------------------------------------------
 # Rules:
+
+# These rules contain a number of lines that are unnecessary for the rule to function, but add additional context useful
+# for showing explanations in the graph visualiser during this demonstration. When adapting these rules for production,
+# these lines can be safely removed from the rules.
 
 rule transitive-group-membership:
     when {
