@@ -57,43 +57,54 @@ operation-set sub action;
 # Membership and ownership relations:
 
 membership sub relation,
-    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    abstract,
     relates parent,
     relates member;
 
 group-membership sub membership,
-    relates group as parent;
+    relates group as parent,
+    relates group-member as member;
+
+inherited-group-membership sub group-membership;
 
 collection-membership sub membership,
-    relates collection as parent;
+    relates collection as parent,
+    relates collection-member as member;
+
+inherited-collection-membership sub collection-membership;
 
 set-membership sub membership,
-    relates set as parent;
+    relates set as parent,
+    relates set-member as member;
+
+inherited-set-membership sub set-membership;
 
 user-group plays group-membership:group;
-subject plays group-membership:member;
+subject plays group-membership:group-member;
 resource-collection plays collection-membership:collection;
-object plays collection-membership:member;
+object plays collection-membership:collection-member;
 operation-set plays set-membership:set;
-action plays set-membership:member;
+action plays set-membership:set-member;
 
 ownership sub relation,
-    # abstract, [https://github.com/vaticle/typeql/issues/274]
+    abstract,
     relates owned,
     relates owner;
 
 group-ownership sub ownership,
     relates group as owned,
+    relates group-owner as owner,
     owns ownership-type;
 
 object-ownership sub ownership,
     relates object as owned,
+    relates object-owner as owner,
     owns ownership-type;
 
 user-group plays group-ownership:group;
-subject plays group-ownership:owner;
+subject plays group-ownership:group-owner;
 object plays object-ownership:object;
-subject plays object-ownership:owner;
+subject plays object-ownership:object-owner;
 
 #--------------------------------------------------
 # Access and permission relations:
@@ -106,7 +117,6 @@ object plays access:object;
 action plays access:action;
 
 permission sub relation,
-    # abstract, [https://github.com/vaticle/typeql/issues/274]
     relates subject,
     relates access,
     owns review-date,
@@ -140,7 +150,6 @@ access plays access-history:access;
 # Policy and violation relations:
 
 segregation-policy sub relation,
-    # abstract, [https://github.com/vaticle/typeql/issues/274]
     relates action,
     owns name;
 
@@ -238,35 +247,35 @@ access-time sub attribute, value datetime;
 
 rule transitive-group-membership:
     when {
-        (group: $g1, member: $g2) isa group-membership;
-        (group: $g2, member: $s) isa group-membership;
-        $g1 has id $g1-id;
-        $g2 has id $g2-id;
-        $s has id $s-id;
+        (group: $g1, group-member: $g2) isa group-membership;
+        (group: $g2, group-member: $s) isa! group-membership;
+        $g1 has id $g1-id; # Unnecessary line, see note above.
+        $g2 has id $g2-id; # Unnecessary line, see note above.
+        $s has id $s-id; # Unnecessary line, see note above.
     } then {
-        (group: $g1, member: $s) isa group-membership;
+        (group: $g1, group-member: $s) isa inherited-group-membership;
     };
 
 rule transitive-collection-membership:
     when {
-        (collection: $c1, member: $c2) isa collection-membership;
-        (collection: $c2, member: $o) isa collection-membership;
-        $c1 has id $c1-id;
-        $c2 has id $c2-id;
-        $o has id $o-id;
+        (collection: $c1, collection-member: $c2) isa collection-membership;
+        (collection: $c2, collection-member: $o) isa! collection-membership;
+        $c1 has id $c1-id; # Unnecessary line, see note above.
+        $c2 has id $c2-id; # Unnecessary line, see note above.
+        $o has id $o-id; # Unnecessary line, see note above.
     } then {
-        (collection: $c1, member: $o) isa collection-membership;
+        (collection: $c1, collection-member: $o) isa inherited-collection-membership;
     };
 
 rule transitive-set-membership:
     when {
-        (set: $s1, member: $s2) isa set-membership;
-        (set: $s2, member: $a) isa set-membership;
-        $s1 has id $s1-id;
-        $s2 has id $s2-id;
-        $a has id $a-id;
+        (set: $s1, set-member: $s2) isa set-membership;
+        (set: $s2, set-member: $a) isa! set-membership;
+        $s1 has id $s1-id; # Unnecessary line, see note above.
+        $s2 has id $s2-id; # Unnecessary line, see note above.
+        $a has id $a-id; # Unnecessary line, see note above.
     } then {
-        (set: $s1, member: $a) isa set-membership;
+        (set: $s1, set-member: $a) isa inherited-set-membership;
     };
 
 rule permission-inheritance:
@@ -275,26 +284,26 @@ rule permission-inheritance:
         $ac (object: $o, action: $a) isa access;
         $ac2 (object: $o2, action: $a2) isa access;
         (subject: $s2, access: $ac2) isa direct-permission;
-        $s has id $s-id;
-        $o has id $o-id;
-        $a has id $a-id;
-        $s2 has id $s2-id;
-        $o2 has id $o2-id;
-        $a2 has id $a2-id;
+        $s has id $s-id; # Unnecessary line, see note above.
+        $o has id $o-id; # Unnecessary line, see note above.
+        $a has id $a-id; # Unnecessary line, see note above.
+        $s2 has id $s2-id; # Unnecessary line, see note above.
+        $o2 has id $o2-id; # Unnecessary line, see note above.
+        $a2 has id $a2-id; # Unnecessary line, see note above.
         {
-            (group: $s2, member: $s) isa group-membership;
-        }  or {
+            (group: $s2, group-member: $s) isa group-membership;
+        } or {
             $s2 is $s;
         };
         {
-            (set: $a2, member: $a) isa set-membership;
-        } or {
-            $a2 is $a;
-        };
-        {
-            (collection: $o2, member: $o) isa collection-membership;
+            (collection: $o2, collection-member: $o) isa collection-membership;
         } or {
             $o2 is $o;
+        };
+        {
+            (set: $a2, set-member: $a) isa set-membership;
+        } or {
+            $a2 is $a;
         };
     } then {
         (subject: $s, access: $ac) isa inherited-permission;
@@ -335,15 +344,6 @@ rule automatic-permission-validity:
         };
     } then {
         $p has validity true;
-    };
-
-rule no-object-no-action:
-    when {
-        $o isa object, has id $id-o; $id-o = "";
-        $a isa action, has id $id-a; $id-a = "";
-        $id-o is $id-a;
-    } then {
-        (object: $o, action: $a) isa access;
     };
 
 #--------------------------------------------------
