@@ -8,6 +8,8 @@ TypeDB's in-built type-inference and polymorphism, then move on to some more adv
 rule-inference. We'll see how we can automate permission inheritance and enforce a dynamic segregation-of-duty policy at
 the schema level.
 
+![Screenshot 2023-06-16 at 13 02 19](https://github.com/james-whiteside/typedb-examples/assets/117453030/f601ae73-1e43-455e-b7c1-226ce453967d)
+
 ## Required knowledge
 
 This demo assumes knowledge of:
