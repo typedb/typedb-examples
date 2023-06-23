@@ -1,0 +1,64 @@
+# Solutions
+
+# The solutions to each of the exercises can be found here. To run the query in a solution: make sure the correct
+# session and transaction type are selected, highlight the intended query, right click and select "Run Selection".
+
+#--------------------------------------------------
+# Exercise 01 solution:
+
+
+match 
+$t isa id_unknown, has name, has description;
+
+#--------------------------------------------------
+# Exercise 02 solution:
+
+match 
+$t isa identity, has $all;
+not{$t isa organization;};
+
+#--------------------------------------------------
+# Exercise 03 solution:
+
+match
+$t isa threat_actor, has stix_id $n;
+$n = "bravo_threat";
+
+insert 
+$t has threat_actor_types "insider";
+
+#--------------------------------------------------
+# Exercise 04 solution:
+
+match
+$bravo_id isa id_unknown, has name "Adversary Bravo";
+$bravo_ma isa malware, has stix_id "bravo_malware";
+
+insert
+(used: $bravo_ma, using: $bravo_id) isa uses,
+    has stix_id "bravo_use";
+    
+
+#--------------------------------------------------
+# Exercise 06 solution:
+
+rule transitive_use:
+when {
+    $x isa stix_domain_object, has name $name1;
+    $y isa stix_domain_object, has name $name2;
+    $z isa stix_domain_object, has name $name3;
+    $use1 (used_by: $x, used: $y) isa uses;
+    $use2 (used_by: $y, used: $z) isa uses;
+} then {
+    (used_by: $x, used: $z) isa uses;
+};
+
+#--------------------------------------------------
+# Exercise 07 solution:
+
+match 
+
+$e isa external_reference, has url_link $c;
+$e has $eid;
+$a isa attack_pattern, has name $d;
+$rel (referencing: $a, referenced: $e) isa external_references; sort $d;

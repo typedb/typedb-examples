@@ -1,0 +1,20 @@
+# Example 08:
+
+# This example shows how to use the match command to find all the
+# relationships between an attack pattern and an intrusion set that
+# are referenced by a specific external reference.
+
+match
+
+$a isa attack_pattern, has name $an;
+$i isa intrusion_set, has name $in;
+$rel (referencing: $a, referenced: $e) isa external_references;
+$u (used: $a, using: $i) isa uses;
+
+#------------------------------------------------------------
+# Exercise 08:
+
+# Create a intrusion_set as well as an external_reference and external_references
+# relationship that references to be able to display our previously created bravo_*.
+
+#------------------------------------------------------------

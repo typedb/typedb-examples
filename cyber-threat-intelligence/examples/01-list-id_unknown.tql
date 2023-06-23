@@ -1,6 +1,9 @@
 # Example 01:
 
 # We are querying for a list of id_unkown in the database:
+# $t and $all are variables, which can be used in the query.
+# The query is a match statement, which is a pattern matching statement.
+# The query will return all the id_unknown in the database.
 
 match 
 

@@ -1,0 +1,25 @@
+# Example 07:
+
+# From the previous example, we can see that some attack patterns are used by intrusion sets.
+# We can also see that some attack patterns have external references.
+# We can use the same approach to find attack patterns that are used by intrusion sets and have external references.
+
+match 
+
+$e isa external_reference;
+$e has $eid;
+$a isa attack_pattern;
+$rel (referencing: $a, referenced: $e) isa external_references;
+
+    
+#--------------------------------------------------
+# Exercise 07:
+
+# Find all attack patterns that are used by intrusion sets and have external references.
+# Return the name of the attack pattern, the name of the intrusion set, and the external reference ID.
+# Order by the name of the attack pattern.
+# Keyword hints: match, sort
+# Type hints: attack_pattern, intrusion_set, external_reference
+
+#--------------------------------------------------
+
