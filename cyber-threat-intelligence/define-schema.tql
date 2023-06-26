@@ -5,7 +5,7 @@ define
 ### 1 Base Entities ###
 
 stix_entity sub entity,
-    abstract;
+    abstract; 
 
 stix_object sub stix_entity,
     owns stix_type,
