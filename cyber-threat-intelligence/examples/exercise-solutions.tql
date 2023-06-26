@@ -42,16 +42,16 @@ insert
 #--------------------------------------------------
 # Exercise 06 solution:
 
-rule transitive_use:
-when {
-    $x isa stix_domain_object, has name $name1;
-    $y isa stix_domain_object, has name $name2;
-    $z isa stix_domain_object, has name $name3;
-    $use1 (used_by: $x, used: $y) isa uses;
-    $use2 (used_by: $y, used: $z) isa uses;
-} then {
-    (used_by: $x, used: $z) isa uses;
-};
+match 
+{$bravo_1 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
+{$bravo_1 isa malware, has stix_id "bravo_malware";} or
+{$bravo_1 isa threat_actor, has stix_id "bravo_threat";};
+
+{$bravo_2 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
+{$bravo_2 isa malware, has stix_id "bravo_malware";} or
+{$bravo_2 isa threat_actor, has stix_id "bravo_threat";};
+
+$new ($bravo_1, $bravo_2) isa uses;
 
 #--------------------------------------------------
 # Exercise 07 solution:

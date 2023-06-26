@@ -2,12 +2,6 @@ define
 
 # Based on https://docs.oasis-open.org/cti/stix/v2.1/cs01/stix-v2.1-cs01.html#_disnqa06jm5
 
-### TODO
-# - check the !!! marking
-# - DISCUSSION marking
-# - What to do with the stix_type field?
-# - TO CONTINUE
-
 ### 1 Base Entities ###
 
 stix_entity sub entity,
@@ -21,7 +15,7 @@ stix_object sub stix_entity,
     plays granular_marking:marking;
 
 stix_core_object sub stix_object,
-    owns spec_version, # for SDOs
+    owns spec_version,
 
     plays object_marking:marked,
     plays created_by:created,
@@ -52,7 +46,6 @@ stix_cyber_observable_object sub stix_core_object,
     owns defanged,
     
     # Rel
-    # !!! TAKE CARE !!!
     plays external_references:referencing,
     plays contains_ref:containing,
 
@@ -77,7 +70,6 @@ external_reference sub stix_sub_object,
     plays hashes:hashes_owner,
     plays external_references:referenced;
 
-### TODO USED 
 kill_chain_phase sub stix_sub_object,
     owns kill_chain_name,
     owns kill_chain_phase_name,
@@ -89,7 +81,7 @@ kill_chain_phase sub stix_sub_object,
 attack_pattern sub stix_domain_object,
     owns name,
     owns description,
-    owns aliases, # LIST
+    owns aliases,
 
     # Rel
     plays delivers:delivering,
@@ -505,8 +497,6 @@ based_on sub stix_core_relationship,
     relates basing as source,
     relates based as target;
 
-
-### !!! TODO SCOs !!! ###
 communicates_with sub stix_core_relationship,
     relates communicating as source,
     relates communicated as target;
@@ -539,12 +529,10 @@ exfiltrates_to sub stix_core_relationship,
     relates exfiltrating_to as source,
     relates exfiltrated_to as target;
 
-### !!! TODO SCOs !!! ###
 downloads sub stix_core_relationship,
     relates downloading as source,
     relates downloaded as target;
 
-### !!! TODO SCOs !!! ###
 drops sub stix_core_relationship,
     relates dropping as source,
     relates dropped as target;
@@ -597,10 +585,6 @@ image_ref sub ref;
 parent_ref sub ref;
 message_body_data_ref sub ref,
     relates from as source;
-
-# Possible relationships between SDOs
-# infrastructure _> infrastructure_types
-# identity _> sector
 
 derivation sub relation,
     relates derived_from,
@@ -696,7 +680,7 @@ email_message sub stix_cyber_observable_object,
     plays to_refs:from,
     plays cc_refs:from,
     plays bcc_refs:from,
-    plays received_lines:owner, # LinkedList
+    plays received_lines:owner,
     plays body_multipart:to,
     plays raw_email_ref:source;
 
@@ -887,7 +871,6 @@ network_traffic sub stix_cyber_observable_object,
     plays encapsulated_by_ref:target,
     plays opened_connection_refs:opening;
 
-# TODO: Should be a hierarchy or a relation?
 http_request_ext sub network_traffic,
     owns request_method,
     owns request_value,
@@ -1052,10 +1035,6 @@ x509_v3_extensions sub x509_certificate,
     owns certificate_policies,
     owns policy_mappings;
 
-# TODO
-# Embended relations to deal with ownership of SDOs
-# CREATE SUBTYPES OF stix_attribute
-
 marking_definition sub stix_object,
     owns created,
     owns modified,
@@ -1070,11 +1049,8 @@ statement_marking sub marking_definition,
     owns statement;
 
 tlp_marking sub marking_definition,
-    owns color; # TODO REGEX red/amber/green/clear
+    owns color;
 
-
-# This is not a List but a Set
-# We keep the list name for consistancy with STIX2.1
 list sub relation,
     relates list_item,
     relates owner;
@@ -1118,7 +1094,7 @@ dict sub relation,
 hashes sub dict,
     relates hash_value as dict_item,
     relates hashes_owner as owner,
-    owns hash_algorithm as key_abstract; # TODO REGEX SUB KEY
+    owns hash_algorithm as key_abstract; 
 
 document_info_dict sub dict,
     relates document_info as dict_item,
@@ -1155,9 +1131,7 @@ startup_info sub dict,
     relates info_owner as owner,
     owns key as key_abstract;
 
-### !!! DISCUSSION !!! ###
-
-additional_header_fields sub relation, # Dict of List
+additional_header_fields sub relation, 
     relates dict_item,
     relates owner,
 
@@ -1168,13 +1142,10 @@ additional_header_fields sub relation, # Dict of List
 header_fields sub list,
     plays additional_header_fields:dict_item;
 
-### !!! FIN DISCUSSION !!! ###
-
 external_references sub list,
     relates referencing as list_item,
     relates referenced as owner;
 
-### TODO USED
 kill_chain_phases sub list,
     relates using as list_item,
     relates used as owner;
@@ -1185,7 +1156,6 @@ data_marking sub list,
 
     plays granular_marking:marking;
 
-### TODO MARKED
 object_marking sub list,
     relates marking as list_item,
     relates marked as owner;
@@ -1287,8 +1257,8 @@ objective sub stix_attribute_string;
 action sub stix_attribute_string;
 context sub stix_attribute_string;
 identity_class sub stix_attribute_string;
-sector sub stix_attribute_string; ### REL ???
-infrastructure_types sub stix_attribute_string; ### REL ???
+sector sub stix_attribute_string;
+infrastructure_types sub stix_attribute_string;
 contact_information sub stix_attribute_string;
 indicator_type sub stix_attribute_string;
 pattern sub stix_attribute_string;
