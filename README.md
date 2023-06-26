@@ -2,7 +2,7 @@
 
 A collection of TypeDB example projects and tutorials, designed for users with a range of familiarity with TypeDB,
 TypeQL, and other products in the TypeDB ecosystem. Each example lists the knowledge necessary to work through it, but
-general difficult levels are also provided for guidance.
+general difficulty levels are also provided for guidance.
 
 ## Beginner
 
