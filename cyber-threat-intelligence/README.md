@@ -35,5 +35,5 @@ Remember to click on the green tick after running each of these scripts to commi
 
 To get started, try running the examples. They are intended to be run once each and in order, so be aware that running
 them more than once or out of order might generate data errors. If anything goes wrong, you can run the
-`dataset.tql` script again to reset everything. All the examples use `data` sessions, but you'll have to switch
+`insert-data.tql` script again to reset everything. All the examples use `data` sessions, but you'll have to switch
 between `read` and `write` transactions depending on the queries in the example, and remember to commit after writes.
