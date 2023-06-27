@@ -3,7 +3,7 @@
 # We are querying for a list of actors with unknown ids in the database:
 # $t and $all are variables, which can be used in the query.
 # The query is a match statement, which is a pattern matching statement.
-# The query will return all the id_unknown in the database.
+# The query will return all the entities of type id_unknown in the database.
 
 match 
 
