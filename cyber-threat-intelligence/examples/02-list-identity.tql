@@ -7,7 +7,7 @@
 
 match 
 
-$t isa identity, has $all;
+$t isa identity, has $attribute;
 
 #--------------------------------------------------
 # Exercise 02:
