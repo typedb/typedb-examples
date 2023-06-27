@@ -8,7 +8,7 @@
 
 
 match 
-$t isa id_unknown, has name, has description;
+$t isa id_unknown, has name $n, has description $d;
 
 #--------------------------------------------------
 # Exercise 02 solution:
