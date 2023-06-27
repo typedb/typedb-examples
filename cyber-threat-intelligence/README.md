@@ -11,12 +11,14 @@ We'll see how we can automate threat discovery at the schema level with the crea
 
 This demo assumes knowledge of:
 
-- General identity and access management concepts.
 - TypeDB's transaction system.
 - All basic TypeQL syntax elements.
 - TypeDB Studio's interface.
 
 For more information, please see our [documentation](https://docs.vaticle.com/docs/general/introduction). 
+
+General knowledge of STIX2.1 would be a plus.
+
 
 ## Getting started
 
