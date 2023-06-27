@@ -31,7 +31,7 @@ to automate permission inheritance and policy enforcement at the schema level us
 
 ### [Cyber threat intelligence](https://github.com/vaticle/typedb-examples/tree/master/cyber-threat-intelligence)
 
-A guided tutorial to learn how to use TypeDB in a Cyber Threat Intelligence (CTI) context in order to identify threats using powerful queries and inferenced ruling.
+Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries and rule-inference.
 
 ## Advanced
 
