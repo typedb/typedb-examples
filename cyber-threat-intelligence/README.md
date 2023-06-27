@@ -1,4 +1,4 @@
-# Cyber Threat Intelligence 
+# Cyber threat intelligence 
 
 ## Introduction
 
