@@ -2,7 +2,7 @@
 
 ## Introduction
 
-In this demo, you'll learn how to use TypeDB as the database for a Cyber Threat Intelligence context. We'll cover
+In this demo, you'll learn how to use TypeDB as the database in a cyber threat intelligence context. We'll cover
 some basic operations like listing the identities and subtyped of it with the help of type-inferenced queries.
 We will then move on to some more advanced examples that take advantage of rules. 
 We'll see how we can automate threats discovery at the schema level with the creation of a new rule.
