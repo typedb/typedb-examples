@@ -1,6 +1,6 @@
 # Example 07:
 
-# From the previous example, we can see that some attack patterns are used by intrusion sets.
+# From the Example 06, we can see that some attack patterns are used by intrusion sets.
 # We can also see that some attack patterns have external references.
 # We can use the same approach to find attack patterns that are used by intrusion sets and have external references.
 
