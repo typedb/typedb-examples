@@ -27,7 +27,7 @@ TypeQL file:
 
 Then switch to a `data-write` transaction and run the following:
 
-```dataset.tql```
+```insert-data.tql```
 
 Remember to click on the green tick after running each of these scripts to commit the changes to the database.
 
