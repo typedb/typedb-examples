@@ -20,6 +20,6 @@ $u2 (used: $bravo_ma, using:$bravo_ta) isa uses,
 # With inference on we can now query for the attack pattern and malware that are used by the threat actor
 # Create a query that finds the attack pattern and malware that are used by the threat actor
 # Keyword hints: match, or
-# Type hints: attack_pattern, malware, threat_actor, uses
+# Type hints: attack_pattern, malware, threat_actor, uses, stix_id
 
 #--------------------------------------------------
