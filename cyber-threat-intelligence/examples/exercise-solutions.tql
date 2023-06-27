@@ -36,7 +36,7 @@ $bravo_ma isa malware, has stix_id "bravo_malware";
 
 insert
 (used: $bravo_ma, using: $bravo_id) isa uses,
-    has stix_id "bravo_use";
+    has stix_id "bravo_uses";
     
 
 #--------------------------------------------------

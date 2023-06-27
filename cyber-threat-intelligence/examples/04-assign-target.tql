@@ -1,6 +1,8 @@
 # Example 04:
 
-# Now let's insert a new targets relation between a specific malware and a specific id_unknown:
+# Now let's insert a new targets relation between a specific malware and a specific id_unknown.
+# We will use the stix_id attribute to identify the malware and the name attribute to identify the id_unknown.
+# We will also use the stix_id attribute to identify the new targets relation.
 
 match
 $bravo_id isa id_unknown, has name "Adversary Bravo";
