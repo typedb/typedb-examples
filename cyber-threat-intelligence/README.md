@@ -23,7 +23,7 @@ For more information, please see our [documentation](https://docs.vaticle.com/do
 Start your TypeDB server and open TypeDB Studio. Make sure you are on a `schema-write` transaction and run the following
 TypeQL file:
 
-```schema.tql```
+```define-schema.tql```
 
 Then switch to a `data-write` transaction and run the following:
 
