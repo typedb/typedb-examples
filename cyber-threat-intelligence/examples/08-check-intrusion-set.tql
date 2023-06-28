@@ -14,7 +14,11 @@ $u (used: $a, using: $i) isa uses;
 #------------------------------------------------------------
 # Exercise 08:
 
-# Create a intrusion_set as well as an external_reference and external_references
-# relationship that references to be able to display our previously created bravo_*.
+# Create a intrusion_set as well as a uses relation to link it to the malware owning "bravo_malware" as stix_id.
+# You will need to provide a stix_id for both new intrusion_set and new uses relation.
+# Modify the query from the Exercise 06 to include your intrusion_set as a potential roleplayer in the uses relationship.
+# 
+# As you can see, two uses relations are infered creating automatically a link between intrusion_set and threat_actor through attack_pattern.
+
 
 #------------------------------------------------------------

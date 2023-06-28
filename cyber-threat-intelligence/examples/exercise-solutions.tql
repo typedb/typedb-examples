@@ -62,3 +62,30 @@ $e isa external_reference, has url_link $c;
 $e has $eid;
 $a isa attack_pattern, has name $d;
 $rel (referencing: $a, referenced: $e) isa external_references; sort $d;
+
+
+#--------------------------------------------------
+# Exercise 08 solution:
+
+# insert new intrusion_set and uses relation
+match 
+$bravo_2 isa malware, has stix_id "bravo_malware";
+
+insert 
+$intrusion isa intrusion_set, has stix_id "bravo_intrusion";
+$bravo_uses (using: $intrusion, used: $bravo_2) isa uses, has stix_id "bravo_uses_3"; 
+
+
+# search for uses between attack_pattern, malware, threat_actor and intrusion_set
+match 
+{$bravo_1 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
+{$bravo_1 isa malware, has stix_id "bravo_malware";} or
+{$bravo_1 isa threat_actor, has stix_id "bravo_threat";} or
+{$bravo_1 isa intrusion_set, has stix_id "bravo_intrusion";};
+
+{$bravo_2 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
+{$bravo_2 isa malware, has stix_id "bravo_malware";} or
+{$bravo_2 isa threat_actor, has stix_id "bravo_threat";} or
+{$bravo_2 isa intrusion_set, has stix_id "bravo_intrusion";};
+
+$new ($bravo_1, $bravo_2) isa uses;

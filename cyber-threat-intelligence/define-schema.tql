@@ -1591,9 +1591,9 @@ when {
 
 rule transitive_use:
 when {
-    $x isa stix_domain_object, has name $name1;
-    $y isa stix_domain_object, has name $name2;
-    $z isa stix_domain_object, has name $name3;
+    $x isa stix_domain_object;
+    $y isa stix_domain_object;
+    $z isa stix_domain_object;
     $use1 (using: $x, used: $y) isa uses;
     $use2 (using: $y, used: $z) isa uses;
 } then {
