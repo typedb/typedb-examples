@@ -1,14 +1,13 @@
 # Example 05:
 
 # Now let's research the attack we described earlier using the id_unknown and threat_actor stix_id
+# This query represents the following question: "Who targets the unknown id and what tool is used?"
 
 match
-
 $t($x, $y) isa targets;
 $c($a, $b) isa attributed_to;
 $b has stix_id "bravo_threat";
 $x has stix_id "bravo_id_unknown";
-
 
 #--------------------------------------------------
 # Exercise 05:

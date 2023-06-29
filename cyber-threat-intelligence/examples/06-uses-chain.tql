@@ -1,11 +1,11 @@
 # Example 06:
 
-# Now let's research the attack we described earlier using the id_unknown and threat_actor stix_id
+# We will use the stix_id to find the attack pattern using the malware created in the Exercise 03
+# We will then create a uses relationship between the attack pattern and malware
 
 match
 $bravo_ap isa attack_pattern, has stix_id "attack_pattern_bravo";
 $bravo_ma isa malware, has stix_id "bravo_malware";
-
 
 insert
 $u1 (used: $bravo_ap, using:$bravo_ma) isa uses,

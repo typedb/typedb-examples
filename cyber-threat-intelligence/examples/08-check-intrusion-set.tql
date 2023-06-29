@@ -5,7 +5,6 @@
 # are referenced by a specific external reference.
 
 match
-
 $a isa attack_pattern, has name $an;
 $i isa intrusion_set, has name $in;
 $rel (referencing: $a, referenced: $e) isa external_references;
@@ -19,6 +18,5 @@ $u (used: $a, using: $i) isa uses;
 # Modify the query from the Exercise 06 to include your intrusion_set as a potential roleplayer in the uses relationship.
 # 
 # As you can see, two uses relations are infered creating automatically a link between intrusion_set and threat_actor through attack_pattern.
-
 
 #------------------------------------------------------------
