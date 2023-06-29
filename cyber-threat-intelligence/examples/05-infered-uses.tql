@@ -16,15 +16,12 @@ $x has stix-id "bravo-id-unknown";
 # TypeDB's rule-inference. Now if we run the query again, we get more attributes as well as a new relation
 # shown in a green outline. This is because of a rule encoded into the schema:
 # 
-# rule transitive-use:
+# rule attributed-to-when-targeting:
 # when {
-#     $x isa stix-domain-object;
-#     $y isa stix-domain-object;
-#     $z isa stix-domain-object;
-#     $use1 (using: $x, used: $y) isa uses;
-#     $use2 (using: $y, used: $z) isa uses;
+#     (attributing: $z, attributed: $x) isa attributed-to;
+#     (targeting: $x, targeted: $y) isa targets;
 # } then {
-#     (using: $x, used: $z) isa uses;
+#     (targeting: $z, targeted: $y) isa targets;
 # };
 # 
 # This rule makes uses relationship transitive, so if we know that a threat actor uses an unknown id, and that unknown
