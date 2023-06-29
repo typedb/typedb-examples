@@ -1,7 +1,7 @@
 # Example 06:
 
 # Next, we will use the stix_id to find the attack pattern using the malware created in Exercise 03.
-# We will then create a uses relationship between the attack pattern and malware
+# We will then create a uses relationship between the attack pattern and malware.
 
 match
 $bravo_ap isa attack_pattern, has stix_id "attack_pattern_bravo";
