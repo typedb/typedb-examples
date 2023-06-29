@@ -19,7 +19,6 @@ For more information, please see our [documentation](https://docs.vaticle.com/do
 
 General knowledge of STIX2.1 would be a plus.
 
-
 ## Getting started
 
 Start your TypeDB server and open TypeDB Studio. Make sure you are on a `schema-write` transaction and run the following

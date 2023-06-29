@@ -3,7 +3,7 @@
 # Let's start by getting a list of users in the database:
 
 match
-$u isa employee, has full-name $fn, has email $e;
+$u isa user, has full-name $fn, has email $e;
 
 # We should see seven users represented by entities, each with two attributes: full-name and email, which are the three
 # variables we bound in our query. If we look closely at the entities, we can see that there are actually two types:

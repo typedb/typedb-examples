@@ -18,10 +18,10 @@ $gm ($ug, $u) isa group-membership;
 #
 # rule transitive-group-membership:
 #     when {
-#         (group: $g1, member: $g2) isa group-membership;
-#         (group: $g2, member: $s) isa group-membership;
+#         (group: $g1, group-member: $g2) isa group-membership;
+#         (group: $g2, group-member: $s) isa! group-membership;
 #     } then {
-#         (group: $g1, member: $s) isa group-membership;
+#         (group: $g1, group-member: $s) isa inherited-group-membership;
 #     };
 #
 # This rule makes membership of user groups transitive. Take Clarissa Mao for example. She is a member of the web admin

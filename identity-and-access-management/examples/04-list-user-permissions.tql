@@ -14,35 +14,29 @@ $p ($e, $ac) isa permission;
 # as a member of the Cloud Team. This is thanks to a set of rules encoded into our schema that automate permission
 # inheritance for us:
 #
-# rule subject-permission-inheritance:
+# rule permission-inheritance:
 #     when {
 #         $s isa subject;
-#         (group: $g, member: $s) isa group-membership;
-#         (subject: $g, access: $ac) isa permission;
+#         $ac (object: $o, action: $a) isa access;
+#         $ac2 (object: $o2, action: $a2) isa access;
+#         (subject: $s2, access: $ac2) isa direct-permission;
+#         {
+#             (group: $s2, group-member: $s) isa group-membership;
+#         } or {
+#             $s2 is $s;
+#         };
+#         {
+#             (collection: $o2, collection-member: $o) isa collection-membership;
+#         } or {
+#             $o2 is $o;
+#         };
+#         {
+#             (set: $a2, set-member: $a) isa set-membership;
+#         } or {
+#             $a2 is $a;
+#         };
 #     } then {
 #         (subject: $s, access: $ac) isa inherited-permission;
-#     };
-#
-# rule object-permission-inheritance:
-#     when {
-#         $o isa object;
-#         (collection: $c, member: $o) isa collection-membership;
-#         $ac-c(object: $c, action: $a) isa access;
-#         $ac-o(object: $o, action: $a) isa access;
-#         (subject: $s, access: $ac-c) isa permission;
-#     } then {
-#         (subject: $s, access: $ac-o) isa inherited-permission;
-#     };
-#
-# rule action-permission-inheritance:
-#     when {
-#         $a isa action;
-#         (set: $se, member: $a) isa set-membership;
-#         $ac-s(object: $o, action: $se) isa access;
-#         $ac-a(object: $o, action: $a) isa access;
-#         (subject: $s, access: $ac-s) isa permission;
-#     } then {
-#         (subject: $s, access: $ac-a) isa inherited-permission;
 #     };
 
 #--------------------------------------------------

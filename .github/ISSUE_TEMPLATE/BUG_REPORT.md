@@ -13,9 +13,8 @@ Please replace every line in curly brackets { like this } with an appropriate de
 ## Environment
 
 1. OS (where TypeDB server runs): { e.g. Mac OS 10, Windows 10, Ubuntu 16.4, etc. }
-2. TypeDB version (and platform): { e.g. TypeDB 1.4, or TypeDB KGMS 1.4.3 on Google Cloud }
-3. TypeDB Jupyter connector version: { e.g. typedb-jupyter 0.2 }
-4. Jupyter version (and platform): { e.g Jupyter Server 2.5.0 }
+2. TypeDB version (and platform): { e.g. TypeDB 2.0.0, or TypeDB Cluster 2.0.0 on Google Cloud }
+3. TypeDB client: { e.g. Studio, Console, Jupyter }
 4. Other environment details:
 
 ## Reproducible Steps
