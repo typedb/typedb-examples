@@ -15,10 +15,10 @@ insert
 #--------------------------------------------------
 # Exercise 04:
 
-# Write a new query to find the attack_pattern with stix_id "attack_pattern_bravo" 
-# as well as the malware with stix_id "bravo_malware"
-# and then, create a uses relationship to descibe the fact that the attack_pattern is using the malware
-# Keyword hints: match, insert
-# Type hints: attack_pattern, malware, uses
+# Write a new query to find the id_unknown with stix_id "bravo_id_unknown" as well as the malware with stix_id "bravo_malware"
+# and then, create a uses relationship to descibe the fact that the attack_pattern is using the malware.
+# You will need to give a new unique stix_id to your uses relationship.
+# Keyword hints: match, insert, has
+# Type hints: id_unknown, malware, uses
 
 #--------------------------------------------------
