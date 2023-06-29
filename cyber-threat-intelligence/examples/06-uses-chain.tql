@@ -1,6 +1,6 @@
 # Example 06:
 
-# We will use the stix_id to find the attack pattern using the malware created in the Exercise 03
+# Next, we will use the stix_id to find the attack pattern using the malware created in Exercise 03.
 # We will then create a uses relationship between the attack pattern and malware
 
 match
