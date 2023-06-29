@@ -7,35 +7,35 @@
 # Clean old data:
 
 match $t isa thing; delete $t isa thing;
-match $t isa threat_actor; insert $t has full-name "Bravo";
+match $t isa threat-actor; insert $t has full-name "Bravo";
 
 
 # Example from: https://oasis-open.github.io/cti-documentation/examples/identifying-a-threat-actor-profile
 # Identifying a Threat Actor Profile
 insert 
-$ta isa threat_actor, has name "Disco Team Threat Actor Group", 
-    has spec_version "2.1",
-    has stix_id "threat_actor__dfaa8d77_07e2_4e28_b2c8_92e9f7b04428",
+$ta isa threat-actor, has name "Disco Team Threat Actor Group", 
+    has spec-version "2.1",
+    has stix-id "threat-actor--dfaa8d77-07e2-4e28-b2c8-92e9f7b04428",
     has created 2014-11-19T23:39:03.893,
     has modified 2014-11-19T23:39:03.893,
-    has aliases "disco_team@stealthemail.com", 
+    has aliases "disco-team@stealthemail.com", 
     has aliases "Equipo del Discoteca",
     has description "This organized threat actor group operates to create profit from all types of crime.",
     has aliases "Equipo del Discoteca",
-    has stix_role "agent",
+    has stix-role "agent",
     has goals "Steal Credit Card Information", 
     has sophistication "expert",
-    has resource_level "organization", 
-    has threat_actor_types "crime syndicate", 
-    has primary_motivation "personal_gain";
-$id isa organization, has name "Disco Team", has spec_version "2.1", 
-    has stix_id "identity__733c5838_34d9_4fbf_949c_62aba761184c",
+    has resource-level "organization", 
+    has threat-actor-types "crime syndicate", 
+    has primary-motivation "personal-gain";
+$id isa organization, has name "Disco Team", has spec-version "2.1", 
+    has stix-id "identity--733c5838-34d9-4fbf-949c-62aba761184c",
     has created 2016-08-23T18:05:49.307, has modified 2016-08-23T18:05:49.307,
-    has description "Disco Team is the name of an organized threat actor crime_syndicate.", 
-    has contact_information "disco_team@stealthemail.com"; 
+    has description "Disco Team is the name of an organized threat actor crime-syndicate.", 
+    has contact-information "disco-team@stealthemail.com"; 
 
-(attributing: $ta, attributed: $id) isa attributed_to, has spec_version "2.1", 
-    has stix_id "relationship__a2e3efb5_351d_4d46_97a0_6897ee7c77a0",
+(attributing: $ta, attributed: $id) isa attributed-to, has spec-version "2.1", 
+    has stix-id "relationship--a2e3efb5-351d-4d46-97a0-6897ee7c77a0",
     has created 2020-02-29T18:01:28.577,
     has modified 2020-02-29T18:01:28.577;
 
@@ -43,32 +43,32 @@ $id isa organization, has name "Disco Team", has spec_version "2.1",
 # Identicator for malicious URL
 insert 
 $in isa indicator, has name "Malicious site hosting downloader",
-    has spec_version "2.1", 
+    has spec-version "2.1", 
     has description "This organized threat actor group operates to create profit from all types of crime.",
     has created 2014-06-29T13:49:37.079,
     has modified 2014-06-29T13:49:37.079,
-    has stix_id "indicator__d81f86b9_975b_4c0b_875e_810c5ad45a4f",
+    has stix-id "indicator--d81f86b9-975b-4c0b-875e-810c5ad45a4f",
     has pattern "[url:value = 'http://x4z9arb.cn/4712/']", 
-    has pattern_type "stix", 
-    has valid_from 2014-06-29T13:49:37.079,
-    has indicator_type "malicious_activity";
+    has pattern-type "stix", 
+    has valid-from 2014-06-29T13:49:37.079,
+    has indicator-type "malicious-activity";
 $ma isa malware, has name "x4z9arb backdoor", 
-    has spec_version "2.1", 
-    has stix_id "malware__162d917e_766f_4611_b5d6_652791454fca", 
+    has spec-version "2.1", 
+    has stix-id "malware--162d917e-766f-4611-b5d6-652791454fca", 
     has created 2014-06-30T09:15:17.182, 
     has modified 2014-06-30T09:15:17.182, 
     has description "This malware attempts to download remote files after establishing a foothold as a backdoor.", 
-    has malware_types "backdoor",
-    has malware_types "remote_access_trojan",
-    has is_family false;
-$kill_chain_phase isa kill_chain_phase, 
-    has kill_chain_name "mandiant_attack_lifecycle_model",
-    has kill_chain_phase_name "establish_foothold"; 
+    has malware-types "backdoor",
+    has malware-types "remote-access-trojan",
+    has is-family false;
+$kill-chain-phase isa kill-chain-phase, 
+    has kill-chain-name "mandiant-attack-lifecycle-model",
+    has kill-chain-phase-name "establish-foothold"; 
 
-(used: $ma, using: $kill_chain_phase) isa kill_chain_phases;
+(used: $ma, using: $kill-chain-phase) isa kill-chain-phases;
 (indicating: $in, indicated: $ma) isa indicates, 
-    has spec_version "2.1",
-    has stix_id "relationship__864af2ea_46f9_4d23_b3a2_1c2adf81c265", 
+    has spec-version "2.1",
+    has stix-id "relationship--864af2ea-46f9-4d23-b3a2-1c2adf81c265", 
     has created 2020-02-29T18:03:58.029,
     has modified 2020-02-29T18:03:58.029;
 
@@ -76,183 +76,183 @@ $kill_chain_phase isa kill_chain_phase,
 # Malware indicator for file hash
 insert
 $in isa indicator, has name "File hash for Poison Ivy variant", 
-    has spec_version "2.1", 
-    has stix_id "indicator__a932fcc6_e032_476c_826f_cb970a5a1ade", 
+    has spec-version "2.1", 
+    has stix-id "indicator--a932fcc6-e032-476c-826f-cb970a5a1ade", 
     has created 2014-02-20T09:16:08.989, 
     has modified 2014-02-20T09:16:08.989, 
     has description "This file hash indicates that a sample of Poison Ivy is present.",
-    has indicator_type "malicious_activity",
-    has pattern "[file:hashes.'SHA_256' = 'ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c']", 
-    has pattern_type "stix",
-    has valid_from 2014-02-20T09:00:00;
+    has indicator-type "malicious-activity",
+    has pattern "[file:hashes.'SHA-256' = 'ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c']", 
+    has pattern-type "stix",
+    has valid-from 2014-02-20T09:00:00;
 $m isa malware, has name "Poison Ivy",
-    has spec_version "2.1", 
-    has stix_id "malware__fdd60b30_b67c_41e3_b0b9_f01faf20d111", 
+    has spec-version "2.1", 
+    has stix-id "malware--fdd60b30-b67c-41e3-b0b9-f01faf20d111", 
     has created 2014-02-20T09:16:08.989, 
     has modified 2014-02-20T09:16:08.989,
-    has malware_types "remote_access_trojan", 
-    has is_family false; 
+    has malware-types "remote-access-trojan", 
+    has is-family false; 
 (indicating: $in, indicated: $m) isa indicates, 
-    has spec_version "2.1", 
-    has stix_id "relationship__29dcdf68_1b0c_4e16_94ed_bcc7a9572f69", 
+    has spec-version "2.1", 
+    has stix-id "relationship--29dcdf68-1b0c-4e16-94ed-bcc7a9572f69", 
     has created 2020-02-29T18:09:12.808,
     has modified 2020-02-29T18:09:12.808;
 
 # Example from: https://oasis-open.github.io/cti-documentation/examples/sighting-of-an-indicator
 # Sighting of an Indicator
 insert
-$malicious_url isa indicator, has name "Malicious URL", 
-    has spec_version "2.1",
-    has stix_id "indicator__9299f726_ce06_492e_8472_2b52ccb53191", 
+$malicious-url isa indicator, has name "Malicious URL", 
+    has spec-version "2.1",
+    has stix-id "indicator--9299f726-ce06-492e-8472-2b52ccb53191", 
     has created 2017-02-27T13:57:10.515, 
     has modified 2017-02-27T13:57:10.515, 
     has description "This URL is potentially associated with malicious activity and is listed on several blacklist sites.", 
-    has indicator_type "malicious_activity", 
+    has indicator-type "malicious-activity", 
     has pattern "[url:value = 'http://paypa1.banking.com']", 
-    has pattern_type "stix", 
-    has valid_from 2015-06-29T09:10:15.915;
+    has pattern-type "stix", 
+    has valid-from 2015-06-29T09:10:15.915;
 $alpha isa organization, has name "Alpha Threat Analysis Org.", 
-    has spec_version "2.1",
-    has stix_id "identity__39012926_a052_44c4_ae48_caaf4a10ee6e", 
+    has spec-version "2.1",
+    has stix-id "identity--39012926-a052-44c4-ae48-caaf4a10ee6e", 
     has created 2017-02-24T15:50:10.564, 
     has modified 2017-02-24T15:50:10.564, 
-    has stix_role "Cyber Security", 
+    has stix-role "Cyber Security", 
     has sector "technology", 
-    has contact_information "info@alpha.org"; 
+    has contact-information "info@alpha.org"; 
 $beta isa organization, has name "Beta Cyber Intelligence Company", 
-    has spec_version "2.1",
-    has stix_id "identity__5206ba14_478f_4b0b_9a48_395f690c20a2", 
+    has spec-version "2.1",
+    has stix-id "identity--5206ba14-478f-4b0b-9a48-395f690c20a2", 
     has created 2017-02-26T17:55:10.442, 
     has modified 2017-02-26T17:55:10.442, 
-    has stix_role "Cyber Security",  
+    has stix-role "Cyber Security",  
     has sector "technology", 
-    has contact_information "info@beta.com"; 
-(observed_data: $beta, sighting_of: $malicious_url) isa sighting, has stix_id "5206ba14_478f_4b0b_9a48_395f690c20a2";
-(creator: $alpha, created: $malicious_url) isa created_by; 
+    has contact-information "info@beta.com"; 
+(observed-data: $beta, sighting-of: $malicious-url) isa sighting, has stix-id "5206ba14-478f-4b0b-9a48-395f690c20a2";
+(creator: $alpha, created: $malicious-url) isa created-by; 
 
 # Example from: https://oasis-open.github.io/cti-documentation/examples/sighting-of-observed-data
 # Sighting of Observed Data
 insert
 $pym isa organization, has name "Pym Technologies", 
-    has spec_version "2.1",
-    has stix_id "identity__7865b6d2_a4af_45c5_b582_afe5ec376c33",
+    has spec-version "2.1",
+    has stix-id "identity--7865b6d2-a4af-45c5-b582-afe5ec376c33",
     has created 2013-04-14T13:07:49.812, 
     has modified 2013-04-14T13:07:49.812, 
     has sector "technology",
-    has contact_information "hank@pymtech.com";
+    has contact-information "hank@pymtech.com";
 $oscorp isa organization, has name "Oscorp Industries", 
-    has spec_version "2.1" , 
-    has stix_id "identity__987eeee1_413a_44ac_96cc_0a8acdcc2f2c", 
+    has spec-version "2.1" , 
+    has stix-id "identity--987eeee1-413a-44ac-96cc-0a8acdcc2f2c", 
     has created 2017-01-14T13:07:49.812, 
     has modified 2017-01-14T13:07:49.812, 
     has sector "technology", 
-    has contact_information "norman@oscorp.com";
+    has contact-information "norman@oscorp.com";
 $malware isa malware, has name "Online Job Site Trojan", 
-    has spec_version "2.1", 
-    has stix_id "malware__ae560258_a5cb_4be8_8f05_013d6712295f", 
+    has spec-version "2.1", 
+    has stix-id "malware--ae560258-a5cb-4be8-8f05-013d6712295f", 
     has created 2014-02-20T09:16:08.989, 
     has modified 2014-02-20T09:16:08.989, 
     has description "Trojan that is disguised as the executable file resume.pdf., it also creates a registry key.",
-    has malware_types "remote_access_trojan", 
-    has is_family false;
+    has malware-types "remote-access-trojan", 
+    has is-family false;
 $file isa file, 
-    has stix_id "file__364fe3e5_b1f4_5ba3_b951_ee5983b3538d",
-    has spec_version "2.1",
+    has stix-id "file--364fe3e5-b1f4-5ba3-b951-ee5983b3538d",
+    has spec-version "2.1",
     has size 83968, 
     has name "resume.pdf";
-$ploup isa hash_value;
+$ploup isa hash-value;
 $ploup "1717b7fff97d37a1e1a0029d83492de1";
-$plip isa hash_value; 
+$plip isa hash-value; 
 $plip "1717b7fff97d37a1e1a0aa29d83492de1";
-(hash_value: $ploup, hashes_owner: $file) isa hashes, has hash_algorithm "MD5";
-(hash_value: $plip, hashes_owner: $file) isa hashes, has hash_algorithm "SHA-1";
-$data1 isa observed_data, 
-    has spec_version "2.1",
-    has stix_id "observed_data__cf8eaa41_6f4c_482e_89b9_9cd2d6a83cb1", 
+(hash-value: $ploup, hashes-owner: $file) isa hashes, has hash-algorithm "MD5";
+(hash-value: $plip, hashes-owner: $file) isa hashes, has hash-algorithm "SHA-1";
+$data1 isa observed-data, 
+    has spec-version "2.1",
+    has stix-id "observed-data--cf8eaa41-6f4c-482e-89b9-9cd2d6a83cb1", 
     has created 2017-02-28T19:37:11.213, 
     has modified 2017-02-28T19:37:11.213,
-    has first_observed 2017-02-27T21:37:11.213, 
-    has last_observed 2017-02-27T21:37:11.213,
-    has number_observed 1;
-$key isa windows_registry_key,
-    has stix_id "windows_registry_key__16b80d14_d574_5620_abad_10ff304b1c26", 
-    has spec_version "2.1", 
-    has attribute_key "HKEY_LOCAL_MACHINE\\SYSTEM\\ControlSet001\\Services\\WSALG2";
-$data2 isa observed_data, 
-    has spec_version "2.1",
-    has stix_id "observed_data__a0d34360_66ad_4977_b255_d9e1080421c4", 
+    has first-observed 2017-02-27T21:37:11.213, 
+    has last-observed 2017-02-27T21:37:11.213,
+    has number-observed 1;
+$key isa windows-registry-key,
+    has stix-id "windows-registry-key--16b80d14-d574-5620-abad-10ff304b1c26", 
+    has spec-version "2.1", 
+    has attribute-key "HKEY-LOCAL-MACHINE\\SYSTEM\\ControlSet001\\Services\\WSALG2";
+$data2 isa observed-data, 
+    has spec-version "2.1",
+    has stix-id "observed-data--a0d34360-66ad-4977-b255-d9e1080421c4", 
     has created 2017-02-28T19:37:11.213, 
     has modified 2017-02-28T19:37:11.213, 
-    has first_observed 2017-02-27T21:37:11.213, 
-    has last_observed 2017-02-27T21:37:11.213, 
-    has number_observed 1;
-(creator: $oscorp, created: $data2) isa created_by;
-(creator: $oscorp, created: $data1) isa created_by;
-(creator: $pym, created: $malware) isa created_by;
-(sighting_of: $malware, observed_data: $data1, observed_data: $data2) isa sighting,
-   has spec_version "2.1",
-   has stix_id "sighting__779c4ae8_e134_4180_baa4_03141095d971",
+    has first-observed 2017-02-27T21:37:11.213, 
+    has last-observed 2017-02-27T21:37:11.213, 
+    has number-observed 1;
+(creator: $oscorp, created: $data2) isa created-by;
+(creator: $oscorp, created: $data1) isa created-by;
+(creator: $pym, created: $malware) isa created-by;
+(sighting-of: $malware, observed-data: $data1, observed-data: $data2) isa sighting,
+   has spec-version "2.1",
+   has stix-id "sighting--779c4ae8-e134-4180-baa4-03141095d971",
    has created 2017-02-28T19:37:11.213, 
    has modified 2017-02-28T19:37:11.213,
-   has first_seen 2017-02-28T19:07:24.856, 
-   has last_seen 2017-02-28T19:07:24.857,
+   has first-seen 2017-02-28T19:07:24.856, 
+   has last-seen 2017-02-28T19:07:24.857,
    has count 1;
-(referencing: $data1, referenced: $file) isa external_references; 
-(referencing: $data2, referenced: $key) isa external_references; 
+(referencing: $data1, referenced: $file) isa external-references; 
+(referencing: $data2, referenced: $key) isa external-references; 
 
 # Example from: https://oasis-open.github.io/cti-documentation/examples/threat-actor-leveraging-attack-patterns-and-malware
 # Threat Actor Leveraging Attack Patterns and Malware
 insert
-$bravo_ta isa threat_actor, 
-    has spec_version "2.1",
-    has stix_id "threat_actor_bravo", 
+$bravo-ta isa threat-actor, 
+    has spec-version "2.1",
+    has stix-id "threat-actor-bravo", 
     has created 2015-05-07T14:22:14.760, 
     has modified 2015-05-07T14:22:14.760, 
     has name "Adversary Bravo", 
     has description "Adversary Bravo is known to use phishing attacks to deliver remote access malware to the targets.",
-    has threat_actor_types "spy", 
-    has threat_actor_types "criminal";
-$poison_ivy isa malware,
-    has spec_version "2.1", 
-    has stix_id "malware__d1c612bc_146f_4b65_b7b0_9a54a14150a4",
+    has threat-actor-types "spy", 
+    has threat-actor-types "criminal";
+$poison-ivy isa malware,
+    has spec-version "2.1", 
+    has stix-id "malware--d1c612bc-146f-4b65-b7b0-9a54a14150a4",
     has created 2015-04-23T11:12:34.760, 
     has modified 2015-04-23T11:12:34.760, 
     has name "Poison Ivy Variant d1c6", 
-    has is_family false, 
-    has malware_types "remote_access_trojan";
-$kill_chain_phase isa kill_chain_phase, 
-    has kill_chain_name "mandiant_attack_lifecycle_model",
-    has kill_chain_phase_name "initial_compromise"; 
-(used: $poison_ivy, using: $kill_chain_phase) isa kill_chain_phases;
-$phishing isa attack_pattern, 
-    has spec_version "2.1", 
-    has stix_id "attack_pattern__8ac90ff3_ecf8_4835_95b8_6aea6a623df5", 
+    has is-family false, 
+    has malware-types "remote-access-trojan";
+$kill-chain-phase isa kill-chain-phase, 
+    has kill-chain-name "mandiant-attack-lifecycle-model",
+    has kill-chain-phase-name "initial-compromise"; 
+(used: $poison-ivy, using: $kill-chain-phase) isa kill-chain-phases;
+$phishing isa attack-pattern, 
+    has spec-version "2.1", 
+    has stix-id "attack-pattern--8ac90ff3-ecf8-4835-95b8-6aea6a623df5", 
     has created 2015-05-07T14:22:14.760, 
     has modified 2015-05-07T14:22:14.760, 
     has name "Phishing", 
     has description "Spear phishing used as a delivery mechanism for malware.";
-(used: $phishing, using: $kill_chain_phase) isa kill_chain_phases; 
+(used: $phishing, using: $kill-chain-phase) isa kill-chain-phases; 
 
-$bravo_id isa id_unknown, 
-    has spec_version "2.1",
-    has stix_id "bravo_id_unknown",
+$bravo-id isa id-unknown, 
+    has spec-version "2.1",
+    has stix-id "bravo-id-unknown",
     has created 2015-05-10T16:27:17.760, 
     has modified 2015-05-10T16:27:17.760, 
     has name "Adversary Bravo", 
     has description "Adversary Bravo is a threat actor that utilizes phishing attacks.";
-# (using: $bravo_ta, used: $poison_ivy) isa uses, 
-#     has spec_version "2.1",
-#     has stix_id "relationship__d44019b6_b8f7_4cb3_837e_7fd3c5724b87",
+# (using: $bravo-ta, used: $poison-ivy) isa uses, 
+#     has spec-version "2.1",
+#     has stix-id "relationship--d44019b6-b8f7-4cb3-837e-7fd3c5724b87",
 #     has created 2020-02-29T18:18:08.661,
 #     has modified 2020-02-29T18:18:08.661;
-# (using: $bravo_ta, used: $phishing) isa uses,
-#     has spec_version "2.1",
-#     has stix_id "relationship__3cd2d6f9_0ded_486b_8dca_606283a8997f", 
+# (using: $bravo-ta, used: $phishing) isa uses,
+#     has spec-version "2.1",
+#     has stix-id "relationship--3cd2d6f9-0ded-486b-8dca-606283a8997f", 
 #     has created 2020-02-29T18:18:08.661,
 #     has modified 2020-02-29T18:18:08.661;
-# (attributing: $bravo_ta, attributed: $bravo_id) isa attributed_to,
-#     has spec_version "2.1",
-#     has stix_id "relationship__56e5f1c8_08f3_4e24_9e8e_f87d844672ec", 
+# (attributing: $bravo-ta, attributed: $bravo-id) isa attributed-to,
+#     has spec-version "2.1",
+#     has stix-id "relationship--56e5f1c8-08f3-4e24-9e8e-f87d844672ec", 
 #     has created 2020-02-29T18:18:08.661, 
 #     has modified 2020-02-29T18:18:08.661;
 
@@ -260,27 +260,27 @@ $bravo_id isa id_unknown,
 # Malware Indicator for File Hash
 insert 
 $in isa indicator, has name "Malicious site hosting downloader",
-    has spec_version "2.1", 
+    has spec-version "2.1", 
     has description "File hash for Poison Ivy variant",
     has created 2014-02-20T09:16:08.989,
     has modified 2014-02-20T09:16:08.989,
-    has stix_id "indicator--a932fcc6-e032-476c-826f-cb970a5a1ade",
+    has stix-id "indicator--a932fcc6-e032-476c-826f-cb970a5a1ade",
     has pattern "[file:hashes.'SHA-256' = 'ef537f25c895bfa782526529a9b63d97aa631564d5d789c2b765448c8635fb6c']", 
-    has pattern_type "stix", 
-    has valid_from 2014-02-20T09:00:00,
-    has indicator_type "malicious_activity";
+    has pattern-type "stix", 
+    has valid-from 2014-02-20T09:00:00,
+    has indicator-type "malicious-activity";
 $ma isa malware, has name "Poison Ivy", 
-    has spec_version "2.1", 
-    has stix_id "malware--fdd60b30-b67c-41e3-b0b9-f01faf20d111", 
+    has spec-version "2.1", 
+    has stix-id "malware--fdd60b30-b67c-41e3-b0b9-f01faf20d111", 
     has created 2014-02-20T09:16:08.989, 
     has modified 2014-02-20T09:16:08.989, 
-    has malware_types "backdoor",
-    has malware_types "remote_access_trojan",
-    has is_family false;
+    has malware-types "backdoor",
+    has malware-types "remote-access-trojan",
+    has is-family false;
 
 (indicating: $in, indicated: $ma) isa indicates, 
-    has spec_version "2.1",
-    has stix_id "relationship--29dcdf68-1b0c-4e16-94ed-bcc7a9572f69", 
+    has spec-version "2.1",
+    has stix-id "relationship--29dcdf68-1b0c-4e16-94ed-bcc7a9572f69", 
     has created 2020-02-29T18:09:12.808,
     has modified 2020-02-29T18:09:12.808;
 
@@ -288,220 +288,220 @@ $ma isa malware, has name "Poison Ivy",
 # Defining Campaigns vs. Threat Actors vs. Intrusion Sets
 insert
 
-$bravo_at isa attack_pattern,
-    has spec_version "2.1",
-    has stix_id "attack_pattern_bravo",
+$bravo-at isa attack-pattern,
+    has spec-version "2.1",
+    has stix-id "attack-pattern-bravo",
     has created 2015-05-10T16:27:16.760,
     has modified 2015-05-10T16:27:16.760,
     has name "Attack Pattern Bravo";
 
-$bpp_ta isa threat_actor, 
-    has spec_version "2.1",
-    has stix_id "threat-actor--56f3f0db-b5d5-431c-ae56-c18f02caf500", 
+$bpp-ta isa threat-actor, 
+    has spec-version "2.1",
+    has stix-id "threat-actor--56f3f0db-b5d5-431c-ae56-c18f02caf500", 
     has created 2016-08-08T15:50:10.983, 
     has modified 2016-08-08T15:50:10.983, 
     has name "Fake BPP (Branistan Peoples Party)", 
-    has threat_actor_types "nation-state", 
+    has threat-actor-types "nation-state", 
     has roles "director",
     has goals "Influence the election in Branistan",
     has sophistication "strategic",
-    has resource_level "government",
-    has primary_motivation "ideology",
-    has secondary_motivations "dominance";
+    has resource-level "government",
+    has primary-motivation "ideology",
+    has secondary-motivations "dominance";
 
 $id1 isa identity,
-    has spec_version "2.1",
-    has stix_id "identity--8c6af861-7b20-41ef-9b59-6344fd872a8f",
+    has spec-version "2.1",
+    has stix-id "identity--8c6af861-7b20-41ef-9b59-6344fd872a8f",
     has created 2016-08-08T15:50:10.983,
     has modified 2016-08-08T15:50:10.983,
     has name "Franistan Intelligence",
-    has identity_class "organization";
+    has identity-class "organization";
 
 $id2 isa identity,
-    has spec_version "2.1",
-    has stix_id "identity--ddfe7140-2ba4-48e4-b19a-df069432103b",
+    has spec-version "2.1",
+    has stix-id "identity--ddfe7140-2ba4-48e4-b19a-df069432103b",
     has created 2016-08-08T15:50:10.983,
     has modified 2016-08-08T15:50:10.983,
     has name "Branistan Peoples Party",
-    has identity_class "organization";
+    has identity-class "organization";
 
-$er1 isa external_reference,
-    has source_name "website",
-    has url_link "http://www.bpp.bn";
+$er1 isa external-reference,
+    has source-name "website",
+    has url-link "http://www.bpp.bn";
 
-(referencing: $id2, referenced: $er1) isa external_references;
+(referencing: $id2, referenced: $er1) isa external-references;
 
-$at1 isa attack_pattern,
-    has spec_version "2.1",
-    has stix_id "attack-pattern--19da6e1c-71ab-4c2f-886d-d620d09d3b5a",
+$at1 isa attack-pattern,
+    has spec-version "2.1",
+    has stix-id "attack-pattern--19da6e1c-71ab-4c2f-886d-d620d09d3b5a",
     has created 2016-08-08T15:50:10.983,
     has modified 2017-01-30T21:15:04.127,
     has name "Content Spoofing";
 
-$er2 isa external_reference,
-    has source_name "capec",
-    has url_link "https://capec.mitre.org/data/definitions/148.html",
-    has external_id "CAPEC-148";
+$er2 isa external-reference,
+    has source-name "capec",
+    has url-link "https://capec.mitre.org/data/definitions/148.html",
+    has external-id "CAPEC-148";
 
-(referencing: $at1, referenced: $er2) isa external_references;
+(referencing: $at1, referenced: $er2) isa external-references;
 
-$at2 isa attack_pattern,
-    has spec_version "2.1",
-    has stix_id "attack-pattern--f6050ea6-a9a3-4524-93ed-c27858d6cb3c",
+$at2 isa attack-pattern,
+    has spec-version "2.1",
+    has stix-id "attack-pattern--f6050ea6-a9a3-4524-93ed-c27858d6cb3c",
     has created 2016-08-08T15:50:10.983,
     has modified 2017-01-30T21:15:04.127,
     has name "HTTP Flood";
 
-$er3 isa external_reference,
-    has source_name "capec",
-    has url_link "https://capec.mitre.org/data/definitions/488.html",
-    has external_id "CAPEC-488";
+$er3 isa external-reference,
+    has source-name "capec",
+    has url-link "https://capec.mitre.org/data/definitions/488.html",
+    has external-id "CAPEC-488";
 
-(referencing: $at2, referenced: $er3) isa external_references;
+(referencing: $at2, referenced: $er3) isa external-references;
 
 $ca1 isa campaign,
-    has spec_version "2.1",
-    has stix_id "campaign--e5268b6e-4931-42f1-b379-87f48eb41b1e",
+    has spec-version "2.1",
+    has stix-id "campaign--e5268b6e-4931-42f1-b379-87f48eb41b1e",
     has created 2016-08-08T15:50:10.983,
     has modified 2016-08-08T15:50:10.983,
     has name "Operation Bran Flakes",
     has description "A concerted effort to insert false information into the BPP's web pages.",
     has aliases "OBF",
-    has first_seen 2016-01-08T12:50:40.123,
+    has first-seen 2016-01-08T12:50:40.123,
     has objective "Hack www.bpp.bn";
 
 $ca2 isa campaign,
-    has spec_version "2.1",
-    has stix_id "campaign--1d8897a7-fdc2-4e59-afc9-becbe04df727",
+    has spec-version "2.1",
+    has stix-id "campaign--1d8897a7-fdc2-4e59-afc9-becbe04df727",
     has created 2016-08-08T15:50:10.983,
     has modified 2016-08-08T15:50:10.983,
     has name "Operation Raisin Bran",
     has description "A DDOS campaign to flood BPP web servers.",
     has aliases "ORB",
-    has first_seen 2016-02-07T19:45:32.126,
+    has first-seen 2016-02-07T19:45:32.126,
     has objective "Flood www.bpp.bn";
 
-$is1 isa intrusion_set,
-    has spec_version "2.1",
-    has stix_id "intrusion-set--ed69450a-f067-4b51-9ba2-c4616b9a6713",
+$is1 isa intrusion-set,
+    has spec-version "2.1",
+    has stix-id "intrusion-set--ed69450a-f067-4b51-9ba2-c4616b9a6713",
     has created 2016-08-08T15:50:10.983,
     has modified 2016-08-08T15:50:10.983,
     has name "APT BPP",
     has description "An advanced persistent threat that seeks to disrupt Branistan's election with multiple attacks.",
     has aliases "Bran-teaser",
-    has first_seen 2016-01-08T12:50:40.123,
+    has first-seen 2016-01-08T12:50:40.123,
     has goals "Influence the Branistan election",
     has goals "Disrupt the BPP",
     has sophistication "strategic",
-    has resource_level "government",
-    has primary_motivation "ideology",
-    has secondary_motivations "dominance";
+    has resource-level "government",
+    has primary-motivation "ideology",
+    has secondary-motivations "dominance";
 
-$ato1 (attributing: $ca1, attributed: $bpp_ta) isa attributed_to;
-$ato1 has spec_version "2.1",
-    has stix_id "relationship--98765000-efdf-4a86-8681-36481ceae57f",
+$ato1 (attributing: $ca1, attributed: $bpp-ta) isa attributed-to;
+$ato1 has spec-version "2.1",
+    has stix-id "relationship--98765000-efdf-4a86-8681-36481ceae57f",
     has created 2020-02-29T17:41:44.938,
     has modified 2020-02-29T17:41:44.938;
 
-$ato2 (attributing: $ca2, attributed: $bpp_ta) isa attributed_to;
-$ato2 has spec_version "2.1",
-    has stix_id "relationship--53a55c73-f2c8-47b9-8e50-ae34d8c5da4d",
+$ato2 (attributing: $ca2, attributed: $bpp-ta) isa attributed-to;
+$ato2 has spec-version "2.1",
+    has stix-id "relationship--53a55c73-f2c8-47b9-8e50-ae34d8c5da4d",
     has created 2020-02-29T17:41:44.938,
     has modified 2020-02-29T17:41:44.938;
 
-$ato3 (attributing: $ca1, attributed: $is1) isa attributed_to;
-$ato3 has spec_version "2.1",
-    has stix_id "relationship--5047c2c0-524b-4afd-9cd6-e197efe59495",
+$ato3 (attributing: $ca1, attributed: $is1) isa attributed-to;
+$ato3 has spec-version "2.1",
+    has stix-id "relationship--5047c2c0-524b-4afd-9cd6-e197efe59495",
     has created 2020-02-29T17:41:44.939,
     has modified 2020-02-29T17:41:44.939;
 
-$ato4 (attributing: $ca2, attributed: $is1) isa attributed_to;
-$ato4 has spec_version "2.1",
-    has stix_id "relationship--9cc131ca-b64d-4ab1-a300-5e4a0073280a",
+$ato4 (attributing: $ca2, attributed: $is1) isa attributed-to;
+$ato4 has spec-version "2.1",
+    has stix-id "relationship--9cc131ca-b64d-4ab1-a300-5e4a0073280a",
     has created 2020-02-29T17:41:44.939,
     has modified 2020-02-29T17:41:44.939;
 
-$ato5 (attributing: $is1, attributed: $bpp_ta) isa attributed_to;
-$ato5 has spec_version "2.1",
-    has stix_id "relationship--c171fd27-2a8a-42b7-8293-34016b70c1c8",
+$ato5 (attributing: $is1, attributed: $bpp-ta) isa attributed-to;
+$ato5 has spec-version "2.1",
+    has stix-id "relationship--c171fd27-2a8a-42b7-8293-34016b70c1c8",
     has created 2020-02-29T17:41:44.939,
     has modified 2020-02-29T17:41:44.939;
 
 $ato6 (targeting: $is1, targeted: $id2) isa targets;
-$ato6 has spec_version "2.1",
-    has stix_id "relationship--554e3341-d7b1-4b3c-a522-28ef52fbb49b",
+$ato6 has spec-version "2.1",
+    has stix-id "relationship--554e3341-d7b1-4b3c-a522-28ef52fbb49b",
     has created 2020-02-29T17:41:44.939,
     has modified 2020-02-29T17:41:44.939;
 
 $ato7 (using: $is1, used: $at1) isa uses;
-$ato7 has spec_version "2.1",
-    has stix_id "relationship--06964095-5750-41fe-a9af-6c6a9d995489",
+$ato7 has spec-version "2.1",
+    has stix-id "relationship--06964095-5750-41fe-a9af-6c6a9d995489",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato8 (using: $is1, used: $at2) isa uses;
-$ato8 has spec_version "2.1",
-    has stix_id "relationship--4fe5dab1-fd6d-41aa-b8b1-d3118a708284",
+$ato8 has spec-version "2.1",
+    has stix-id "relationship--4fe5dab1-fd6d-41aa-b8b1-d3118a708284",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato9 (targeting: $ca1, targeted: $id2) isa targets;
-$ato9 has spec_version "2.1",
-    has stix_id "relationship--d8b7932d-0ecb-4891-b021-c78ff2b63747",
+$ato9 has spec-version "2.1",
+    has stix-id "relationship--d8b7932d-0ecb-4891-b021-c78ff2b63747",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato10 (targeting: $ca2, targeted: $id2) isa targets;
-$ato10 has spec_version "2.1",
-    has stix_id "relationship--96cfbc6f-5c08-4372-b811-b90fbb2ec180",
+$ato10 has spec-version "2.1",
+    has stix-id "relationship--96cfbc6f-5c08-4372-b811-b90fbb2ec180",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato11 (using: $ca1, used: $at1) isa uses;
-$ato11 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0a",
+$ato11 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0a",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato12 (using: $ca2, used: $at2) isa uses;
-$ato12 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0b",
+$ato12 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0b",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato13 (impersonating: $bpp_ta, impersonated: $id2) isa impersonates;
-$ato13 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0c",
+$ato13 (impersonating: $bpp-ta, impersonated: $id2) isa impersonates;
+$ato13 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0c",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato14 (targeting: $bpp_ta, targeted: $id2) isa targets;
-$ato14 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0d",
+$ato14 (targeting: $bpp-ta, targeted: $id2) isa targets;
+$ato14 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0d",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato15 (attributing: $bpp_ta, attributed: $id1) isa attributed_to;
-$ato15 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0e",
+$ato15 (attributing: $bpp-ta, attributed: $id1) isa attributed-to;
+$ato15 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0e",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
 $ato16 (targeting: $ca2, targeted: $id1) isa targets;
-$ato16 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0f",
+$ato16 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b0f",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato17 (using: $bpp_ta, used: $at1) isa uses;
-$ato17 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b10",
+$ato17 (using: $bpp-ta, used: $at1) isa uses;
+$ato17 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b10",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
-$ato18 (using: $bpp_ta, used: $at2) isa uses;
-$ato18 has spec_version "2.1",
-    has stix_id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b11",
+$ato18 (using: $bpp-ta, used: $at2) isa uses;
+$ato18 has spec-version "2.1",
+    has stix-id "relationship--e0b0b1a9-0b0a-4b0a-9b0a-0b0a0b0a0b11",
     has created 2020-02-29T17:41:44.940,
     has modified 2020-02-29T17:41:44.940;
 
