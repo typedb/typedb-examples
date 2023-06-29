@@ -2,7 +2,7 @@
 
 # Now let's see a list of actors in the database.
 # 
-# We are querying for a list of identities in the database.
+# We are querying for a list of identities.
 # We are using the match keyword to match the identity type.
 # As we can see identity exists in the database but also references other subtypes.
 
