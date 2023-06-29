@@ -13,7 +13,7 @@ $t isa id_unknown, has name $n, has description $d;
 # Exercise 02 solution:
 
 match 
-$t isa identity, has $all;
+$t isa identity, has $attribute;
 not{$t isa organization;};
 
 #--------------------------------------------------
