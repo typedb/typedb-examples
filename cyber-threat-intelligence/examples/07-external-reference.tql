@@ -1,7 +1,7 @@
 # Example 07:
 
 # From Example 06, we can see that some attack patterns have external references.
-# We can use the same approach to find attack patterns that are used by intrusion sets and have external references.
+# We can use the same approach to find attack patterns that have external references.
 # An external reference refers to a link or identifier that points to additional information or context about a specific threat or indicator. 
 
 match 
@@ -13,11 +13,11 @@ $rel (referencing: $a, referenced: $e) isa external-references;
 #--------------------------------------------------
 # Exercise 07:
 
-# Find all attack patterns that are used by intrusion sets and have external references.
-# Return the name of the attack pattern, the name of the intrusion set, and the external reference ID.
+# Find all attack patterns that have external references.
+# Return the name of the attack pattern and the external reference ID.
 # Order by the name of the attack pattern.
 # Keyword hints: match, sort
-# Type hints: attack-pattern, intrusion-set, external-reference
+# Type hints: attack-pattern, external-reference
 
 #--------------------------------------------------
 
