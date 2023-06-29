@@ -38,7 +38,7 @@ $t has threat_actor_types "insider";
 # Exercise 04 solution:
 
 match
-$bravo_id isa id_unknown, has name "Adversary Bravo";
+$bravo_id isa id_unknown, has stix_id "bravo_id_unknown";
 $bravo_ma isa malware, has stix_id "bravo_malware";
 
 insert
