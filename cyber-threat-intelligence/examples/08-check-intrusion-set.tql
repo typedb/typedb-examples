@@ -5,18 +5,18 @@
 # are referenced by a specific external reference.
 
 match
-$a isa attack_pattern, has name $an;
-$i isa intrusion_set, has name $in;
-$rel (referencing: $a, referenced: $e) isa external_references;
+$a isa attack-pattern, has name $an;
+$i isa intrusion-set, has name $in;
+$rel (referencing: $a, referenced: $e) isa external-references;
 $u (used: $a, using: $i) isa uses;
 
 #------------------------------------------------------------
 # Exercise 08:
 
-# Create an intrusion_set as well as a uses relation to link it to the malware owning "bravo_malware" as stix_id.
-# You will need to provide a stix_id for both new intrusion_set and new uses relation.
-# Modify the query from the Exercise 06 to include your intrusion_set as a potential roleplayer in the uses relationship.
+# Create an intrusion-set as well as a uses relation to link it to the malware owning "bravo-malware" as stix-id.
+# You will need to provide a stix-id for both new intrusion-set and new uses relation.
+# Modify the query from the Exercise 06 to include your intrusion-set as a potential roleplayer in the uses relationship.
 # 
-# As we can see, two uses relations are infered, automatically creating a link between intrusion_set and threat_actor through attack_pattern.
+# As we can see, two uses relations are infered, automatically creating a link between intrusion-set and threat-actor through attack-pattern.
 
 #------------------------------------------------------------

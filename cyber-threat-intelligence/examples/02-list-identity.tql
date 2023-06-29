@@ -13,7 +13,7 @@ $t isa identity, has $attribute;
 #--------------------------------------------------
 # Exercise 02:
 
-# Edit this query to list only id_unknown and identity.
+# Edit this query to list only id-unknown and identity.
 # Keyword hints: not
 # Type hints: organization
 

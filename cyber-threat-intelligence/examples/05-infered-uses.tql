@@ -1,13 +1,13 @@
 # Example 05:
 
-# Now let's research the attack we described earlier using the id_unknown and threat_actor stix_id
+# Now let's research the attack we described earlier using the id-unknown and threat-actor stix-id
 # This query represents the following question: "Who targets the unknown id and what tool is used?"
 
 match
 $t($x, $y) isa targets;
-$c($a, $b) isa attributed_to;
-$b has stix_id "bravo_threat";
-$x has stix_id "bravo_id_unknown";
+$c($a, $b) isa attributed-to;
+$b has stix-id "bravo-threat";
+$x has stix-id "bravo-id-unknown";
 
 #--------------------------------------------------
 # Exercise 05:
@@ -16,11 +16,11 @@ $x has stix_id "bravo_id_unknown";
 # TypeDB's rule-inference. Now if we run the query again, we get more attributes as well as a new relation
 # shown in a green outline. This is because of a rule encoded into the schema:
 # 
-# rule transitive_use:
+# rule transitive-use:
 # when {
-#     $x isa stix_domain_object;
-#     $y isa stix_domain_object;
-#     $z isa stix_domain_object;
+#     $x isa stix-domain-object;
+#     $y isa stix-domain-object;
+#     $z isa stix-domain-object;
 #     $use1 (using: $x, used: $y) isa uses;
 #     $use2 (using: $y, used: $z) isa uses;
 # } then {

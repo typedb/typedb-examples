@@ -1,24 +1,24 @@
 # Example 04:
 
-# Now let's insert a new targets relation between a specific malware and a specific id_unknown.
-# We will use the stix_id attribute to identify the malware and the name attribute to identify the id_unknown.
-# We will also assign a stix_id attribute to identify the new targets relation.
+# Now let's insert a new targets relation between a specific malware and a specific id-unknown.
+# We will use the stix-id attribute to identify the malware and the name attribute to identify the id-unknown.
+# We will also assign a stix-id attribute to identify the new targets relation.
 
 match
-$bravo_id isa id_unknown, has name "Adversary Bravo";
-$bravo_ma isa malware, has stix_id "bravo_malware";
+$bravo-id isa id-unknown, has name "Adversary Bravo";
+$bravo-ma isa malware, has stix-id "bravo-malware";
 
 insert
-(targeting: $bravo_ma, targeted: $bravo_id) isa targets,
-    has stix_id "bravo_targets";
+(targeting: $bravo-ma, targeted: $bravo-id) isa targets,
+    has stix-id "bravo-targets";
     
 #--------------------------------------------------
 # Exercise 04:
 
-# Write a new query to find the id_unknown with stix_id "bravo_id_unknown" as well as the malware with stix_id "bravo_malware"
-# and then, create a uses relationship to descibe the fact that the attack_pattern is using the malware.
-# You will need to give a new unique stix_id to your uses relationship.
+# Write a new query to find the id-unknown with stix-id "bravo-id-unknown" as well as the malware with stix-id "bravo-malware"
+# and then, create a uses relationship to descibe the fact that the attack-pattern is using the malware.
+# You will need to give a new unique stix-id to your uses relationship.
 # Keyword hints: match, insert, has
-# Type hints: id_unknown, malware, uses
+# Type hints: id-unknown, malware, uses
 
 #--------------------------------------------------

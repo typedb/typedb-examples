@@ -5,10 +5,10 @@
 # An external reference refers to a link or identifier that points to additional information or context about a specific threat or indicator. 
 
 match 
-$e isa external_reference;
+$e isa external-reference;
 $e has $eid;
-$a isa attack_pattern;
-$rel (referencing: $a, referenced: $e) isa external_references;
+$a isa attack-pattern;
+$rel (referencing: $a, referenced: $e) isa external-references;
 
 #--------------------------------------------------
 # Exercise 07:
@@ -17,7 +17,7 @@ $rel (referencing: $a, referenced: $e) isa external_references;
 # Return the name of the attack pattern, the name of the intrusion set, and the external reference ID.
 # Order by the name of the attack pattern.
 # Keyword hints: match, sort
-# Type hints: attack_pattern, intrusion_set, external_reference
+# Type hints: attack-pattern, intrusion-set, external-reference
 
 #--------------------------------------------------
 

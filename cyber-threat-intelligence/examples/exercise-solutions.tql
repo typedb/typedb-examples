@@ -7,7 +7,7 @@
 # Exercise 01 solution:
 
 match 
-$t isa id_unknown, has name $n, has description $d;
+$t isa id-unknown, has name $n, has description $d;
 
 #--------------------------------------------------
 # Exercise 02 solution:
@@ -21,16 +21,16 @@ not{$t isa organization;};
 
 #display
 match
-$t isa threat_actor, has stix_id $n;
-$n = "bravo_threat";
+$t isa threat-actor, has stix-id $n;
+$n = "bravo-threat";
 
-#insert new threat_actor_types
+#insert new threat-actor-types
 match
-$t isa threat_actor, has stix_id $n;
-$n = "bravo_threat";
+$t isa threat-actor, has stix-id $n;
+$n = "bravo-threat";
 
 insert 
-$t has threat_actor_types "insider";
+$t has threat-actor-types "insider";
 
 
 
@@ -38,58 +38,58 @@ $t has threat_actor_types "insider";
 # Exercise 04 solution:
 
 match
-$bravo_id isa id_unknown, has stix_id "bravo_id_unknown";
-$bravo_ma isa malware, has stix_id "bravo_malware";
+$bravo-id isa id-unknown, has stix-id "bravo-id-unknown";
+$bravo-ma isa malware, has stix-id "bravo-malware";
 
 insert
-(used: $bravo_ma, using: $bravo_id) isa uses,
-    has stix_id "bravo_uses";
+(used: $bravo-ma, using: $bravo-id) isa uses,
+    has stix-id "bravo-uses";
     
 #--------------------------------------------------
 # Exercise 06 solution:
 
 match 
-{$bravo_1 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
-{$bravo_1 isa malware, has stix_id "bravo_malware";} or
-{$bravo_1 isa threat_actor, has stix_id "bravo_threat";};
+{$bravo-1 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
+{$bravo-1 isa malware, has stix-id "bravo-malware";} or
+{$bravo-1 isa threat-actor, has stix-id "bravo-threat";};
 
-{$bravo_2 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
-{$bravo_2 isa malware, has stix_id "bravo_malware";} or
-{$bravo_2 isa threat_actor, has stix_id "bravo_threat";};
+{$bravo-2 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
+{$bravo-2 isa malware, has stix-id "bravo-malware";} or
+{$bravo-2 isa threat-actor, has stix-id "bravo-threat";};
 
-$new ($bravo_1, $bravo_2) isa uses;
+$new ($bravo-1, $bravo-2) isa uses;
 
 #--------------------------------------------------
 # Exercise 07 solution:
 
 match 
 
-$e isa external_reference, has url_link $c;
+$e isa external-reference, has url-link $c;
 $e has $eid;
-$a isa attack_pattern, has name $d;
-$rel (referencing: $a, referenced: $e) isa external_references; sort $d;
+$a isa attack-pattern, has name $d;
+$rel (referencing: $a, referenced: $e) isa external-references; sort $d;
 
 #--------------------------------------------------
 # Exercise 08 solution:
 
-# insert new intrusion_set and uses relation
+# insert new intrusion-set and uses relation
 match 
-$bravo_2 isa malware, has stix_id "bravo_malware";
+$bravo-2 isa malware, has stix-id "bravo-malware";
 
 insert 
-$intrusion isa intrusion_set, has stix_id "bravo_intrusion";
-$bravo_uses (using: $intrusion, used: $bravo_2) isa uses, has stix_id "bravo_uses_3"; 
+$intrusion isa intrusion-set, has stix-id "bravo-intrusion";
+$bravo-uses (using: $intrusion, used: $bravo-2) isa uses, has stix-id "bravo-uses-3"; 
 
-# search for uses between attack_pattern, malware, threat_actor and intrusion_set
+# search for uses between attack-pattern, malware, threat-actor and intrusion-set
 match 
-{$bravo_1 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
-{$bravo_1 isa malware, has stix_id "bravo_malware";} or
-{$bravo_1 isa threat_actor, has stix_id "bravo_threat";} or
-{$bravo_1 isa intrusion_set, has stix_id "bravo_intrusion";};
+{$bravo-1 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
+{$bravo-1 isa malware, has stix-id "bravo-malware";} or
+{$bravo-1 isa threat-actor, has stix-id "bravo-threat";} or
+{$bravo-1 isa intrusion-set, has stix-id "bravo-intrusion";};
 
-{$bravo_2 isa attack_pattern, has stix_id "attack_pattern_bravo";} or
-{$bravo_2 isa malware, has stix_id "bravo_malware";} or
-{$bravo_2 isa threat_actor, has stix_id "bravo_threat";} or
-{$bravo_2 isa intrusion_set, has stix_id "bravo_intrusion";};
+{$bravo-2 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
+{$bravo-2 isa malware, has stix-id "bravo-malware";} or
+{$bravo-2 isa threat-actor, has stix-id "bravo-threat";} or
+{$bravo-2 isa intrusion-set, has stix-id "bravo-intrusion";};
 
-$new ($bravo_1, $bravo_2) isa uses;
+$new ($bravo-1, $bravo-2) isa uses;

@@ -1,24 +1,24 @@
 # Example 06:
 
-# Next, we will use the stix_id to find the attack pattern using the malware created in Exercise 03.
+# Next, we will use the stix-id to find the attack pattern using the malware created in Exercise 03.
 # We will then create a uses relationship between the attack pattern and malware.
 
 match
-$bravo_ap isa attack_pattern, has stix_id "attack_pattern_bravo";
-$bravo_ma isa malware, has stix_id "bravo_malware";
+$bravo-ap isa attack-pattern, has stix-id "attack-pattern-bravo";
+$bravo-ma isa malware, has stix-id "bravo-malware";
 
 insert
-$u1 (used: $bravo_ap, using:$bravo_ma) isa uses,
-    has stix_id "bravo_uses_1";
+$u1 (used: $bravo-ap, using:$bravo-ma) isa uses,
+    has stix-id "bravo-uses-1";
 
 #--------------------------------------------------
 # Exercise 06:
 
 # With inference switched on, we can now query for the attack pattern and malware that are used by the threat actor.
-# Create a query that finds the attack pattern and malware that are used by the threat actor with stix_id "bravo_threat".
+# Create a query that finds the attack pattern and malware that are used by the threat actor with stix-id "bravo-threat".
 # To switch on explanations, toggle the "snapshot", "infer", and "explain" buttons to on. 
 # You can double click on the green infered uses relationship to get an explanation of what triggered the inferred rule.
 # Keyword hints: match, or
-# Type hints: attack_pattern, malware, threat_actor, uses, stix_id
+# Type hints: attack-pattern, malware, threat-actor, uses, stix-id
 
 #--------------------------------------------------
