@@ -1,6 +1,6 @@
 # Example 01:
 
-# Let's start by getting a list of id_unknown in the database:
+# Let's start by getting a list of id_unknown in the database.
 #
 # We are querying for a list of actors with unknown ids in the database:
 # $t and $all are variables, which can be used in the query.
