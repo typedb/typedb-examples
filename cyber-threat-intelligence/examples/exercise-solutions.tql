@@ -6,7 +6,6 @@
 #--------------------------------------------------
 # Exercise 01 solution:
 
-
 match 
 $t isa id_unknown, has name $n, has description $d;
 
@@ -38,7 +37,6 @@ insert
 (used: $bravo_ma, using: $bravo_id) isa uses,
     has stix_id "bravo_uses";
     
-
 #--------------------------------------------------
 # Exercise 06 solution:
 
@@ -63,7 +61,6 @@ $e has $eid;
 $a isa attack_pattern, has name $d;
 $rel (referencing: $a, referenced: $e) isa external_references; sort $d;
 
-
 #--------------------------------------------------
 # Exercise 08 solution:
 
@@ -74,7 +71,6 @@ $bravo_2 isa malware, has stix_id "bravo_malware";
 insert 
 $intrusion isa intrusion_set, has stix_id "bravo_intrusion";
 $bravo_uses (using: $intrusion, used: $bravo_2) isa uses, has stix_id "bravo_uses_3"; 
-
 
 # search for uses between attack_pattern, malware, threat_actor and intrusion_set
 match 
