@@ -12,7 +12,7 @@ $x has stix_id "bravo_id_unknown";
 #--------------------------------------------------
 # Exercise 05:
 
-# When we run this query, we get a few results, but let's try toggling the inference button at the top to switch on
+# When we run this query, we get one result, but let's try toggling the inference button at the top to switch on
 # TypeDB's rule-inference. Now if we run the query again, we get many more results shown in a green outline. This is
 # because of a rule encoded into the schema:
 # 
