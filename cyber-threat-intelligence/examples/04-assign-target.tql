@@ -1,0 +1,24 @@
+# Example 04:
+
+# Now let's insert a new targets relation between a specific malware and a specific id-unknown.
+# We will use the stix-id attribute to identify the malware and the name attribute to identify the id-unknown.
+# We will also assign a stix-id attribute to identify the new targets relation.
+
+match
+$bravo-id isa id-unknown, has name "Adversary Bravo";
+$bravo-ma isa malware, has stix-id "bravo-malware";
+
+insert
+(targeting: $bravo-ma, targeted: $bravo-id) isa targets,
+    has stix-id "bravo-targets";
+    
+#--------------------------------------------------
+# Exercise 04:
+
+# Write a new query to find the id-unknown with stix-id "bravo-id-unknown" as well as the malware with stix-id "bravo-malware"
+# and then, create a uses relationship to descibe the fact that the id-unknown is using the malware.
+# You will need to give a new unique stix-id to your uses relationship.
+# Keyword hints: match, insert, has
+# Type hints: id-unknown, malware, uses
+
+#--------------------------------------------------

@@ -1,0 +1,19 @@
+# Example 01:
+
+# Let's start by getting a list of id-unknown in the database.
+#
+# We are querying for a list of actors with unknown ids.
+# $t and $attribute are variables, which are used in the query.
+# The query is a get query containing a single pattern matching statement.
+# The query will return all the entities of type id-unknown in the database and their attributes.
+
+match  
+$t isa id-unknown, has $attribute;
+
+#--------------------------------------------------
+# Exercise 01:
+
+# Edit this query to show only the name and description of our id-unknown.
+# Type hints: name, description
+
+#--------------------------------------------------
