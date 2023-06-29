@@ -1,6 +1,6 @@
 # Example 07:
 
-# From the Example 06, we can see that some attack patterns have external references.
+# From Example 06, we can see that some attack patterns have external references.
 # We can use the same approach to find attack patterns that are used by intrusion sets and have external references.
 # An external reference refers to a link or identifier that points to additional information or context about a specific threat or indicator. 
 
