@@ -3,7 +3,7 @@
 # Let's start by getting a list of id_unknown in the database.
 #
 # We are querying for a list of actors with unknown ids.
-# $t and $all are variables, which can be used in the query.
+# $t and $attribute are variables, which are used in the query.
 # The query is a get query containing a single pattern matching statement.
 # The query will return all the entities of type id_unknown in the database and their attributes.
 
