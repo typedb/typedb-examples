@@ -30,6 +30,5 @@ $x has stix_id "bravo_id_unknown";
 # This rule makes uses relationship transitive, so if we know that a threat actor uses an unknown id, and that unknown
 # id uses a target, then we can infer that the threat actor uses the target. This is a very powerful feature of TypeDB.
 # 
-# Keyword hints: infer
 
 #--------------------------------------------------
