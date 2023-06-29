@@ -1,7 +1,0 @@
-# Example 02:
-
-# We are querying for a list of identity in the database:
-
-match 
-
-$t isa identity, has $all;

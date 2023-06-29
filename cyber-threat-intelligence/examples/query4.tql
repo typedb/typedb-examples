@@ -1,6 +1,0 @@
-match
-$t isa id_unknown, has name "Adversary Bravo";
-$bravo_ta isa threat_actor, has stix_id "bravo_threat";
-
-insert
-(targeting: $bravo_ta, targeted: $t) isa targets;
