@@ -19,12 +19,20 @@ not{$t isa organization;};
 #--------------------------------------------------
 # Exercise 03 solution:
 
+#display
+match
+$t isa threat_actor, has stix_id $n;
+$n = "bravo_threat";
+
+#insert new threat_actor_types
 match
 $t isa threat_actor, has stix_id $n;
 $n = "bravo_threat";
 
 insert 
 $t has threat_actor_types "insider";
+
+
 
 #--------------------------------------------------
 # Exercise 04 solution:
