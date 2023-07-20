@@ -14,12 +14,10 @@ the schema level.
 
 This demo assumes knowledge of:
 
-- General identity and access management concepts.
-- TypeDB's transaction system.
-- All basic TypeQL syntax elements.
-- TypeDB Studio's interface.
-
-For more information, please see our [documentation](https://docs.vaticle.com/docs/general/introduction). 
+- [General identity and access management concepts](https://en.wikipedia.org/wiki/Identity_management).
+- [TypeDB's transaction system](https://typedb.com/docs/typedb/2.x/development/connect.html).
+- [All basic TypeQL syntax elements](https://typedb.com/docs/typedb/2.x/dev/match.html).
+- [TypeDB Studio's interface](https://typedb.com/docs/clients/2.x/studio.html).
 
 ## Getting started
 
