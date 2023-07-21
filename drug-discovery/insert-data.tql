@@ -1,0 +1,16 @@
+match
+$di isa disease, has $di-a, has name "Neoplasms";
+$di-a isa! $di-attribute;
+$digi ($di, $g) isa disease-gene-interaction;
+$g isa gene, has $g-a;
+$g-a isa! $g-attribute;
+$drgi ($g, $dr) isa drug-gene-interaction;
+$dr isa drug, has $dr-a, has name "CYCLOPHOSPHAMIDE";
+$dr-a isa! $dr-attribute;
+$scr ($g, $t) isa transcription;
+$t isa transcript, has $t-a;
+$t-a isa! $t-attribute;
+$sla ($t, $p) isa translation;
+$p isa protein, has $p-a;
+$p-a isa! $p-attribute;
+

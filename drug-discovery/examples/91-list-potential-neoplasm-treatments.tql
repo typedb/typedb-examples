@@ -1,0 +1,4 @@
+match
+$di isa disease, has name "Neoplasms";
+$dr isa drug, has name $n;
+$x ($di, $dr) isa potential-disease-treatment;
