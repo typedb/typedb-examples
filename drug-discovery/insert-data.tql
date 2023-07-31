@@ -1,16 +1,98 @@
 match
+$p isa protein, has $p-a, has id "Q9NPB9";
+$sla ($p, $t) isa translation;
+$t isa transcript, has $t-a;
+$scr ($t, $g) isa transcription;
+$g isa gene, has $g-a, has id "ACKR4";
+
+
+match
+$g isa gene, has $g-a, has primary-gene-symbol "LAP3";
+$ce1 ($g, $c1) isa cell-expression;
+$c1 isa cell, has $c1-a, has cell-name "glandular cells";
+$tc1 ($c1, $t1) isa tissue-composition;
+$t1 isa tissue, has $t1-a, has tissue-name "gallbladder";
+$ce2 ($g, $c2) isa cell-expression;
+$c2 isa cell, has $c2-a, has cell-name "lymphoid tissue";
+$tc2 ($c2, $t2) isa tissue-composition;
+$t2 isa tissue, has $t2-a, has tissue-name "appendix";
+$ce3 ($g, $c3) isa cell-expression;
+$c3 isa cell, has $c3-a, has cell-name "bowman's capsule";
+$tc3 ($c3, $t3) isa tissue-composition;
+$t3 isa tissue, has $t3-a, has tissue-name "kidney";
+$ce4 ($g, $c4) isa cell-expression;
+$c4 isa cell, has $c4-a, has cell-name "distal tubules";
+$tc4 ($c4, $t3) isa tissue-composition;
+
+
+match
+$ti isa tissue, has $ti-a, has name "heart muscle";
+$tc ($ti, $c) isa tissue-composition;
+$c isa cell, has $c-a;
+$ce ($c, $g) isa cell-expression;
+$g isa gene, has $ga-a;
+$scr ($g, $tr) isa transcription;
+$tr isa transcript, has $tr-a;
+$sla ($tr, $p) isa translation;
+$p isa protein, has $p-a, has uniprot-id "P20645";
+
+
+# run against full dataset
+match
+$epi ($g1, $g2) isa encoded-protein-interaction;
+$g1 isa gene, has $g1-a, has primary-gene-symbol $s1;
+$g2 isa gene, has $g2-a, has primary-gene-symbol $s2;
+$scr1 ($g1, $t1) isa transcription;
+$scr2 ($g2, $t2) isa transcription;
+$t1 isa transcript, has $t1-a;
+$t2 isa transcript, has $t2-a;
+$sla1 ($t1, $p1) isa translation;
+$sla2 ($t2, $p2) isa translation;
+$p1 isa protein, has $p1-a, has uniprot-id "O60240";
+$p2 isa protein, has $p2-a, has uniprot-id "Q8WTS1";
+
+
+match
+$p1 isa protein, has $p1-a, has uniprot-id "A0M8Q6";
+$pp1 ($p1, $pa) isa pathway-participation;
+$pa isa pathway, has $pa-a;
+$pp2 ($pa, $p2) isa pathway-participation;
+$p2 isa protein, has $p2-a, has uniprot-id "A1L4H1";
+
+
+match
 $di isa disease, has $di-a, has name "Neoplasms";
-$di-a isa! $di-attribute;
 $digi ($di, $g) isa disease-gene-interaction;
 $g isa gene, has $g-a;
-$g-a isa! $g-attribute;
 $drgi ($g, $dr) isa drug-gene-interaction;
 $dr isa drug, has $dr-a, has name "CYCLOPHOSPHAMIDE";
-$dr-a isa! $dr-attribute;
 $scr ($g, $t) isa transcription;
 $t isa transcript, has $t-a;
-$t-a isa! $t-attribute;
 $sla ($t, $p) isa translation;
 $p isa protein, has $p-a;
-$p-a isa! $p-attribute;
+
+
+match
+$di isa disease, has $di-a, has name "Neoplasms";
+$digi ($di, $g1) isa disease-gene-interaction;
+$g1 isa gene, has $g1-a;
+$scr1 ($g1, $t1) isa transcription;
+$t1 isa transcript, has $t1-a;
+$sla1 ($t1, $p1) isa translation;
+$p1 isa protein, has $p1-a;
+$pp1 ($p1, $pa1) isa pathway-participation;
+$pa1 isa pathway, has $pa1-a;
+$pp2 ($pa1, $p2) isa pathway-participation;
+$p2 isa protein, has $p2-a, has name "PSD11_HUMAN";
+$pp3 ($p2, $pa2) isa pathway-participation;
+$pa2 isa pathway, has $pa2-a;
+$pp4 ($pa2, $p3) isa pathway-participation;
+$p3 isa protein, has $p3-a;
+$sla2 ($p3, $t2) isa translation;
+$t2 isa transcript, has $t2-a;
+$scr2 ($t2, $g2) isa transcription;
+$g2 isa gene, has $g2-a;
+$drgi ($g2, $dr) isa drug-gene-interaction;
+$dr isa drug, has $dr-a, has name "NIVOLUMAB";
+
 

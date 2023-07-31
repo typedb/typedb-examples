@@ -1,0 +1,10 @@
+match
+$t isa tissue, has name $n;
+$n == "heart muscle";
+$te ($t, $p) isa tissue-enhancement;
+$p isa protein, has id $id;
+
+
+match
+$p isa protein, has uniprot-id "P20645", has function-description $f;
+

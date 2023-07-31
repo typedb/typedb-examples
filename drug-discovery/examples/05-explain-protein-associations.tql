@@ -1,0 +1,8 @@
+match
+$p1 isa protein, has uniprot-id $p1-id;
+$p2 isa protein, has uniprot-id $p2-id;
+$ppa ($p1, $p2) isa protein-protein-association;
+
+
+
+

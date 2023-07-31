@@ -1,0 +1,16 @@
+match
+$g isa gene, has id $id;
+$id == "LAP3";
+$te ($g, $t) isa tissue-expression;
+$t isa tissue, has name $n;
+
+
+match
+$g isa gene, has id $id;
+$id == "LAP3";
+$ce ($g, $c) isa cell-expression;
+$c isa cell, has name $c-n;
+$tc ($c, $t) isa tissue-composition;
+$t isa tissue, has name $t-n;
+$t-n == "kidney";
+
