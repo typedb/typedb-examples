@@ -61,7 +61,7 @@ match
 $o1 isa operation, has name "approve pull request";
 $o2 isa operation, has name "merge pull request";
 insert
-(action: $o1, action: $o2) isa static-segregation-policy, has name "independent pull request merging";
+(segregated-action: $o1, segregated-action: $o2) isa static-segregation-policy, has name "independent pull request merging";
 
 #--------------------------------------------------
 # Exercise 07 solution:
@@ -103,6 +103,6 @@ $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
 $ac ($po, $o) isa access;
 insert
-($u, $ac) isa access-history, has access-time 2023-05-16T15:07:47;
+(accessing-subject: $u, exercised-access: $ac) isa access-history, has access-time 2023-05-16T15:07:47;
 
 #--------------------------------------------------

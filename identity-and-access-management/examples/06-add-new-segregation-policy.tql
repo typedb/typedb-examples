@@ -9,7 +9,7 @@ match
 $o1 isa operation, has name "submit order";
 $o2 isa operation, has name "approve order";
 insert
-(action: $o1, action: $o2) isa dynamic-segregation-policy, has name "independent order approval";
+(segregated-action: $o1, segregated-action: $o2) isa dynamic-segregation-policy, has name "independent order approval";
 
 # In this case we've chosen to make it a dynamic policy. This means that users can have both permissions, but should not
 # be able to exercise both of them for the same object. We could alternatively have defined a static policy, which would

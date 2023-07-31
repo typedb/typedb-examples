@@ -6,7 +6,7 @@ match
 $bu isa business-unit, has name "Cloud";
 insert
 $e isa employee, has full-name "Filip Inaros", has email "filip.inaros@vaticle.com";
-(group: $bu, group-member: $e) isa group-membership;
+(user-group: $bu, group-member: $e) isa group-membership;
 
 # Here we're doing a match-insert query. First we match the existing group Cloud, then we insert the new user and give
 # him membership of the user group.
