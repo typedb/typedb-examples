@@ -5,3 +5,20 @@ $pdt ($di, $dr) isa potential-disease-treatment;
 $di-n = "Neoplasms";
 $dr-n = "NIVOLUMAB";
 
+
+match
+$di isa disease, has name "Neoplasms";
+$dipi ($di, $p1) isa disease-protein-interaction;
+$p1 isa protein;
+$pp1 ($p1, $pa1) isa pathway-participation;
+$pa1 isa pathway, has $pa1-a;
+$pp2 ($pa1, $p2) isa pathway-participation;
+$p2 isa protein;
+$pp3 ($p2, $pa2) isa pathway-participation;
+$pa2 isa pathway, has $pa2-a;
+$pp4 ($pa2, $p3) isa pathway-participation;
+$p3 isa protein;
+$drpi ($p3, $dr) isa drug-protein-interaction;
+$dr isa drug, has name "NIVOLUMAB";
+
+

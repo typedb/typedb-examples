@@ -4,3 +4,13 @@ $dr isa drug, has name $dr-n;
 $pdt ($di, $dr) isa potential-disease-treatment;
 $di-n = "Neoplasms";
 $dr-n = "CYCLOPHOSPHAMIDE";
+
+
+match
+$di isa disease, has name "Neoplasms";
+$dipi ($di, $p) isa disease-protein-interaction;
+$p isa protein, has $p-a;
+$drpi ($p, $dr) isa drug-protein-interaction;
+$dr isa drug, has name "CYCLOPHOSPHAMIDE";
+
+

@@ -1,14 +1,14 @@
 match
-$p isa protein, has id $pid;
-$pid == "Q9NPB9";
+$p isa protein, has id $p-id;
+$p-id == "Q9NPB9";
 $pe ($p, $g) isa protein-encoding;
 $g isa gene, has id $g-id; 
 $g-id == "ACKR4";
 
 
 match
-$p isa protein, has id $pid;
-$pid == "O00763";
+$p isa protein, has id $p-id;
+$p-id == "O00763";
 $pe ($p, $g) isa protein-encoding;
 $g isa gene, has id $g-id; 
 $g-id == "ACACB";

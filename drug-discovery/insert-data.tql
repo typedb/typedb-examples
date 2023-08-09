@@ -40,8 +40,8 @@ $p isa protein, has $p-a, has uniprot-id "P20645";
 # run against full dataset
 match
 $epi ($g1, $g2) isa encoded-protein-interaction;
-$g1 isa gene, has $g1-a, has primary-gene-symbol $s1;
-$g2 isa gene, has $g2-a, has primary-gene-symbol $s2;
+$g1 isa gene, has $g1-a;
+$g2 isa gene, has $g2-a;
 $scr1 ($g1, $t1) isa transcription;
 $scr2 ($g2, $t2) isa transcription;
 $t1 isa transcript, has $t1-a;
@@ -94,5 +94,17 @@ $scr2 ($t2, $g2) isa transcription;
 $g2 isa gene, has $g2-a;
 $drgi ($g2, $dr) isa drug-gene-interaction;
 $dr isa drug, has $dr-a, has name "NIVOLUMAB";
+
+
+match
+$v isa virus, has $v-a, has name "MHV";
+$vpi ($v, $p) isa virus-protein-interaction;
+$p isa protein, has $p-a;
+$sla ($p, $t) isa translation;
+$t isa transcript, has $t-a;
+$scr ($t, $g) isa transcription;
+$g isa gene, has $g-a;
+$dgi ($g, $d) isa drug-gene-interaction;
+$d isa drug, has $d-a;
 
 

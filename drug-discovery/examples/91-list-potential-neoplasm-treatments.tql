@@ -1,4 +1,11 @@
 match
 $di isa disease, has name "Neoplasms";
 $dr isa drug, has name $n;
-$x ($di, $dr) isa potential-disease-treatment;
+$pdt ($di, $dr) isa potential-disease-treatment;
+
+
+match
+$v isa virus, has $v-a, has name "MHV";
+$d isa drug, has name $n;
+$pvt ($v, $d) isa potential-virus-treatment;
+
