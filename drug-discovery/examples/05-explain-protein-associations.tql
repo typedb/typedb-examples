@@ -5,11 +5,11 @@ $ppa ($p1, $p2) isa protein-protein-association;
 
 
 match
-$g1 isa gene, has $g1-a;
+$g1 isa gene, has gene-symbol $g1-s;
 $pe1 ($g1, $p1) isa protein-encoding;
-$p1 isa protein, has $p1-a, has uniprot-id "O60240";
+$p1 isa protein, has uniprot-id "O60240";
 $ppa ($p1, $p2) isa protein-protein-association;
-$p2 isa protein, has $p2-a, has uniprot-id "Q8WTS1";
+$p2 isa protein, has uniprot-id "Q8WTS1";
 $pe2 ($p2, $g2) isa protein-encoding;
-$g2 isa gene, has $g2-a;
+$g2 isa gene, has gene-symbol $g2-s;
 

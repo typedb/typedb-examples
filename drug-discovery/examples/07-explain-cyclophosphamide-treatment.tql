@@ -9,7 +9,7 @@ $dr-n = "CYCLOPHOSPHAMIDE";
 match
 $di isa disease, has name "Neoplasms";
 $dipi ($di, $p) isa disease-protein-interaction;
-$p isa protein, has $p-a;
+$p isa protein, has primary-uniprot-name $n;
 $drpi ($p, $dr) isa drug-protein-interaction;
 $dr isa drug, has name "CYCLOPHOSPHAMIDE";
 
