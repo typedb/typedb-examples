@@ -298,19 +298,27 @@ protein-protein-association sub inferred-bio-relation,
 
 protein plays protein-protein-association:associated-protein;
 
-rule inferred-protein-protein-association:
+rule inferred-protein-protein-association-from-interaction:
     when {
         $p1 isa protein;
         $p2 isa protein;
         not {
             $p1 is $p2;
         };
-        {
-            (interacting-protein: $p1, interacting-protein: $p2) isa protein-protein-interaction;
-        } or {
-            (participating-protein: $p1, participated-pathway: $path) isa pathway-participation;
-            (participating-protein: $p2, participated-pathway: $path) isa pathway-participation;
+        (interacting-protein: $p1, interacting-protein: $p2) isa protein-protein-interaction;
+    } then {
+        (associated-protein: $p1, associated-protein: $p2) isa protein-protein-association;
+    };
+
+rule inferred-protein-protein-association-from-pathway:
+    when {
+        $p1 isa protein;
+        $p2 isa protein;
+        not {
+            $p1 is $p2;
         };
+        (participating-protein: $p1, participated-pathway: $path) isa pathway-participation;
+        (participating-protein: $p2, participated-pathway: $path) isa pathway-participation;
     } then {
         (associated-protein: $p1, associated-protein: $p2) isa protein-protein-association;
     };
