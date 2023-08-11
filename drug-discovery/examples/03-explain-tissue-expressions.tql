@@ -1,9 +1,46 @@
+# Example 03:
+
+# In this query, we ask for the names of the tissues in which the gene LAP3 is expressed:
+
 match
 $g isa gene, has id $id;
 $id == "LAP3";
 $te ($g, $t) isa tissue-expression;
 $t isa tissue, has name $n;
 
+# Once again, inference needs to be switched on to get results because tissue-expression relations are inferred by the
+# following rule:
+#
+# rule inferred-tissue-expression:
+#     when {
+#         $t isa tissue;
+#         $c isa cell;
+#         $g isa gene;
+#         (composed-tissue: $t, composing-cell: $c) isa tissue-composition;
+#         (expressing-cell: $c, expressed-gene: $g) isa cell-expression;
+#     } then {
+#         (expressing-tissue: $t, expressed-gene: $g) isa tissue-expression;
+#     };
+#
+# If we then explain the tissue-expressions after, we can see that they were inferred from tissue-composition and
+# cell-expression relations. One of the tissues has multiple cell types in which the gene is expressed. By
+# double-clicking on an inferred concept more than once, further explanations might appear in the graph visualiser.
+# Doing so for each of the tissue-expressions reveals that gene LAP3 is expressed in multiple cell types within the
+# kidney tissue.
+#
+# TypeDB's inference engine does not allow the same conclusion to be inferred more than once, even by different rules,
+# in order to prevent data duplication. All the explanations can still be accessed by requesting multiple explanations
+# in this way. When all explanations have been displayed, TypeDB displays a message indicating that no further
+# explanations exist.
+
+#--------------------------------------------------
+# Exercise 03:
+
+# Write a new query to retrieve the names of the two cell types in the kidney in which gene LAP3 is expressed.
+# Keyword hints: match, isa, has
+# Type hints: gene, cell, tissue, cell-expression, tissue-composition, gene-symbol, cell-name, tissue-name
+
+#--------------------------------------------------
 
 match
 $g isa gene, has id $id;
@@ -13,4 +50,3 @@ $c isa cell, has name $c-n;
 $tc ($c, $t) isa tissue-composition;
 $t isa tissue, has name $t-n;
 $t-n == "kidney";
-

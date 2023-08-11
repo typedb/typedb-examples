@@ -1,7 +1,23 @@
+# Example 01:
+
+# Let's start by getting the names of the protein Q9NPB9:
+
 match
 $p isa protein, has id "Q9NPB9", has name $n;
 
+# We should see one protein represented by an entity with nine name attributes, which are the two variables we bound in
+# our query. If we look closely at the attributes, we can see that there are actually three types: primary-uniprot-name,
+# alternative-uniprot-name, and uniprot-entry-name. This is because all three of these types are subtypes of name, and
+# so are valid results for the query. This is an example of TypeDB's polymorphism feature at work, where we've
+# constructed a query that will return results of different types.
+
+#--------------------------------------------------
+# Exercise 01:
+
+# Edit this query to get all the IDs of the gene ACKR4.
+# Type hints: gene, id
+
+#--------------------------------------------------
 
 match
 $g isa gene, has id "ACKR4", has id $id;
-

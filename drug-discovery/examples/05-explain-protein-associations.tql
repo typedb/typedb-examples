@@ -1,8 +1,62 @@
+# Example 05:
+
+# In this query, we're asking for pairs of proteins that are associated. A protein-protein-association is a high-level
+# relation, indicating that the two roleplayer proteins are associated in some way:
+
 match
 $p1 isa protein, has uniprot-id $p1-id;
 $p2 isa protein, has uniprot-id $p2-id;
 $ppa ($p1, $p2) isa protein-protein-association;
 
+# We get four results back, two of them sharing one of the associated proteins. Let's dig a bit deeper into the results.
+#
+# If we explain the protein-protein-association between proteins O60240 and Q8WTS1, we see that it's inferred from a
+# protein-protein-interaction, indicating that the two proteins are associated because they directly interact. This
+# inference is performed by the following rule:
+#
+# rule inferred-protein-protein-association-from-interaction:
+#     when {
+#         $p1 isa protein;
+#         $p2 isa protein;
+#         not {
+#             $p1 is $p2;
+#         };
+#         (interacting-protein: $p1, interacting-protein: $p2) isa protein-protein-interaction;
+#     } then {
+#         (associated-protein: $p1, associated-protein: $p2) isa protein-protein-association;
+#     };
+#
+# If we explain the one between proteins A0M8Q6 and A1L4H1, then we see that it's inferred from a pathway-participation
+# relation between each of the two proteins and a common pathway, indicating that the two proteins are associated
+# because they both participate in the same metabolic pathway. This inference is performed by the following rule:
+#
+# rule inferred-protein-protein-association-from-pathway:
+#     when {
+#         $p1 isa protein;
+#         $p2 isa protein;
+#         not {
+#             $p1 is $p2;
+#         };
+#         (participating-protein: $p1, participated-pathway: $path) isa pathway-participation;
+#         (participating-protein: $p2, participated-pathway: $path) isa pathway-participation;
+#     } then {
+#         (associated-protein: $p1, associated-protein: $p2) isa protein-protein-association;
+#     };
+#
+# Here we see another of TypeDB's most powerful features: polymorphic inference, where two rules with different
+# conditions result in identical conclusions. When combined with sequential inference, this has the potential to encode
+# a very large number of cases that lead to a high-level conclusion without having to specify every permutative
+# combination individually, something that would be utterly impractical otherwise.
+
+#--------------------------------------------------
+# Exercise 05:
+
+# Write a new query to get the gene symbols of the two genes that encode for the associated proteins O60240 and Q8WTS1,
+# and display them in a single continuous graph.
+# Keyword hints: match, isa, has
+# Type hints: gene, gene-symbol, protein-encoding, uniprot-id, proten-protein-association
+
+#--------------------------------------------------
 
 match
 $g1 isa gene, has gene-symbol $g1-s;
@@ -12,4 +66,3 @@ $ppa ($p1, $p2) isa protein-protein-association;
 $p2 isa protein, has uniprot-id "Q8WTS1";
 $pe2 ($p2, $g2) isa protein-encoding;
 $g2 isa gene, has gene-symbol $g2-s;
-
