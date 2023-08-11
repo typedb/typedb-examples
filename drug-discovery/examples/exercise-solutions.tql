@@ -1,0 +1,91 @@
+# Solutions
+
+# The solutions to each of the exercises can be found here. To run the query in a solution: make sure the correct
+# session and transaction type are selected, highlight the intended query, right click and select "Run Selection".
+
+#--------------------------------------------------
+# Exercise 01 solution:
+
+match
+$g isa gene, has id "ACKR4", has id $id;
+
+#--------------------------------------------------
+# Exercise 02 solution:
+
+match
+$p isa protein, has id $p-id;
+$p-id == "O00763";
+$pe ($p, $g) isa protein-encoding;
+$g isa gene, has id $g-id;
+
+# Double-clicking on the protein-encoding twice causes transcription and translation relations to appear each time, but
+# doing so a third time causes a message to be displayed, indicating that there are no further explanations. This shows
+# that the database contains two splice variants for the encoding of protein O00763 by gene ACACB.
+
+#--------------------------------------------------
+# Exercise 03 solution:
+
+match
+$g isa gene, has id $id;
+$id == "LAP3";
+$ce ($g, $c) isa cell-expression;
+$c isa cell, has name $c-n;
+$tc ($c, $t) isa tissue-composition;
+$t isa tissue, has name $t-n;
+$t-n == "kidney";
+
+#--------------------------------------------------
+# Exercise 04 solution:
+
+match
+$p isa protein, has uniprot-id "P20645", has function-description $f;
+
+#--------------------------------------------------
+# Exercise 05 solution:
+
+match
+$g1 isa gene, has gene-symbol $g1-s;
+$pe1 ($g1, $p1) isa protein-encoding;
+$p1 isa protein, has uniprot-id "O60240";
+$ppa ($p1, $p2) isa protein-protein-association;
+$p2 isa protein, has uniprot-id "Q8WTS1";
+$pe2 ($p2, $g2) isa protein-encoding;
+$g2 isa gene, has gene-symbol $g2-s;
+
+#--------------------------------------------------
+# Exercise 06 solution:
+
+match
+$v isa virus, has name "MHV";
+$d isa drug, has name $n;
+$pvt ($v, $d) isa potential-virus-treatment;
+
+#--------------------------------------------------
+# Exercise 07 solution:
+
+match
+$di isa disease, has name "Neoplasms";
+$dipi ($di, $p) isa disease-protein-interaction;
+$p isa protein, has primary-uniprot-name $n;
+$drpi ($p, $dr) isa drug-protein-interaction;
+$dr isa drug, has name "CYCLOPHOSPHAMIDE";
+
+#--------------------------------------------------
+# Exercise 08 solution:
+
+match
+$di isa disease, has name "Neoplasms";
+$dipi ($di, $p1) isa disease-protein-interaction;
+$p1 isa protein;
+$pp1 ($p1, $pa1) isa pathway-participation;
+$pa1 isa pathway, has name $pa1-n;
+$pp2 ($pa1, $p2) isa pathway-participation;
+$p2 isa protein;
+$pp3 ($p2, $pa2) isa pathway-participation;
+$pa2 isa pathway, has name $pa2-n;
+$pp4 ($pa2, $p3) isa pathway-participation;
+$p3 isa protein;
+$drpi ($p3, $dr) isa drug-protein-interaction;
+$dr isa drug, has name "NIVOLUMAB";
+
+#--------------------------------------------------

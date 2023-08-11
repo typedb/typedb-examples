@@ -39,6 +39,3 @@ $p isa protein, has id $id;
 # Type hints: protein, id, function-description
 
 #--------------------------------------------------
-
-match
-$p isa protein, has uniprot-id "P20645", has function-description $f;

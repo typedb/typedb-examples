@@ -42,13 +42,3 @@ $g isa gene, has id $g-id;
 # determine how many splice variants exist for this encoding.
 
 #--------------------------------------------------
-
-match
-$p isa protein, has id $p-id;
-$p-id == "O00763";
-$pe ($p, $g) isa protein-encoding;
-$g isa gene, has id $g-id;
-
-# Double-clicking on the protein-encoding twice causes transcription and translation relations to appear each time, but
-# doing so a third time causes a message to be displayed, indicating that there are no further explanations. This shows
-# that the database contains two splice variants for the encoding of protein O00763 by gene ACACB.

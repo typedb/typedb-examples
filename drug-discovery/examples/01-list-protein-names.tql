@@ -18,6 +18,3 @@ $p isa protein, has id "Q9NPB9", has name $n;
 # Type hints: gene, id
 
 #--------------------------------------------------
-
-match
-$g isa gene, has id "ACKR4", has id $id;

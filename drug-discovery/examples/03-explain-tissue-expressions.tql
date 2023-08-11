@@ -41,12 +41,3 @@ $t isa tissue, has name $n;
 # Type hints: gene, cell, tissue, cell-expression, tissue-composition, gene-symbol, cell-name, tissue-name
 
 #--------------------------------------------------
-
-match
-$g isa gene, has id $id;
-$id == "LAP3";
-$ce ($g, $c) isa cell-expression;
-$c isa cell, has name $c-n;
-$tc ($c, $t) isa tissue-composition;
-$t isa tissue, has name $t-n;
-$t-n == "kidney";
