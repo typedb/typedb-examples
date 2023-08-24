@@ -17,7 +17,7 @@ small subset of the data in the project is included in order to simplify this de
 incomplete to a seasoned microbiologist. To explore and build on the full dataset, you can download the project
 [here](https://github.com/typedb-osi/typedb-bio).
 
-![Screenshot 2023-06-16 at 13 02 19](https://github.com/james-whiteside/typedb-examples/assets/117453030/f601ae73-1e43-455e-b7c1-226ce453967d)
+![Screenshot 2023-08-24 at 12 47 13](https://github.com/james-whiteside/typedb-examples/assets/117453030/e7717db8-0a33-45f7-ba6c-f4fe70cf9fe9)
 
 ## Required knowledge
 
