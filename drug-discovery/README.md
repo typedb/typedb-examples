@@ -1,11 +1,3 @@
-
-
-
-
-
-
-
-
 # Drug discovery
 
 ## Introduction
@@ -58,7 +50,7 @@ reset everything. All the examples use `data` sessions and `read` transactions, 
 explanations. In order to switch on inference, toggle the "infer" button to on. In order to switch on explanations,
 toggle the "snapshot", "infer", and "explain" buttons to on. After executing a query with explanations switched on,
 double-click on an inferred concept (one with a green outline) to find out how it was inferred from a rule. After using
-the explanations feature, remember to close the transaction with the "⨉" button before running the next query. Each
+the explanations feature, remember to close the transaction with the "×" button before running the next query. Each
 example includes guidance on which concepts to explain and in what order, in order to follow along with the demo. Each
 example also has an accompanying exercise. You can skip them out and all the examples will still run fine. Some are much
 harder than others! All the solutions are in the `solutions.tql` file.
