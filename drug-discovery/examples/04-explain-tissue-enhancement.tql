@@ -34,8 +34,11 @@ $p isa protein, has id $id;
 #--------------------------------------------------
 # Exercise 04:
 
-# Write a new query to retrieve the function description of the protein returned by Example 04.
-# Keyword hints: match, isa, has
-# Type hints: protein, id, function-description
+# Edit this query to list the proteins that have enhanced expression in the hippocampus and a leucine-rich repeat
+# structure, denoted by an encoding gene with a symbol commencing with the letters "LRR", and retrieve the function
+# descriptions of those proteins.
+# Keyword hints: like
+# Type hints: function-description, protein-encoding, gene, gene-symbol
+# Regex hints: "LRR.*"
 
 #--------------------------------------------------

@@ -38,7 +38,11 @@ $t-n == "kidney";
 # Exercise 04 solution:
 
 match
-$p isa protein, has uniprot-id "P20645", has function-description $f;
+$t isa tissue, has name "hippocampus";
+$te ($t, $p) isa tissue-enhancement;
+$p isa protein, has function-description $f;
+$pe ($p, $g) isa protein-encoding;
+$g isa gene, has gene-symbol like "LRR.*";
 
 #--------------------------------------------------
 # Exercise 05 solution:
