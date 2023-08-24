@@ -1,0 +1,33 @@
+# Example 07:
+
+# Let's dig deeper into the cyclophosphamide result. To begin with, let's query just that treatment:
+
+match
+$di isa disease, has name $di-n;
+$dr isa drug, has name $dr-n;
+$pdt ($di, $dr) isa potential-disease-treatment;
+$di-n = "Neoplasms";
+$dr-n = "CYCLOPHOSPHAMIDE";
+
+# If we explain the potential-disease-treatment relation, TypeDB shows us that it was inferred from two associations
+# between neoplasms and cyclophosphamide with a particular protein, via a disease-protein-association and a
+# drug-protein-association respectively, which are themselves inferred. We can then explain those to discover that both
+# neoplasms and cyclophosphamide have a direct interaction with this protein, so the potential treatment is a case of
+# the drug affecting a protein that impacts the spread of the cancer.
+#
+# The interactions with the protein are themselves inferred, and we can dig even deeper to uncover the data that leads
+# to their inference, but this depth of explanation is sufficient to understand how the treatment might work. Obviously,
+# this treatment may not work, but this information serves as a good indicator to begin the first stages of a clinical
+# trial, and is a key step of the drug discovery process. By using inference to identify potential treatments in this
+# way, selection of candidate drugs for trials can be vastly accelerated.
+
+#--------------------------------------------------
+# Exercise 07:
+
+# Write a new query to retrieve the primary-uniprot-name of the protein involved in the potential treatment of neoplasms
+# by cyclophosphamide.
+# Keyword hints: match, isa, has
+# Type hints: disease, disease-name, disease-protein-interaction, protein, primary-uniprot-name,
+# drug-protein-interaction, drug, drug-name
+
+#--------------------------------------------------

@@ -1,0 +1,44 @@
+# Example 04:
+
+# Now let's ask something higher-level, for the proteins that have enhanced expression within the heart muscle:
+
+match
+$t isa tissue, has name $n;
+$n == "heart muscle";
+$te ($t, $p) isa tissue-enhancement;
+$p isa protein, has id $id;
+
+# The result we get, protein P20645, is inferred by the following rule:
+#
+# rule inferred-tissue-enhancement:
+#     when {
+#         $p isa protein;
+#         $g isa gene;
+#         $t isa tissue;
+#         (encoded-protein: $p, encoding-gene: $g) isa protein-encoding;
+#         (expressed-gene: $g, expressing-tissue: $t) isa tissue-expression;
+#     } then {
+#         (expressed-protein: $p, enhanced-tissue: $t) isa tissue-enhancement;
+#     };
+#
+# Looking closely at the condition of the rule, we can see that tissue-enhancements are inferred by protein-encodings
+# and tissue-expressions, which we saw were themselves inferred in Examples 02 and 03. If we explain the
+# tissue-enhancement relation, these two relations appear in the graph visualiser, and we can double-click on them to
+# explain them as well.
+#
+# This is one of TypeDB's most powerful features: sequential inference, where the conclusion of one rule triggers the
+# condition of another. This can lead to extremely complex behaviour by the combination of relatively simple rules. In
+# TypeDB Studio, we can explain each level of inference in sequence, following a high-level inferred concept back to the
+# raw data that generated it.
+
+#--------------------------------------------------
+# Exercise 04:
+
+# Edit this query to list the proteins that have enhanced expression in the hippocampus and a leucine-rich repeat
+# structure, denoted by an encoding gene with a symbol commencing with the letters "LRR", and retrieve the function
+# descriptions of those proteins.
+# Keyword hints: like
+# Type hints: function-description, protein-encoding, gene, gene-symbol
+# Regex hints: "LRR.*"
+
+#--------------------------------------------------

@@ -31,7 +31,13 @@ to automate permission inheritance and policy enforcement at the schema level us
 
 ### [Cyber threat intelligence](https://github.com/vaticle/typedb-examples/tree/master/cyber-threat-intelligence)
 
-Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries and rule-inference.
+Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries
+and rule-inference.
+
+### [Drug discovery](https://github.com/vaticle/typedb-examples/tree/master/drug-discovery)
+
+Learn how to use TypeDB to accelerate the drug discovery process. Explore the relations between biomolecules using
+polymorphism and advanced rule-inference strategies, and leverage them to identify potential cancer treatments.
 
 ## Advanced
 

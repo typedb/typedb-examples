@@ -1,0 +1,23 @@
+# Example 06:
+
+# Now that we've seen how we can navigate the data model and explored the full capabilities of TypeDB's rule-inference,
+# we can begin using it to address some real problems in discovery. Let's ask for a list of drugs that might be
+# potential treatments for neoplasms, a form of cancer:
+
+match
+$di isa disease, has name "Neoplasms";
+$dr isa drug, has name $n;
+$pdt ($di, $dr) isa potential-disease-treatment;
+
+# This gives us two results back: cyclophosphamide and nivolumab, but we haven't specified how a drug qualifies as a
+# disease treatment in our query. In Examples 07 and 08 we'll see how TypeDB inferred the potential-disease-treatment
+# relations by combining all the rules we've defined so far.
+
+#--------------------------------------------------
+# Exercise 06:
+
+# Edit this query to find potential treatments for MHV (mouse hepatitis virus), a coronavirus that is often used as an
+# analogue to study the effects of other coronaviruses like SARS-CoV-2.
+# Type hints: virus, potential-virus-treatment
+
+#--------------------------------------------------
