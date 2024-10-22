@@ -8,7 +8,7 @@ $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "submit order";
 $ac ($po, $o) isa access;
 insert
-(subject: $u, access: $ac) isa access-history, has access-time 2023-05-16T11:20:38;
+(accessing-subject: $u, exercised-access: $ac) isa access-history, has access-time 2023-05-16T11:20:38;
 
 # The four lines in the match clause of this query are identical to the first four lines in the query we used to check
 # his permission (Example 07). This is because the roleplayers in an access history relation are the same as those in a

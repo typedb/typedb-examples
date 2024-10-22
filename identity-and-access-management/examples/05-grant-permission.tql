@@ -9,7 +9,7 @@ $a isa application, has name "Sage";
 $os isa operation-set, has name "manage order";
 $ac ($a, $os) isa access;
 insert
-(subject: $u, access: $ac) isa direct-permission;
+(permitted-subject: $u, permitted-access: $ac) isa direct-permission;
 
 # Now if we run the previous query again to list his permissions (Example 04), we'll see that he's gained several new
 # ones.
