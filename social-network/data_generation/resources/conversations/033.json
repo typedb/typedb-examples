@@ -1,0 +1,72 @@
+{
+  "username": "@23232",
+  "timestamp": "2023-05-14T11:00:00Z",
+  "body": "Finally got the hang of making #latteart! What do you think of my first attempt? #coffee #baristalife",
+  "comments": [
+    {
+      "username": "@34343",
+      "timestamp": "2023-05-14T11:15:00Z",
+      "body": "That looks so good! It’s like something you’d get at a café. How hard was it to do?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-05-14T11:30:00Z",
+          "body": "@34343 Thanks! It took a few tries to get the pour just right, but once you get the hang of it, it’s fun!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-05-14T11:40:00Z",
+      "body": "This is amazing! What design is that? A heart? A leaf?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-05-14T11:55:00Z",
+          "body": "@45454 It’s supposed to be a heart, but it kind of looks like a leaf, doesn’t it? Still working on the finer details!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-05-14T12:00:00Z",
+      "body": "Did you have to use a special type of milk to get that froth? I can never get mine to look that smooth.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-05-14T12:15:00Z",
+          "body": "@56565 I used whole milk for this one. The fat content makes it easier to get that creamy texture. Oat milk works pretty well too!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-05-14T12:20:00Z",
+      "body": "I’ve always wanted to try making latte art! Do you need a fancy espresso machine to do this?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-05-14T12:35:00Z",
+          "body": "@67676 Not really! I have a mid-range machine with a steam wand, and that’s all you need. The technique is the tricky part!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-05-14T12:45:00Z",
+      "body": "This is so cool! Next time, you should try doing a flower design. I bet you could nail it!",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-05-14T13:00:00Z",
+          "body": "@78787 That’s the plan! I’ve been watching tutorials, so maybe next time I’ll try something more complex like a tulip.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

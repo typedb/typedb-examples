@@ -1,0 +1,72 @@
+{
+  "username": "@34343",
+  "timestamp": "2023-09-10T14:20:00Z",
+  "body": "Tried filming a #timelapse of last night’s #sunset. What do you think? #naturephotography #sky",
+  "comments": [
+    {
+      "username": "@45454",
+      "timestamp": "2023-09-10T14:35:00Z",
+      "body": "Wow, that turned out beautifully! The colors are incredible. What did you use to film it?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-10T14:50:00Z",
+          "body": "@45454 Thanks! I just used my phone, believe it or not! Had it on a tripod and used a time-lapse app.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-09-10T15:00:00Z",
+      "body": "That’s so calming to watch. Did you add music to the video?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-10T15:15:00Z",
+          "body": "@56565 Yeah, I added a little soft piano music to match the vibe. It really brings the whole thing together!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-09-10T15:25:00Z",
+      "body": "I love how the clouds are moving! How long did it take to capture that?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-10T15:40:00Z",
+          "body": "@67676 It took about an hour in real time, but the time-lapse condenses it down to just a minute or so!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-09-10T15:50:00Z",
+      "body": "I’ve always wanted to try making a time-lapse! Any tips for beginners?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-10T16:05:00Z",
+          "body": "@78787 Definitely use a tripod to keep the camera steady, and make sure to pick a scene with a lot of movement, like clouds or traffic.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-09-10T16:15:00Z",
+      "body": "This looks amazing! I can’t believe you got this on your phone. Any plans to film more time-lapses?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-10T16:30:00Z",
+          "body": "@89898 Thanks! I’m hooked now, so I’m thinking of doing one for a sunrise next time. Should be fun!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "username": "@67676",
+  "timestamp": "2023-12-08T12:00:00Z",
+  "body": "Just finished building my first ever #PC! Check out the build. I’m super proud of it, but let me know if you see any ways to improve! #gamingPC #tech",
+  "comments": [
+    {
+      "username": "@78787",
+      "timestamp": "2023-12-08T12:15:00Z",
+      "body": "That looks so clean! What kind of graphics card did you use?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-12-08T12:25:00Z",
+          "body": "@78787 Thanks! I went with the NVIDIA RTX 3070. It was a bit of a splurge, but I wanted something future-proof for gaming.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-12-08T12:30:00Z",
+      "body": "Solid build! Did you do any custom cooling, or just stick with air cooling?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-12-08T12:45:00Z",
+          "body": "@89898 I went with an air cooling setup for now. Maybe I’ll upgrade to liquid cooling down the road, but it’s doing the job for now!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-12-08T12:50:00Z",
+      "body": "That RGB lighting looks sick! What case are you using? It looks super spacious.",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-12-08T13:05:00Z",
+          "body": "@45454 Appreciate it! It’s the NZXT H510. Plenty of room for cable management, which made the build so much easier!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-12-08T13:10:00Z",
+      "body": "Nice! What’s the first game you’re going to play on it?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-12-08T13:20:00Z",
+          "body": "@23232 I’m thinking of starting with *Cyberpunk 2077*—I’ve heard it looks incredible with the graphics maxed out!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-12-08T13:30:00Z",
+      "body": "Congrats on the build! Are you planning on upgrading any other parts soon?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-12-08T13:45:00Z",
+          "body": "@34343 Thanks! I might upgrade the RAM in the future, but for now, I’m happy with it. I want to see how it handles everything first!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "username": "@75757",
+  "timestamp": "2021-09-30T19:00:00Z",
+  "body": "Just saw the new #superhero movie. Honestly, I don’t get the hype. The plot felt all over the place. Anyone else feel the same? #moviereview #superheromovies",
+  "comments": [
+    {
+      "username": "@86868",
+      "timestamp": "2021-09-30T19:20:00Z",
+      "body": "I actually loved it! I think the chaos of the plot was intentional—it mirrors the character’s journey through confusion and self-discovery.",
+      "comments": [
+        {
+          "username": "@75757",
+          "timestamp": "2021-09-30T19:40:00Z",
+          "body": "@86868 That’s an interesting take. Maybe I missed some of the symbolism. I still feel like the pacing was off though.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@97979",
+      "timestamp": "2021-09-30T19:50:00Z",
+      "body": "I agree with @75757. The action scenes were great, but the character development felt rushed. They tried to pack too much into one movie.",
+      "comments": [
+        {
+          "username": "@86868",
+          "timestamp": "2021-09-30T20:05:00Z",
+          "body": "@97979 True, the character arcs could’ve used more time. But I think they were setting up for future movies in the series, so I’m willing to give it a pass.",
+          "comments": [
+            {
+              "username": "@97979",
+              "timestamp": "2021-09-30T20:25:00Z",
+              "body": "@86868 That’s fair. I’m hoping the next one expands on those arcs more. Still, this one felt like it was just trying to do too much at once.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@65656",
+      "timestamp": "2021-09-30T20:10:00Z",
+      "body": "The special effects were insane, though! That fight scene at the end had me on the edge of my seat.",
+      "comments": [
+        {
+          "username": "@75757",
+          "timestamp": "2021-09-30T20:30:00Z",
+          "body": "@65656 I’ll give you that. The visuals were top-notch. Maybe I was too distracted by the plot to fully appreciate the action scenes.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@54545",
+      "timestamp": "2021-09-30T20:35:00Z",
+      "body": "I’m just tired of superhero movies in general. They all follow the same formula—good guy vs bad guy with some big explosions.",
+      "comments": [
+        {
+          "username": "@86868",
+          "timestamp": "2021-09-30T20:45:00Z",
+          "body": "@54545 I get that, but I feel like this one tried to break away from the typical formula with more emotional depth.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

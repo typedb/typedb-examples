@@ -1,0 +1,66 @@
+{
+  "username": "@24680",
+  "timestamp": "2022-11-10T12:30:00Z",
+  "body": "What’s everyone’s thoughts on the new #smartphone that just came out? I’m considering upgrading, but not sure if it’s worth it. #tech #upgrade",
+  "comments": [
+    {
+      "username": "@13579",
+      "timestamp": "2022-11-10T13:00:00Z",
+      "body": "I’ve heard mixed reviews. Some people say it’s amazing, but others are having issues with battery life. Maybe wait for a few software updates?",
+      "comments": [
+        {
+          "username": "@86420",
+          "timestamp": "2022-11-10T13:15:00Z",
+          "body": "I agree with @13579. I always wait a couple of months before getting a new phone to see if any issues pop up.",
+          "comments": []
+        },
+        {
+          "username": "@24680",
+          "timestamp": "2022-11-10T14:00:00Z",
+          "body": "Good point @13579 and @86420, might be worth waiting a bit to see how things go.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@98760",
+      "timestamp": "2022-11-10T13:20:00Z",
+      "body": "I’ve had it for a week now, and I love it! The camera is incredible, and I haven’t noticed any battery issues so far.",
+      "comments": [
+        {
+          "username": "@86420",
+          "timestamp": "2022-11-10T13:35:00Z",
+          "body": "@98760 How’s the display? I’ve heard it’s a bit dim compared to the previous model.",
+          "comments": [
+            {
+              "username": "@98760",
+              "timestamp": "2022-11-10T13:50:00Z",
+              "body": "It’s not too bad, to be honest. I haven’t had any issues with brightness even in sunlight.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@55555",
+      "timestamp": "2022-11-10T14:10:00Z",
+      "body": "I’m still using my phone from three years ago and it works just fine. Is the upgrade really necessary?",
+      "comments": [
+        {
+          "username": "@24680",
+          "timestamp": "2022-11-10T14:30:00Z",
+          "body": "That’s what I’m trying to figure out, @55555. I don’t *need* a new phone, but I’m tempted by the new features.",
+          "comments": [
+            {
+              "username": "@13579",
+              "timestamp": "2022-11-10T14:45:00Z",
+              "body": "@24680 I say if your current phone still works well, maybe hold off. But if you’re really excited about the new features, why not treat yourself?",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

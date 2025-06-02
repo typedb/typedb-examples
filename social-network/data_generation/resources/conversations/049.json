@@ -1,0 +1,72 @@
+{
+  "username": "@23232",
+  "timestamp": "2023-12-05T15:00:00Z",
+  "body": "Live from my #artstudio! I’m working on a new #painting today—come hang out while I add some details. Any color suggestions? #artlife #creativity",
+  "comments": [
+    {
+      "username": "@34343",
+      "timestamp": "2023-12-05T15:05:00Z",
+      "body": "This looks great already! How about adding some deep blues? They’ll add a nice contrast to the warm colors.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-05T15:15:00Z",
+          "body": "@34343 I love that idea! I’ve been looking for something to balance the warm tones. Deep blue it is!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-12-05T15:20:00Z",
+      "body": "The texture you’re creating is awesome! Are you going to add any metallics? Gold or silver could really make it pop.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-05T15:30:00Z",
+          "body": "@45454 Metallics sound fun! I’ve got some gold paint here—maybe I’ll try adding a few accents and see how it looks.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-12-05T15:35:00Z",
+      "body": "Loving the live painting session! What’s your inspiration for this piece?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-05T15:50:00Z",
+          "body": "@56565 Thanks! This one’s inspired by a sunset I saw last week—trying to capture that mix of colors as the light fades.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-12-05T15:55:00Z",
+      "body": "Are you going to add any abstract shapes or keep it more natural? Some bold shapes could really stand out.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-05T16:05:00Z",
+          "body": "@67676 I hadn’t planned on it, but abstract shapes could add an interesting element. Maybe I’ll experiment with that next!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-12-05T16:10:00Z",
+      "body": "The colors you’re using are so vibrant! Any chance you’re going to sell this piece once it’s finished?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-05T16:20:00Z",
+          "body": "@78787 I hadn’t thought that far ahead! If it turns out how I’m envisioning, I might consider it.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

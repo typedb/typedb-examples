@@ -1,0 +1,72 @@
+{
+  "username": "@12121",
+  "timestamp": "2023-11-20T09:00:00Z",
+  "body": "Big news: I just got promoted at work! I’m excited but also a little nervous about the new responsibilities. Any tips for managing a #team? #promotion #leadership",
+  "comments": [
+    {
+      "username": "@23232",
+      "timestamp": "2023-11-20T09:15:00Z",
+      "body": "Congrats! That’s amazing! My biggest advice is to listen to your team. Make sure everyone feels heard, and you’ll build trust fast.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-20T09:25:00Z",
+          "body": "@23232 Thanks! I definitely want to make sure communication is solid. Listening sounds like a great place to start.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-11-20T09:30:00Z",
+      "body": "Congratulations! Don’t be afraid to delegate tasks. It’s easy to feel like you need to do everything, but trusting your team is key.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-20T09:40:00Z",
+          "body": "@34343 That’s a good reminder! I tend to take on too much, but I know I need to trust my team more.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-11-20T09:45:00Z",
+      "body": "Congrats! One tip: be clear with your expectations, but also stay approachable. It helps create a balance between leadership and teamwork.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-20T09:55:00Z",
+          "body": "@45454 I’ll definitely keep that in mind. Setting expectations while staying approachable sounds like a challenge, but I’m up for it!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-11-20T10:00:00Z",
+      "body": "That’s awesome! My advice: set regular check-ins with your team. It keeps things on track and helps everyone stay aligned on goals.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-20T10:10:00Z",
+          "body": "@56565 Love that idea! Regular check-ins could help me stay connected and make sure everything is running smoothly.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-11-20T10:15:00Z",
+      "body": "Congratulations! Remember, it’s okay to make mistakes and learn as you go. No one expects you to be perfect right away.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-20T10:25:00Z",
+          "body": "@67676 That’s really reassuring to hear. I’ve been putting a lot of pressure on myself to get everything right, but I’ll try to keep that in mind.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

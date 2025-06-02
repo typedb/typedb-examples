@@ -1,0 +1,72 @@
+{
+  "username": "@34343",
+  "timestamp": "2023-07-02T17:15:00Z",
+  "body": "Took my #drone out for a flight over the city! Here’s the #aerialfootage I captured. Let me know what you think! #dronephotography #cityscape",
+  "comments": [
+    {
+      "username": "@45454",
+      "timestamp": "2023-07-02T17:30:00Z",
+      "body": "Wow, those shots are incredible! The city looks amazing from that height. How long have you been flying drones?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-07-02T17:45:00Z",
+          "body": "@45454 Thanks! I’ve been flying for about six months now. Still learning, but it’s so much fun!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-07-02T17:50:00Z",
+      "body": "This is awesome! Did you edit the footage yourself? It looks really professional.",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-07-02T18:05:00Z",
+          "body": "@56565 Yeah, I used some basic editing software to clean it up and add a few transitions. Glad you liked it!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-07-02T18:10:00Z",
+      "body": "The sunset looks amazing from that angle! Do you have a favorite spot to fly?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-07-02T18:25:00Z",
+          "body": "@67676 The sunset was my favorite part too! I love flying near the waterfront—there’s always something interesting to capture.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-07-02T18:30:00Z",
+      "body": "I’ve been thinking about getting a drone! Any recommendations for a beginner?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-07-02T18:45:00Z",
+          "body": "@78787 Definitely start with something affordable and easy to fly. I started with a DJI Mini—it’s perfect for learning the basics.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-07-02T18:50:00Z",
+      "body": "This is stunning! How high can your drone fly? The perspective is unreal!",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-07-02T19:05:00Z",
+          "body": "@89898 Thanks! It can go up to about 400 feet, which gives you an amazing view but still stays within legal limits.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

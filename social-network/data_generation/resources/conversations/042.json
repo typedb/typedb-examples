@@ -1,0 +1,89 @@
+{
+  "username": "@45454",
+  "timestamp": "2023-11-01T12:00:00Z",
+  "body": "I’m trying to decide what my next #hobby should be! What do you think I should start? #newhobby #ideas",
+  "question": "Which should be my next hobby?",
+  "answers": ["Painting", "Gardening", "Learning guitar", "Cooking new recipes"],
+  "comments": [
+    {
+      "username": "@56565",
+      "timestamp": "2023-11-01T12:15:00Z",
+      "body": "I voted for painting! It’s so therapeutic, and you can express yourself in so many ways. Plus, it’s something you can do at your own pace.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-11-01T12:30:00Z",
+          "body": "@56565 Painting does seem really calming. I’m just worried I might not be any good at it!",
+          "comments": [
+            {
+              "username": "@56565",
+              "timestamp": "2023-11-01T12:45:00Z",
+              "body": "@45454 Don’t worry about that! It’s all about having fun and experimenting. You don’t need to be a pro to enjoy it.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-11-01T12:50:00Z",
+      "body": "Gardening all the way! It’s so rewarding to grow your own plants. Plus, it gets you outside and working with your hands.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-11-01T13:05:00Z",
+          "body": "@67676 Gardening sounds fun, but I’ve never had much of a green thumb. Any beginner tips?",
+          "comments": [
+            {
+              "username": "@67676",
+              "timestamp": "2023-11-01T13:20:00Z",
+              "body": "@45454 Start with easy plants like herbs or succulents. They’re pretty low-maintenance and a great way to get started!",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-11-01T13:30:00Z",
+      "body": "I voted for learning guitar! It’s challenging but super rewarding when you can play your first song. Plus, you’ll never get bored with all the songs to learn.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-11-01T13:45:00Z",
+          "body": "@78787 That’s a good point! I’ve always wanted to play guitar, but it seems tough to learn. How long did it take you to learn your first song?",
+          "comments": [
+            {
+              "username": "@78787",
+              "timestamp": "2023-11-01T14:00:00Z",
+              "body": "@45454 It took me a couple of weeks to get the basics down, but once you push through the beginning stages, it gets way more fun!",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-11-01T14:10:00Z",
+      "body": "I’m all for cooking new recipes! There’s nothing like creating something delicious and learning new techniques in the kitchen. Plus, you get to eat your hobby!",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-11-01T14:25:00Z",
+          "body": "@89898 Haha, I love that! Cooking sounds like a practical hobby too. Do you have a favorite recipe I should try if I pick this?",
+          "comments": [
+            {
+              "username": "@89898",
+              "timestamp": "2023-11-01T14:40:00Z",
+              "body": "@45454 Definitely! You should try making homemade pasta—it’s easier than you’d think and super satisfying!",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

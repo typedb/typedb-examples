@@ -1,0 +1,72 @@
+{
+  "username": "@78787",
+  "timestamp": "2023-06-18T11:30:00Z",
+  "body": "Spent the weekend #camping in the #mountains. Best way to disconnect and recharge! #outdoorlife #naturelover",
+  "comments": [
+    {
+      "username": "@89898",
+      "timestamp": "2023-06-18T11:45:00Z",
+      "body": "That looks so peaceful! Did you hike to the campsite?",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-06-18T12:00:00Z",
+          "body": "@89898 Yup! It was about a 3-mile hike to get there, but totally worth it for the view and the solitude.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@90909",
+      "timestamp": "2023-06-18T12:10:00Z",
+      "body": "Wow, those mountains look amazing! How was the weather?",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-06-18T12:25:00Z",
+          "body": "@90909 The weather was perfect! Sunny during the day and cool at night. Ideal for sitting around the campfire.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@10101",
+      "timestamp": "2023-06-18T12:30:00Z",
+      "body": "What’s the best part of camping for you? I’ve been thinking about trying it, but I’m not sure where to start.",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-06-18T12:50:00Z",
+          "body": "@10101 Honestly, just disconnecting from everything. No phones, no distractions—just nature. You should definitely try it!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-06-18T13:00:00Z",
+      "body": "Did you see any wildlife while you were out there?",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-06-18T13:20:00Z",
+          "body": "@23232 A few deer and lots of birds! No bears, thankfully!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-06-18T13:30:00Z",
+      "body": "What did you cook over the campfire? Always curious about camp meals!",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-06-18T13:45:00Z",
+          "body": "@34343 Classic s’mores, of course! And some foil-wrapped veggies and sausages for dinner. Simple but delicious!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

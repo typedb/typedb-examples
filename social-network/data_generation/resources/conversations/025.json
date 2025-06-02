@@ -1,0 +1,72 @@
+{
+  "username": "@23232",
+  "timestamp": "2023-08-20T14:30:00Z",
+  "body": "Harvested my first #tomatoes from the #garden today! So proud of these little guys. #gardening #homegrown",
+  "comments": [
+    {
+      "username": "@34343",
+      "timestamp": "2023-08-20T14:45:00Z",
+      "body": "Those look amazing! Homegrown tomatoes taste way better than store-bought, right?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-08-20T15:00:00Z",
+          "body": "@34343 Absolutely! They’re so much sweeter. I can’t wait to use them in a salad later!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-08-20T15:10:00Z",
+      "body": "Wow, those look perfect! How long did it take for them to grow?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-08-20T15:25:00Z",
+          "body": "@45454 Thanks! It took about 3 months from planting to harvest. I had to keep an eye on them every day!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-08-20T15:30:00Z",
+      "body": "Do you have any tips for growing tomatoes? Mine always seem to wither before they ripen.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-08-20T15:50:00Z",
+          "body": "@56565 Make sure they get plenty of sunlight and water consistently, but not too much! Also, using a good quality soil makes a big difference.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-08-20T16:00:00Z",
+      "body": "Are you going to make some homemade tomato sauce with those beauties?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-08-20T16:15:00Z",
+          "body": "@67676 That’s the plan! I’m going to make a big batch this weekend. Nothing beats fresh sauce from homegrown tomatoes.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-08-20T16:20:00Z",
+      "body": "I’m so impressed! I can barely keep a houseplant alive. What else are you growing?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-08-20T16:35:00Z",
+          "body": "@78787 Haha, thanks! I’ve got some herbs like basil and mint growing too, and I’m trying cucumbers next!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

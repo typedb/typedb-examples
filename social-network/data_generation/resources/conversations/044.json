@@ -1,0 +1,74 @@
+{
+  "username": "@56565",
+  "timestamp": "2023-11-25T14:00:00Z",
+  "body": "I’m planning to learn a new #language next year, but I can’t decide which one! #languagelearning #goals",
+  "question": "Which language should I learn?",
+  "answers": ["Spanish", "French", "Japanese", "Italian"],
+  "comments": [
+    {
+      "username": "@67676",
+      "timestamp": "2023-11-25T14:15:00Z",
+      "body": "Spanish for sure! It’s super practical, and you can use it in so many places around the world. Plus, it’s not too difficult to learn.",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-11-25T14:30:00Z",
+          "body": "@67676 I’ve heard that about Spanish! It does seem like a useful language, especially for traveling around the Americas.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-11-25T14:40:00Z",
+      "body": "French all the way! It’s such a beautiful language, and if you ever visit France or parts of Africa, it’ll come in handy.",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-11-25T14:55:00Z",
+          "body": "@78787 French does have a certain elegance to it! I’d love to visit Paris someday, so it would be great to know the language.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-11-25T15:00:00Z",
+      "body": "Go for Japanese! It’s challenging but so rewarding. Plus, if you’re into Japanese culture or anime, it’s awesome to understand the language.",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-11-25T15:20:00Z",
+          "body": "@89898 That’s tempting! I’ve always wanted to visit Japan, and learning Japanese would make the experience even better.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-11-25T15:30:00Z",
+      "body": "Italian! It’s the language of art, music, and food. Plus, Italy is such a beautiful country, and speaking the language makes the experience so much richer.",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-11-25T15:45:00Z",
+          "body": "@45454 Italian would be fun! I’d love to learn the language before visiting Rome or Florence one day. The food alone is reason enough to go!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-11-25T16:00:00Z",
+      "body": "Honestly, any of these languages would be amazing! But I voted for Spanish—so many people speak it, and you’ll find it useful in everyday life.",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-11-25T16:15:00Z",
+          "body": "@34343 That’s true! Spanish seems like the most practical option, especially if I want to use it regularly.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,72 @@
+{
+  "username": "@56565",
+  "timestamp": "2023-10-10T09:30:00Z",
+  "body": "Just completed my first #potterywheel project! Check out my bowl—definitely a bit wobbly, but I’m proud of it! #ceramics #handmade",
+  "comments": [
+    {
+      "username": "@67676",
+      "timestamp": "2023-10-10T09:45:00Z",
+      "body": "That’s awesome! For a first attempt, it looks great. Was it hard to get the clay centered on the wheel?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-10T10:00:00Z",
+          "body": "@67676 Thanks! Yeah, centering the clay was the hardest part! It kept wobbling all over the place at first.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-10-10T10:10:00Z",
+      "body": "That bowl has character! Are you planning to glaze it?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-10T10:25:00Z",
+          "body": "@78787 Absolutely! I’m thinking of going for a deep blue glaze. Hopefully, it’ll turn out as nice as I imagine!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-10-10T10:30:00Z",
+      "body": "Pottery seems so relaxing! How long did it take to make the bowl?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-10T10:45:00Z",
+          "body": "@89898 It really is! The whole process took about two hours, but the time flew by. There’s something really meditative about working with clay.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-10-10T10:50:00Z",
+      "body": "Did it turn out the way you expected, or was it harder than it looks?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-10T11:05:00Z",
+          "body": "@23232 It’s definitely harder than it looks! I had a vision, but the bowl kind of took on a life of its own. Still happy with the result though!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-10-10T11:15:00Z",
+      "body": "That’s so cool! What’s your next project? A matching plate maybe?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-10T11:30:00Z",
+          "body": "@34343 Haha, maybe! I’d love to make a full set eventually, but I think I’ll stick to bowls for a bit until I get the hang of it.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

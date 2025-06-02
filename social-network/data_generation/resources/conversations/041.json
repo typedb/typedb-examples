@@ -1,0 +1,74 @@
+{
+  "username": "@78787",
+  "timestamp": "2023-10-05T18:30:00Z",
+  "body": "I’m planning a solo #vacation and can’t decide where to go. #travel #solotravel #wanderlust",
+  "question": "What kind of vacation should I go on?",
+  "answers": ["Beach getaway", "Mountain retreat", "City exploration", "Road trip"],
+  "comments": [
+    {
+      "username": "@89898",
+      "timestamp": "2023-10-05T18:45:00Z",
+      "body": "Beach getaway all the way! Nothing beats relaxing by the ocean. Plus, you can completely disconnect and unwind.",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-10-05T19:00:00Z",
+          "body": "@89898 That’s tempting! I’ve been feeling like I need some relaxation time, and the ocean always helps with that.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-10-05T19:10:00Z",
+      "body": "Mountain retreat for sure! Fresh air, peaceful hikes, and stunning views—perfect for clearing your mind.",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-10-05T19:25:00Z",
+          "body": "@56565 That does sound perfect. I’ve never been on a solo mountain trip before, but it sounds like a great way to recharge.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-10-05T19:30:00Z",
+      "body": "City exploration! There’s so much to see and do. You can get lost in the culture, food, and attractions. Plus, solo trips to cities are fun because you can move at your own pace.",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-10-05T19:45:00Z",
+          "body": "@23232 That’s true! I do love the energy of exploring a new city, especially when I can wander around and discover hidden gems.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-10-05T19:50:00Z",
+      "body": "Road trip! You can see so many different places, and there’s nothing like the freedom of the open road. Plus, you can make spontaneous stops along the way.",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-10-05T20:05:00Z",
+          "body": "@34343 I love the idea of a road trip! The flexibility to stop wherever you want and explore sounds like a lot of fun. Definitely something to consider.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-10-05T20:15:00Z",
+      "body": "Honestly, any of these options sound amazing! I’m jealous—wherever you go, it’ll be an adventure!",
+      "comments": [
+        {
+          "username": "@78787",
+          "timestamp": "2023-10-05T20:30:00Z",
+          "body": "@45454 Haha, thanks! I’m excited to just get away for a bit, no matter where I end up.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

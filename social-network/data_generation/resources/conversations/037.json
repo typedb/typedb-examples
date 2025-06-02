@@ -1,0 +1,72 @@
+{
+  "username": "@67676",
+  "timestamp": "2023-08-15T12:45:00Z",
+  "body": "Spent the afternoon practicing #archery for the first time! Here’s a clip of me hitting the target… eventually. What do you think? #targetpractice #firsttime",
+  "comments": [
+    {
+      "username": "@78787",
+      "timestamp": "2023-08-15T13:00:00Z",
+      "body": "That’s awesome! Archery looks so fun! How long did it take to get that shot?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-08-15T13:15:00Z",
+          "body": "@78787 Thanks! It took a few rounds to get the hang of it. Definitely harder than it looks!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-08-15T13:20:00Z",
+      "body": "Not bad for a first-timer! How does your arm feel? I’ve heard it can get sore pretty quick.",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-08-15T13:35:00Z",
+          "body": "@89898 Haha, my arm is definitely sore! Holding the bow steady is tougher than I expected.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-08-15T13:40:00Z",
+      "body": "Nice! Were you aiming for the bullseye or just happy to hit the target?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-08-15T13:55:00Z",
+          "body": "@45454 Let’s just say I was thrilled to hit the target at all, haha! The bullseye is next on my list though.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-08-15T14:00:00Z",
+      "body": "You’re a natural! Are you thinking about taking more lessons?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-08-15T14:15:00Z",
+          "body": "@34343 Definitely! I’m already hooked. Hoping to improve my accuracy with some practice.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-08-15T14:20:00Z",
+      "body": "This is so cool! Did you use a traditional bow or a compound bow?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-08-15T14:35:00Z",
+          "body": "@56565 I used a traditional recurve bow. It felt pretty classic, but I’m curious to try a compound bow next time!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

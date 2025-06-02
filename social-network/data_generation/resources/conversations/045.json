@@ -1,0 +1,81 @@
+{
+  "username": "@34343",
+  "timestamp": "2023-12-15T08:30:00Z",
+  "body": "I’m getting a new #gamingconsole for the holidays but can’t decide which one! #gaming #holidaygifts",
+  "question": "What console should I get?",
+  "answers": ["PlayStation 5", "Xbox Series X", "Nintendo Switch", "Custom PC build"],
+  "comments": [
+    {
+      "username": "@45454",
+      "timestamp": "2023-12-15T08:45:00Z",
+      "body": "PlayStation 5 for sure! Amazing exclusives like *Spider-Man 2* and *God of War*. If you love story-driven games, PS5 is the way to go!",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-12-15T09:00:00Z",
+          "body": "@45454 That’s a good point! I’ve heard the graphics are insane, and I’ve been dying to play *God of War*.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-12-15T09:10:00Z",
+      "body": "Xbox Series X all the way! Game Pass gives you access to so many games for a flat price. Plus, you can play a ton of titles on day one.",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-12-15T09:25:00Z",
+          "body": "@56565 Game Pass is definitely tempting! I’ve been thinking about how much value you get from it with all those games.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-12-15T09:30:00Z",
+      "body": "Get a Nintendo Switch! It’s portable, and you get all the fun first-party games like *Zelda* and *Mario Kart*. Perfect for casual gaming or playing on the go.",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-12-15T09:45:00Z",
+          "body": "@67676 The portability is a big plus! I could take it anywhere, and I’ve always wanted to play *Breath of the Wild*.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-12-15T09:55:00Z",
+      "body": "PC gaming setup, no question! It’s more customizable, and you can upgrade your hardware as new tech comes out. Plus, tons of indie games you can’t get anywhere else!",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-12-15T10:10:00Z",
+          "body": "@78787 That’s true, PC gaming gives you more flexibility! Building a rig sounds fun too, but I’m wondering if it’s a lot of work to maintain.",
+          "comments": [
+            {
+              "username": "@78787",
+              "timestamp": "2023-12-15T10:25:00Z",
+              "body": "@34343 It’s not too bad once you set it up! Plus, you can upgrade parts over time rather than buying a whole new console.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-12-15T10:30:00Z",
+      "body": "Honestly, any of these are great choices! But if I had to pick, I’d go with the Switch—it’s perfect for solo gaming or playing with friends.",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-12-15T10:45:00Z",
+          "body": "@89898 It’s true! The multiplayer options on the Switch sound awesome for when friends come over.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

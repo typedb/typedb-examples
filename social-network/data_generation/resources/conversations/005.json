@@ -1,0 +1,73 @@
+{
+  "username": "@48484",
+  "timestamp": "2023-02-14T09:30:00Z",
+  "body": "Planning my first international trip this summer! Any tips for a #firsttimetraveler? #travel #vacation #summer",
+  "comments": [
+    {
+      "username": "@72727",
+      "timestamp": "2023-02-14T09:45:00Z",
+      "body": "That’s exciting! My advice: pack light. You’ll thank yourself later, especially if you plan to move around a lot.",
+      "comments": [
+        {
+          "username": "@48484",
+          "timestamp": "2023-02-14T10:00:00Z",
+          "body": "@72727 Thanks for the tip! I have a tendency to overpack, so I’ll have to be mindful of that.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@93939",
+      "timestamp": "2023-02-14T09:55:00Z",
+      "body": "Definitely bring copies of your important documents, like your passport. You never know what might happen.",
+      "comments": [
+        {
+          "username": "@84848",
+          "timestamp": "2023-02-14T10:15:00Z",
+          "body": "@93939 Good call! I also recommend emailing copies to yourself just in case.",
+          "comments": [
+            {
+              "username": "@93939",
+              "timestamp": "2023-02-14T10:25:00Z",
+              "body": "Yes, that’s a great idea @84848. Having digital copies can be a lifesaver.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@61616",
+      "timestamp": "2023-02-14T10:30:00Z",
+      "body": "Make sure you learn some basic phrases in the local language. It goes a long way in showing respect, even if it’s just 'hello' and 'thank you.'",
+      "comments": [
+        {
+          "username": "@48484",
+          "timestamp": "2023-02-14T10:45:00Z",
+          "body": "@61616 That’s a great idea! I’ve been thinking about doing that. It probably makes the experience more enjoyable too.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@53535",
+      "timestamp": "2023-02-14T11:00:00Z",
+      "body": "Don’t forget travel insurance. It might seem unnecessary, but it can save you a lot of hassle if something goes wrong.",
+      "comments": [
+        {
+          "username": "@48484",
+          "timestamp": "2023-02-14T11:15:00Z",
+          "body": "@53535 I’ve heard mixed things about travel insurance. Do you think it’s worth it even for a short trip?",
+          "comments": [
+            {
+              "username": "@53535",
+              "timestamp": "2023-02-14T11:30:00Z",
+              "body": "Definitely, @48484. Even for short trips, unexpected things can happen. It gives you peace of mind.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
