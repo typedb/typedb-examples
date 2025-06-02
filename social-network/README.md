@@ -19,14 +19,14 @@ The full copy-pasteable console script goes as follows, assuming you replace the
 ```
 database create social-network
 transaction schema social-network
-source <path to schema.tql>
+source /Users/joshua/Documents/vaticle/gh_vaticle/examples-repos/typedb-examples/social-network/schema.tql
 commit
 transaction write social-network
-source <path to data.tql>
+source /Users/joshua/Documents/vaticle/gh_vaticle/examples-repos/typedb-dataset-generation/social_media/queries.tql
 commit
 ```
 
-Now go to the 'Example Queries' section and plug them into a `read` transaction.
+Now you can go to the 'Example Queries' section and plug them into a `read` transaction.
 
 Have fun!
 

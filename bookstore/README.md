@@ -21,14 +21,14 @@ The full copy-pasteable console script goes as follows, assuming you replace the
 ```
 database create bookstore
 transaction schema bookstore
-source /Users/joshua/Documents/vaticle/gh_vaticle/examples-repos/typedb-examples/bookstore/schema.tql
+source <path to schema.tql>
 commit
 transaction write bookstore
-source /Users/joshua/Documents/vaticle/gh_vaticle/examples-repos/typedb-examples/bookstore/data.tql
+source <path to data.tql>
 commit
 ```
 
-Now go to the 'Example Queries' section and plug them into a `read` transaction.
+Now you can go to the 'Example Queries' section and plug them into a `read` transaction.
 
 Have fun!
 
