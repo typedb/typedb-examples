@@ -1,5 +1,9 @@
 # Identity and access management
 
+## Compatibility note
+
+**This demo has not yet been updated to be compatible with TypeDB 3.0**
+
 ## Introduction
 
 In this demo, you'll learn how to use TypeDB as the database for an identity and access management system. We'll cover

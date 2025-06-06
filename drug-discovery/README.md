@@ -1,5 +1,9 @@
 # Drug discovery
 
+## Compatibility note
+
+**This demo has not yet been updated to be compatible with TypeDB 3.0**
+
 ## Introduction
 
 In this demo, you'll learn how to use harness the power of TypeDB's inference engine to accelerate the drug discovery

@@ -1,7 +1,25 @@
 # TypeDB Examples
 
 A collection of TypeDB example projects and tutorials, designed for users with a range of familiarity with TypeDB,
-TypeQL, and other products in the TypeDB ecosystem. Each example lists the knowledge necessary to work through it.
+TypeQL, and other products in the TypeDB ecosystem.
+
+
+## Small Examples
+
+There are some smaller, though still complex, examples that are fully contained in this repository:
+
+* Bookstore: a simple ecommerce-like model of a bookstore, including sample data
+* Social network: a moderately complex model of a social network, including sample data
+
+These folders contain their own descriptions, instructions, and sample queries.
+
+## Domain-specific Demonstrations
+
+This repository also serves as an index to TypeDB's larger projects demonstrating usage in specific industries:
+
+* Cyber Thread Intelligence: an implementation of the STIX 2.1 model in TypeDB, including data loading and sample queries
+* Drug Discovery: a bio-medical repository 
+
 
 ### [Identity and access management](https://github.com/vaticle/typedb-examples/tree/master/identity-and-access-management)
 
