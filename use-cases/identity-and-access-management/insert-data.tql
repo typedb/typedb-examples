@@ -22,7 +22,7 @@
 #--------------------------------------------------
 # Clean old data:
 
-match $t isa thing; delete $t isa thing; end;
+match $t isa $_; delete $t; end;
 match $t isa user; insert $t has full-name "Rocinante"; end;
 
 #--------------------------------------------------
@@ -293,25 +293,25 @@ end;
 #--------------------------------------------------
 # Permissions:
 
-match $s isa subject, has id "engineer"; $o isa object, has id "root/engineering"; $a isa action, has id "view file"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Core"; $o isa object, has id "root/engineering/typedb"; $a isa action, has id "manage directory"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Cloud"; $o isa object, has id "root/engineering/typedb-cloud"; $a isa action, has id "manage directory"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Finance"; $o isa object, has id "Sage"; $a isa action, has id "manage order"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "Salesforce"; $a isa action, has id "manage account"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Customer Support"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Core"; $o isa object, has id "core"; $a isa action, has id "manage pull request"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Cloud"; $o isa object, has id "cloud"; $a isa action, has id "manage pull request"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "Web"; $o isa object, has id "web"; $a isa action, has id "manage pull request"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "web editor"; $o isa object, has id "web"; $a isa action, has id "manage branch"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "web admin"; $o isa object, has id "web"; $a isa action, has id "manage repository"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "engineer"; $o isa object, has id "root/engineering"; $a isa action, has id "view file"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Core"; $o isa object, has id "root/engineering/typedb"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Cloud"; $o isa object, has id "root/engineering/typedb-cloud"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Finance"; $o isa object, has id "Sage"; $a isa action, has id "manage order"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "Salesforce"; $a isa action, has id "manage account"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Customer Support"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Core"; $o isa object, has id "core"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Cloud"; $o isa object, has id "cloud"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Web"; $o isa object, has id "web"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "web editor"; $o isa object, has id "web"; $a isa action, has id "manage branch"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "web admin"; $o isa object, has id "web"; $a isa action, has id "manage repository"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 
 #--------------------------------------------------
 # Access histories:
 
-match $s isa subject, has id "bobbie.draper@vaticle.com"; $o isa object, has id "camina.drummer@ibm.com"; $a isa action, has id "view account"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-05T09:19:17; end;
-match $s isa subject, has id "joe.miller@vaticle.com"; $o isa object, has id "customer"; $a isa action, has id "insert record"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-07T13:11:26; end;
-match $s isa subject, has id "alex.kamal@vaticle.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
-match $s isa subject, has id "naomi.nagata@vaticle.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac (accessed-object: $o, valid-action: $a) isa access; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
+match $s isa subject, has id "bobbie.draper@vaticle.com"; $o isa object, has id "camina.drummer@ibm.com"; $a isa action, has id "view account"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-05T09:19:17; end;
+match $s isa subject, has id "joe.miller@vaticle.com"; $o isa object, has id "customer"; $a isa action, has id "insert record"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-07T13:11:26; end;
+match $s isa subject, has id "alex.kamal@vaticle.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
+match $s isa subject, has id "naomi.nagata@vaticle.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac isa access, links (accessed-object: $o, valid-action: $a);; insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
 
 #--------------------------------------------------

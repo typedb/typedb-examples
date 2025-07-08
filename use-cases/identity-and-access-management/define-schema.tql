@@ -32,7 +32,7 @@ entity user @abstract, sub subject;
 entity user-group @abstract, sub subject;
 
 entity object @abstract,
-    owns object-type;
+    owns object-type @card(0..);
 
 entity resource  @abstract, sub object;
 
@@ -40,7 +40,7 @@ entity resource-collection @abstract, sub object;
 
 entity action @abstract,
     owns name,
-    owns object-type;
+    owns object-type @card(0..);
 
 entity operation sub action;
 
