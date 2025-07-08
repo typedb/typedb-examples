@@ -102,14 +102,14 @@ relation access,
 object plays access:accessed-object;
 action plays access:valid-action;
 
-relation permission,
+relation direct-permission,
     relates permitted-subject,
     relates permitted-access,
     owns review-date,
     owns validity;
 
-subject plays permission:permitted-subject;
-access plays permission:permitted-access;
+subject plays direct-permission:permitted-subject;
+access plays direct-permission:permitted-access;
 
 relation change-request,
     relates requesting-subject,
@@ -132,7 +132,7 @@ access plays access-history:exercised-access;
 # Policy and violation relation types:
 
 relation segregation-policy,
-    relates segregated-action,
+    relates segregated-action @card(2),
     owns name;
 
 relation static-segregation-policy sub segregation-policy;
@@ -223,45 +223,98 @@ attribute hash sub id, value string;
 attribute full-name, value string;
 attribute access-time, value datetime;
 
-# #--------------------------------------------------
-# # Rules:
+#--------------------------------------------------
+# Functions:
+#--------------------------------------------------
+# memberships of a given instance
+fun group_memberships($member: subject) -> { user-group }:
+match
+    $group isa user-group;
+    {
+        $m isa group-membership, links (user-group: $group, group-member: $member);
+    } or {
+        $m1 isa group-membership, links (user-group: $group, group-member: $intermediate);
+        let $intermediate in group_memberships($member);
+    };
+return { $group };
 
-# # These rules contain a number of lines that are unnecessary for the rule to function, but add additional context useful
-# # for showing explanations in the graph visualiser during this demonstration. When adapting these rules for production,
-# # these lines can be safely removed from the rules.
 
-# rule transitive-group-membership:
-#     when {
-#         (user-group: $g1, group-member: $g2) isa group-membership;
-#         (user-group: $g2, group-member: $s) isa! group-membership;
-#         $g1 has id $g1-id; # Unnecessary line, see note above.
-#         $g2 has id $g2-id; # Unnecessary line, see note above.
-#         $s has id $s-id; # Unnecessary line, see note above.
-#     } then {
-#         (user-group: $g1, group-member: $s) isa inherited-group-membership;
-#     };
+fun collection_memberships($member: object) -> { resource-collection }:
+match
+    $collection isa resource-collection;
+    {
+        $m isa collection-membership, links (resource-collection: $collection, collection-member: $member);
+    } or {
+        $m1 isa collection-membership, links (resource-collection: $collection, collection-member: $intermediate);
+        let $intermediate in collection_memberships($member);
+    };
+return { $collection };
 
-# rule transitive-collection-membership:
-#     when {
-#         (resource-collection: $c1, collection-member: $c2) isa collection-membership;
-#         (resource-collection: $c2, collection-member: $o) isa! collection-membership;
-#         $c1 has id $c1-id; # Unnecessary line, see note above.
-#         $c2 has id $c2-id; # Unnecessary line, see note above.
-#         $o has id $o-id; # Unnecessary line, see note above.
-#     } then {
-#         (resource-collection: $c1, collection-member: $o) isa inherited-collection-membership;
-#     };
+fun set_memberships($member: action) -> { operation-set }:
+match
+    $set isa operation-set;
+    {
+        $m isa set-membership, links (operation-set: $set, set-member: $member);
+    } or {
+        $m1 isa set-membership, links (operation-set: $set, set-member: $intermediate);
+        let $intermediate in set_memberships($member);
+    };
+return { $set };
 
-# rule transitive-set-membership:
-#     when {
-#         (operation-set: $s1, set-member: $s2) isa set-membership;
-#         (operation-set: $s2, set-member: $a) isa! set-membership;
-#         $s1 has id $s1-id; # Unnecessary line, see note above.
-#         $s2 has id $s2-id; # Unnecessary line, see note above.
-#         $a has id $a-id; # Unnecessary line, see note above.
-#     } then {
-#         (operation-set: $s1, set-member: $a) isa inherited-set-membership;
-#     };
+#--------------------------------------------------
+# members of a given collection
+fun group_members($group: user-group) -> { subject }:
+match
+#    $group isa user-group;
+    $member isa subject;
+    {
+        $m isa group-membership, links (user-group: $group, group-member: $member);
+    } or {
+        let $intermediate in group_members($group);
+        $m1 isa group-membership, links (user-group: $intermediate, group-member: $member);
+    };
+return { $member };
+
+fun set_members($set: operation-set) -> { action }:
+match
+    $member isa action;
+    {
+        $m isa set-membership, links (operation-set: $set, set-member: $member);
+    } or {
+        let $intermediate in set_members($set);
+        $m1 isa set-membership, links (operation-set: $intermediate, set-member: $member);
+    };
+return { $member };
+
+fun collection_members($collection: resource-collection) -> { object }:
+match
+    $member isa object;
+    {
+        $m isa collection-membership, links (resource-collection: $collection, collection-member: $member);
+    } or {
+        let $intermediate in collection_members($collection);
+        $m1 isa collection-membership, links (resource-collection: $intermediate, collection-member: $member);
+    };
+return { $member };
+
+
+#--------------------------------------------------
+# Functions for permissions
+fun list_permissions($subject: subject) -> { access }:
+match
+    $granting-subject isa subject;
+    { let $granting-subject in group_memberships($subject); }  or { $granting-subject is $subject; };
+
+    $granting-permission isa direct-permission, links (permitted-subject: $granting-subject, permitted-access: $granting-access);
+    $granting-access isa access, links (accessed-object: $granting-object, valid-action: $granting-action);
+
+    $action isa action;
+    $object isa object;
+    { let $action in set_members($granting-action); } or { $action is $granting-action; };
+    { let $object in collection_members($granting-object); } or { $object is $granting-object ; };
+
+    $access isa access, links (accessed-object: $object, valid-action: $action);
+return { $access };
 
 # rule permission-inheritance:
 #     when {

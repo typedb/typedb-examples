@@ -13,28 +13,25 @@ $gm ($ug, $u) isa group-membership;
 # our group membership, we've declared the roleplayers but not the roles they play. This is because there is only one
 # logical way that the roleplayers can play these roles, so we let TypeDB's type inference firgure that out for us.
 #
-# When we run this query, we get a few results, but let's try toggling the inference button at the top to switch on
-# TypeDB's rule-inference. Now if we run the query again, we get many more results shown in a green outline. This is
-# because of a rule encoded into the schema:
+# When we run this query, we get a few results but these do not include the transitive memberships.
+# Using the group_memberships function in the schema, we can get the groups that a user is transitively a member of.
 #
-# rule transitive-group-membership:
-#     when {
-#         (group: $g1, group-member: $g2) isa group-membership;
-#         (group: $g2, group-member: $s) isa! group-membership;
-#     } then {
-#         (group: $g1, group-member: $s) isa inherited-group-membership;
-#     };
-#
-# This rule makes membership of user groups transitive. Take Clarissa Mao for example. She is a member of the web admin
-# user role, and that role is a member of the web editor user role. This is because all web admins are also web editors
-# by default, and can do anything a web editor can (and more). We know that this means Clarissa is a web editor, but we
-# haven't written this fact to the database. With rule-inference, we don't need to, because we can encapsulate the
-# business logic of transitive membership in a high-level rule and let TypeDB do the legwork for us.
+match
+$u isa user, has full-name $fn;
+let $ug in group_memberships($u);
+$ug has id $id;
+
+# This function defines the transitive closure of user group memberships. Take Clarissa Mao for example. 
+#She is a member of the web admin user role, and that role is a member of the web editor user role. 
+# This is because all web admins are also web editors by default, and can do anything a web editor can (and more).
+# We know that this means Clarissa is a web editor, but we haven't written this fact to the database. 
+# With functions, we don't need to, because we can encapsulate the business logic of transitive membership
+# in a high-level function and let TypeDB do the legwork for us.
 
 #--------------------------------------------------
 # Exercise 02:
 
-# Edit this query to list the number of user groups each person is in by name. Try running it with inference off and on.
+# Edit this query to list the number of user groups each person is in by name.
 # Keyword hints: group, count
 
 #--------------------------------------------------
