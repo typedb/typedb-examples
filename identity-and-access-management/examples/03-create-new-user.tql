@@ -16,7 +16,7 @@ $e isa employee, has full-name "Filip Inaros", has email "filip.inaros@vaticle.c
 
 # Write a new query to give Filip a second email address: "filip@vaticle.com". Try re-running Example 01 afterwards to
 # see the results of these queries.
-# Keyword hints: match, insert
+# Keyword hints: match, update
 # Type hints: employee, email
 
 #--------------------------------------------------
