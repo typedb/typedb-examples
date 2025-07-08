@@ -53,23 +53,18 @@ relation membership @abstract,
     relates parent,
     relates member;
 
-group-membership sub membership,
+relation group-membership sub membership,
     relates user-group as parent,
     relates group-member as member;
 
-inherited-group-membership sub group-membership;
 
-collection-membership sub membership,
+relation collection-membership sub membership,
     relates resource-collection as parent,
     relates collection-member as member;
 
-inherited-collection-membership sub collection-membership;
-
-set-membership sub membership,
+relation set-membership sub membership,
     relates operation-set as parent,
     relates set-member as member;
-
-inherited-set-membership sub set-membership;
 
 user-group plays group-membership:user-group;
 subject plays group-membership:group-member;
@@ -215,7 +210,7 @@ entity repository sub resource-collection,
 
 attribute credential, value string;
 attribute object-type, value string;
-attribute id, @abstract, value string;
+attribute id, @abstract;
 attribute name sub id, value string;
 attribute ownership-type, value string;
 attribute review-date, value datetime;
