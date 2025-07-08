@@ -24,40 +24,32 @@ define
 #--------------------------------------------------
 # Core entity types:
 
-subject sub entity,
-    abstract,
+entity subject @abstract,
     owns credential;
 
-user sub subject,
-    abstract;
+entity user @abstract, sub subject;
 
-user-group sub subject,
-    abstract;
+entity user-group @abstract, sub subject;
 
-object sub entity,
-    abstract,
+entity object @abstract,
     owns object-type;
 
-resource sub object,
-    abstract;
+entity resource  @abstract, sub object;
 
-resource-collection sub object,
-    abstract;
+entity resource-collection @abstract, sub object;
 
-action sub entity,
-    abstract,
+entity action @abstract,
     owns name,
     owns object-type;
 
-operation sub action;
+entity operation sub action;
 
-operation-set sub action;
+entity operation-set sub action;
 
 #--------------------------------------------------
 # Membership and ownership relation types:
 
-membership sub relation,
-    abstract,
+relation membership @abstract,
     relates parent,
     relates member;
 
@@ -86,17 +78,16 @@ object plays collection-membership:collection-member;
 operation-set plays set-membership:operation-set;
 action plays set-membership:set-member;
 
-ownership sub relation,
-    abstract,
+relation ownership @abstract,
     relates owned,
     relates owner;
 
-group-ownership sub ownership,
+relation group-ownership sub ownership,
     relates owned-group as owned,
     relates group-owner as owner,
     owns ownership-type;
 
-object-ownership sub ownership,
+relation object-ownership sub ownership,
     relates owned-object as owned,
     relates object-owner as owner,
     owns ownership-type;
@@ -109,27 +100,23 @@ subject plays object-ownership:object-owner;
 #--------------------------------------------------
 # Access and permission relation types:
 
-access sub relation,
+relation access,
     relates accessed-object,
     relates valid-action;
 
 object plays access:accessed-object;
 action plays access:valid-action;
 
-permission sub relation,
+relation permission,
     relates permitted-subject,
     relates permitted-access,
     owns review-date,
     owns validity;
 
-direct-permission sub permission;
-
-inherited-permission sub permission;
-
 subject plays permission:permitted-subject;
 access plays permission:permitted-access;
 
-change-request sub relation,
+relation change-request,
     relates requesting-subject,
     relates requested-subject,
     relates requested-change;
@@ -138,7 +125,7 @@ subject plays change-request:requesting-subject;
 subject plays change-request:requested-subject;
 access plays change-request:requested-change;
 
-access-history sub relation,
+relation access-history,
     relates accessing-subject,
     relates exercised-access,
     owns access-time;
@@ -149,20 +136,19 @@ access plays access-history:exercised-access;
 #--------------------------------------------------
 # Policy and violation relation types:
 
-segregation-policy sub relation,
+relation segregation-policy,
     relates segregated-action,
     owns name;
 
-static-segregation-policy sub segregation-policy;
+relation static-segregation-policy sub segregation-policy;
 
-dynamic-segregation-policy sub segregation-policy;
+relation dynamic-segregation-policy sub segregation-policy;
 
 action plays segregation-policy:segregated-action;
 
-violation sub relation,
-    abstract;
+relation violation @abstract;
 
-segregation-violation sub violation,
+relation segregation-violation sub violation,
     relates violating-subject,
     relates violating-object,
     relates violated-policy;
@@ -174,191 +160,191 @@ segregation-policy plays segregation-violation:violated-policy;
 #--------------------------------------------------
 # Core entity subtypes:
 
-employee sub user,
+entity employee sub user,
     owns full-name,
     owns email;
 
-contractor sub user,
+entity contractor sub user,
     owns full-name,
     owns email;
 
-business-unit sub user-group,
+entity business-unit sub user-group,
     owns name;
 
-user-role sub user-group,
+entity user-role sub user-group,
     owns name;
 
-user-account sub user-group,
+entity user-account sub user-group,
     owns email;
 
-file sub resource,
+entity file sub resource,
     owns path;
 
-purchase-order sub resource,
+entity purchase-order sub resource,
     owns reference;
 
-customer-account sub resource,
+entity customer-account sub resource,
     owns email;
 
-record sub resource,
+entity record sub resource,
     owns primary-key;
 
-pull-request sub resource,
+entity pull-request sub resource,
     owns hash;
 
-directory sub resource-collection,
+entity directory sub resource-collection,
     owns path;
 
-application sub resource-collection,
+entity application sub resource-collection,
     owns name;
 
-database sub resource-collection,
+entity database sub resource-collection,
     owns name;
 
-table sub resource-collection,
+entity table sub resource-collection,
     owns name;
 
-branch sub resource-collection,
+entity branch sub resource-collection,
     owns name;
 
-repository sub resource-collection,
+entity repository sub resource-collection,
     owns name;
 
 #--------------------------------------------------
 # Attribute types:
 
-credential sub attribute, value string;
-object-type sub attribute, value string;
-id sub attribute, abstract, value string;
-name sub id, value string;
-ownership-type sub attribute, value string;
-review-date sub attribute, value datetime;
-validity sub attribute, value boolean;
-email sub id, value string;
-path sub id, value string;
-reference sub id, value string;
-primary-key sub id, value string;
-hash sub id, value string;
-full-name sub attribute, value string;
-access-time sub attribute, value datetime;
+attribute credential, value string;
+attribute object-type, value string;
+attribute id, @abstract, value string;
+attribute name sub id, value string;
+attribute ownership-type, value string;
+attribute review-date, value datetime;
+attribute validity, value boolean;
+attribute email sub id, value string;
+attribute path sub id, value string;
+attribute reference sub id, value string;
+attribute primary-key sub id, value string;
+attribute hash sub id, value string;
+attribute full-name, value string;
+attribute access-time, value datetime;
 
-#--------------------------------------------------
-# Rules:
+# #--------------------------------------------------
+# # Rules:
 
-# These rules contain a number of lines that are unnecessary for the rule to function, but add additional context useful
-# for showing explanations in the graph visualiser during this demonstration. When adapting these rules for production,
-# these lines can be safely removed from the rules.
+# # These rules contain a number of lines that are unnecessary for the rule to function, but add additional context useful
+# # for showing explanations in the graph visualiser during this demonstration. When adapting these rules for production,
+# # these lines can be safely removed from the rules.
 
-rule transitive-group-membership:
-    when {
-        (user-group: $g1, group-member: $g2) isa group-membership;
-        (user-group: $g2, group-member: $s) isa! group-membership;
-        $g1 has id $g1-id; # Unnecessary line, see note above.
-        $g2 has id $g2-id; # Unnecessary line, see note above.
-        $s has id $s-id; # Unnecessary line, see note above.
-    } then {
-        (user-group: $g1, group-member: $s) isa inherited-group-membership;
-    };
+# rule transitive-group-membership:
+#     when {
+#         (user-group: $g1, group-member: $g2) isa group-membership;
+#         (user-group: $g2, group-member: $s) isa! group-membership;
+#         $g1 has id $g1-id; # Unnecessary line, see note above.
+#         $g2 has id $g2-id; # Unnecessary line, see note above.
+#         $s has id $s-id; # Unnecessary line, see note above.
+#     } then {
+#         (user-group: $g1, group-member: $s) isa inherited-group-membership;
+#     };
 
-rule transitive-collection-membership:
-    when {
-        (resource-collection: $c1, collection-member: $c2) isa collection-membership;
-        (resource-collection: $c2, collection-member: $o) isa! collection-membership;
-        $c1 has id $c1-id; # Unnecessary line, see note above.
-        $c2 has id $c2-id; # Unnecessary line, see note above.
-        $o has id $o-id; # Unnecessary line, see note above.
-    } then {
-        (resource-collection: $c1, collection-member: $o) isa inherited-collection-membership;
-    };
+# rule transitive-collection-membership:
+#     when {
+#         (resource-collection: $c1, collection-member: $c2) isa collection-membership;
+#         (resource-collection: $c2, collection-member: $o) isa! collection-membership;
+#         $c1 has id $c1-id; # Unnecessary line, see note above.
+#         $c2 has id $c2-id; # Unnecessary line, see note above.
+#         $o has id $o-id; # Unnecessary line, see note above.
+#     } then {
+#         (resource-collection: $c1, collection-member: $o) isa inherited-collection-membership;
+#     };
 
-rule transitive-set-membership:
-    when {
-        (operation-set: $s1, set-member: $s2) isa set-membership;
-        (operation-set: $s2, set-member: $a) isa! set-membership;
-        $s1 has id $s1-id; # Unnecessary line, see note above.
-        $s2 has id $s2-id; # Unnecessary line, see note above.
-        $a has id $a-id; # Unnecessary line, see note above.
-    } then {
-        (operation-set: $s1, set-member: $a) isa inherited-set-membership;
-    };
+# rule transitive-set-membership:
+#     when {
+#         (operation-set: $s1, set-member: $s2) isa set-membership;
+#         (operation-set: $s2, set-member: $a) isa! set-membership;
+#         $s1 has id $s1-id; # Unnecessary line, see note above.
+#         $s2 has id $s2-id; # Unnecessary line, see note above.
+#         $a has id $a-id; # Unnecessary line, see note above.
+#     } then {
+#         (operation-set: $s1, set-member: $a) isa inherited-set-membership;
+#     };
 
-rule permission-inheritance:
-    when {
-        $s isa subject;
-        $ac (accessed-object: $o, valid-action: $a) isa access;
-        $ac2 (accessed-object: $o2, valid-action: $a2) isa access;
-        (permitted-subject: $s2, permitted-access: $ac2) isa direct-permission;
-        $s has id $s-id; # Unnecessary line, see note above.
-        $o has id $o-id; # Unnecessary line, see note above.
-        $a has id $a-id; # Unnecessary line, see note above.
-        $s2 has id $s2-id; # Unnecessary line, see note above.
-        $o2 has id $o2-id; # Unnecessary line, see note above.
-        $a2 has id $a2-id; # Unnecessary line, see note above.
-        {
-            (user-group: $s2, group-member: $s) isa group-membership;
-        } or {
-            $s2 is $s;
-        };
-        {
-            (resource-collection: $o2, collection-member: $o) isa collection-membership;
-        } or {
-            $o2 is $o;
-        };
-        {
-            (operation-set: $a2, set-member: $a) isa set-membership;
-        } or {
-            $a2 is $a;
-        };
-    } then {
-        (permitted-subject: $s, permitted-access: $ac) isa inherited-permission;
-    };
+# rule permission-inheritance:
+#     when {
+#         $s isa subject;
+#         $ac (accessed-object: $o, valid-action: $a) isa access;
+#         $ac2 (accessed-object: $o2, valid-action: $a2) isa access;
+#         (permitted-subject: $s2, permitted-access: $ac2) isa direct-permission;
+#         $s has id $s-id; # Unnecessary line, see note above.
+#         $o has id $o-id; # Unnecessary line, see note above.
+#         $a has id $a-id; # Unnecessary line, see note above.
+#         $s2 has id $s2-id; # Unnecessary line, see note above.
+#         $o2 has id $o2-id; # Unnecessary line, see note above.
+#         $a2 has id $a2-id; # Unnecessary line, see note above.
+#         {
+#             (user-group: $s2, group-member: $s) isa group-membership;
+#         } or {
+#             $s2 is $s;
+#         };
+#         {
+#             (resource-collection: $o2, collection-member: $o) isa collection-membership;
+#         } or {
+#             $o2 is $o;
+#         };
+#         {
+#             (operation-set: $a2, set-member: $a) isa set-membership;
+#         } or {
+#             $a2 is $a;
+#         };
+#     } then {
+#         (permitted-subject: $s, permitted-access: $ac) isa inherited-permission;
+#     };
 
-rule static-segregation-violation-detection:
-    when {
-        $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
-        $ac1 (accessed-object: $o, valid-action: $a1) isa access;
-        $ac2 (accessed-object: $o, valid-action: $a2) isa access;
-        $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
-        $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
-        $a1 has id $a1-id; # Unnecessary line, see note above.
-        $a2 has id $a2-id; # Unnecessary line, see note above.
-        $po has id $po-id; # Unnecessary line, see note above.
-        $o has id $o-id; # Unnecessary line, see note above.
-        $s has id $s-id; # Unnecessary line, see note above.
-    } then {
-        (violating-subject: $s, violating-object: $o, violated-policy: $po) isa segregation-violation;
-    };
+# rule static-segregation-violation-detection:
+#     when {
+#         $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
+#         $ac1 (accessed-object: $o, valid-action: $a1) isa access;
+#         $ac2 (accessed-object: $o, valid-action: $a2) isa access;
+#         $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
+#         $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
+#         $a1 has id $a1-id; # Unnecessary line, see note above.
+#         $a2 has id $a2-id; # Unnecessary line, see note above.
+#         $po has id $po-id; # Unnecessary line, see note above.
+#         $o has id $o-id; # Unnecessary line, see note above.
+#         $s has id $s-id; # Unnecessary line, see note above.
+#     } then {
+#         (violating-subject: $s, violating-object: $o, violated-policy: $po) isa segregation-violation;
+#     };
 
-rule automatic-permission-invalidity:
-    when {
-        $ac1 (accessed-object: $o, valid-action: $a1) isa access;
-        $ac2 (accessed-object: $o, valid-action: $a2) isa access;
-        $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
-        $o has id $o-id; # Unnecessary line, see note above.
-        $a1 has id $a1-id; # Unnecessary line, see note above.
-        $a2 has id $a2-id; # Unnecessary line, see note above.
-        $s has id $s-id; # Unnecessary line, see note above.
-        {
-            $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
-            $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
-            $po has id $po-id; # Unnecessary line, see note above.
-        } or {
-            $po (segregated-action: $a1, segregated-action: $a2) isa dynamic-segregation-policy;
-            $ah (accessing-subject: $s, exercised-access: $ac2) isa access-history;
-            $po has id $po-id; # Unnecessary line, see note above.
-        };
-    } then {
-        $p1 has validity false;
-    };
+# rule automatic-permission-invalidity:
+#     when {
+#         $ac1 (accessed-object: $o, valid-action: $a1) isa access;
+#         $ac2 (accessed-object: $o, valid-action: $a2) isa access;
+#         $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
+#         $o has id $o-id; # Unnecessary line, see note above.
+#         $a1 has id $a1-id; # Unnecessary line, see note above.
+#         $a2 has id $a2-id; # Unnecessary line, see note above.
+#         $s has id $s-id; # Unnecessary line, see note above.
+#         {
+#             $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
+#             $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
+#             $po has id $po-id; # Unnecessary line, see note above.
+#         } or {
+#             $po (segregated-action: $a1, segregated-action: $a2) isa dynamic-segregation-policy;
+#             $ah (accessing-subject: $s, exercised-access: $ac2) isa access-history;
+#             $po has id $po-id; # Unnecessary line, see note above.
+#         };
+#     } then {
+#         $p1 has validity false;
+#     };
 
-rule automatic-permission-validity:
-    when {
-        $p isa permission;
-        not {
-            $p has validity false;
-        };
-    } then {
-        $p has validity true;
-    };
+# rule automatic-permission-validity:
+#     when {
+#         $p isa permission;
+#         not {
+#             $p has validity false;
+#         };
+#     } then {
+#         $p has validity true;
+#     };
 
-#--------------------------------------------------
+# #--------------------------------------------------
