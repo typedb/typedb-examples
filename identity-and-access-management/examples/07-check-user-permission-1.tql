@@ -8,8 +8,8 @@ match
 $u isa user, has email "filip.inaros@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "submit order";
-$ac isa access ($po, $o) ;
-$p isa permission ($u, $ac), has validity;
+$ac isa access, links ($po, $o) ;
+$p isa direct-permission, ($u, $ac), has validity;
 
 
 # This successfully returns a result, meaning that Filip has permission to submit the order.
