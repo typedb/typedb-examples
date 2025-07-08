@@ -314,4 +314,3 @@ match $s isa subject, has id "joe.miller@vaticle.com"; $o isa object, has id "cu
 match $s isa subject, has id "alex.kamal@vaticle.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
 match $s isa subject, has id "naomi.nagata@vaticle.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
 
-#--------------------------------------------------

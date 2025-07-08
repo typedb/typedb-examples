@@ -7,7 +7,7 @@ match
 $u isa user, has email "filip.inaros@vaticle.com";
 $a isa application, has name "Sage";
 $os isa operation-set, has name "manage order";
-$ac ($a, $os) isa access;
+$ac isa access, links ($a, $os);
 insert
 (permitted-subject: $u, permitted-access: $ac) isa direct-permission;
 
