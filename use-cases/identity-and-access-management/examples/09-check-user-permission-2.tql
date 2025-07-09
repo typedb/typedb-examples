@@ -8,7 +8,7 @@ $u isa user, has email "filip.inaros@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
 $ac isa access ($po, $o);
-has_permission($u, $ac);,
+true == has_permission($u, $ac);
 false == violates_policies($u, $ac);
 
 # This time, we get no results returned. This is because the dynamic segregation policy we defined has automatically

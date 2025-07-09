@@ -6,7 +6,7 @@ match
 $u isa user, has email "filip.inaros@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "submit order";
-$ac ($po, $o) isa access;
+$ac isa access ($po, $o);
 insert
 (accessing-subject: $u, exercised-access: $ac) isa access-history, has access-time 2023-05-16T11:20:38;
 
