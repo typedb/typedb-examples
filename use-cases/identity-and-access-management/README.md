@@ -39,7 +39,7 @@ them more than once or out of order might generate data errors. If anything goes
 run the `setup-script.tqls` script again to reset everything. For the examples, you'll have to switch between 
 `read` and `write` transactions depending on the queries in the example, and remember to commit after writes.
 Each example has an accompanying exercise. You can skip them out and all the examples will still run fine. Some are
-much harder than others! All the solutions are in the `solutions.tql` file.
+much harder than others! All the solutions are in the `exercise-solutions.tql` file.
 
 ## Next steps
 
