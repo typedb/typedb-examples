@@ -316,36 +316,46 @@ match
     $access isa access, links (accessed-object: $object, valid-action: $action);
 return { $access };
 
-# rule permission-inheritance:
-#     when {
-#         $s isa subject;
-#         $ac (accessed-object: $o, valid-action: $a) isa access;
-#         $ac2 (accessed-object: $o2, valid-action: $a2) isa access;
-#         (permitted-subject: $s2, permitted-access: $ac2) isa direct-permission;
-#         $s has id $s-id; # Unnecessary line, see note above.
-#         $o has id $o-id; # Unnecessary line, see note above.
-#         $a has id $a-id; # Unnecessary line, see note above.
-#         $s2 has id $s2-id; # Unnecessary line, see note above.
-#         $o2 has id $o2-id; # Unnecessary line, see note above.
-#         $a2 has id $a2-id; # Unnecessary line, see note above.
-#         {
-#             (user-group: $s2, group-member: $s) isa group-membership;
-#         } or {
-#             $s2 is $s;
-#         };
-#         {
-#             (resource-collection: $o2, collection-member: $o) isa collection-membership;
-#         } or {
-#             $o2 is $o;
-#         };
-#         {
-#             (operation-set: $a2, set-member: $a) isa set-membership;
-#         } or {
-#             $a2 is $a;
-#         };
-#     } then {
-#         (permitted-subject: $s, permitted-access: $ac) isa inherited-permission;
-#     };
+fun has_permission_through($subject: subject, $access: access) -> { direct-permission }:
+match
+    $subject isa subject;
+    $object isa object;
+    $action isa action;
+    $granting-subject isa subject;
+    $granting-object isa object;
+    $granting-action isa action;
+    $access isa access, links (accessed-object: $object, valid-action: $action);
+    { let $granting-subject in group_memberships($subject); }  or { $granting-subject is $subject; };
+    { let $granting-action in set_memberships($action); } or { $granting-action is $action; };
+    { let $granting-object in collection_memberships($object); } or { $granting-object is $object; };
+    $granting-access isa access (accessed-object: $granting-object, valid-action: $granting-action);
+    $granting-permission isa direct-permission, links (permitted-subject: $granting-subject, permitted-access: $granting-access);
+return { $granting-permission };
+
+fun has_permission($subject: subject, $access: access) -> boolean:
+match
+    let $_ in has_permission_through($subject, $access);
+return check;
+
+# Segregation policy functions
+fun segregation_policies_violated($s: subject, $ac1: access) -> { segregation-policy }:
+match
+    $ac1 isa access (accessed-object: $o, valid-action: $a1);
+    {
+        $po isa static-segregation-policy (segregated-action: $a1, segregated-action: $a2);
+        $ac2 isa access (accessed-object: $o, valid-action: $a2);
+        true == has_permission($s, $ac2);
+    } or {
+        $po isa dynamic-segregation-policy (segregated-action: $a1, segregated-action: $a2) ;
+        $ac2 isa access (accessed-object: $o, valid-action: $a2);
+        $ah isa access-history (accessing-subject: $s, exercised-access: $ac2);
+    };
+return { $po };
+
+fun violates_policies($s: subject, $ac1: access) -> boolean:
+match 
+    let $po in segregation_policies_violated($s, $ac1);
+return check;
 
 # rule static-segregation-violation-detection:
 #     when {
@@ -354,11 +364,6 @@ return { $access };
 #         $ac2 (accessed-object: $o, valid-action: $a2) isa access;
 #         $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
 #         $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
-#         $a1 has id $a1-id; # Unnecessary line, see note above.
-#         $a2 has id $a2-id; # Unnecessary line, see note above.
-#         $po has id $po-id; # Unnecessary line, see note above.
-#         $o has id $o-id; # Unnecessary line, see note above.
-#         $s has id $s-id; # Unnecessary line, see note above.
 #     } then {
 #         (violating-subject: $s, violating-object: $o, violated-policy: $po) isa segregation-violation;
 #     };

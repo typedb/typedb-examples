@@ -7,8 +7,10 @@ match
 $u isa user, has email "amos.burton@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
-$ac ($po, $o) isa access;
-$p ($u, $ac) isa permission, has validity true;
+$ac isa access ($po, $o);
+has_permission($u, $ac);,
+false == violates_policies($u, $ac);
+
 
 # This successfully returns a result, which allows Amos to approve Filip's permission.
 
