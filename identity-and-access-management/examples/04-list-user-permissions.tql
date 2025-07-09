@@ -15,8 +15,7 @@ $p isa permission, links ($e, $ac);
 
 match
 $e isa employee, has email "filip.inaros@vaticle.com";
-let $p in list_permissions($e);
-$p links ($e, $ac);
+let $ac in list_permissions($e);
 $ac isa access, links ($o, $a);
 $o isa object, has id $id;
 $a isa action, has name $n;
@@ -24,7 +23,7 @@ $a isa action, has name $n;
 #--------------------------------------------------
 # Exercise 04:
 
-# Define a preamble function which lists the operations a given user can perform on a given directory.
+# Use a preamble function to list the operations a given user can perform on a given directory.
 # Use this to query the operations that Filip can perform on the directory "root/engineering/typedb-cloud".
 # Keyword hints: with
 # Type hints: directory, path, operation
