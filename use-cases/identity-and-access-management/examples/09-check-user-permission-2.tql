@@ -7,8 +7,9 @@ match
 $u isa user, has email "filip.inaros@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
-$ac ($po, $o) isa access;
-$p ($u, $ac) isa permission, has validity true;
+$ac isa access ($po, $o);
+has_permission($u, $ac);,
+false == violates_policies($u, $ac);
 
 # This time, we get no results returned. This is because the dynamic segregation policy we defined has automatically
 # flagged this permission as being invalid because Filip was the one who submitted this purchase order. This logic is
