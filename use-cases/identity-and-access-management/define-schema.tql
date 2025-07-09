@@ -157,11 +157,11 @@ segregation-policy plays segregation-violation:violated-policy;
 
 entity employee sub user,
     owns full-name,
-    owns email;
+    owns email @card(1..2);
 
 entity contractor sub user,
     owns full-name,
-    owns email;
+    owns email @card(1..2);
 
 entity business-unit sub user-group,
     owns name;

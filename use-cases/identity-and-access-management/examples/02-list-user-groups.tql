@@ -22,7 +22,7 @@ let $ug in group_memberships($u);
 $ug has id $id;
 
 # This function defines the transitive closure of user group memberships. Take Clarissa Mao for example. 
-#She is a member of the web admin user role, and that role is a member of the web editor user role. 
+# She is a member of the web admin user role, and that role is a member of the web editor user role. 
 # This is because all web admins are also web editors by default, and can do anything a web editor can (and more).
 # We know that this means Clarissa is a web editor, but we haven't written this fact to the database. 
 # With functions, we don't need to, because we can encapsulate the business logic of transitive membership

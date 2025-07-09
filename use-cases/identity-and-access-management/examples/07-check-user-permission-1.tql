@@ -17,10 +17,6 @@ false == violates_policies($u, $ac);
 
 #--------------------------------------------------
 # Exercise 07:
-
-# Use TypeDB Studio's explanations feature to find out how Filip inheritted this permission. To switch on
-# explanations, toggle the "snapshot", "infer", and "explain" buttons to on. After executing the query, double-click on
-# an inferred concept (one with a green outline) to find out how it was inferred from a rule. After using the
-# explanations feature, remember to close the transaction with the "⨉" button.
-
+# (TODO: explanations are not yet implemented in studio)
+# Use TypeDB Studio's explanations feature to find out how Filip inheritted this permission. 
 #--------------------------------------------------
