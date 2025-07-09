@@ -17,8 +17,10 @@ insert
 #--------------------------------------------------
 # Exercise 05:
 
+# If a user has permission for an operation-set, they automatically have permission to perform all operations in the operation-set.
 # Write a new query that shows what individual permissions a user will get through the operation set "manage order".
-# Keyword hints: match
+# Keyword hints: match, let..in
 # Type hints: operation-set, operation, name
+# Function hints: set_members(operation-set)
 
 #--------------------------------------------------

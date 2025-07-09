@@ -18,8 +18,8 @@ $gm ($ug, $u) isa group-membership;
 #
 match
 $u isa user, has full-name $fn;
+$ug isa user-group, has id $id;
 let $ug in group_memberships($u);
-$ug has id $id;
 
 # This function defines the transitive closure of user group memberships. Take Clarissa Mao for example. 
 # She is a member of the web admin user role, and that role is a member of the web editor user role. 
@@ -32,6 +32,6 @@ $ug has id $id;
 # Exercise 02:
 
 # Edit this query to list the number of user groups each person is in by name.
-# Keyword hints: group, count
+# Keyword hints: reduce, count, groupby
 
 #--------------------------------------------------

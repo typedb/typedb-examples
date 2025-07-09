@@ -7,7 +7,7 @@ $e isa employee, has email "filip.inaros@vaticle.com";
 $o isa object, has id $id;
 $a isa action, has name $n;
 $ac isa access, links ($o, $a);
-$p isa permission, links ($e, $ac);
+$p isa direct-permission, links ($e, $ac);
 
 # This won't return any results as we haven't explicitly granted him any permissions, but if we use 
 # the `list_permissions`function, we see that Filip automatically inherits all the permissions he should
@@ -23,9 +23,15 @@ $a isa action, has name $n;
 #--------------------------------------------------
 # Exercise 04:
 
-# Use a preamble function to list the operations a given user can perform on a given directory.
-# Use this to query the operations that Filip can perform on the directory "root/engineering/typedb-cloud".
-# Keyword hints: with
-# Type hints: directory, path, operation
+# Update this to query the operations that Filip can perform on the directory "root/engineering/typedb-cloud".
+# Use the `has_permission` function to check if he has permission to perform the operation.
+# Type hints: directory, path, operation, ==
 
 #--------------------------------------------------
+match
+$e isa employee, has email "filip.inaros@vaticle.com";
+$o isa directory, has path "root/engineering/typedb-cloud";
+$a isa operation, has name $n;
+$ac isa access ($o, $a);
+true == has_permission($e, $ac);
+select $n;
