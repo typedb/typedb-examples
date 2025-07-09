@@ -1,0 +1,403 @@
+#
+# Copyright (C) 2023 Vaticle
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+define
+
+#--------------------------------------------------
+# Core entity types:
+
+entity subject @abstract,
+    owns credential;
+
+entity user @abstract, sub subject;
+
+entity user-group @abstract, sub subject;
+
+entity object @abstract,
+    owns object-type @card(0..);
+
+entity resource  @abstract, sub object;
+
+entity resource-collection @abstract, sub object;
+
+entity action @abstract,
+    owns name,
+    owns object-type @card(0..);
+
+entity operation sub action;
+
+entity operation-set sub action;
+
+#--------------------------------------------------
+# Membership and ownership relation types:
+
+relation membership @abstract,
+    relates parent,
+    relates member;
+
+relation group-membership sub membership,
+    relates user-group as parent,
+    relates group-member as member;
+
+
+relation collection-membership sub membership,
+    relates resource-collection as parent,
+    relates collection-member as member;
+
+relation set-membership sub membership,
+    relates operation-set as parent,
+    relates set-member as member;
+
+user-group plays group-membership:user-group;
+subject plays group-membership:group-member;
+resource-collection plays collection-membership:resource-collection;
+object plays collection-membership:collection-member;
+operation-set plays set-membership:operation-set;
+action plays set-membership:set-member;
+
+relation ownership @abstract,
+    relates owned,
+    relates owner;
+
+relation group-ownership sub ownership,
+    relates owned-group as owned,
+    relates group-owner as owner,
+    owns ownership-type;
+
+relation object-ownership sub ownership,
+    relates owned-object as owned,
+    relates object-owner as owner,
+    owns ownership-type;
+
+user-group plays group-ownership:owned-group;
+subject plays group-ownership:group-owner;
+object plays object-ownership:owned-object;
+subject plays object-ownership:object-owner;
+
+#--------------------------------------------------
+# Access and permission relation types:
+
+relation access,
+    relates accessed-object,
+    relates valid-action;
+
+object plays access:accessed-object;
+action plays access:valid-action;
+
+relation direct-permission,
+    relates permitted-subject,
+    relates permitted-access,
+    owns review-date,
+    owns validity;
+
+subject plays direct-permission:permitted-subject;
+access plays direct-permission:permitted-access;
+
+relation change-request,
+    relates requesting-subject,
+    relates requested-subject,
+    relates requested-change;
+
+subject plays change-request:requesting-subject;
+subject plays change-request:requested-subject;
+access plays change-request:requested-change;
+
+relation access-history,
+    relates accessing-subject,
+    relates exercised-access,
+    owns access-time;
+
+subject plays access-history:accessing-subject;
+access plays access-history:exercised-access;
+
+#--------------------------------------------------
+# Policy and violation relation types:
+
+relation segregation-policy,
+    relates segregated-action @card(2),
+    owns name;
+
+relation static-segregation-policy sub segregation-policy;
+
+relation dynamic-segregation-policy sub segregation-policy;
+
+action plays segregation-policy:segregated-action;
+
+relation violation @abstract;
+
+relation segregation-violation sub violation,
+    relates violating-subject,
+    relates violating-object,
+    relates violated-policy;
+
+subject plays segregation-violation:violating-subject;
+object plays segregation-violation:violating-object;
+segregation-policy plays segregation-violation:violated-policy;
+
+#--------------------------------------------------
+# Core entity subtypes:
+
+entity employee sub user,
+    owns full-name,
+    owns email @card(1..2);
+
+entity contractor sub user,
+    owns full-name,
+    owns email @card(1..2);
+
+entity business-unit sub user-group,
+    owns name;
+
+entity user-role sub user-group,
+    owns name;
+
+entity user-account sub user-group,
+    owns email;
+
+entity file sub resource,
+    owns path;
+
+entity purchase-order sub resource,
+    owns reference;
+
+entity customer-account sub resource,
+    owns email;
+
+entity record sub resource,
+    owns primary-key;
+
+entity pull-request sub resource,
+    owns hash;
+
+entity directory sub resource-collection,
+    owns path;
+
+entity application sub resource-collection,
+    owns name;
+
+entity database sub resource-collection,
+    owns name;
+
+entity table sub resource-collection,
+    owns name;
+
+entity branch sub resource-collection,
+    owns name;
+
+entity repository sub resource-collection,
+    owns name;
+
+#--------------------------------------------------
+# Attribute types:
+
+attribute credential, value string;
+attribute object-type, value string;
+attribute id, @abstract;
+attribute name sub id, value string;
+attribute ownership-type, value string;
+attribute review-date, value datetime;
+attribute validity, value boolean;
+attribute email sub id, value string;
+attribute path sub id, value string;
+attribute reference sub id, value string;
+attribute primary-key sub id, value string;
+attribute hash sub id, value string;
+attribute full-name, value string;
+attribute access-time, value datetime;
+
+#--------------------------------------------------
+# Functions:
+#--------------------------------------------------
+# memberships of a given instance
+fun group_memberships($member: subject) -> { user-group }:
+match
+    $group isa user-group;
+    {
+        $m isa group-membership, links (user-group: $group, group-member: $member);
+    } or {
+        $m1 isa group-membership, links (user-group: $group, group-member: $intermediate);
+        let $intermediate in group_memberships($member);
+    };
+return { $group };
+
+
+fun collection_memberships($member: object) -> { resource-collection }:
+match
+    $collection isa resource-collection;
+    {
+        $m isa collection-membership, links (resource-collection: $collection, collection-member: $member);
+    } or {
+        $m1 isa collection-membership, links (resource-collection: $collection, collection-member: $intermediate);
+        let $intermediate in collection_memberships($member);
+    };
+return { $collection };
+
+fun set_memberships($member: action) -> { operation-set }:
+match
+    $set isa operation-set;
+    {
+        $m isa set-membership, links (operation-set: $set, set-member: $member);
+    } or {
+        $m1 isa set-membership, links (operation-set: $set, set-member: $intermediate);
+        let $intermediate in set_memberships($member);
+    };
+return { $set };
+
+#--------------------------------------------------
+# members of a given collection
+fun group_members($group: user-group) -> { subject }:
+match
+#    $group isa user-group;
+    $member isa subject;
+    {
+        $m isa group-membership, links (user-group: $group, group-member: $member);
+    } or {
+        let $intermediate in group_members($group);
+        $m1 isa group-membership, links (user-group: $intermediate, group-member: $member);
+    };
+return { $member };
+
+fun set_members($set: operation-set) -> { action }:
+match
+    $member isa action;
+    {
+        $m isa set-membership, links (operation-set: $set, set-member: $member);
+    } or {
+        let $intermediate in set_members($set);
+        $m1 isa set-membership, links (operation-set: $intermediate, set-member: $member);
+    };
+return { $member };
+
+fun collection_members($collection: resource-collection) -> { object }:
+match
+    $member isa object;
+    {
+        $m isa collection-membership, links (resource-collection: $collection, collection-member: $member);
+    } or {
+        let $intermediate in collection_members($collection);
+        $m1 isa collection-membership, links (resource-collection: $intermediate, collection-member: $member);
+    };
+return { $member };
+
+
+#--------------------------------------------------
+# Functions for permissions
+fun list_permissions($subject: subject) -> { access }:
+match
+    $granting-subject isa subject;
+    { let $granting-subject in group_memberships($subject); }  or { $granting-subject is $subject; };
+
+    $granting-permission isa direct-permission, links (permitted-subject: $granting-subject, permitted-access: $granting-access);
+    $granting-access isa access, links (accessed-object: $granting-object, valid-action: $granting-action);
+
+    $action isa action;
+    $object isa object;
+    { let $action in set_members($granting-action); } or { $action is $granting-action; };
+    { let $object in collection_members($granting-object); } or { $object is $granting-object ; };
+
+    $access isa access, links (accessed-object: $object, valid-action: $action);
+return { $access };
+
+fun has_permission_through($subject: subject, $access: access) -> { direct-permission }:
+match
+    $subject isa subject;
+    $object isa object;
+    $action isa action;
+    $granting-subject isa subject;
+    $granting-object isa object;
+    $granting-action isa action;
+    $access isa access, links (accessed-object: $object, valid-action: $action);
+    { let $granting-subject in group_memberships($subject); }  or { $granting-subject is $subject; };
+    { let $granting-action in set_memberships($action); } or { $granting-action is $action; };
+    { let $granting-object in collection_memberships($object); } or { $granting-object is $object; };
+    $granting-access isa access (accessed-object: $granting-object, valid-action: $granting-action);
+    $granting-permission isa direct-permission, links (permitted-subject: $granting-subject, permitted-access: $granting-access);
+return { $granting-permission };
+
+fun has_permission($subject: subject, $access: access) -> boolean:
+match
+    let $_ in has_permission_through($subject, $access);
+return check;
+
+# Segregation policy functions
+fun segregation_policies_violated($s: subject, $ac1: access) -> { segregation-policy }:
+match
+    $ac1 isa access (accessed-object: $o, valid-action: $a1);
+    {
+        $po isa static-segregation-policy (segregated-action: $a1, segregated-action: $a2);
+        $ac2 isa access (accessed-object: $o, valid-action: $a2);
+        true == has_permission($s, $ac2);
+    } or {
+        $po isa dynamic-segregation-policy (segregated-action: $a1, segregated-action: $a2) ;
+        $ac2 isa access (accessed-object: $o, valid-action: $a2);
+        $ah isa access-history (accessing-subject: $s, exercised-access: $ac2);
+    };
+return { $po };
+
+fun violates_policies($s: subject, $ac1: access) -> boolean:
+match 
+    let $po in segregation_policies_violated($s, $ac1);
+return check;
+
+# rule static-segregation-violation-detection:
+#     when {
+#         $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
+#         $ac1 (accessed-object: $o, valid-action: $a1) isa access;
+#         $ac2 (accessed-object: $o, valid-action: $a2) isa access;
+#         $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
+#         $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
+#     } then {
+#         (violating-subject: $s, violating-object: $o, violated-policy: $po) isa segregation-violation;
+#     };
+
+# rule automatic-permission-invalidity:
+#     when {
+#         $ac1 (accessed-object: $o, valid-action: $a1) isa access;
+#         $ac2 (accessed-object: $o, valid-action: $a2) isa access;
+#         $p1 (permitted-subject: $s, permitted-access: $ac1) isa permission;
+#         $o has id $o-id; # Unnecessary line, see note above.
+#         $a1 has id $a1-id; # Unnecessary line, see note above.
+#         $a2 has id $a2-id; # Unnecessary line, see note above.
+#         $s has id $s-id; # Unnecessary line, see note above.
+#         {
+#             $po (segregated-action: $a1, segregated-action: $a2) isa static-segregation-policy;
+#             $p2 (permitted-subject: $s, permitted-access: $ac2) isa permission;
+#             $po has id $po-id; # Unnecessary line, see note above.
+#         } or {
+#             $po (segregated-action: $a1, segregated-action: $a2) isa dynamic-segregation-policy;
+#             $ah (accessing-subject: $s, exercised-access: $ac2) isa access-history;
+#             $po has id $po-id; # Unnecessary line, see note above.
+#         };
+#     } then {
+#         $p1 has validity false;
+#     };
+
+# rule automatic-permission-validity:
+#     when {
+#         $p isa permission;
+#         not {
+#             $p has validity false;
+#         };
+#     } then {
+#         $p has validity true;
+#     };
+
+# #--------------------------------------------------
