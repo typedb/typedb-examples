@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { fetchLocationPages } from '../AppService';
 import PageCard from './PageCard';
 import type { Page } from './PageList';
+import { ServiceContext } from "../service/ServiceContext";
 
 export default function LocationPageList() {
   const { place_id } = useParams<{ place_id: string }>();
@@ -10,11 +10,12 @@ export default function LocationPageList() {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     setLoading(true);
     setError(null);
-    fetchLocationPages(place_id || '')
+      serviceContext.fetchLocationPages(place_id || '')
       .then((data: { "place-name": string, pages: Page[] }[]) => {
         setPlaceName(data[0]["place-name"]);
         setPages(data[0].pages);

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchGroup, fetchMedia, fetchPages } from '../AppService';
+import { ServiceContext } from '../service/ServiceContext';
 
 interface GroupData {
   name: string;
@@ -39,12 +39,13 @@ export default function GroupPage() {
   const [mediaError, setMediaError] = useState(false);
   const [followers, setFollowers] = useState<FollowerPage[]>([]);
   const [followersLoading, setFollowersLoading] = useState(false);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
     if (group && group.data["profile-picture"]) {
-      fetchMedia(group.data["profile-picture"])
+      serviceContext.fetchMedia(group.data["profile-picture"])
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
@@ -53,7 +54,7 @@ export default function GroupPage() {
   }, [group, group?.data, group?.data["profile-picture"]]);
 
   useEffect(() => {
-    fetchGroup(id)
+    serviceContext.fetchGroup(id)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
@@ -70,7 +71,7 @@ export default function GroupPage() {
   useEffect(() => {
     if (group && group.followers && group.followers.length > 0) {
       setFollowersLoading(true);
-      fetchPages()
+      serviceContext.fetchPages()
         .then((allPages: any[]) => {
           const followerPages = allPages.filter(page => 
             group.followers!.includes(page.id)

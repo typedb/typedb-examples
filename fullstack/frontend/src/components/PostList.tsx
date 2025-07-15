@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Post from './Post';
-import { fetchPosts } from '../AppService';
+import { ServiceContext } from "../service/ServiceContext";
 
 export interface PostType {
   "post-data": {
@@ -28,6 +28,7 @@ export default function PostList({ pageId }: PostListProps) {
   const [posts, setPosts] = useState<PostType[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     if (!pageId) {
@@ -36,7 +37,7 @@ export default function PostList({ pageId }: PostListProps) {
       return;
     }
     setLoading(true);
-    fetchPosts(pageId)
+    serviceContext.fetchPosts(pageId)
       .then((data: PostType[]) => {
         setPosts(data);
         setLoading(false);

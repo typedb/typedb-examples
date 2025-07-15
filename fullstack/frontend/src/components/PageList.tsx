@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchPages } from '../AppService';
 import PageCard from './PageCard';
+import { ServiceContext } from '../service/ServiceContext';
 
 export interface Page {
   id: string;
@@ -15,9 +15,10 @@ export default function PageList() {
   const [pages, setPages] = useState<Page[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
-    fetchPages()
+      serviceContext.fetchPages()
       .then((data: Page[]) => {
         setPages(data);
         setLoading(false);

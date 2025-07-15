@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import CommentList from './CommentList';
 import './Post.css';
 import type { PostType } from './PostList';
-import { fetchMedia } from '../AppService';
 import ReactionsBar from './ReactionsBar';
+import { ServiceContext } from "../service/ServiceContext";
 
 interface PostProps {
   post: PostType;
@@ -13,13 +13,14 @@ export default function Post({ post }: PostProps) {
   const [comment, setComment] = useState('');
   const [clicked, setClicked] = useState(false);
   const [profilePic, setProfilePic] = useState<string | null>(null);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     let isMounted = true;
     async function load() {
       if (post["author-profile-picture"]) {
         try {
-          const blob = await fetchMedia(post["author-profile-picture"]);
+          const blob = await serviceContext.fetchMedia(post["author-profile-picture"]);
           if (isMounted) setProfilePic(URL.createObjectURL(blob));
         } catch {
           if (isMounted) setProfilePic(null);
