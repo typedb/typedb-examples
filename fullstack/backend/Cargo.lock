@@ -201,7 +201,6 @@ dependencies = [
  "base64",
  "futures",
  "serde",
- "serde_derive",
  "serde_json",
  "tokio",
  "tower-http",
