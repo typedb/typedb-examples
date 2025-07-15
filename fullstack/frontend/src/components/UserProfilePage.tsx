@@ -29,22 +29,22 @@ export default function UserProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (user && user.data.profilePicture) {
-      serviceContext.fetchMedia(user.data.profilePicture)
+    if (user && user.profilePicture) {
+      serviceContext.fetchMedia(user.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [user, user && user.data.profilePicture]);
+  }, [user, user && user.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchUser(id!)
       .then((data: User) => {
         setUser(data);
         setLoading(false);
-        if (data && data.data && data.data.name) {
-          document.title = `${data.data.name} (User) | TySpace`;
+        if (data && data.name) {
+          document.title = `${data.name} (User) | TySpace`;
         }
       })
       .catch(e => {
@@ -128,7 +128,7 @@ export default function UserProfilePage() {
                 </div>
               )}
             </div>
-            <h2 style={{ margin: 0, textAlign: 'center' }}>{user.data.name}</h2>
+            <h2 style={{ margin: 0, textAlign: 'center' }}>{user.name}</h2>
             <span style={{ color: '#888', fontSize: 14 }}>(User)</span>
           </div>
 
@@ -174,18 +174,18 @@ export default function UserProfilePage() {
           {/* Bio */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Bio</h3>
-            <div style={{ color: '#555', lineHeight: 1.5 }}>{user.data.bio}</div>
+            <div style={{ color: '#555', lineHeight: 1.5 }}>{user.bio}</div>
           </div>
 
           {/* Attributes */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Details</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
-              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{user.data.badge || ''}</span>
-              <span style={{ fontWeight: 500 }}>Gender:</span> <span>{user.data.gender || ''}</span>
-              <span style={{ fontWeight: 500 }}>Language:</span> <span>{user.data.language || ''}</span>
-              <span style={{ fontWeight: 500 }}>Email:</span> <span>{user.data.email || ''}</span>
-              <span style={{ fontWeight: 500 }}>Phone:</span> <span>{user.data.phone || ''}</span>
+              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{user.badge || ''}</span>
+              <span style={{ fontWeight: 500 }}>Gender:</span> <span>{user.gender || ''}</span>
+              <span style={{ fontWeight: 500 }}>Language:</span> <span>{user.language || ''}</span>
+              <span style={{ fontWeight: 500 }}>Email:</span> <span>{user.email || ''}</span>
+              <span style={{ fontWeight: 500 }}>Phone:</span> <span>{user.phone || ''}</span>
               <span style={{ fontWeight: 500 }}>Location:</span> 
               <span>
                 {getLocationParts(user.location).map((part, idx, arr) => (
@@ -195,7 +195,7 @@ export default function UserProfilePage() {
                   </React.Fragment>
                 ))}
               </span>
-              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.data.relationshipStatus)}</span>
+              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.relationshipStatus)}</span>
               <span style={{ fontWeight: 500 }}>Followers:</span> <span>{user.numberOfFollowers ?? 0}</span>
             </div>
           </div>

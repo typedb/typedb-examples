@@ -1,11 +1,4 @@
 export interface Group {
-    data: GroupData;
-    posts: string[];
-    numberOfFollowers?: number;
-    followers?: string[];
-}
-
-interface GroupData {
     name: string;
     bio: string;
     profilePicture?: string;
@@ -15,4 +8,7 @@ interface GroupData {
     tag?: string[];
     pageVisibility?: string;
     postVisibility?: string;
+    posts: string[];
+    numberOfFollowers?: number;
+    followers?: string[];
 }

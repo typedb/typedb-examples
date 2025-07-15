@@ -5,6 +5,7 @@ import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
 import { Group } from "../model/Group";
 import { FollowerPage, Page } from "../model/Page";
+import userAvatar from '../assets/userAvatar.svg';
 
 export default function GroupPage() {
   const { id } = useParams<{ id: string }>();
@@ -20,22 +21,22 @@ export default function GroupPage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (group && group.data.profilePicture) {
-      serviceContext.fetchMedia(group.data.profilePicture)
+    if (group && group.profilePicture) {
+      serviceContext.fetchMedia(group.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [group, group?.data, group?.data.profilePicture]);
+  }, [group, group?.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchGroup(id!)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
-        if (data && data.data && data.data.name) {
-          document.title = `${data.data.name} (Group) | TySpace`;
+        if (data && data.name) {
+          document.title = `${data.name} (Group) | TySpace`;
         }
       })
       .catch(e => {
@@ -96,11 +97,11 @@ export default function GroupPage() {
                 <img src={mediaUrl} alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', border: '1px solid #eee' }} />
               ) : (
                 <div style={{ width: 150, height: 150, borderRadius: '50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 48, border: '1px solid #eee' }}>
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"/><path d="M16 16c0-2.2-3.6-2.2-3.6-2.2S8 13.8 8 16"/></svg>
+                  <img src={userAvatar} alt="Default Avatar" />
                 </div>
               )}
             </div>
-            <h2 style={{ margin: 0, textAlign: 'center' }}>{group.data.name}</h2>
+            <h2 style={{ margin: 0, textAlign: 'center' }}>{group.name}</h2>
             <span style={{ color: '#888', fontSize: 14 }}>(Group)</span>
           </div>
 
@@ -146,15 +147,15 @@ export default function GroupPage() {
           {/* Bio */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Bio</h3>
-            <div style={{ color: '#555', lineHeight: 1.5 }}>{group.data.bio}</div>
+            <div style={{ color: '#555', lineHeight: 1.5 }}>{group.bio}</div>
           </div>
 
           {/* Attributes */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Details</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
-              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{group.data.badge || ''}</span>
-              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{group.data.tag && group.data.tag.length ? group.data.tag.join(', ') : ''}</span>
+              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{group.badge || ''}</span>
+              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{group.tags && group.tags.length ? group.tags.join(', ') : ''}</span>
             </div>
           </div>
 

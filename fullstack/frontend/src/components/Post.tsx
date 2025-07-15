@@ -4,6 +4,7 @@ import './Post.css';
 import ReactionsBar from './ReactionsBar';
 import { ServiceContext } from "../service/ServiceContext";
 import { PostType } from "../model/Post";
+import userAvatar from '../assets/userAvatar.svg';
 
 interface PostProps {
   post: PostType;
@@ -78,7 +79,7 @@ export default function Post({ post }: PostProps) {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               ) : (
-                post.authorName.charAt(0).toUpperCase()
+                  <img src={userAvatar} alt="Default Avatar"  />
               )}
             </div>
           </a>
@@ -92,14 +93,14 @@ export default function Post({ post }: PostProps) {
                   {post.authorName}
                 </a>
               </div>
-              <div>{post.postData.postText}</div>
+              <div>{post.postText}</div>
             </div>
           </div>
         </div>
         <ReactionsBar reactions={post.reactions} />
       </div>
       <div className="comment-list">
-        <CommentList postId={post.postData.postId} />
+        <CommentList postId={post.postId} />
       </div>
       <form style={{ marginTop: 12 }} onSubmit={handleSend} autoComplete="off">
         <textarea

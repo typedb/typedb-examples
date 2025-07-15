@@ -12,6 +12,7 @@ use base64::{Engine as _, engine::general_purpose::URL_SAFE};
 use futures::{StreamExt, TryStreamExt};
 use serde::Deserialize;
 use serde_json::value::RawValue;
+use serde_with::{NoneAsEmptyString, serde_as};
 use tower_http::cors::{Any, CorsLayer};
 use typedb_driver::{Credentials, DriverOptions, TransactionType, TypeDBDriver};
 
@@ -108,6 +109,47 @@ async fn get_comments(
     )
 }
 
+#[serde_as]
+#[derive(Debug, Deserialize)]
+struct CreateUserPayload {
+    username: String,
+    name: String,
+    profile_picture: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    badge: Option<String>,
+    is_active: bool,
+    gender: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    language: Option<String>,
+    email: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    phone: Option<String>,
+    #[serde_as(as = "NoneAsEmptyString")]
+    relationship_status: Option<String>,
+    can_publish: bool,
+    page_visibility: String,
+    post_visibility: String,
+    bio: String,
+}
+
+async fn post_create_user(
+    State(driver): State<Arc<TypeDBDriver>>,
+    Json(payload): Json<CreateUserPayload>,
+) -> impl IntoResponse {
+    let transaction = driver.transaction("social-network", TransactionType::Write).await.unwrap();
+    transaction
+        .query(query::create_person_query(payload))
+        .await
+        .unwrap()
+        .into_rows()
+        .map_ok(drop)
+        .try_collect::<()>()
+        .await
+        .unwrap();
+    transaction.commit().await.unwrap();
+    (StatusCode::OK, Json(RawValue::NULL.to_owned()))
+}
+
 #[tokio::main]
 async fn main() {
     let driver = Arc::new(
@@ -121,6 +163,9 @@ async fn main() {
     );
     let app = Router::new()
         .route("/api/pages", get(get_page_list))
+        .route("/api/create-user", post(post_create_user))
+        .route("/api/create-organisation", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
+        .route("/api/create-group", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
         .route("/api/location/{place_id}", get(get_location_page_list))
         .route("/api/user/{id}", get(get_profile))
         .route("/api/group/{id}", get(get_profile))

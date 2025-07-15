@@ -6,6 +6,7 @@ import { ServiceContext } from '../service/ServiceContext';
 import { Organization } from "../model/Organization";
 import { FollowerPage, Page } from "../model/Page";
 import { getLocationParts } from "../model/Location";
+import userAvatar from '../assets/userAvatar.svg';
 
 export default function OrganizationProfilePage() {
   const { id } = useParams<{ id: string }>();
@@ -21,22 +22,22 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (org && org.data.profilePicture) {
-      serviceContext.fetchMedia(org.data.profilePicture)
+    if (org && org.profilePicture) {
+      serviceContext.fetchMedia(org.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [org, org && org.data.profilePicture]);
+  }, [org, org && org.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchOrganization(id!)
       .then((data: Organization) => {
         setOrg(data);
         setLoading(false);
-        if (data && data.data && data.data.name) {
-          document.title = `${data.data.name} (Organization) | TySpace`;
+        if (data && data.name) {
+          document.title = `${data.name} (Organization) | TySpace`;
         }
       })
       .catch(e => {
@@ -97,11 +98,11 @@ export default function OrganizationProfilePage() {
                 <img src={mediaUrl} alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', border: '1px solid #eee' }} />
               ) : (
                 <div style={{ width: 150, height: 150, borderRadius: '50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 48, border: '1px solid #eee' }}>
-                  <svg width="60" height="60" viewBox="0 0 24 24" fill="none" stroke="#aaa" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="4"/><path d="M16 16c0-2.2-3.6-2.2-3.6-2.2S8 13.8 8 16"/></svg>
+                  <img src={userAvatar} alt="Default Avatar" />
                 </div>
               )}
             </div>
-            <h2 style={{ margin: 0, textAlign: 'center' }}>{org.data.name}</h2>
+            <h2 style={{ margin: 0, textAlign: 'center' }}>{org.name}</h2>
             <span style={{ color: '#888', fontSize: 14 }}>(Organization)</span>
           </div>
 
@@ -147,18 +148,18 @@ export default function OrganizationProfilePage() {
           {/* Bio */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Bio</h3>
-            <div style={{ color: '#555', lineHeight: 1.5 }}>{org.data.bio}</div>
+            <div style={{ color: '#555', lineHeight: 1.5 }}>{org.bio}</div>
           </div>
 
           {/* Attributes */}
           <div>
             <h3 style={{ marginBottom: 12 }}>Details</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
-              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{org.data.badge || ''}</span>
-              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{org.data.tag && org.data.tag.length ? org.data.tag.join(', ') : ''}</span>
-              <span style={{ fontWeight: 500 }}>Email:</span> <span>{org.data.email || ''}</span>
-              <span style={{ fontWeight: 500 }}>Language:</span> <span>{org.data.language || ''}</span>
-              <span style={{ fontWeight: 500 }}>Phone:</span> <span>{org.data.phone || ''}</span>
+              <span style={{ fontWeight: 500 }}>Badge:</span> <span>{org.badge || ''}</span>
+              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{org.tags && org.tags.length ? org.tags.join(', ') : ''}</span>
+              <span style={{ fontWeight: 500 }}>Email:</span> <span>{org.email || ''}</span>
+              <span style={{ fontWeight: 500 }}>Language:</span> <span>{org.language || ''}</span>
+              <span style={{ fontWeight: 500 }}>Phone:</span> <span>{org.phone || ''}</span>
               <span style={{ fontWeight: 500 }}>Location:</span>
               <span>
                 {getLocationParts(org.location).map((part, idx, arr) => (

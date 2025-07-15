@@ -8,7 +8,7 @@ const pageVisibilityOptions = ["public", "private"];
 const postVisibilityOptions = ["default", "public", "private"];
 
 export default function CreatePage() {
-  const [formType, setFormType] = useState<'person' | 'organisation' | 'group'>('person');
+  const [type, setFormType] = useState<'person' | 'organisation' | 'group'>('person');
   // Common fields
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
@@ -19,7 +19,7 @@ export default function CreatePage() {
   const [badge, setBadge] = useState('');
   const [isActive, setIsActive] = useState(true);
   // Profile fields (person/org)
-  const [username, setUsername] = useState('');
+  const [id, setId] = useState('');
   const [canPublish, setCanPublish] = useState(false);
   // Person fields
   const [gender, setGender] = useState('');
@@ -67,18 +67,15 @@ export default function CreatePage() {
     setFormError(null);
     // Build payload based on type
     let payload: any = {
-      type: formType,
       name,
       bio,
       profile_picture: profilePicture,
       badge,
       is_active: isActive,
     };
-    if (formType === 'person' || formType === 'organisation') {
-      payload.username = username;
-      payload.can_publish = canPublish;
-    }
-    if (formType === 'person') {
+    let promise;
+    if (type === 'person') {
+      payload.username = id;
       payload.gender = gender;
       payload.language = language;
       payload.email = email;
@@ -86,18 +83,27 @@ export default function CreatePage() {
       payload.relationship_status = relationshipStatus;
       payload.page_visibility = pageVisibility;
       payload.post_visibility = postVisibility;
+      payload.can_publish = canPublish;
+      promise = serviceContext.createUser(payload);
     }
-    if (formType === 'organisation' || formType === 'group') {
-      payload.tag = tags;
+    if (type === 'organisation') {
+      payload.can_publish = canPublish;
+      payload.tags = tags;
+      promise = serviceContext.createOrganisation(payload);
     }
-    if (formType === 'group') {
+    if (type === 'group') {
       payload.page_visibility = pageVisibility;
       payload.post_visibility = postVisibility;
+      payload.tags = tags;
+      promise = serviceContext.createGroup(payload);
     }
-    serviceContext.createPage(payload)
+    promise
       .then(() => {
         setFormLoading(false);
-        navigate('/');
+        if (type === 'person') navigate(`/user/${id}`);
+        else if (type === 'organisation') navigate(`/organisation/${id}`);
+        else if (type === 'group') navigate(`/group/${id}`);
+        else navigate('/');
       })
       .catch(e => {
         setFormError(e.message);
@@ -117,34 +123,44 @@ export default function CreatePage() {
         }}>
           <label style={{ gridColumn: '1 / -1' }}>
             Type:
-            <select value={formType} onChange={e => setFormType(e.target.value as any)} style={{ marginLeft: 4 }}>
+            <select value={type} onChange={e => setFormType(e.target.value as any)} style={{ marginLeft: 4 }}>
               <option value="person">User</option>
               <option value="organisation">Organization</option>
               <option value="group">Group</option>
             </select>
           </label>
-          {/* PERSON FIELDS ORDERED */}
-          {formType === 'person' && (
+
+          <label>
+            {type === 'group' ? "ID:" : "Username:"}
+            <input value={id} onChange={e => setId(e.target.value)} required style={{ marginLeft: 4, width: '100%' }} />
+          </label>
+
+          <label>
+            Name:
+            <input value={name} onChange={e => setName(e.target.value)} required style={{ marginLeft: 4, width: '100%' }} />
+          </label>
+          <label>
+            Profile Picture:
+            <input type="file" accept="image/*" onChange={handleProfilePictureChange} style={{ marginLeft: 4 }} />
+            {uploadingPic && <span style={{ color: '#888', marginLeft: 8 }}>Uploading...</span>}
+            {uploadError && <span style={{ color: 'red', marginLeft: 8 }}>{uploadError}</span>}
+            {profilePicturePreview && (
+              <div style={{ marginTop: 8 }}>
+                <img src={profilePicturePreview} alt="Preview" style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 8, border: '1px solid #ccc' }} />
+              </div>
+            )}
+          </label>
+          <label>
+            Badge:
+            <input value={badge} onChange={e => setBadge(e.target.value)} style={{ marginLeft: 4, width: '100%' }} />
+          </label>
+          <label>
+            Is Active:
+            <input type="checkbox" checked={isActive} onChange={e => setIsActive(e.target.checked)} style={{ marginLeft: 4 }} />
+          </label>
+
+          {type === 'person' && (
             <>
-              <label>
-                Username:
-                <input value={username} onChange={e => setUsername(e.target.value)} required style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Name:
-                <input value={name} onChange={e => setName(e.target.value)} required style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Profile Picture:
-                <input type="file" accept="image/*" onChange={handleProfilePictureChange} style={{ marginLeft: 4 }} />
-                {uploadingPic && <span style={{ color: '#888', marginLeft: 8 }}>Uploading...</span>}
-                {uploadError && <span style={{ color: 'red', marginLeft: 8 }}>{uploadError}</span>}
-                {profilePicturePreview && (
-                  <div style={{ marginTop: 8 }}>
-                    <img src={profilePicturePreview} alt="Preview" style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 8, border: '1px solid #ccc' }} />
-                  </div>
-                )}
-              </label>
               <label>
                 Gender:
                 <select value={gender} onChange={e => setGender(e.target.value)} style={{ marginLeft: 4, width: '100%' }}>
@@ -172,74 +188,32 @@ export default function CreatePage() {
                 </select>
               </label>
               <label>
-                Badge:
-                <input value={badge} onChange={e => setBadge(e.target.value)} style={{ marginLeft: 4, width: '100%' }} />
+                Can Publish:
+                <input type="checkbox" checked={canPublish} onChange={e => setCanPublish(e.target.checked)} style={{ marginLeft: 4 }} />
               </label>
-              <label>
-                Is Active:
-                <input type="checkbox" checked={isActive} onChange={e => setIsActive(e.target.checked)} style={{ marginLeft: 4 }} />
-              </label>
+            </>
+          )}
+          {type === 'organisation' && (
+            <>
               <label>
                 Can Publish:
                 <input type="checkbox" checked={canPublish} onChange={e => setCanPublish(e.target.checked)} style={{ marginLeft: 4 }} />
               </label>
-              <label>
-                Page Visibility:
-                <select value={pageVisibility} onChange={e => setPageVisibility(e.target.value)} style={{ marginLeft: 4, width: '100%' }}>
-                  {pageVisibilityOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </select>
-              </label>
-              <label>
-                Post Visibility:
-                <select value={postVisibility} onChange={e => setPostVisibility(e.target.value)} style={{ marginLeft: 4, width: '100%' }}>
-                  {postVisibilityOptions.map(opt => <option key={opt} value={opt}>{opt}</option>)}
-                </select>
-              </label>
             </>
           )}
-          {/* ORGANISATION/GROUP FIELDS (as before) */}
-          {formType !== 'person' && (
-            <>
-              <label>
-                Name:
-                <input value={name} onChange={e => setName(e.target.value)} required style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Profile Picture:
-                <input type="file" accept="image/*" onChange={handleProfilePictureChange} style={{ marginLeft: 4 }} />
-                {uploadingPic && <span style={{ color: '#888', marginLeft: 8 }}>Uploading...</span>}
-                {uploadError && <span style={{ color: 'red', marginLeft: 8 }}>{uploadError}</span>}
-                {profilePicturePreview && (
-                  <div style={{ marginTop: 8 }}>
-                    <img src={profilePicturePreview} alt="Preview" style={{ width: 60, height: 60, objectFit: 'cover', borderRadius: 8, border: '1px solid #ccc' }} />
-                  </div>
-                )}
-              </label>
-              <label>
-                Tags (comma separated):
-                <input value={tags.join(', ')} onChange={handleTagChange} style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Email:
-                <input value={email} onChange={e => setEmail(e.target.value)} style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Language:
-                <input value={language} onChange={e => setLanguage(e.target.value)} style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-              <label>
-                Phone:
-                <input value={phone} onChange={e => setPhone(e.target.value)} style={{ marginLeft: 4, width: '100%' }} />
-              </label>
-            </>
-          )}
-          {/* Group fields */}
-          {formType === 'group' && (
+          {(type === 'organisation' || type === 'group') && (
             <>
               <label>
                 Tags (comma separated):
                 <input value={tags.join(', ')} onChange={handleTagChange} style={{ marginLeft: 4, width: '100%' }} />
               </label>
+            </>
+          )}
+          {type === 'person' && (
+            <><label /></> // empty slot to nudge layout
+          )}
+          {(type === 'person' || type === 'group') && (
+            <>
               <label>
                 Page Visibility:
                 <select value={pageVisibility} onChange={e => setPageVisibility(e.target.value)} style={{ marginLeft: 4, width: '100%' }}>

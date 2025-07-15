@@ -1,14 +1,12 @@
 export interface PostType {
-    postData: {
-        postText: string;
-        postVisibility: string;
-        postImage: string;
-        language: string;
-        tag: string[];
-        isVisible: boolean;
-        creationTimestamp: string;
-        postId: string;
-    }
+    postText: string;
+    postVisibility: string;
+    postImage: string;
+    language: string;
+    tags: string[];
+    isVisible: boolean;
+    creationTimestamp: string;
+    postId: string;
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
@@ -18,11 +16,9 @@ export interface PostType {
 
 export interface Comment {
     commentId: string;
-    commentData: {
-        commentText: string;
-        creationTimestamp: string;
-        isVisible: boolean;
-    }
+    commentText: string;
+    creationTimestamp: string;
+    isVisible: boolean;
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
