@@ -1,16 +1,21 @@
 import React from "react";
+import { User } from "../model/User";
+import { PostType } from "../model/Post";
+import { LocationPage, Page } from "../model/Page";
+import { Group } from "../model/Group";
+import { Organization } from "../model/Organization";
 
 export type ServiceContextType = {
-    fetchUser: (id: string) => Promise<any>;
-    fetchPages: () => Promise<any>;
-    fetchPosts: (pageId: string) => Promise<any>;
-    fetchComments: (postId: string) => Promise<any>;
-    createPage: (payload: any) => Promise<any>;
+    fetchUser: (id: string) => Promise<User>;
+    fetchPages: () => Promise<Page[]>;
+    fetchPosts: (pageId: string) => Promise<PostType[]>;
+    fetchComments: (postId: string) => Promise<Comment[]>;
+    createPage: (payload: any) => Promise<void>;
     fetchMedia: (mediaId: string) => Promise<Blob | null>;
     uploadMedia: (file: File) => Promise<string>;
-    fetchLocationPages: (locationName: string) => Promise<any>;
-    fetchGroup: (id: string | undefined) => Promise<any>;
-    fetchOrganization: (id: string | undefined) => Promise<any>;
+    fetchLocationPages: (locationName: string) => Promise<LocationPage[]>;
+    fetchGroup: (id: string) => Promise<Group>;
+    fetchOrganization: (id: string) => Promise<Organization>;
 };
 
 export const ServiceContext = React.createContext<ServiceContextType>({

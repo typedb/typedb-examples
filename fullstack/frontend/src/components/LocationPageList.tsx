@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PageCard from './PageCard';
-import type { Page } from './PageList';
 import { ServiceContext } from "../service/ServiceContext";
+import { Page } from "../model/Page";
 
 export default function LocationPageList() {
   const { place_id } = useParams<{ place_id: string }>();

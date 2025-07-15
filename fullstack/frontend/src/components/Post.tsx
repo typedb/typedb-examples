@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import CommentList from './CommentList';
 import './Post.css';
-import type { PostType } from './PostList';
 import ReactionsBar from './ReactionsBar';
 import { ServiceContext } from "../service/ServiceContext";
+import { PostType } from "../model/Post";
 
 interface PostProps {
   post: PostType;

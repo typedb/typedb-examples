@@ -3,32 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
-
-interface GroupData {
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-  badge?: string;
-  "is-active"?: boolean;
-  "group-id"?: string;
-  tag?: string[];
-  "page-visibility"?: string;
-  "post-visibility"?: string;
-}
-
-interface Group {
-  data: GroupData;
-  posts: string[];
-  "number-of-followers"?: number;
-  followers?: string[];
-}
-
-interface FollowerPage {
-  id: string;
-  name: string;
-  type: 'person' | 'organisation' | 'group';
-  profilePictureId: string;
-}
+import { Group } from "../model/Group";
+import { FollowerPage, Page } from "../model/Page";
 
 export default function GroupPage() {
   const { id } = useParams<{ id: string }>();
@@ -54,7 +30,7 @@ export default function GroupPage() {
   }, [group, group?.data, group?.data["profile-picture"]]);
 
   useEffect(() => {
-    serviceContext.fetchGroup(id)
+    serviceContext.fetchGroup(id!)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
@@ -72,7 +48,7 @@ export default function GroupPage() {
     if (group && group.followers && group.followers.length > 0) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
-        .then((allPages: any[]) => {
+        .then((allPages: Page[]) => {
           const followerPages = allPages.filter(page => 
             group.followers!.includes(page.id)
           ).map(page => ({

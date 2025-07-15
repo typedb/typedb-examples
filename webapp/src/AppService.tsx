@@ -1,3 +1,9 @@
+import { User } from "./model/User";
+import { LocationPage, Page } from "./model/Page";
+import { PostType } from "./model/Post";
+import { Group } from "./model/Group";
+import { Organization } from "./model/Organization";
+
 export const service = {
     fetchUser,
     fetchPages,
@@ -11,29 +17,29 @@ export const service = {
     fetchOrganization,
 };
 
-async function fetchUser(id: string) {
+async function fetchUser(id: string): Promise<User> {
     return fetch(`http://localhost:8000/api/user/${id}`)
         .then(jsonOrError('Failed to fetch user'));
 }
 
-async function fetchPages() {
+async function fetchPages(): Promise<Page[]> {
     return fetch('http://localhost:8000/api/pages')
         .then(jsonOrError('Failed to fetch pages'));
 }
 
-async function fetchPosts(pageId: string) {
+async function fetchPosts(pageId: string): Promise<PostType[]> {
     if (!pageId) return [];
     return fetch(`http://localhost:8000/api/posts?pageId=${pageId}`)
         .then(jsonOrError('Failed to fetch posts'));
 }
 
-async function fetchComments(postId: string) {
+async function fetchComments(postId: string): Promise<Comment[]> {
     if (!postId) return [];
     return fetch(`http://localhost:8000/api/comments?postId=${postId}`)
         .then(jsonOrError('Failed to fetch comments'));
 }
 
-async function createPage(payload: any) {
+async function createPage(payload: any): Promise<void> {
     return fetch('http://localhost:8000/api/pages', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -60,19 +66,17 @@ async function uploadMedia(file: File): Promise<string> {
     });
 }
 
-async function fetchLocationPages(locationName: string) {
+async function fetchLocationPages(locationName: string): Promise<LocationPage[]> {
     return fetch(`http://localhost:8000/api/location/${encodeURIComponent(locationName)}`)
         .then(jsonOrError('Failed to fetch location pages'));
 }
 
-async function fetchGroup(id: string | undefined) {
-    if (!id) return null;
+async function fetchGroup(id: string): Promise<Group> {
     return fetch(`http://localhost:8000/api/group/${id}`)
         .then(jsonOrError('Failed to fetch group'));
 }
 
-async function fetchOrganization(id: string | undefined) {
-    if (!id) return null;
+async function fetchOrganization(id: string): Promise<Organization> {
     return fetch(`http://localhost:8000/api/organisation/${id}`)
         .then(jsonOrError('Failed to fetch organisation'));
 }

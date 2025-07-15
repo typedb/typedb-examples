@@ -4,39 +4,9 @@ import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
 import userAvatar from '../assets/userAvatar.svg';
-
-interface User {
-  data: UserData;
-  posts: string[];
-  friends: string[];
-  "number-of-followers"?: number;
-  "number-of-friends"?: number;
-  location?: LocationItem[];
-}
-
-interface UserData {
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-  badge?: string;
-  "is-active"?: boolean;
-  username?: string;
-  "can-publish"?: boolean;
-  gender?: string;
-  language?: string;
-  email?: string;
-  phone?: string;
-  "relationship-status"?: string;
-  "page-visibility"?: string;
-  "post-visibility"?: string;
-}
-
-interface LocationItem {
-  "place-name": string;
-  "place-id": string;
-  "parent-name": string;
-  "parent-id": string;
-}
+import { User } from "../model/User";
+import { getLocationParts } from "../model/Location";
+import { Page } from "../model/Page";
 
 interface FriendPage {
   id: string;
@@ -87,7 +57,7 @@ export default function UserProfilePage() {
     if (user && user.friends && user.friends.length > 0) {
       setFriendsLoading(true);
       serviceContext.fetchPages()
-        .then((allPages: any[]) => {
+        .then((allPages: Page[]) => {
           const friendPages = allPages.filter(page => 
             user.friends.includes(page.id) && page.type === 'person'
           ).map(page => ({
@@ -125,32 +95,6 @@ export default function UserProfilePage() {
       default:
         return status;
     }
-  }
-
-  function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
-    if (!location || location.length === 0) return [];
-    // Build a map from place to its 'in'
-    const placeToParent: Record<string, string> = {};
-    const placeToName: Record<string, string> = {};
-    const inSet = new Set<string>();
-    location.forEach(item => {
-      placeToParent[item["place-id"]] = item["parent-id"];
-      placeToName[item["place-id"]] = item["place-name"];
-      placeToName[item["parent-id"]] = item["parent-name"];
-      inSet.add(item["parent-id"]);
-    });
-    // Find the most specific place (not referenced as 'in' anywhere)
-    let start = location.find(item => !inSet.has(item["place-id"]));
-    if (!start) start = location[0]; // fallback
-    // Reconstruct the chain
-    const parts = [{ name: placeToName[start["place-id"]], id: start["place-id"] }];
-    let current = start["place-id"];
-    while (placeToParent[current]) {
-      const next = placeToParent[current];
-      parts.push({ name: placeToName[next], id: next });
-      current = next;
-    }
-    return parts.reverse(); // most general first
   }
 
   if (loading) return <div className="page-card">
