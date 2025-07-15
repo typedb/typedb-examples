@@ -6,6 +6,7 @@ import { ServiceContext } from '../service/ServiceContext';
 import { Organization } from "../model/Organization";
 import { FollowerPage, Page } from "../model/Page";
 import { getLocationParts } from "../model/Location";
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 
 export default function OrganizationProfilePage() {
@@ -22,10 +23,10 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (org && org.profilePicture) {
+    if (org?.profilePicture) {
       serviceContext.fetchMedia(org.profilePicture)
         .then(blob => {
-          setMediaUrl(URL.createObjectURL(blob));
+          if (blob) setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
@@ -33,10 +34,10 @@ export default function OrganizationProfilePage() {
 
   useEffect(() => {
     serviceContext.fetchOrganization(id!)
-      .then((data: Organization) => {
+      .then((data) => {
         setOrg(data);
         setLoading(false);
-        if (data && data.name) {
+        if (data?.name) {
           document.title = `${data.name} (Organization) | TySpace`;
         }
       })
@@ -47,7 +48,7 @@ export default function OrganizationProfilePage() {
   }, [id]);
 
   useEffect(() => {
-    if (org && org.followers && org.followers.length > 0) {
+    if (org?.followers?.length) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
         .then((allPages: Page[]) => {
@@ -156,7 +157,7 @@ export default function OrganizationProfilePage() {
             <h3 style={{ marginBottom: 12 }}>Details</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
               <span style={{ fontWeight: 500 }}>Badge:</span> <span>{org.badge || ''}</span>
-              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{org.tags && org.tags.length ? org.tags.join(', ') : ''}</span>
+              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{org.tags?.length ? org.tags.join(', ') : ''}</span>
               <span style={{ fontWeight: 500 }}>Email:</span> <span>{org.email || ''}</span>
               <span style={{ fontWeight: 500 }}>Language:</span> <span>{org.language || ''}</span>
               <span style={{ fontWeight: 500 }}>Phone:</span> <span>{org.phone || ''}</span>

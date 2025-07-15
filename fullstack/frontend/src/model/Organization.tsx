@@ -8,7 +8,7 @@ export interface Organization {
     isActive?: boolean;
     username?: string;
     canPublish?: boolean;
-    tag?: string[];
+    tags?: string[];
     email?: string;
     language?: string;
     phone?: string;

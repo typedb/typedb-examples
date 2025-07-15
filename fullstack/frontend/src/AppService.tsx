@@ -1,10 +1,11 @@
 import { User } from "./model/User";
-import { Page, LocationPage } from "./model/Page";
-import { PostType, Comment } from "./model/Post";
+import { LocationPage, Page } from "./model/Page";
+import { Comment, PostType } from "./model/Post";
 import { Group } from "./model/Group";
 import { Organization } from "./model/Organization";
+import { ServiceContextType } from "./service/ServiceContext";
 
-export const service = {
+export const service: ServiceContextType = {
     fetchUser,
     fetchPages,
     fetchPosts,

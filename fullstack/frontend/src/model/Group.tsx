@@ -5,7 +5,7 @@ export interface Group {
     badge?: string;
     isActive?: boolean;
     groupId?: string;
-    tag?: string[];
+    tags?: string[];
     pageVisibility?: string;
     postVisibility?: string;
     posts: string[];

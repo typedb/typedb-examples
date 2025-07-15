@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ServiceContext } from '../service/ServiceContext';
 import ReactionsBar from './ReactionsBar';
 import { Comment } from '../model/Post';
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 
 interface CommentListProps {
@@ -41,7 +42,8 @@ export default function CommentList({ postId }: CommentListProps) {
         if (comment.authorProfilePicture) {
           try {
             const blob = await serviceContext.fetchMedia(comment.authorProfilePicture);
-            newProfilePics[comment.commentId] = URL.createObjectURL(blob);
+            if (blob) newProfilePics[comment.commentId] = URL.createObjectURL(blob);
+            else newProfilePics[comment.commentId] = null;
           } catch {
             newProfilePics[comment.commentId] = null;
           }

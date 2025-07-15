@@ -5,6 +5,7 @@ import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
 import { Group } from "../model/Group";
 import { FollowerPage, Page } from "../model/Page";
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 
 export default function GroupPage() {
@@ -21,10 +22,10 @@ export default function GroupPage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (group && group.profilePicture) {
+    if (group?.profilePicture) {
       serviceContext.fetchMedia(group.profilePicture)
         .then(blob => {
-          setMediaUrl(URL.createObjectURL(blob));
+          if (blob) setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
@@ -32,10 +33,10 @@ export default function GroupPage() {
 
   useEffect(() => {
     serviceContext.fetchGroup(id!)
-      .then((data: Group) => {
+      .then((data) => {
         setGroup(data);
         setLoading(false);
-        if (data && data.name) {
+        if (data?.name) {
           document.title = `${data.name} (Group) | TySpace`;
         }
       })
@@ -46,7 +47,7 @@ export default function GroupPage() {
   }, [id]);
 
   useEffect(() => {
-    if (group && group.followers && group.followers.length > 0) {
+    if (group?.followers?.length) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
         .then((allPages: Page[]) => {
@@ -155,7 +156,7 @@ export default function GroupPage() {
             <h3 style={{ marginBottom: 12 }}>Details</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
               <span style={{ fontWeight: 500 }}>Badge:</span> <span>{group.badge || ''}</span>
-              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{group.tags && group.tags.length ? group.tags.join(', ') : ''}</span>
+              <span style={{ fontWeight: 500 }}>Tags:</span> <span>{group.tags?.length ? group.tags.join(', ') : ''}</span>
             </div>
           </div>
 
