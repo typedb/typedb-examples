@@ -1,0 +1,15 @@
+.send-btn {
+  margin-top: 6px;
+  padding: 6px 16px;
+  border-radius: 4px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  transition: transform 0.12s cubic-bezier(.4,0,.2,1);
+}
+
+.send-btn-animate {
+  transform: scale(0.95);
+} 
