@@ -5,16 +5,17 @@ import { Organization } from "./model/Organization";
 import { TYPEDB_ADDRESS, TYPEDB_DATABASE, TYPEDB_PASSWORD, TYPEDB_USERNAME } from "./config";
 import { Comment, PostType } from "./model/Post";
 import { ServiceContextType } from "./service/ServiceContext";
+import { User } from "./model/User";
 
 export const service: ServiceContextType = {
-    fetchUser: async (id: string) => await pageQuery(id),
-    fetchGroup: async (id: string): Promise<Group> => await pageQuery(id),
-    fetchOrganization: async (id: string): Promise<Organization> => await pageQuery(id),
+    fetchUser: pageQuery<User>,
+    fetchGroup: pageQuery<Group>,
+    fetchOrganization: pageQuery<Organization>,
 
-    fetchPages: async () => await pageListQuery() as Page[],
-    fetchLocationPages: async (placeId: string) => await locationQuery(placeId) as LocationPage[],
-    fetchPosts: async (pageId: string) => await postsQuery(pageId) as PostType[],
-    fetchComments: async (postId: string) => await commentsQuery(postId) as Comment[],
+    fetchPages: pageListQuery,
+    fetchLocationPages: locationQuery,
+    fetchPosts: postsQuery,
+    fetchComments: commentsQuery,
 
     fetchMedia: async (mediaId: string) => null,
 
@@ -30,7 +31,7 @@ const driver = new TypeDBHttpDriver({
     password: TYPEDB_PASSWORD,
 });
 
-async function pageQuery<T>(id: string): Promise<T> {
+async function pageQuery<T extends User | Group | Organization>(id: string): Promise<T> {
     return readConceptDocuments<T>(`
         match $page isa page, has id "${id}";
         fetch {
@@ -82,8 +83,8 @@ async function pageQuery<T>(id: string): Promise<T> {
     `).then(res => res[0]);
 }
 
-async function pageListQuery<T>(): Promise<T[]> {
-    return readConceptDocuments<T>(`
+async function pageListQuery(): Promise<Page[]> {
+    return readConceptDocuments(`
         match $page isa page;
         fetch {
             "name": $page.name,
@@ -107,8 +108,8 @@ async function pageListQuery<T>(): Promise<T[]> {
     `);
 }
 
-async function postsQuery<T>(pageId: string): Promise<T[]> {
-    return readConceptDocuments<T>(`
+async function postsQuery(pageId: string): Promise<PostType[]> {
+    return readConceptDocuments<PostType>(`
         match
             $page has id "${pageId}";
             (page: $page, post: $post) isa posting;
@@ -145,7 +146,7 @@ async function postsQuery<T>(pageId: string): Promise<T[]> {
     `);
 }
 
-async function commentsQuery<T>(postId: string): Promise<T[]> {
+async function commentsQuery(postId: string): Promise<Comment[]> {
     return readConceptDocuments(`
         match
             $post has id "${postId}";
@@ -175,8 +176,8 @@ async function commentsQuery<T>(postId: string): Promise<T[]> {
     `);
 }
 
-async function locationQuery<T>(placeId: string): Promise<T[]> {
-    return readConceptDocuments<T>(`
+async function locationQuery(placeId: string): Promise<LocationPage[]> {
+    return readConceptDocuments(`
         match 
             $place has place-id "${placeId}", has name $place-name;
         fetch {
