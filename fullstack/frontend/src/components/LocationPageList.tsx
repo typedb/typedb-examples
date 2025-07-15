@@ -34,7 +34,7 @@ export default function LocationPageList() {
       <Link to="/" className="home-link">← Home</Link>
       
       <h2>Pages in {placeName}</h2>
-      <div className="page-list">
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
         {pages.map(page => (
           <div key={page.id} style={{ display: 'flex', gap: 16, padding: 16, border: '1px solid #eee', borderRadius: 8, alignItems: 'center' }}>
             <PageCard
