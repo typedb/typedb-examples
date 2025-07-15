@@ -5,7 +5,7 @@ import { ServiceContext } from "../service/ServiceContext";
 
 interface PageCardProps {
   id: string;
-  type: 'person' | 'organisation' | 'group';
+  type: 'person' | 'organization' | 'group';
   name: string;
   profilePictureId: string;
   scale?: number;
@@ -33,7 +33,7 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
 
   let link = '/';
   if (type === 'person') link = `/user/${id}`;
-  else if (type === 'organisation') link = `/organisation/${id}`;
+  else if (type === 'organization') link = `/organization/${id}`;
   else if (type === 'group') link = `/group/${id}`;
 
   const avatarSize = 80 * scale;
@@ -52,7 +52,7 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
       </div>
       <div style={{ fontSize: fontSize, fontWeight: 500, color: '#1976d2', maxWidth: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{name}</div>
       <div style={{ fontSize: 12, color: '#888' }}>
-        {type === 'person' ? 'User' : type === 'organisation' ? 'Organization' : 'Group'}
+        {type === 'person' ? 'User' : type === 'organization' ? 'Organization' : 'Group'}
       </div>
     </Link>
   );

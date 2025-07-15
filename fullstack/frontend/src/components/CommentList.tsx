@@ -58,7 +58,7 @@ export default function CommentList({ postId }: CommentListProps) {
 
   function getProfileUrl(type: string, id: string): string {
     if (type === 'person') return `/user/${id}`;
-    if (type === 'organisation') return `/organisation/${id}`;
+    if (type === 'organization') return `/organization/${id}`;
     if (type === 'group') return `/group/${id}`;
     return '/';
   }

@@ -359,7 +359,7 @@ class PlaceType(Enum):
 
 class PageType(Enum):
     PERSON = "person"
-    ORGANISATION = "organisation"
+    ORGANISATION = "organization"
     COMPANY = "company"
     CHARITY = "charity"
     INSTITUTE = "educational-institute"
@@ -377,12 +377,12 @@ class PageType(Enum):
         return (type for type in PageType if type.is_profile)
 
     @property
-    def is_organisation(self) -> bool:
+    def is_organization(self) -> bool:
         return self in [PageType.ORGANISATION, PageType.COMPANY, PageType.CHARITY, PageType.INSTITUTE, PageType.SCHOOL, PageType.COLLEGE, PageType.UNIVERSITY]
 
     @classmethod
-    def organisation_types(cls) -> Iterator[Self]:
-        return (type for type in PageType if type.is_organisation)
+    def organization_types(cls) -> Iterator[Self]:
+        return (type for type in PageType if type.is_organization)
 
     @property
     def is_institute(self) -> bool:
@@ -393,7 +393,7 @@ class PageType(Enum):
         return (type for type in PageType if type.is_institute)
 
 
-class OrganisationType(Enum):
+class OrganizationType(Enum):
     COMPANY = "company"
     CHARITY = "charity"
     INSTITUTE = "educational-institute"
@@ -404,17 +404,17 @@ class OrganisationType(Enum):
     @property
     def page_type(self) -> PageType:
         match self:
-            case OrganisationType.COMPANY:
+            case OrganizationType.COMPANY:
                 return PageType.COMPANY
-            case OrganisationType.CHARITY:
+            case OrganizationType.CHARITY:
                 return PageType.CHARITY
-            case OrganisationType.INSTITUTE:
+            case OrganizationType.INSTITUTE:
                 return PageType.INSTITUTE
-            case OrganisationType.SCHOOL:
+            case OrganizationType.SCHOOL:
                 return PageType.SCHOOL
-            case OrganisationType.COLLEGE:
+            case OrganizationType.COLLEGE:
                 return PageType.COLLEGE
-            case OrganisationType.UNIVERSITY:
+            case OrganizationType.UNIVERSITY:
                 return PageType.UNIVERSITY
             case _:
                 raise RuntimeError()

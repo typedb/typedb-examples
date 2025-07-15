@@ -8,7 +8,7 @@ const pageVisibilityOptions = ["public", "private"];
 const postVisibilityOptions = ["default", "public", "private"];
 
 export default function CreatePage() {
-  const [type, setFormType] = useState<'person' | 'organisation' | 'group'>('person');
+  const [type, setFormType] = useState<'person' | 'organization' | 'group'>('person');
   // Common fields
   const [name, setName] = useState('');
   const [bio, setBio] = useState('');
@@ -29,7 +29,7 @@ export default function CreatePage() {
   const [relationshipStatus, setRelationshipStatus] = useState('');
   const [pageVisibility, setPageVisibility] = useState('public');
   const [postVisibility, setPostVisibility] = useState('default');
-  // Organisation/group fields
+  // Organization/group fields
   const [tags, setTags] = useState<string[]>([]);
   // Group fields
   // (group-id is auto-generated)
@@ -85,23 +85,23 @@ export default function CreatePage() {
       payload.post_visibility = postVisibility;
       payload.can_publish = canPublish;
       promise = serviceContext.createUser(payload);
-    }
-    if (type === 'organisation') {
+    } else if (type === 'organization') {
       payload.can_publish = canPublish;
       payload.tags = tags;
-      promise = serviceContext.createOrganisation(payload);
-    }
-    if (type === 'group') {
+      promise = serviceContext.createOrganization(payload);
+    } else if (type === 'group') {
       payload.page_visibility = pageVisibility;
       payload.post_visibility = postVisibility;
       payload.tags = tags;
       promise = serviceContext.createGroup(payload);
+    } else {
+      throw new Error('Invalid page type');
     }
     promise
       .then(() => {
         setFormLoading(false);
         if (type === 'person') navigate(`/user/${id}`);
-        else if (type === 'organisation') navigate(`/organisation/${id}`);
+        else if (type === 'organization') navigate(`/organization/${id}`);
         else if (type === 'group') navigate(`/group/${id}`);
         else navigate('/');
       })
@@ -125,7 +125,7 @@ export default function CreatePage() {
             Type:
             <select value={type} onChange={e => setFormType(e.target.value as any)} style={{ marginLeft: 4 }}>
               <option value="person">User</option>
-              <option value="organisation">Organization</option>
+              <option value="organization">Organization</option>
               <option value="group">Group</option>
             </select>
           </label>
@@ -193,7 +193,7 @@ export default function CreatePage() {
               </label>
             </>
           )}
-          {type === 'organisation' && (
+          {type === 'organization' && (
             <>
               <label>
                 Can Publish:
@@ -201,7 +201,7 @@ export default function CreatePage() {
               </label>
             </>
           )}
-          {(type === 'organisation' || type === 'group') && (
+          {(type === 'organization' || type === 'group') && (
             <>
               <label>
                 Tags (comma separated):

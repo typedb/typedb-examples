@@ -77,8 +77,8 @@ async function fetchGroup(id: string): Promise<Group> {
 }
 
 async function fetchOrganization(id: string): Promise<Organization> {
-    return fetch(`http://localhost:8000/api/organisation/${id}`)
-        .then(jsonOrError('Failed to fetch organisation'));
+    return fetch(`http://localhost:8000/api/organization/${id}`)
+        .then(jsonOrError('Failed to fetch organization'));
 }
 
 function jsonOrError(error: string) {

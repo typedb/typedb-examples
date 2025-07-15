@@ -49,7 +49,7 @@ async fn get_location_page_list(
 
 async fn get_profile(State(driver): State<Arc<TypeDBDriver>>, Path(id): Path<String>) -> Json<Option<Box<RawValue>>> {
     let transaction = driver.transaction("social-network", TransactionType::Read).await.unwrap();
-    let result = transaction.query(query::profile_query(&id)).await.unwrap();
+    let result = transaction.query(query::page_query(&id)).await.unwrap();
     let doc = result.into_documents().next().await;
     Json(doc.map(|doc| RawValue::from_string(doc.unwrap().into_json().to_string()).unwrap()))
 }
@@ -164,12 +164,12 @@ async fn main() {
     let app = Router::new()
         .route("/api/pages", get(get_page_list))
         .route("/api/create-user", post(post_create_user))
-        .route("/api/create-organisation", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
+        .route("/api/create-organization", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
         .route("/api/create-group", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
         .route("/api/location/{place_id}", get(get_location_page_list))
         .route("/api/user/{id}", get(get_profile))
         .route("/api/group/{id}", get(get_profile))
-        .route("/api/organisation/{id}", get(get_profile))
+        .route("/api/organization/{id}", get(get_profile))
         .route("/api/posts", get(get_posts))
         .route("/api/comments", get(get_comments))
         .route("/api/media", post(post_media))
