@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PageCard from './PageCard';
-import type { Page } from './PageList';
 import { ServiceContext } from "../service/ServiceContext";
+import { LocationPage, Page } from "../model/Page";
 
 export default function LocationPageList() {
   const { place_id } = useParams<{ place_id: string }>();
@@ -16,8 +16,8 @@ export default function LocationPageList() {
     setLoading(true);
     setError(null);
       serviceContext.fetchLocationPages(place_id || '')
-      .then((data: { "place-name": string, pages: Page[] }[]) => {
-        setPlaceName(data[0]["place-name"]);
+      .then((data: LocationPage[]) => {
+        setPlaceName(data[0].placeName);
         setPages(data[0].pages);
         setLoading(false);
       })
@@ -42,7 +42,7 @@ export default function LocationPageList() {
               id={page.id}
               type={page.type}
               name={page.name}
-              profilePictureId={page["profile-picture"] || ""}
+              profilePictureId={page.profilePicture || ""}
             />
             <div style={{ flex: 1 }}>
               <p style={{ margin: 0, color: '#555', lineHeight: 1.5 }}>{page.bio}</p>

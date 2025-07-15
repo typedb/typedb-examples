@@ -1,20 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { ServiceContext } from '../service/ServiceContext';
 import ReactionsBar from './ReactionsBar';
-
-interface Comment {
-  "comment-id": string;
-  "comment-data": {
-    "comment-text": string;
-    "creation-timestamp": string;
-    "is-visible": boolean;
-  }
-  "author-name": string;
-  "author-profile-picture": string;
-  "author-id": string;
-  "author-type": 'person' | 'organisation' | 'group';
-  "reactions": string[];
-}
+import { Comment } from '../model/Post';
 
 interface CommentListProps {
   postId: string;
@@ -50,12 +37,12 @@ export default function CommentList({ postId }: CommentListProps) {
       const newProfilePics: Record<string, string | null> = {};
       
       for (const comment of comments) {
-        if (comment["author-profile-picture"]) {
+        if (comment.authorProfilePicture) {
           try {
-            const blob = await serviceContext.fetchMedia(comment["author-profile-picture"]);
-            newProfilePics[comment["comment-id"]] = URL.createObjectURL(blob);
+            const blob = await serviceContext.fetchMedia(comment.authorProfilePicture);
+            newProfilePics[comment.commentId] = URL.createObjectURL(blob);
           } catch {
-            newProfilePics[comment["comment-id"]] = null;
+            newProfilePics[comment.commentId] = null;
           }
         }
       }
@@ -82,9 +69,9 @@ export default function CommentList({ postId }: CommentListProps) {
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
       {comments.map(c => (
-        <div key={c["comment-id"]} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', position: 'relative', paddingBottom: 20, border: '1px solid #e0e0e0', borderRadius: 8, padding: 12 }}>
+        <div key={c.commentId} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', position: 'relative', paddingBottom: 20, border: '1px solid #e0e0e0', borderRadius: 8, padding: 12 }}>
           <a 
-            href={getProfileUrl(c["author-type"], c["author-id"])}
+            href={getProfileUrl(c.authorType, c.authorId)}
             style={{ textDecoration: 'none' }}
           >
             <div 
@@ -103,21 +90,21 @@ export default function CommentList({ postId }: CommentListProps) {
                 cursor: 'pointer'
               }}
             >
-              {profilePics[c["comment-id"]] ? (
+              {profilePics[c.commentId] ? (
                 <img 
-                  src={profilePics[c["comment-id"]]!} 
-                  alt={c["author-name"]}
+                  src={profilePics[c.commentId]!} 
+                  alt={c.authorName}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               ) : (
-                c["author-name"].charAt(0).toUpperCase()
+                c.authorName.charAt(0).toUpperCase()
               )}
             </div>
           </a>
           <div style={{ flex: 1 }}>
             <div style={{ display: 'block', marginBottom: 4 }}>
             <a 
-              href={getProfileUrl(c["author-type"], c["author-id"])}
+              href={getProfileUrl(c.authorType, c.authorId)}
               style={{ 
                 fontSize: '12px', 
                 color: '#007bff', 
@@ -125,10 +112,10 @@ export default function CommentList({ postId }: CommentListProps) {
                 fontWeight: 'bold',
               }}
             >
-              {c["author-name"]}
+              {c.authorName}
             </a>
             </div>
-            <div>{c["comment-data"]["comment-text"]}</div>
+            <div>{c.commentData.commentText}</div>
           </div>
           <ReactionsBar reactions={c.reactions} />
         </div>

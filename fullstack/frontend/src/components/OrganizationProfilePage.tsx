@@ -3,42 +3,9 @@ import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
-
-interface OrganizationData {
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-  badge?: string;
-  "is-active"?: boolean;
-  username?: string;
-  "can-publish"?: boolean;
-  tag?: string[];
-  email?: string;
-  language?: string;
-  phone?: string;
-}
-
-interface LocationItem {
-  "place-name": string;
-  "place-id": string;
-  "parent-name": string;
-  "parent-id": string;
-}
-
-interface Organization {
-  data: OrganizationData;
-  posts: string[];
-  "number-of-followers"?: number;
-  followers?: string[];
-  location?: LocationItem[];
-}
-
-interface FollowerPage {
-  id: string;
-  name: string;
-  type: 'person' | 'organisation' | 'group';
-  profilePictureId: string;
-}
+import { Organization } from "../model/Organization";
+import { FollowerPage, Page } from "../model/Page";
+import { getLocationParts } from "../model/Location";
 
 export default function OrganizationProfilePage() {
   const { id } = useParams<{ id: string }>();
@@ -54,17 +21,17 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (org && org.data["profile-picture"]) {
-      serviceContext.fetchMedia(org.data["profile-picture"])
+    if (org && org.data.profilePicture) {
+      serviceContext.fetchMedia(org.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [org, org && org.data["profile-picture"]]);
+  }, [org, org && org.data.profilePicture]);
 
   useEffect(() => {
-    serviceContext.fetchOrganization(id)
+    serviceContext.fetchOrganization(id!)
       .then((data: Organization) => {
         setOrg(data);
         setLoading(false);
@@ -82,14 +49,14 @@ export default function OrganizationProfilePage() {
     if (org && org.followers && org.followers.length > 0) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
-        .then((allPages: any[]) => {
+        .then((allPages: Page[]) => {
           const followerPages = allPages.filter(page => 
             org.followers!.includes(page.id)
           ).map(page => ({
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFollowers(followerPages);
           setFollowersLoading(false);
@@ -116,32 +83,6 @@ export default function OrganizationProfilePage() {
     <div>Organization not found</div>
   </div>;
 
-  function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
-    if (!location || location.length === 0) return [];
-    // Build a map from place-id to its parent-id and place-name
-    const placeIdToParentId: Record<string, string> = {};
-    const placeIdToName: Record<string, string> = {};
-    const parentIdSet = new Set<string>();
-    location.forEach(item => {
-      placeIdToParentId[item["place-id"]] = item["parent-id"];
-      placeIdToName[item["place-id"]] = item["place-name"];
-      placeIdToName[item["parent-id"]] = item["parent-name"];
-      parentIdSet.add(item["parent-id"]);
-    });
-    // Find the most specific place (not referenced as a parent-id anywhere)
-    let start = location.find(item => !parentIdSet.has(item["place-id"]));
-    if (!start) start = location[0]; // fallback
-    // Reconstruct the chain
-    const parts = [{ name: placeIdToName[start["place-id"]], id: start["place-id"] }];
-    let current = start["place-id"];
-    while (placeIdToParentId[current]) {
-      const next = placeIdToParentId[current];
-      parts.push({ name: placeIdToName[next], id: next });
-      current = next;
-    }
-    return parts.reverse(); // most general first
-  }
-
   return (
     <div className="page-card" style={{ maxWidth: 1200, margin: '0 auto' }}>
       <Link to="/" className="home-link">← Home</Link>
@@ -166,7 +107,7 @@ export default function OrganizationProfilePage() {
 
           {/* Followers Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Followers ({org["number-of-followers"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Followers ({org.numberOfFollowers ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 

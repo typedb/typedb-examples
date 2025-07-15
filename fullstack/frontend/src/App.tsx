@@ -7,7 +7,7 @@ import GroupPage from './components/GroupPage';
 import CreatePage from './components/CreatePage';
 import LocationPageList from './components/LocationPageList';
 import { service } from "./AppService";
-import { ServiceContext } from './components/ServiceContext';
+import { ServiceContext } from './service/ServiceContext';
 
 const App: React.FC = () => {
   document.title = 'TypeSpace';

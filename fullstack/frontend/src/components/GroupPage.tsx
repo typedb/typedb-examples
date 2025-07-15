@@ -3,32 +3,8 @@ import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
-
-interface GroupData {
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-  badge?: string;
-  "is-active"?: boolean;
-  "group-id"?: string;
-  tag?: string[];
-  "page-visibility"?: string;
-  "post-visibility"?: string;
-}
-
-interface Group {
-  data: GroupData;
-  posts: string[];
-  "number-of-followers"?: number;
-  followers?: string[];
-}
-
-interface FollowerPage {
-  id: string;
-  name: string;
-  type: 'person' | 'organisation' | 'group';
-  profilePictureId: string;
-}
+import { Group } from "../model/Group";
+import { FollowerPage, Page } from "../model/Page";
 
 export default function GroupPage() {
   const { id } = useParams<{ id: string }>();
@@ -44,17 +20,17 @@ export default function GroupPage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (group && group.data["profile-picture"]) {
-      serviceContext.fetchMedia(group.data["profile-picture"])
+    if (group && group.data.profilePicture) {
+      serviceContext.fetchMedia(group.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [group, group?.data, group?.data["profile-picture"]]);
+  }, [group, group?.data, group?.data.profilePicture]);
 
   useEffect(() => {
-    serviceContext.fetchGroup(id)
+    serviceContext.fetchGroup(id!)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
@@ -72,14 +48,14 @@ export default function GroupPage() {
     if (group && group.followers && group.followers.length > 0) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
-        .then((allPages: any[]) => {
+        .then((allPages: Page[]) => {
           const followerPages = allPages.filter(page => 
             group.followers!.includes(page.id)
           ).map(page => ({
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFollowers(followerPages);
           setFollowersLoading(false);
@@ -130,7 +106,7 @@ export default function GroupPage() {
 
           {/* Followers Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Followers ({group["number-of-followers"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Followers ({group.numberOfFollowers ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 

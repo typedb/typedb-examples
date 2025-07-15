@@ -2,14 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
-
-export interface Page {
-  id: string;
-  type: 'person' | 'organisation' | 'group';
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-}
+import { Page } from "../model/Page";
 
 export default function PageList() {
   const [pages, setPages] = useState<Page[]>([]);
@@ -42,7 +35,7 @@ export default function PageList() {
               id={page.id}
               type={page.type}
               name={page.name}
-              profilePictureId={page["profile-picture"] || ""}
+              profilePictureId={page.profilePicture || ""}
             />
             <div style={{ flex: 1 }}>
               <p style={{ margin: 0, color: '#555', lineHeight: 1.5 }}>{page.bio}</p>

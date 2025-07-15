@@ -4,39 +4,9 @@ import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
 import userAvatar from '../assets/userAvatar.svg';
-
-interface User {
-  data: UserData;
-  posts: string[];
-  friends: string[];
-  "number-of-followers"?: number;
-  "number-of-friends"?: number;
-  location?: LocationItem[];
-}
-
-interface UserData {
-  name: string;
-  bio: string;
-  "profile-picture"?: string;
-  badge?: string;
-  "is-active"?: boolean;
-  username?: string;
-  "can-publish"?: boolean;
-  gender?: string;
-  language?: string;
-  email?: string;
-  phone?: string;
-  "relationship-status"?: string;
-  "page-visibility"?: string;
-  "post-visibility"?: string;
-}
-
-interface LocationItem {
-  "place-name": string;
-  "place-id": string;
-  "parent-name": string;
-  "parent-id": string;
-}
+import { User } from "../model/User";
+import { getLocationParts } from "../model/Location";
+import { Page } from "../model/Page";
 
 interface FriendPage {
   id: string;
@@ -59,14 +29,14 @@ export default function UserProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (user && user.data['profile-picture']) {
-      serviceContext.fetchMedia(user.data['profile-picture'])
+    if (user && user.data.profilePicture) {
+      serviceContext.fetchMedia(user.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [user, user && user.data['profile-picture']]);
+  }, [user, user && user.data.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchUser(id!)
@@ -87,14 +57,14 @@ export default function UserProfilePage() {
     if (user && user.friends && user.friends.length > 0) {
       setFriendsLoading(true);
       serviceContext.fetchPages()
-        .then((allPages: any[]) => {
+        .then((allPages: Page[]) => {
           const friendPages = allPages.filter(page => 
             user.friends.includes(page.id) && page.type === 'person'
           ).map(page => ({
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFriends(friendPages);
           setFriendsLoading(false);
@@ -125,32 +95,6 @@ export default function UserProfilePage() {
       default:
         return status;
     }
-  }
-
-  function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
-    if (!location || location.length === 0) return [];
-    // Build a map from place to its 'in'
-    const placeToParent: Record<string, string> = {};
-    const placeToName: Record<string, string> = {};
-    const inSet = new Set<string>();
-    location.forEach(item => {
-      placeToParent[item["place-id"]] = item["parent-id"];
-      placeToName[item["place-id"]] = item["place-name"];
-      placeToName[item["parent-id"]] = item["parent-name"];
-      inSet.add(item["parent-id"]);
-    });
-    // Find the most specific place (not referenced as 'in' anywhere)
-    let start = location.find(item => !inSet.has(item["place-id"]));
-    if (!start) start = location[0]; // fallback
-    // Reconstruct the chain
-    const parts = [{ name: placeToName[start["place-id"]], id: start["place-id"] }];
-    let current = start["place-id"];
-    while (placeToParent[current]) {
-      const next = placeToParent[current];
-      parts.push({ name: placeToName[next], id: next });
-      current = next;
-    }
-    return parts.reverse(); // most general first
   }
 
   if (loading) return <div className="page-card">
@@ -190,7 +134,7 @@ export default function UserProfilePage() {
 
           {/* Friends Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Friends ({user["number-of-friends"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Friends ({user.numberOfFriends ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 
@@ -251,8 +195,8 @@ export default function UserProfilePage() {
                   </React.Fragment>
                 ))}
               </span>
-              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.data["relationship-status"])}</span>
-              <span style={{ fontWeight: 500 }}>Followers:</span> <span>{user["number-of-followers"] ?? 0}</span>
+              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.data.relationshipStatus)}</span>
+              <span style={{ fontWeight: 500 }}>Followers:</span> <span>{user.numberOfFollowers ?? 0}</span>
             </div>
           </div>
 
