@@ -4,6 +4,7 @@ import PostList from './PostList';
 import PageCard from './PageCard';
 import { fetchUser, fetchPages } from '../AppService';
 import { fetchMedia } from '../AppService';
+import userAvatar from '../assets/userAvatar.svg';
 
 interface User {
   data: UserData;
@@ -170,7 +171,7 @@ export default function UserProfilePage() {
                 <img src={mediaUrl} alt="Profile" style={{ width: 150, height: 150, borderRadius: '50%', objectFit: 'cover', border: '1px solid #eee' }} />
               ) : (
                 <div style={{ width: 150, height: 150, borderRadius: '50%', background: '#eee', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#aaa', fontSize: 48, border: '1px solid #eee' }}>
-                  <img src={require('../assets/userAvatar.svg').default} alt="Default Avatar" />
+                  <img src={userAvatar} alt="Default Avatar" />
                 </div>
               )}
             </div>
