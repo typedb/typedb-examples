@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchMedia, fetchPages } from '../AppService';
+import { fetchMedia, fetchOrganization, fetchPages } from '../AppService';
 
 interface OrganizationData {
   name: string;
@@ -63,11 +63,7 @@ export default function OrganizationProfilePage() {
   }, [org, org && org.data["profile-picture"]]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/organisation/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch organization');
-        return res.json();
-      })
+    fetchOrganization(id)
       .then((data: Organization) => {
         setOrg(data);
         setLoading(false);
@@ -106,9 +102,18 @@ export default function OrganizationProfilePage() {
     }
   }, [org]);
 
-  if (loading) return <div className="page-card">Loading...</div>;
-  if (error) return <div className="page-card">Error: {error}</div>;
-  if (!org) return <div className="page-card">Organization not found</div>;
+  if (loading) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Loading...</div>
+  </div>;
+  if (error) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Error: {error}</div>
+  </div>;
+  if (!org) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Organization not found</div>
+  </div>;
 
   function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
     if (!location || location.length === 0) return [];

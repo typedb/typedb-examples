@@ -153,9 +153,18 @@ export default function UserProfilePage() {
     return parts.reverse(); // most general first
   }
 
-  if (loading) return <div className="page-card">Loading...</div>;
-  if (error) return <div className="page-card">Error: {error}</div>;
-  if (!user) return <div className="page-card">User not found</div>;
+  if (loading) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Loading...</div>
+  </div>;
+  if (error) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Error: {error}</div>
+  </div>;
+  if (!user) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>User not found</div>
+  </div>;
 
   return (
     <div className="page-card" style={{ maxWidth: 1200, margin: '0 auto' }}>

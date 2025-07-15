@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchMedia, fetchPages } from '../AppService';
+import { fetchGroup, fetchMedia, fetchPages } from '../AppService';
 
 interface GroupData {
   name: string;
@@ -53,11 +53,7 @@ export default function GroupPage() {
   }, [group, group?.data, group?.data["profile-picture"]]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/group/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch group');
-        return res.json();
-      })
+    fetchGroup(id)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
@@ -96,9 +92,18 @@ export default function GroupPage() {
     }
   }, [group]);
 
-  if (loading) return <div className="page-card">Loading...</div>;
-  if (error) return <div className="page-card">Error: {error}</div>;
-  if (!group) return <div className="page-card">Group not found</div>;
+  if (loading) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Loading...</div>
+  </div>;
+  if (error) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Error: {error}</div>
+  </div>;
+  if (!group) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Group not found</div>
+  </div>;
 
   return (
     <div className="page-card" style={{ maxWidth: 1200, margin: '0 auto' }}>
@@ -185,4 +190,4 @@ export default function GroupPage() {
       </div>
     </div>
   );
-} 
+}
