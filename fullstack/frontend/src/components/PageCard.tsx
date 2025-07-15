@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 import { ServiceContext } from "../service/ServiceContext";
 
@@ -21,7 +22,8 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
       if (profilePictureId) {
         try {
           const blob = await serviceContext.fetchMedia(profilePictureId);
-          if (isMounted) setProfilePic(URL.createObjectURL(blob));
+          if (isMounted && blob) setProfilePic(URL.createObjectURL(blob));
+          else setProfilePic(null);
         } catch {
           if (isMounted) setProfilePic(null);
         }

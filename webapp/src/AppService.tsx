@@ -1,89 +1,215 @@
-import { User } from "./model/User";
+import { isApiErrorResponse, TypeDBHttpDriver } from "typedb-driver-http";
 import { LocationPage, Page } from "./model/Page";
-import { PostType } from "./model/Post";
 import { Group } from "./model/Group";
 import { Organization } from "./model/Organization";
+import { TYPEDB_ADDRESS, TYPEDB_DATABASE, TYPEDB_PASSWORD, TYPEDB_USERNAME } from "./config";
+import { Comment, PostType } from "./model/Post";
+import { ServiceContextType } from "./service/ServiceContext";
 
-export const service = {
-    fetchUser,
-    fetchPages,
-    fetchPosts,
-    fetchComments,
-    createPage,
-    fetchMedia,
-    uploadMedia,
-    fetchLocationPages,
-    fetchGroup,
-    fetchOrganization,
+export const service: ServiceContextType = {
+    fetchUser: async (id: string) => await pageQuery(id),
+    fetchGroup: async (id: string): Promise<Group> => await pageQuery(id),
+    fetchOrganization: async (id: string): Promise<Organization> => await pageQuery(id),
+
+    fetchPages: async () => await pageListQuery() as Page[],
+    fetchLocationPages: async (placeId: string) => await locationQuery(placeId) as LocationPage[],
+    fetchPosts: async (pageId: string) => await postsQuery(pageId) as PostType[],
+    fetchComments: async (postId: string) => await commentsQuery(postId) as Comment[],
+
+    fetchMedia: async (mediaId: string) => null,
+
+    uploadMedia: async (file: File) => "",
+    createUser: async (payload: any) => {},
+    createOrganization: async (payload: any) => {},
+    createGroup: async (payload: any) => {},
 };
 
-async function fetchUser(id: string): Promise<User> {
-    return fetch(`http://localhost:8000/api/user/${id}`)
-        .then(jsonOrError('Failed to fetch user'));
+const driver = new TypeDBHttpDriver({
+    addresses: [TYPEDB_ADDRESS],
+    username: TYPEDB_USERNAME,
+    password: TYPEDB_PASSWORD,
+});
+
+async function pageQuery<T>(id: string): Promise<T> {
+    return readConceptDocuments<T>(`
+        match $page isa page, has id "${id}";
+        fetch {
+            "name": $page.name,
+            "bio": $page.bio,
+            "profilePicture": $page.profile-picture,
+            "badge": $page.badge,
+            "isActive": $page.is-active,
+            "username": (match $page isa profile, has username $username; return first $username;),
+            "canPublish": (match $page isa profile, has can-publish $can-publish; return first $can-publish;),
+            "gender": (match $page isa profile, has gender $gender; return first $gender;),
+            "language": (match $page isa profile, has language $language; return first $language;),
+            "email": (match $page isa profile, has email $email; return first $email;),
+            "phone": (match $page isa profile, has phone $phone; return first $phone;),
+            "relationshipStatus": (match $page isa profile, has relationship-status $relationship-status; return first $relationship-status;),
+            "pageVisibility": (match $page isa profile, has page-visibility $page-visibility; return first $page-visibility;),
+            "postVisibility": (match $page isa profile, has post-visibility $post-visibility; return first $post-visibility;),
+            "tags": [match { $page isa group, has tag $tag; } or { $page isa organisation, has tag $tag; }; return {  $tag  };],
+            "friends": [
+                match ($page, $friend) isa friendship; $friend has id $friend-id;
+                limit 9;
+                return { $friend-id };
+            ],
+            "numberOfFriends": (
+                match ($page, $friend) isa friendship;
+                return count;
+            ),
+            "followers": [
+                match (page: $page, follower: $follower) isa following; $follower has id $follower-id;
+                limit 9;
+                return { $follower-id };
+            ],
+            "numberOfFollowers": (
+                match (page: $page, follower: $follower) isa following;
+                return count;
+            ),
+            "location": [
+                match
+                    (place: $place, located: $page) isa location;
+                    let $child, $parent = parent_places_linked_list($place);
+                fetch {
+                    "placeName": $child.name,
+                    "placeId": $child.place-id,
+                    "parentName": $parent.name,
+                    "parentId": $parent.place-id,
+                };
+            ]
+        };
+    `).then(res => res[0]);
 }
 
-async function fetchPages(): Promise<Page[]> {
-    return fetch('http://localhost:8000/api/pages')
-        .then(jsonOrError('Failed to fetch pages'));
+async function pageListQuery<T>(): Promise<T[]> {
+    return readConceptDocuments<T>(`
+        match $page isa page;
+        fetch {
+            "name": $page.name,
+            "bio": $page.bio,
+            "id": $page.page-id,
+            "profile-picture": $page.profile-picture,
+            "type": (
+                match {
+                    $page isa person;
+                    let $ty = "person";
+                } or {
+                    $page isa organisation;
+                    let $ty = "organisation";
+                } or {
+                    $page isa group;
+                    let $ty = "group";
+                };
+                return first $ty;
+            ),
+        };
+    `);
 }
 
-async function fetchPosts(pageId: string): Promise<PostType[]> {
-    if (!pageId) return [];
-    return fetch(`http://localhost:8000/api/posts?pageId=${pageId}`)
-        .then(jsonOrError('Failed to fetch posts'));
+async function postsQuery<T>(pageId: string): Promise<T[]> {
+    return readConceptDocuments<T>(`
+        match
+            $page has id "${pageId}";
+            (page: $page, post: $post) isa posting;
+        fetch {
+            "postText": $post.post-text,
+            "postVisibility": $post.post-visibility,
+            "postImage": (match $post isa image-post, has post-image $image; return first $image;),
+            "language": $post.language,
+            "tags": [$post.tag],
+            "isVisible": $post.is-visible,
+            "creationTimestamp": $post.creation-timestamp,
+            "postId": $post.post-id,
+            "authorName": $page.name,
+            "authorProfilePicture": $page.profile-picture,
+            "authorId": $page.page-id,
+            "authorType": (
+                match {
+                    $page isa person;
+                    let $ty = "person";
+                } or {
+                    $page isa organisation;
+                    let $ty = "organisation";
+                } or {
+                    $page isa group;
+                    let $ty = "group";
+                };
+                return first $ty;
+            ),
+            "reactions": [
+                match ($post) isa reaction, has emoji $emoji;
+                return { $emoji };
+            ],
+        };
+    `);
 }
 
-async function fetchComments(postId: string): Promise<Comment[]> {
-    if (!postId) return [];
-    return fetch(`http://localhost:8000/api/comments?postId=${postId}`)
-        .then(jsonOrError('Failed to fetch comments'));
+async function commentsQuery<T>(postId: string): Promise<T[]> {
+    return readConceptDocuments(`
+        match
+            $post has id "${postId}";
+            ($post, comment: $comment, author: $author) isa commenting;
+        fetch {
+            "commentText": $comment.comment-text,
+            "creationTimestamp": $comment.creation-timestamp,
+            "isVisible": $comment.is-visible,
+            "authorName": $author.name,
+            "authorProfilePicture": $author.profile-picture,
+            "authorId": $author.page-id,
+            "authorType": (
+                match {
+                    $author isa person;
+                    let $ty = "person";
+                } or {
+                    $author isa organisation;
+                    let $ty = "organisation";
+                };
+                return first $ty;
+            ),
+            "reactions": [
+                match ($comment) isa reaction, has emoji $emoji;
+                return { $emoji };
+            ],
+        };
+    `);
 }
 
-async function createPage(payload: any): Promise<void> {
-    return fetch('http://localhost:8000/api/pages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    }).then(jsonOrError('Failed to create page'));
+async function locationQuery<T>(placeId: string): Promise<T[]> {
+    return readConceptDocuments<T>(`
+        match 
+            $place has place-id "${placeId}", has name $place-name;
+        fetch {
+            "place-name": $place-name,
+            "pages": [
+                match
+                    $page isa page;
+                    location ($page, $page-place);
+                    let $_ = located_in_transitive($page-place, $place);
+                fetch {
+                    "name": $page.name,
+                    "bio": $page.bio,
+                    "id": $page.page-id,
+                    "profilePicture": $page.profile-picture,
+                    "type": (
+                        match {
+                            $page isa person;
+                            let $ty = "person";
+                        } or {
+                            $page isa organisation;
+                            let $ty = "organisation";
+                        };
+                        return first $ty;
+                    ),
+                };
+            ]
+        };
+    `);
 }
-
-async function fetchMedia(mediaId: string): Promise<Blob | null> {
-    return fetch(`http://localhost:8000/api/media/${mediaId}`)
-        .then(res => {
-            if (res.status === 404) return null;
-            else if (!res.ok) throw new Error('Media not found');
-            return res.blob();
-        });
-}
-
-async function uploadMedia(file: File): Promise<string> {
-    return await fetch('http://localhost:8000/api/media', {
-        method: 'POST',
-        body: file
-    }).then(res => {
-        if (!res.ok) throw new Error('Failed to upload media');
-        return res.text();
-    });
-}
-
-async function fetchLocationPages(locationName: string): Promise<LocationPage[]> {
-    return fetch(`http://localhost:8000/api/location/${encodeURIComponent(locationName)}`)
-        .then(jsonOrError('Failed to fetch location pages'));
-}
-
-async function fetchGroup(id: string): Promise<Group> {
-    return fetch(`http://localhost:8000/api/group/${id}`)
-        .then(jsonOrError('Failed to fetch group'));
-}
-
-async function fetchOrganization(id: string): Promise<Organization> {
-    return fetch(`http://localhost:8000/api/organization/${id}`)
-        .then(jsonOrError('Failed to fetch organization'));
-}
-
-function jsonOrError(error: string) {
-    return (res: Response) => {
-        if (!res.ok) throw new Error(error);
-        return res.json();
-    }
+async function readConceptDocuments<T>(query: string): Promise<T[]> {
+    const res = await driver.oneShotQuery(query, false, TYPEDB_DATABASE, "read");
+    if (isApiErrorResponse(res)) throw res.err;
+    if (res.ok.answerType !== 'conceptDocuments') throw new Error('Expected conceptDocuments repsonse');
+    console.debug(res.ok.answers);
+    return res.ok.answers as T[];
 }

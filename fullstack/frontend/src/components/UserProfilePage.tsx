@@ -3,6 +3,7 @@ import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 import { User } from "../model/User";
 import { getLocationParts } from "../model/Location";
@@ -32,7 +33,7 @@ export default function UserProfilePage() {
     if (user && user.profilePicture) {
       serviceContext.fetchMedia(user.profilePicture)
         .then(blob => {
-          setMediaUrl(URL.createObjectURL(blob));
+          if (blob) setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
@@ -40,10 +41,10 @@ export default function UserProfilePage() {
 
   useEffect(() => {
     serviceContext.fetchUser(id!)
-      .then((data: User) => {
+      .then((data) => {
         setUser(data);
         setLoading(false);
-        if (data && data.name) {
+        if (data?.name) {
           document.title = `${data.name} (User) | TySpace`;
         }
       })

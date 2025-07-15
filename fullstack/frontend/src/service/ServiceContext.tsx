@@ -6,9 +6,9 @@ import { Group } from "../model/Group";
 import { Organization } from "../model/Organization";
 
 export type ServiceContextType = {
-    fetchUser: (id: string) => Promise<User>;
-    fetchGroup: (id: string) => Promise<Group>;
-    fetchOrganization: (id: string) => Promise<Organization>;
+    fetchUser: (id: string) => Promise<User | null>;
+    fetchGroup: (id: string) => Promise<Group | null>;
+    fetchOrganization: (id: string) => Promise<Organization | null>;
 
     fetchPages: () => Promise<Page[]>;
     fetchLocationPages: (locationName: string) => Promise<any>;

@@ -4,6 +4,7 @@ import './Post.css';
 import ReactionsBar from './ReactionsBar';
 import { ServiceContext } from "../service/ServiceContext";
 import { PostType } from "../model/Post";
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 
 interface PostProps {
@@ -22,7 +23,8 @@ export default function Post({ post }: PostProps) {
       if (post.authorProfilePicture) {
         try {
           const blob = await serviceContext.fetchMedia(post.authorProfilePicture);
-          if (isMounted) setProfilePic(URL.createObjectURL(blob));
+          if (isMounted && blob) setProfilePic(URL.createObjectURL(blob));
+          else setProfilePic(null);
         } catch {
           if (isMounted) setProfilePic(null);
         }

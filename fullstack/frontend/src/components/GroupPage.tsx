@@ -5,6 +5,7 @@ import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
 import { Group } from "../model/Group";
 import { FollowerPage, Page } from "../model/Page";
+// @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 
 export default function GroupPage() {
@@ -24,7 +25,7 @@ export default function GroupPage() {
     if (group && group.profilePicture) {
       serviceContext.fetchMedia(group.profilePicture)
         .then(blob => {
-          setMediaUrl(URL.createObjectURL(blob));
+          if (blob) setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
@@ -32,10 +33,10 @@ export default function GroupPage() {
 
   useEffect(() => {
     serviceContext.fetchGroup(id!)
-      .then((data: Group) => {
+      .then((data) => {
         setGroup(data);
         setLoading(false);
-        if (data && data.name) {
+        if (data?.name) {
           document.title = `${data.name} (Group) | TySpace`;
         }
       })
