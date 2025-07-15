@@ -102,9 +102,18 @@ export default function OrganizationProfilePage() {
     }
   }, [org]);
 
-  if (loading) return <div className="page-card">Loading...</div>;
-  if (error) return <div className="page-card">Error: {error}</div>;
-  if (!org) return <div className="page-card">Organization not found</div>;
+  if (loading) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Loading...</div>
+  </div>;
+  if (error) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Error: {error}</div>
+  </div>;
+  if (!org) return <div className="page-card">
+    <Link to="/" className="home-link">← Home</Link>
+    <div>Organization not found</div>
+  </div>;
 
   function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
     if (!location || location.length === 0) return [];

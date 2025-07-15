@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import PageList from './components/PageList';
 import UserProfilePage from './components/UserProfilePage';
 import OrganizationProfilePage from './components/OrganizationProfilePage';
@@ -33,7 +33,10 @@ const App: React.FC = () => {
           <Route path="/group/:id" element={<GroupPage />} />
           <Route path="/create" element={<CreatePage />} />
           <Route path="/location/:place_id" element={<LocationPageList />} />
-          <Route path="*" element={<div>Page not found</div>} />
+          <Route path="*" element={<div className="page-card">
+            <Link to="/" className="home-link">← Home</Link>
+            <div>Page not found</div>
+          </div>} />
         </Routes>
       </div>
     </Router>
