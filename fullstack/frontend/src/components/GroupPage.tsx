@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchMedia, fetchPages } from '../AppService';
+import { fetchGroup, fetchMedia, fetchPages } from '../AppService';
 
 interface GroupData {
   name: string;
@@ -53,11 +53,7 @@ export default function GroupPage() {
   }, [group, group?.data, group?.data["profile-picture"]]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/group/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch group');
-        return res.json();
-      })
+    fetchGroup(id)
       .then((data: Group) => {
         setGroup(data);
         setLoading(false);
@@ -185,4 +181,4 @@ export default function GroupPage() {
       </div>
     </div>
   );
-} 
+}

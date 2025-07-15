@@ -1,36 +1,23 @@
 export async function fetchUser(id: string) {
     return fetch(`http://localhost:8000/api/user/${id}`)
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch user');
-            return res.json();
-        });
+        .then(jsonOrError('Failed to fetch user'));
 }
 
 export async function fetchPages() {
     return fetch('http://localhost:8000/api/pages')
-        .then(res => {
-            console.log(res);
-            if (!res.ok) throw new Error('Failed to fetch pages');
-            return res.json();
-        });
+        .then(jsonOrError('Failed to fetch pages'));
 }
 
 export async function fetchPosts(pageId: string) {
     if (!pageId) return [];
     return fetch(`http://localhost:8000/api/posts?pageId=${pageId}`)
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch posts');
-            return res.json();
-        });
+        .then(jsonOrError('Failed to fetch posts'));
 }
 
 export async function fetchComments(postId: string) {
     if (!postId) return [];
     return fetch(`http://localhost:8000/api/comments?postId=${postId}`)
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch comments');
-            return res.json();
-        });
+        .then(jsonOrError('Failed to fetch comments'));
 }
 
 export async function createPage(payload: any) {
@@ -38,11 +25,7 @@ export async function createPage(payload: any) {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-    })
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to create page');
-            return res.json();
-        });
+    }).then(jsonOrError('Failed to create page'));
 }
 
 export async function fetchMedia(mediaId: string): Promise<Blob> {
@@ -54,19 +37,35 @@ export async function fetchMedia(mediaId: string): Promise<Blob> {
 }
 
 export async function uploadMedia(file: File): Promise<string> {
-    const res = await fetch('http://localhost:8000/api/media', {
+    return await fetch('http://localhost:8000/api/media', {
         method: 'POST',
         body: file
+    }).then(res => {
+        if (!res.ok) throw new Error('Failed to upload media');
+        return res.text();
     });
-    if (!res.ok) throw new Error('Failed to upload media');
-    const data = await res;
-    return data;
 }
 
 export async function fetchLocationPages(locationName: string) {
     return fetch(`http://localhost:8000/api/location/${encodeURIComponent(locationName)}`)
-        .then(res => {
-            if (!res.ok) throw new Error('Failed to fetch location pages');
-            return res.json();
-        });
+        .then(jsonOrError('Failed to fetch location pages'));
+}
+
+export async function fetchGroup(id: string | undefined) {
+    if (!id) return null;
+    return fetch(`http://localhost:8000/api/group/${id}`)
+        .then(jsonOrError('Failed to fetch group'));
+}
+
+export async function fetchOrganization(id: string | undefined) {
+    if (!id) return null;
+    return fetch(`http://localhost:8000/api/organisation/${id}`)
+        .then(jsonOrError('Failed to fetch organisation'));
+}
+
+function jsonOrError(error: string) {
+    return (res: Response) => {
+        if (!res.ok) throw new Error(error);
+        return res.json();
+    }
 }

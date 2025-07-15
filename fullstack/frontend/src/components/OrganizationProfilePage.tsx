@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchMedia, fetchPages } from '../AppService';
+import { fetchMedia, fetchOrganization, fetchPages } from '../AppService';
 
 interface OrganizationData {
   name: string;
@@ -63,11 +63,7 @@ export default function OrganizationProfilePage() {
   }, [org, org && org.data["profile-picture"]]);
 
   useEffect(() => {
-    fetch(`http://localhost:8000/api/organisation/${id}`)
-      .then(res => {
-        if (!res.ok) throw new Error('Failed to fetch organization');
-        return res.json();
-      })
+    fetchOrganization(id)
       .then((data: Organization) => {
         setOrg(data);
         setLoading(false);
