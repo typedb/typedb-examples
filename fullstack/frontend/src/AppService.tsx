@@ -28,10 +28,11 @@ export async function createPage(payload: any) {
     }).then(jsonOrError('Failed to create page'));
 }
 
-export async function fetchMedia(mediaId: string): Promise<Blob> {
+export async function fetchMedia(mediaId: string): Promise<Blob | null> {
     return fetch(`http://localhost:8000/api/media/${mediaId}`)
         .then(res => {
-            if (!res.ok) throw new Error('Media not found');
+            if (res.status === 404) return null;
+            else if (!res.ok) throw new Error('Media not found');
             return res.blob();
         });
 }
