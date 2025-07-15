@@ -1,7 +1,7 @@
 from json import load
 from typing import Any
 from query_builder import QueryBuilder
-from enums import OrganisationType, PostType
+from enums import OrganizationType, PostType
 from conversation import Conversation
 
 query_builder = QueryBuilder()
@@ -54,15 +54,15 @@ with open("resources/bios.txt", "r") as resource_file:
     for bio in resource_file:
         queries.append(query_builder.person(bio.strip()))
 
-with open("resources/organisations.json", "r") as resource_file:
-    organisations: list[dict[str, Any]] = load(resource_file)
+with open("resources/organizations.json", "r") as resource_file:
+    organizations: list[dict[str, Any]] = load(resource_file)
 
-    for organisation in organisations:
-        queries.append(query_builder.organisation(
-            organisation_type=OrganisationType(organisation["type"]),
-            name=organisation["name"],
-            bio=organisation["bio"],
-            tags=organisation["tags"],
+    for organization in organizations:
+        queries.append(query_builder.organization(
+            organization_type=OrganizationType(organization["type"]),
+            name=organization["name"],
+            bio=organization["bio"],
+            tags=organization["tags"],
         ))
 
 with open("resources/groups.json", "r") as resource_file:

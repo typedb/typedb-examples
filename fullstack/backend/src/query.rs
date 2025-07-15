@@ -14,8 +14,8 @@ fetch {
             $page isa person;
             let $ty = "person";
         } or {
-            $page isa organisation;
-            let $ty = "organisation";
+            $page isa organization;
+            let $ty = "organization";
         } or {
             $page isa group;
             let $ty = "group";
@@ -30,7 +30,7 @@ pub fn location_query(place_id: &str) -> String {
         match 
             $place has place-id "{place_id}", has name $place-name;
         fetch {{
-            "place-name": $place-name,
+            "placeName": $place-name,
             "pages": [
                 match
                     $page isa page;
@@ -46,8 +46,8 @@ pub fn location_query(place_id: &str) -> String {
                             $page isa person;
                             let $ty = "person";
                         }} or {{
-                            $page isa organisation;
-                            let $ty = "organisation";
+                            $page isa organization;
+                            let $ty = "organization";
                         }};
                         return first $ty;
                     ),
@@ -58,7 +58,7 @@ pub fn location_query(place_id: &str) -> String {
     )
 }
 
-pub fn profile_query(id: &str) -> String {
+pub fn page_query(id: &str) -> String {
     format!(
         r#"
         match $page isa page, has id "{id}";
@@ -77,7 +77,7 @@ pub fn profile_query(id: &str) -> String {
             "relationshipStatus": (match $page isa profile, has relationship-status $relationship-status; return first $relationship-status;),
             "pageVisibility": (match $page isa profile, has page-visibility $page-visibility; return first $page-visibility;),
             "postVisibility": (match $page isa profile, has post-visibility $post-visibility; return first $post-visibility;),
-            "tags": [match {{ $page isa group, has tag $tag; }} or {{ $page isa organisation, has tag $tag; }}; return {{  $tag  }};],
+            "tags": [match {{ $page isa group, has tag $tag; }} or {{ $page isa organization, has tag $tag; }}; return {{  $tag  }};],
             "friends": [
                 match ($page, $friend) isa friendship; $friend has id $friend-id;
                 limit 9;
@@ -135,8 +135,8 @@ pub fn posts_query(page_id: &str) -> String {
                     $page isa person;
                     let $ty = "person";
                 }} or {{
-                    $page isa organisation;
-                    let $ty = "organisation";
+                    $page isa organization;
+                    let $ty = "organization";
                 }} or {{
                     $page isa group;
                     let $ty = "group";
@@ -170,8 +170,8 @@ pub fn comments_query(post_id: &str) -> String {
                     $author isa person;
                     let $ty = "person";
                 }} or {{
-                    $author isa organisation;
-                    let $ty = "organisation";
+                    $author isa organization;
+                    let $ty = "organization";
                 }};
                 return first $ty;
             ),

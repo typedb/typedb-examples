@@ -94,14 +94,14 @@ define
     owns marriage-date,
     plays location:located;
 
-  entity organisation sub profile,
+  entity organization sub profile,
     owns tag @card(0..),
     plays employment:employer;
 
-  entity company sub organisation;
-  entity charity sub organisation;
+  entity company sub organization;
+  entity charity sub organization;
 
-  entity educational-institute sub organisation,
+  entity educational-institute sub organization,
     plays education:institute;
 
   entity school sub educational-institute;

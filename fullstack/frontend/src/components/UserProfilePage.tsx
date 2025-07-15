@@ -11,7 +11,7 @@ import { Page } from "../model/Page";
 interface FriendPage {
   id: string;
   name: string;
-  type: 'person' | 'organisation' | 'group';
+  type: 'person' | 'organization' | 'group';
   profilePictureId: string;
 }
 

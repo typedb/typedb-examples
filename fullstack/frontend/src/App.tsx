@@ -32,7 +32,7 @@ const App: React.FC = () => {
           <Routes>
             <Route path="/" element={<PageList />} />
             <Route path="/user/:id" element={<UserProfilePage />} />
-            <Route path="/organisation/:id" element={<OrganizationProfilePage />} />
+            <Route path="/organization/:id" element={<OrganizationProfilePage />} />
             <Route path="/group/:id" element={<GroupPage />} />
             <Route path="/create" element={<CreatePage />} />
             <Route path="/location/:place_id" element={<LocationPageList />} />

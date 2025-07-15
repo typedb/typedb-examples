@@ -10,7 +10,7 @@ export interface PostType {
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
-    authorType: 'person' | 'organisation' | 'group';
+    authorType: 'person' | 'organization' | 'group';
     reactions: string[];
 }
 
@@ -22,6 +22,6 @@ export interface Comment {
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
-    authorType: 'person' | 'organisation' | 'group';
+    authorType: 'person' | 'organization' | 'group';
     reactions: string[];
 }

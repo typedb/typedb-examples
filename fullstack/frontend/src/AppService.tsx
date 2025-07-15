@@ -1,3 +1,9 @@
+import { User } from "./model/User";
+import { Page, LocationPage } from "./model/Page";
+import { PostType, Comment } from "./model/Post";
+import { Group } from "./model/Group";
+import { Organization } from "./model/Organization";
+
 export const service = {
     fetchUser,
     fetchPages,
@@ -9,7 +15,7 @@ export const service = {
     fetchOrganization,
     uploadMedia,
     createUser,
-    createOrganisation,
+    createOrganization,
     createGroup,
 }
 
@@ -35,7 +41,7 @@ async function fetchComments(postId: string): Promise<Comment[]> {
         .then(jsonOrError('Failed to fetch comments'));
 }
 
-async function createUser(payload: any): Promise<void> {
+async function createUser(payload: User): Promise<void> {
     return fetch('http://localhost:8000/api/create-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -43,15 +49,15 @@ async function createUser(payload: any): Promise<void> {
     }).then(jsonOrError('Failed to create page'));
 }
 
-async function createOrganisation(payload: any) {
-    return fetch('http://localhost:8000/api/create-organisation', {
+async function createOrganization(payload: Organization) {
+    return fetch('http://localhost:8000/api/create-organization', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
-    }).then(jsonOrError('Failed to create organisation'));
+    }).then(jsonOrError('Failed to create organization'));
 }
 
-async function createGroup(payload: any) {
+async function createGroup(payload: Group) {
     return fetch('http://localhost:8000/api/create-group', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -89,8 +95,8 @@ async function fetchGroup(id: string): Promise<Group> {
 }
 
 async function fetchOrganization(id: string): Promise<Organization> {
-    return fetch(`http://localhost:8000/api/organisation/${id}`)
-        .then(jsonOrError('Failed to fetch organisation'));
+    return fetch(`http://localhost:8000/api/organization/${id}`)
+        .then(jsonOrError('Failed to fetch organization'));
 }
 
 function jsonOrError(error: string) {

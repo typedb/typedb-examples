@@ -17,7 +17,7 @@ from enums import (
     PostVisibility,
     PostType,
     PlaceType,
-    OrganisationType,
+    OrganizationType,
     SocialRelationType,
     PageType,
     InstituteType,
@@ -90,8 +90,8 @@ class QueryBuilder:
         return (page for page in self._pages.values() if page.type is PageType.PERSON)
 
     @property
-    def _organisations(self) -> Iterator[Page]:
-        return (page for page in self._pages.values() if page.type.is_organisation)
+    def _organizations(self) -> Iterator[Page]:
+        return (page for page in self._pages.values() if page.type.is_organization)
 
     @property
     def _institutes(self) -> Iterator[Page]:
@@ -183,14 +183,14 @@ class QueryBuilder:
 
         return self._random.choice(choices)
 
-    def _get_random_organisation(self, organisation_type: OrganisationType = None) -> Page:
-        if organisation_type is None:
-            choices = list(self._organisations)
+    def _get_random_organization(self, organization_type: OrganizationType = None) -> Page:
+        if organization_type is None:
+            choices = list(self._organizations)
         else:
-            choices = [organisation for organisation in self._organisations if organisation.type is organisation_type.page_type]
+            choices = [organization for organization in self._organizations if organization.type is organization_type.page_type]
 
         if len(choices) == 0:
-            raise RuntimeError("No organisations of the desired type exist.")
+            raise RuntimeError("No organizations of the desired type exist.")
 
         return self._random.choice(choices)
 
@@ -330,9 +330,9 @@ class QueryBuilder:
 
         return queries
 
-    def organisation(
+    def organization(
             self,
-            organisation_type: OrganisationType,
+            organization_type: OrganizationType,
             name: str,
             bio: str,
             tags: list[str],
@@ -342,30 +342,30 @@ class QueryBuilder:
             can_publish: bool = True,
     ) -> str:
         username = "".join(name.split())
-        self._pages[username] = Page(organisation_type.page_type, username, name)
+        self._pages[username] = Page(organization_type.page_type, username, name)
         profile_picture = self._generate_new_media_id()
 
         if location_id is None:
             location_id = self._get_random_place(place_type=PlaceType.CITY).id
 
-        queries = "# organisation\n" + " ".join((
+        queries = "# organization\n" + " ".join((
             f"""match""",
             f"""$place isa place;""",
             f"""$place has id "{location_id}";""",
             f"""insert""",
-            f"""$organisation isa {organisation_type.value};""",
-            f"""$organisation has username "{username}";""",
-            f"""$organisation has name "{name}";""",
-            f"""$organisation has bio "{bio}";""",
-            f"""$organisation has profile-picture"{profile_picture}";""",
-            f"""$organisation has is-active {str(is_active).lower()};""",
-            f"""$organisation has is-visible {str(is_visible).lower()};""",
-            f"""$organisation has can-publish {str(can_publish).lower()};""",
-            f"""$location isa location, links (place: $place, located: $organisation);""",
+            f"""$organization isa {organization_type.value};""",
+            f"""$organization has username "{username}";""",
+            f"""$organization has name "{name}";""",
+            f"""$organization has bio "{bio}";""",
+            f"""$organization has profile-picture"{profile_picture}";""",
+            f"""$organization has is-active {str(is_active).lower()};""",
+            f"""$organization has is-visible {str(is_visible).lower()};""",
+            f"""$organization has can-publish {str(can_publish).lower()};""",
+            f"""$location isa location, links (place: $place, located: $organization);""",
         ))
 
         for tag in tags:
-            queries += f""" $organisation has tag "{tag}";"""
+            queries += f""" $organization has tag "{tag}";"""
         queries == f"""end;""",
 
         return queries
@@ -1100,8 +1100,8 @@ class QueryBuilder:
     def employment(
             self,
             person_username: str = None,
-            organisation_username: str = None,
-            organisation_type: OrganisationType = None,
+            organization_username: str = None,
+            organization_type: OrganizationType = None,
             date_range: tuple[str, str | None] = None,
             description: str = None,
     ) -> str:
@@ -1115,10 +1115,10 @@ class QueryBuilder:
         else:
             person = self._pages[person_username]
 
-        if organisation_username is None:
-            organisation = self._get_random_organisation(organisation_type)
+        if organization_username is None:
+            organization = self._get_random_organization(organization_type)
         else:
-            organisation = self._pages[organisation_username]
+            organization = self._pages[organization_username]
 
         if date_range is None:
             start_date = self._get_random_timestamp(TimestampFormat.DATE, self._employment_range)
@@ -1126,16 +1126,16 @@ class QueryBuilder:
         else:
             start_date, end_date = date_range
 
-        self._employments.append(Employment(organisation, person))
+        self._employments.append(Employment(organization, person))
 
         queries = "# employment\n" + " ".join((
             f"""match""",
             f"""$person isa person;""",
             f"""$person has id "{person.id}";""",
-            f"""$organisation isa organisation;""",
-            f"""$organisation has id "{organisation.id}";""",
+            f"""$organization isa organization;""",
+            f"""$organization has id "{organization.id}";""",
             f"""insert""",
-            f"""$employment isa employment, links (employer: $organisation, employee: $person);""",
+            f"""$employment isa employment, links (employer: $organization, employee: $person);""",
             f"""$employment has start-date {start_date};""",
         ))
 

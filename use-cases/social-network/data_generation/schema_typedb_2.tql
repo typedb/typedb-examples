@@ -80,14 +80,14 @@ define
     owns marriage-date,
     plays location:located;
 
-  organisation sub profile,
+  organization sub profile,
     owns tag,
     plays employment:employer;
 
-  company sub organisation;
-  charity sub organisation;
+  company sub organization;
+  charity sub organization;
 
-  educational-institute sub organisation,
+  educational-institute sub organization,
     plays education:institute;
 
   school sub educational-institute;
@@ -353,7 +353,7 @@ define
 #        (friend: $page, friend: $viewer) isa friendship;
 #      } or {
 #        $viewer-type type profile;
-#        $page-type type organisation;
+#        $page-type type organization;
 #      } or {
 #        $viewer-type type profile;
 #        $page-type type group;
@@ -394,7 +394,7 @@ define
 #        (friend: $page, friend: $viewer) isa friendship;
 #      } or {
 #        $viewer-type type profile;
-#        $page isa organisation;
+#        $page isa organization;
 #      } or {
 #        (group: $page, member: $viewer) isa group-membership;
 #      };
