@@ -30,7 +30,7 @@ export default function UserProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (user && user.profilePicture) {
+    if (user?.profilePicture) {
       serviceContext.fetchMedia(user.profilePicture)
         .then(blob => {
           if (blob) setMediaUrl(URL.createObjectURL(blob));
@@ -55,7 +55,7 @@ export default function UserProfilePage() {
   }, [id]);
 
   useEffect(() => {
-    if (user && user.friends && user.friends.length > 0) {
+    if (user?.friends?.length) {
       setFriendsLoading(true);
       serviceContext.fetchPages()
         .then((allPages: Page[]) => {

@@ -23,7 +23,7 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (org && org.profilePicture) {
+    if (org?.profilePicture) {
       serviceContext.fetchMedia(org.profilePicture)
         .then(blob => {
           if (blob) setMediaUrl(URL.createObjectURL(blob));
@@ -48,7 +48,7 @@ export default function OrganizationProfilePage() {
   }, [id]);
 
   useEffect(() => {
-    if (org && org.followers && org.followers.length > 0) {
+    if (org?.followers?.length) {
       setFollowersLoading(true);
       serviceContext.fetchPages()
         .then((allPages: Page[]) => {
