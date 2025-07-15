@@ -1,21 +1,17 @@
-import { User } from "./model/User";
-import { LocationPage, Page } from "./model/Page";
-import { PostType } from "./model/Post";
-import { Group } from "./model/Group";
-import { Organization } from "./model/Organization";
-
 export const service = {
     fetchUser,
     fetchPages,
     fetchPosts,
     fetchComments,
-    createPage,
     fetchMedia,
-    uploadMedia,
     fetchLocationPages,
     fetchGroup,
     fetchOrganization,
-};
+    uploadMedia,
+    createUser,
+    createOrganisation,
+    createGroup,
+}
 
 async function fetchUser(id: string): Promise<User> {
     return fetch(`http://localhost:8000/api/user/${id}`)
@@ -39,12 +35,28 @@ async function fetchComments(postId: string): Promise<Comment[]> {
         .then(jsonOrError('Failed to fetch comments'));
 }
 
-async function createPage(payload: any): Promise<void> {
-    return fetch('http://localhost:8000/api/pages', {
+async function createUser(payload: any): Promise<void> {
+    return fetch('http://localhost:8000/api/create-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }).then(jsonOrError('Failed to create page'));
+}
+
+async function createOrganisation(payload: any) {
+    return fetch('http://localhost:8000/api/create-organisation', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).then(jsonOrError('Failed to create organisation'));
+}
+
+async function createGroup(payload: any) {
+    return fetch('http://localhost:8000/api/create-group', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+    }).then(jsonOrError('Failed to create group'));
 }
 
 async function fetchMedia(mediaId: string): Promise<Blob | null> {

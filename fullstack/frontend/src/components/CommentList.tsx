@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ServiceContext } from '../service/ServiceContext';
 import ReactionsBar from './ReactionsBar';
 import { Comment } from '../model/Post';
+import userAvatar from '../assets/userAvatar.svg';
 
 interface CommentListProps {
   postId: string;
@@ -97,7 +98,7 @@ export default function CommentList({ postId }: CommentListProps) {
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               ) : (
-                c.authorName.charAt(0).toUpperCase()
+                  <img src={userAvatar} alt="Default Avatar"  />
               )}
             </div>
           </a>
@@ -115,7 +116,7 @@ export default function CommentList({ postId }: CommentListProps) {
               {c.authorName}
             </a>
             </div>
-            <div>{c.commentData.commentText}</div>
+            <div>{c.commentText}</div>
           </div>
           <ReactionsBar reactions={c.reactions} />
         </div>

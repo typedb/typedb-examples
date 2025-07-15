@@ -38,7 +38,7 @@ export default function PostList({ pageId }: PostListProps) {
   return (
     <ul>
       {posts.map(post => (
-        <li key={post.postData.postId}>
+        <li key={post.postId}>
           <Post post={post} />
         </li>
       ))}

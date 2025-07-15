@@ -1,15 +1,6 @@
 import { LocationItem } from "./Location";
 
 export interface User {
-    data: UserData;
-    posts: string[];
-    friends: string[];
-    numberOfFollowers?: number;
-    numberOfFriends?: number;
-    location?: LocationItem[];
-}
-
-interface UserData {
     name: string;
     bio: string;
     profilePicture?: string;
@@ -24,4 +15,9 @@ interface UserData {
     relationshipStatus?: string;
     pageVisibility?: string;
     postVisibility?: string;
+    posts: string[];
+    friends: string[];
+    numberOfFollowers?: number;
+    numberOfFriends?: number;
+    location?: LocationItem[];
 }
