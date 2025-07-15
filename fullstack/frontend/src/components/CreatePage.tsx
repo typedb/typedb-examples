@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { createPage, uploadMedia } from '../AppService';
+import { ServiceContext } from "../service/ServiceContext";
 
 const genderOptions = ["male", "female", "other"];
 const relationshipStatusOptions = ["single", "relationship", "engaged", "married", "complicated"];
@@ -37,6 +37,7 @@ export default function CreatePage() {
   const [formLoading, setFormLoading] = useState(false);
   const [formError, setFormError] = useState<string | null>(null);
   const navigate = useNavigate();
+  const serviceContext = React.useContext(ServiceContext);
 
   function handleTagChange(e: React.ChangeEvent<HTMLInputElement>) {
     setTags(e.target.value.split(',').map(t => t.trim()).filter(Boolean));
@@ -49,7 +50,7 @@ export default function CreatePage() {
     setUploadingPic(true);
     setProfilePicturePreview(URL.createObjectURL(file));
     try {
-      const mediaId = await uploadMedia(file);
+      const mediaId = await serviceContext.uploadMedia(file);
       setProfilePicture(mediaId);
     } catch (err: any) {
       setUploadError(err.message || 'Upload failed');
@@ -93,7 +94,7 @@ export default function CreatePage() {
       payload.page_visibility = pageVisibility;
       payload.post_visibility = postVisibility;
     }
-    createPage(payload)
+    serviceContext.createPage(payload)
       .then(() => {
         setFormLoading(false);
         navigate('/');

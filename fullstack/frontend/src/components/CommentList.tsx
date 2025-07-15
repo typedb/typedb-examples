@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { fetchComments, fetchMedia } from '../AppService';
+import { ServiceContext } from '../service/ServiceContext';
 import ReactionsBar from './ReactionsBar';
 
 interface Comment {
@@ -25,6 +25,7 @@ export default function CommentList({ postId }: CommentListProps) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [profilePics, setProfilePics] = useState<Record<string, string | null>>({});
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     if (!postId) {
@@ -33,7 +34,7 @@ export default function CommentList({ postId }: CommentListProps) {
       return;
     }
     setLoading(true);
-    fetchComments(postId)
+    serviceContext.fetchComments(postId)
       .then((data: Comment[]) => {
         setComments(data);
         setLoading(false);
@@ -51,7 +52,7 @@ export default function CommentList({ postId }: CommentListProps) {
       for (const comment of comments) {
         if (comment["author-profile-picture"]) {
           try {
-            const blob = await fetchMedia(comment["author-profile-picture"]);
+            const blob = await serviceContext.fetchMedia(comment["author-profile-picture"]);
             newProfilePics[comment["comment-id"]] = URL.createObjectURL(blob);
           } catch {
             newProfilePics[comment["comment-id"]] = null;

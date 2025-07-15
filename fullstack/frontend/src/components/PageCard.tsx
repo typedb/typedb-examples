@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { fetchMedia } from '../AppService';
 import userAvatar from '../assets/userAvatar.svg';
+import { ServiceContext } from "../service/ServiceContext";
 
 interface PageCardProps {
   id: string;
@@ -13,13 +13,14 @@ interface PageCardProps {
 
 export default function PageCard({ id, type, name, profilePictureId, scale = 1 }: PageCardProps) {
   const [profilePic, setProfilePic] = useState<string | null>(null);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     let isMounted = true;
     async function load() {
       if (profilePictureId) {
         try {
-          const blob = await fetchMedia(profilePictureId);
+          const blob = await serviceContext.fetchMedia(profilePictureId);
           if (isMounted) setProfilePic(URL.createObjectURL(blob));
         } catch {
           if (isMounted) setProfilePic(null);

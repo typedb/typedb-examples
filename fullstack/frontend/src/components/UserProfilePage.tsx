@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchUser, fetchPages } from '../AppService';
-import { fetchMedia } from '../AppService';
+import { ServiceContext } from '../service/ServiceContext';
 import userAvatar from '../assets/userAvatar.svg';
 
 interface User {
@@ -55,12 +54,13 @@ export default function UserProfilePage() {
   const [mediaError, setMediaError] = useState(false);
   const [friends, setFriends] = useState<FriendPage[]>([]);
   const [friendsLoading, setFriendsLoading] = useState(false);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
     if (user && user.data['profile-picture']) {
-      fetchMedia(user.data['profile-picture'])
+      serviceContext.fetchMedia(user.data['profile-picture'])
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
@@ -69,7 +69,7 @@ export default function UserProfilePage() {
   }, [user, user && user.data['profile-picture']]);
 
   useEffect(() => {
-    fetchUser(id!)
+    serviceContext.fetchUser(id!)
       .then((data: User) => {
         setUser(data);
         setLoading(false);
@@ -86,7 +86,7 @@ export default function UserProfilePage() {
   useEffect(() => {
     if (user && user.friends && user.friends.length > 0) {
       setFriendsLoading(true);
-      fetchPages()
+      serviceContext.fetchPages()
         .then((allPages: any[]) => {
           const friendPages = allPages.filter(page => 
             user.friends.includes(page.id) && page.type === 'person'

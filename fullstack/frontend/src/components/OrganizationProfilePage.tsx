@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import PostList from './PostList';
 import PageCard from './PageCard';
-import { fetchMedia, fetchOrganization, fetchPages } from '../AppService';
+import { ServiceContext } from '../service/ServiceContext';
 
 interface OrganizationData {
   name: string;
@@ -49,12 +49,13 @@ export default function OrganizationProfilePage() {
   const [mediaError, setMediaError] = useState(false);
   const [followers, setFollowers] = useState<FollowerPage[]>([]);
   const [followersLoading, setFollowersLoading] = useState(false);
+  const serviceContext = React.useContext(ServiceContext);
 
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
     if (org && org.data["profile-picture"]) {
-      fetchMedia(org.data["profile-picture"])
+      serviceContext.fetchMedia(org.data["profile-picture"])
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
@@ -63,7 +64,7 @@ export default function OrganizationProfilePage() {
   }, [org, org && org.data["profile-picture"]]);
 
   useEffect(() => {
-    fetchOrganization(id)
+    serviceContext.fetchOrganization(id)
       .then((data: Organization) => {
         setOrg(data);
         setLoading(false);
@@ -80,7 +81,7 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     if (org && org.followers && org.followers.length > 0) {
       setFollowersLoading(true);
-      fetchPages()
+      serviceContext.fetchPages()
         .then((allPages: any[]) => {
           const followerPages = allPages.filter(page => 
             org.followers!.includes(page.id)

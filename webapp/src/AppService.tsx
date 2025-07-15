@@ -9,7 +9,7 @@ export const service = {
     fetchLocationPages,
     fetchGroup,
     fetchOrganization,
-}
+};
 
 async function fetchUser(id: string) {
     return fetch(`http://localhost:8000/api/user/${id}`)
