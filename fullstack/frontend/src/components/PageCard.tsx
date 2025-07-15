@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { fetchMedia } from '../AppService';
+import userAvatar from '../assets/userAvatar.svg';
 
 interface PageCardProps {
   id: string;
@@ -45,7 +46,7 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
         {profilePic ? (
           <img src={profilePic} alt="avatar" style={{ width: avatarSize, height: avatarSize, objectFit: 'cover', display: 'block' }} />
         ) : (
-          <img src={require('../assets/userAvatar.svg').default} alt="Default Avatar" style={{ width: avatarSize, height: avatarSize }} />
+          <img src={userAvatar} alt="Default Avatar" style={{ width: avatarSize, height: avatarSize }} />
         )}
       </div>
       <div style={{ fontSize: fontSize, fontWeight: 500, color: '#1976d2', maxWidth: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{name}</div>

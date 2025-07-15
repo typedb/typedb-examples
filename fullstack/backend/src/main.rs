@@ -51,11 +51,7 @@ async fn get_profile(driver: &TypeDBDriver, id: &str) -> Json<Option<Box<RawValu
 }
 
 async fn get_media(Path(_id): Path<String>) -> impl IntoResponse {
-    let bytes = include_bytes!("../../79.jpg");
-    let mut headers = HeaderMap::new();
-    headers.insert("Access-Control-Allow-Origin", "*".parse().unwrap());
-    headers.insert("Content-Type", "image/jpeg".parse().unwrap());
-    (StatusCode::OK, headers, bytes)
+    (StatusCode::NOT_FOUND, ())
 }
 
 async fn post_media(driver: &TypeDBDriver, headers: HeaderMap, bytes: Bytes) -> impl IntoResponse + use<> {
