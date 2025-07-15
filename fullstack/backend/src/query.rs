@@ -1,6 +1,6 @@
 use std::fmt::Write;
 
-use crate::CreateUserPayload;
+use crate::{CreateGroupPayload, CreateUserPayload};
 
 pub const PAGE_LIST_QUERY: &str = r#"
 match $page isa page;
@@ -184,7 +184,7 @@ pub fn comments_query(post_id: &str) -> String {
     )
 }
 
-pub fn create_person_query(payload: CreateUserPayload) -> String {
+pub fn create_user_query(payload: CreateUserPayload) -> String {
     let CreateUserPayload {
         username,
         name,
@@ -205,7 +205,9 @@ pub fn create_person_query(payload: CreateUserPayload) -> String {
     let mut query = String::from("insert $_ isa person");
     write!(&mut query, ", has name {name:?}").unwrap();
     write!(&mut query, ", has username {username:?}").unwrap();
-    write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
+    if let Some(profile_picture) = profile_picture {
+        write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
+    }
     write!(&mut query, ", has gender {gender:?}").unwrap();
     if let Some(language) = language {
         write!(&mut query, ", has language {language:?}").unwrap();
@@ -214,14 +216,10 @@ pub fn create_person_query(payload: CreateUserPayload) -> String {
     if let Some(phone) = phone {
         write!(&mut query, ", has phone {phone:?}").unwrap();
     }
-    if let Some(relationship_status) = relationship_status
-        && !relationship_status.is_empty()
-    {
+    if let Some(relationship_status) = relationship_status {
         write!(&mut query, ", has relationship-status {relationship_status:?}").unwrap();
     }
-    if let Some(badge) = badge
-        && !badge.is_empty()
-    {
+    if let Some(badge) = badge {
         write!(&mut query, ", has badge {badge:?}").unwrap();
     }
     write!(&mut query, ", has bio {bio:?}").unwrap();
@@ -229,6 +227,40 @@ pub fn create_person_query(payload: CreateUserPayload) -> String {
     write!(&mut query, ", has is-active {is_active}").unwrap();
     write!(&mut query, ", has page-visibility {page_visibility:?}").unwrap();
     write!(&mut query, ", has post-visibility {post_visibility:?}").unwrap();
+    query.push(';');
+
+    query
+}
+
+pub fn create_group_query(payload: CreateGroupPayload) -> String {
+    let CreateGroupPayload {
+        group_id,
+        name,
+        profile_picture,
+        badge,
+        is_active,
+        tags,
+        page_visibility,
+        post_visibility,
+        bio,
+    } = payload;
+
+    let mut query = String::from("insert $_ isa group");
+    write!(&mut query, ", has name {name:?}").unwrap();
+    write!(&mut query, ", has group-id {group_id:?}").unwrap();
+    if let Some(profile_picture) = profile_picture {
+        write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
+    }
+    write!(&mut query, ", has bio {bio:?}").unwrap();
+    write!(&mut query, ", has is-active {is_active}").unwrap();
+    write!(&mut query, ", has page-visibility {page_visibility:?}").unwrap();
+    write!(&mut query, ", has post-visibility {post_visibility:?}").unwrap();
+    if let Some(badge) = badge {
+        write!(&mut query, ", has badge {badge:?}").unwrap();
+    }
+    for tag in tags {
+        write!(&mut query, ", has tag {tag:?}").unwrap();
+    }
     query.push(';');
 
     query
