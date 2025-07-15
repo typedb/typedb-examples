@@ -29,14 +29,14 @@ export default function UserProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (user && user.data['profile-picture']) {
-      serviceContext.fetchMedia(user.data['profile-picture'])
+    if (user && user.data.profilePicture) {
+      serviceContext.fetchMedia(user.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [user, user && user.data['profile-picture']]);
+  }, [user, user && user.data.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchUser(id!)
@@ -64,7 +64,7 @@ export default function UserProfilePage() {
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFriends(friendPages);
           setFriendsLoading(false);
@@ -134,7 +134,7 @@ export default function UserProfilePage() {
 
           {/* Friends Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Friends ({user["number-of-friends"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Friends ({user.numberOfFriends ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 
@@ -195,8 +195,8 @@ export default function UserProfilePage() {
                   </React.Fragment>
                 ))}
               </span>
-              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.data["relationship-status"])}</span>
-              <span style={{ fontWeight: 500 }}>Followers:</span> <span>{user["number-of-followers"] ?? 0}</span>
+              <span style={{ fontWeight: 500 }}>Relationship Status:</span> <span>{getRelationshipStatus(user.data.relationshipStatus)}</span>
+              <span style={{ fontWeight: 500 }}>Followers:</span> <span>{user.numberOfFollowers ?? 0}</span>
             </div>
           </div>
 

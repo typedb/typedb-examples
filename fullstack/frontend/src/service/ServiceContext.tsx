@@ -1,6 +1,6 @@
 import React from "react";
 import { User } from "../model/User";
-import { PostType } from "../model/Post";
+import { Comment, PostType } from "../model/Post";
 import { LocationPage, Page } from "../model/Page";
 import { Group } from "../model/Group";
 import { Organization } from "../model/Organization";

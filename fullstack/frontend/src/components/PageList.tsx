@@ -35,7 +35,7 @@ export default function PageList() {
               id={page.id}
               type={page.type}
               name={page.name}
-              profilePictureId={page["profile-picture"] || ""}
+              profilePictureId={page.profilePicture || ""}
             />
             <div style={{ flex: 1 }}>
               <p style={{ margin: 0, color: '#555', lineHeight: 1.5 }}>{page.bio}</p>

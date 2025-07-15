@@ -21,14 +21,14 @@ export default function OrganizationProfilePage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (org && org.data["profile-picture"]) {
-      serviceContext.fetchMedia(org.data["profile-picture"])
+    if (org && org.data.profilePicture) {
+      serviceContext.fetchMedia(org.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [org, org && org.data["profile-picture"]]);
+  }, [org, org && org.data.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchOrganization(id!)
@@ -56,7 +56,7 @@ export default function OrganizationProfilePage() {
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFollowers(followerPages);
           setFollowersLoading(false);
@@ -107,7 +107,7 @@ export default function OrganizationProfilePage() {
 
           {/* Followers Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Followers ({org["number-of-followers"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Followers ({org.numberOfFollowers ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 

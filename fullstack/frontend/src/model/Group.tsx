@@ -1,18 +1,18 @@
 export interface Group {
     data: GroupData;
     posts: string[];
-    "number-of-followers"?: number;
+    numberOfFollowers?: number;
     followers?: string[];
 }
 
 interface GroupData {
     name: string;
     bio: string;
-    "profile-picture"?: string;
+    profilePicture?: string;
     badge?: string;
-    "is-active"?: boolean;
-    "group-id"?: string;
+    isActive?: boolean;
+    groupId?: string;
     tag?: string[];
-    "page-visibility"?: string;
-    "post-visibility"?: string;
+    pageVisibility?: string;
+    postVisibility?: string;
 }

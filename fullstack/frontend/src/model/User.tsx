@@ -4,24 +4,24 @@ export interface User {
     data: UserData;
     posts: string[];
     friends: string[];
-    "number-of-followers"?: number;
-    "number-of-friends"?: number;
+    numberOfFollowers?: number;
+    numberOfFriends?: number;
     location?: LocationItem[];
 }
 
 interface UserData {
     name: string;
     bio: string;
-    "profile-picture"?: string;
+    profilePicture?: string;
     badge?: string;
-    "is-active"?: boolean;
+    isActive?: boolean;
     username?: string;
-    "can-publish"?: boolean;
+    canPublish?: boolean;
     gender?: string;
     language?: string;
     email?: string;
     phone?: string;
-    "relationship-status"?: string;
-    "page-visibility"?: string;
-    "post-visibility"?: string;
+    relationshipStatus?: string;
+    pageVisibility?: string;
+    postVisibility?: string;
 }

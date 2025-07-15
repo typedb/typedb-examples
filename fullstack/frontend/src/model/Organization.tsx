@@ -3,7 +3,7 @@ import { LocationItem } from "./Location";
 export interface Organization {
     data: OrganizationData;
     posts: string[];
-    "number-of-followers"?: number;
+    numberOfFollowers?: number;
     followers?: string[];
     location?: LocationItem[];
 }
@@ -11,11 +11,11 @@ export interface Organization {
 interface OrganizationData {
     name: string;
     bio: string;
-    "profile-picture"?: string;
+    profilePicture?: string;
     badge?: string;
-    "is-active"?: boolean;
+    isActive?: boolean;
     username?: string;
-    "can-publish"?: boolean;
+    canPublish?: boolean;
     tag?: string[];
     email?: string;
     language?: string;

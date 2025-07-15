@@ -3,10 +3,10 @@ export interface Page {
     type: 'person' | 'organisation' | 'group';
     name: string;
     bio: string;
-    "profile-picture"?: string;
+    profilePicture?: string;
 }
 
-export type LocationPage = { "place-name": string, pages: Page[] }
+export type LocationPage = { placeName: string, pages: Page[] }
 
 export interface FollowerPage {
     id: string;

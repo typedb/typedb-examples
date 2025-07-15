@@ -1,8 +1,8 @@
 export interface LocationItem {
-    "place-name": string;
-    "place-id": string;
-    "parent-name": string;
-    "parent-id": string;
+    placeName: string;
+    placeId: string;
+    parentName: string;
+    parentId: string;
 }
 
 export function getLocationParts(location?: LocationItem[]): { name: string, id: string }[] {
@@ -12,17 +12,17 @@ export function getLocationParts(location?: LocationItem[]): { name: string, id:
     const placeIdToName: Record<string, string> = {};
     const parentIdSet = new Set<string>();
     location.forEach(item => {
-        placeIdToParentId[item["place-id"]] = item["parent-id"];
-        placeIdToName[item["place-id"]] = item["place-name"];
-        placeIdToName[item["parent-id"]] = item["parent-name"];
-        parentIdSet.add(item["parent-id"]);
+        placeIdToParentId[item.placeId] = item.parentId;
+        placeIdToName[item.placeId] = item.placeName;
+        placeIdToName[item.parentId] = item.parentName;
+        parentIdSet.add(item.parentId);
     });
     // Find the most specific place (not referenced as a parent-id anywhere)
-    let start = location.find(item => !parentIdSet.has(item["place-id"]));
+    let start = location.find(item => !parentIdSet.has(item.placeId));
     if (!start) start = location[0]; // fallback
     // Reconstruct the chain
-    const parts = [{ name: placeIdToName[start["place-id"]], id: start["place-id"] }];
-    let current = start["place-id"];
+    const parts = [{ name: placeIdToName[start.placeId], id: start.placeId }];
+    let current = start.placeId;
     while (placeIdToParentId[current]) {
         const next = placeIdToParentId[current];
         parts.push({ name: placeIdToName[next], id: next });

@@ -18,9 +18,9 @@ export default function Post({ post }: PostProps) {
   useEffect(() => {
     let isMounted = true;
     async function load() {
-      if (post["author-profile-picture"]) {
+      if (post.authorProfilePicture) {
         try {
-          const blob = await serviceContext.fetchMedia(post["author-profile-picture"]);
+          const blob = await serviceContext.fetchMedia(post.authorProfilePicture);
           if (isMounted) setProfilePic(URL.createObjectURL(blob));
         } catch {
           if (isMounted) setProfilePic(null);
@@ -29,7 +29,7 @@ export default function Post({ post }: PostProps) {
     }
     load();
     return () => { isMounted = false; };
-  }, [post, post["author-profile-picture"]]);
+  }, [post, post.authorProfilePicture]);
 
   if (!post) return null;
 
@@ -52,7 +52,7 @@ export default function Post({ post }: PostProps) {
       <div style={{ border: '1px solid #e0e0e0', borderRadius: 8, padding: 12, marginBottom: 8, position: 'relative' }}>
         <div style={{ display: 'flex', gap: 16, alignItems: 'flex-start' }}>
           <a 
-            href={getProfileUrl(post["author-type"], post["author-id"])}
+            href={getProfileUrl(post.authorType, post.authorId)}
             style={{ textDecoration: 'none' }}
           >
             <div 
@@ -74,11 +74,11 @@ export default function Post({ post }: PostProps) {
               {profilePic ? (
                 <img 
                   src={profilePic} 
-                  alt={post["author-name"]}
+                  alt={post.authorName}
                   style={{ width: '100%', height: '100%', objectFit: 'cover' }}
                 />
               ) : (
-                post["author-name"].charAt(0).toUpperCase()
+                post.authorName.charAt(0).toUpperCase()
               )}
             </div>
           </a>
@@ -86,20 +86,20 @@ export default function Post({ post }: PostProps) {
             <div style={{ position: 'relative' }}>
               <div style={{ display: 'block', marginBottom: 4 }}>
                 <a 
-                  href={getProfileUrl(post["author-type"], post["author-id"])}
+                  href={getProfileUrl(post.authorType, post.authorId)}
                   style={{ fontSize: '14px', color: '#007bff', textDecoration: 'none', fontWeight: 'bold' }}
                 >
-                  {post["author-name"]}
+                  {post.authorName}
                 </a>
               </div>
-              <div>{post["post-data"]["post-text"]}</div>
+              <div>{post.postData.postText}</div>
             </div>
           </div>
         </div>
         <ReactionsBar reactions={post.reactions} />
       </div>
       <div className="comment-list">
-        <CommentList postId={post["post-data"]["post-id"]} />
+        <CommentList postId={post.postData.postId} />
       </div>
       <form style={{ marginTop: 12 }} onSubmit={handleSend} autoComplete="off">
         <textarea

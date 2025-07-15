@@ -20,14 +20,14 @@ export default function GroupPage() {
   useEffect(() => {
     setMediaUrl(null);
     setMediaError(false);
-    if (group && group.data["profile-picture"]) {
-      serviceContext.fetchMedia(group.data["profile-picture"])
+    if (group && group.data.profilePicture) {
+      serviceContext.fetchMedia(group.data.profilePicture)
         .then(blob => {
           setMediaUrl(URL.createObjectURL(blob));
         })
         .catch(() => setMediaError(true));
     }
-  }, [group, group?.data, group?.data["profile-picture"]]);
+  }, [group, group?.data, group?.data.profilePicture]);
 
   useEffect(() => {
     serviceContext.fetchGroup(id!)
@@ -55,7 +55,7 @@ export default function GroupPage() {
             id: page.id,
             name: page.name,
             type: page.type,
-            profilePictureId: page['profile-picture'] || ''
+            profilePictureId: page.profilePicture || ''
           }));
           setFollowers(followerPages);
           setFollowersLoading(false);
@@ -106,7 +106,7 @@ export default function GroupPage() {
 
           {/* Followers Section */}
           <div>
-            <h3 style={{ marginBottom: 16 }}>Followers ({group["number-of-followers"] ?? 0})</h3>
+            <h3 style={{ marginBottom: 16 }}>Followers ({group.numberOfFollowers ?? 0})</h3>
             <div style={{
               display: 'grid', 
               gridTemplateColumns: 'repeat(auto-fill, minmax(70px, 1fr))', 

@@ -1,17 +1,31 @@
 export interface PostType {
-    "post-data": {
-        "post-text": string;
-        "post-visibility": string;
-        "post-image": string;
-        "language": string;
-        "tag": string[];
-        "is-visible": boolean;
-        "creation-timestamp": string;
-        "post-id": string;
+    postData: {
+        postText: string;
+        postVisibility: string;
+        postImage: string;
+        language: string;
+        tag: string[];
+        isVisible: boolean;
+        creationTimestamp: string;
+        postId: string;
     }
-    "author-name": string;
-    "author-profile-picture": string;
-    "author-id": string;
-    "author-type": 'person' | 'organisation' | 'group';
-    "reactions": string[];
+    authorName: string;
+    authorProfilePicture: string;
+    authorId: string;
+    authorType: 'person' | 'organisation' | 'group';
+    reactions: string[];
+}
+
+export interface Comment {
+    commentId: string;
+    commentData: {
+        commentText: string;
+        creationTimestamp: string;
+        isVisible: boolean;
+    }
+    authorName: string;
+    authorProfilePicture: string;
+    authorId: string;
+    authorType: 'person' | 'organisation' | 'group';
+    reactions: string[];
 }
