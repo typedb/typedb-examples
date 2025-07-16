@@ -3,6 +3,15 @@
 A collection of TypeDB example projects and tutorials, designed for users with a range of familiarity with TypeDB,
 TypeQL, and other products in the TypeDB ecosystem.
 
+## App Examples
+
+### [Fullstack App Example: Social Network](fullstack)
+
+A multi-language, fullstack social network demo featuring interchangeable backends (Java/Spring Boot, Rust/Axum, Python/Flask), a modern
+React + Vite frontend, and a rich TypeDB schema.
+
+- **Frontend:** TypeScript (React, Vite)
+- **Backends:** Java (Spring Boot), Rust (Axum), Python (Flask)
 
 ## Small Examples
 
