@@ -13,6 +13,13 @@ React + Vite frontend, and a rich TypeDB schema.
 - **Frontend:** TypeScript (React, Vite)
 - **Backends:** Java (Spring Boot), Rust (Axum), Python (Flask)
 
+### [Web App Example: Social Network](webapp)
+
+A variant on the fullstack app example, 
+demonstrating a pure-frontend web app connecting directly to a TypeDB backend using our HTTP driver.
+
+- **Frontend:** TypeScript (React, Vite)
+
 ## Small Examples
 
 There are some smaller, though still complex, examples that are fully contained in this repository:
