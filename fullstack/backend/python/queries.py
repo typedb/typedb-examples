@@ -171,148 +171,40 @@ def comments_query(post_id):
         }};
     """
 
-# Rust version:
-# pub fn create_user_query(payload: CreateUserPayload) -> String {
-#     let CreateUserPayload {
-#         username,
-#         name,
-#         profile_picture,
-#         badge,
-#         is_active,
-#         gender,
-#         language,
-#         email,
-#         phone,
-#         relationship_status,
-#         can_publish,
-#         page_visibility,
-#         post_visibility,
-#         bio,
-#     } = payload;
-# 
-#     let mut query = String::from("insert $_ isa person");
-#     write!(&mut query, ", has name {name:?}").unwrap();
-#     write!(&mut query, ", has username {username:?}").unwrap();
-#     if let Some(profile_picture) = profile_picture {
-#         write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
-#     }
-#     write!(&mut query, ", has gender {gender:?}").unwrap();
-#     if let Some(language) = language {
-#         write!(&mut query, ", has language {language:?}").unwrap();
-#     }
-#     write!(&mut query, ", has email {email:?}").unwrap();
-#     if let Some(phone) = phone {
-#         write!(&mut query, ", has phone {phone:?}").unwrap();
-#     }
-#     if let Some(relationship_status) = relationship_status {
-#         write!(&mut query, ", has relationship-status {relationship_status:?}").unwrap();
-#     }
-#     if let Some(badge) = badge {
-#         write!(&mut query, ", has badge {badge:?}").unwrap();
-#     }
-#     write!(&mut query, ", has bio {bio:?}").unwrap();
-#     write!(&mut query, ", has can-publish {can_publish}").unwrap();
-#     write!(&mut query, ", has is-active {is_active}").unwrap();
-#     write!(&mut query, ", has page-visibility {page_visibility:?}").unwrap();
-#     write!(&mut query, ", has post-visibility {post_visibility:?}").unwrap();
-#     query.push(';');
-# 
-#     query
-# }
-# 
-# pub fn create_group_query(payload: CreateGroupPayload) -> String {
-#     let CreateGroupPayload {
-#         group_id,
-#         name,
-#         profile_picture,
-#         badge,
-#         is_active,
-#         tags,
-#         page_visibility,
-#         post_visibility,
-#         bio,
-#     } = payload;
-# 
-#     let mut query = String::from("insert $_ isa group");
-#     write!(&mut query, ", has name {name:?}").unwrap();
-#     write!(&mut query, ", has group-id {group_id:?}").unwrap();
-#     if let Some(profile_picture) = profile_picture {
-#         write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
-#     }
-#     write!(&mut query, ", has bio {bio:?}").unwrap();
-#     write!(&mut query, ", has is-active {is_active}").unwrap();
-#     write!(&mut query, ", has page-visibility {page_visibility:?}").unwrap();
-#     write!(&mut query, ", has post-visibility {post_visibility:?}").unwrap();
-#     if let Some(badge) = badge {
-#         write!(&mut query, ", has badge {badge:?}").unwrap();
-#     }
-#     for tag in tags {
-#         write!(&mut query, ", has tag {tag:?}").unwrap();
-#     }
-#     query.push(';');
-# 
-#     query
-# }
-# 
-# pub fn create_organization_query(payload: CreateOrganizationPayload) -> String {
-#     let CreateOrganizationPayload { username, name, profile_picture, badge, is_active, can_publish, tags, bio } =
-#         payload;
-# 
-#     let mut query = String::from("insert $_ isa organization");
-#     write!(&mut query, ", has name {name:?}").unwrap();
-#     write!(&mut query, ", has username {username:?}").unwrap();
-#     if let Some(profile_picture) = profile_picture {
-#         write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
-#     }
-#     write!(&mut query, ", has bio {bio:?}").unwrap();
-#     write!(&mut query, ", has is-active {is_active}").unwrap();
-#     write!(&mut query, ", has can-publish {can_publish}").unwrap();
-#     if let Some(badge) = badge {
-#         write!(&mut query, ", has badge {badge:?}").unwrap();
-#     }
-#     for tag in tags {
-#         write!(&mut query, ", has tag {tag:?}").unwrap();
-#     }
-#     query.push(';');
-# 
-#     query
-# }
-# 
-
 def create_user_query(payload):
     query = "insert $_ isa person"
     query += f", has name \"{payload['name']}\""
     query += f", has username \"{payload['username']}\""
-    if payload['profile_picture']:
-        query += f", has profile-picture \"{payload['profile_picture']}\""
+    if payload['profilePicture']:
+        query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has gender \"{payload['gender']}\""
     if payload['language']:
         query += f", has language \"{payload['language']}\""
     query += f", has email \"{payload['email']}\""
     if payload['phone']:
         query += f", has phone \"{payload['phone']}\""
-    if payload['relationship_status']:
-        query += f", has relationship-status \"{payload['relationship_status']}\""
+    if payload['relationshipStatus']:
+        query += f", has relationship-status \"{payload['relationshipStatus']}\""
     if payload['badge']:
         query += f", has badge \"{payload['badge']}\""
     query += f", has bio \"{payload['bio']}\""
-    query += f", has can-publish {payload['can_publish']}".lower()
-    query += f", has is-active {payload['is_active']}".lower()
-    query += f", has page-visibility \"{payload['page_visibility']}\""
-    query += f", has post-visibility \"{payload['post_visibility']}\""
+    query += f", has can-publish {payload['canPublish']}".lower()
+    query += f", has is-active {payload['isActive']}".lower()
+    query += f", has page-visibility \"{payload['pageVisibility']}\""
+    query += f", has post-visibility \"{payload['postVisibility']}\""
     query += ";"
     return query
 
 def create_group_query(payload):
     query = "insert $_ isa group"
     query += f", has name \"{payload['name']}\""
-    query += f", has group-id \"{payload['group_id']}\""
-    if payload['profile_picture']:
-        query += f", has profile-picture \"{payload['profile_picture']}\""
+    query += f", has group-id \"{payload['groupId']}\""
+    if payload['profilePicture']:
+        query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has bio \"{payload['bio']}\""
-    query += f", has is-active {payload['is_active']}".lower()
-    query += f", has page-visibility \"{payload['page_visibility']}\""
-    query += f", has post-visibility \"{payload['post_visibility']}\""
+    query += f", has is-active {payload['isActive']}".lower()
+    query += f", has page-visibility \"{payload['pageVisibility']}\""
+    query += f", has post-visibility \"{payload['postVisibility']}\""
     if payload['badge']:
         query += f", has badge \"{payload['badge']}\""
     for tag in payload['tags']:
@@ -324,11 +216,11 @@ def create_organization_query(payload):
     query = "insert $_ isa organization"
     query += f", has name \"{payload['name']}\""
     query += f", has username \"{payload['username']}\""
-    if payload['profile_picture']:
-        query += f", has profile-picture \"{payload['profile_picture']}\""
+    if payload['profilePicture']:
+        query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has bio \"{payload['bio']}\""
-    query += f", has is-active {payload['is_active']}".lower()
-    query += f", has can-publish {payload['can_publish']}".lower()
+    query += f", has is-active {payload['isActive']}".lower()
+    query += f", has can-publish {payload['canPublish']}".lower()
     if payload['badge']:
         query += f", has badge \"{payload['badge']}\""
     for tag in payload['tags']:

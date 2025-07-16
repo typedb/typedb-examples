@@ -115,9 +115,11 @@ struct CreateUserPayload {
     username: String,
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(rename = "profilePicture")]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     badge: Option<String>,
+    #[serde(rename = "isActive")]
     is_active: bool,
     gender: String,
     #[serde_as(as = "NoneAsEmptyString")]
@@ -126,9 +128,13 @@ struct CreateUserPayload {
     #[serde_as(as = "NoneAsEmptyString")]
     phone: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(rename = "relationshipStatus")]
     relationship_status: Option<String>,
+    #[serde(rename = "canPublish")]
     can_publish: bool,
+    #[serde(rename = "pageVisibility")]
     page_visibility: String,
+    #[serde(rename = "postVisibility")]
     post_visibility: String,
     bio: String,
 }
@@ -154,15 +160,20 @@ async fn post_create_user(
 #[serde_as]
 #[derive(Debug, Deserialize)]
 struct CreateGroupPayload {
+    #[serde(rename = "groupId")]
     group_id: String,
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(rename = "profilePicture")]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     badge: Option<String>,
+    #[serde(rename = "isActive")]
     is_active: bool,
     tags: Vec<String>,
+    #[serde(rename = "pageVisibility")]
     page_visibility: String,
+    #[serde(rename = "postVisibility")]
     post_visibility: String,
     bio: String,
 }
@@ -191,10 +202,13 @@ struct CreateOrganizationPayload {
     username: String,
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(rename = "profilePicture")]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     badge: Option<String>,
+    #[serde(rename = "isActive")]
     is_active: bool,
+    #[serde(rename = "canPublish")]
     can_publish: bool,
     tags: Vec<String>,
     bio: String,
