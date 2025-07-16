@@ -18,39 +18,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 class CreateUserPayload {
     public String username;
     public String name;
-    public String profile_picture;
+    public String profilePicture;
     public String badge;
-    public boolean is_active;
+    public boolean isActive;
     public String gender;
     public String language;
     public String email;
     public String phone;
-    public String relationship_status;
-    public boolean can_publish;
-    public String page_visibility;
-    public String post_visibility;
+    public String relationshipStatus;
+    public boolean canPublish;
+    public String pageVisibility;
+    public String postVisibility;
     public String bio;
 }
 
 class CreateGroupPayload {
-    public String group_id;
+    public String groupId;
     public String name;
-    public String profile_picture;
+    public String profilePicture;
     public String badge;
-    public boolean is_active;
+    public boolean isActive;
     public java.util.List<String> tags;
-    public String page_visibility;
-    public String post_visibility;
+    public String pageVisibility;
+    public String postVisibility;
     public String bio;
 }
 
 class CreateOrganizationPayload {
     public String username;
     public String name;
-    public String profile_picture;
+    public String profilePicture;
     public String badge;
-    public boolean is_active;
-    public boolean can_publish;
+    public boolean isActive;
+    public boolean canPublish;
     public java.util.List<String> tags;
     public String bio;
 }
