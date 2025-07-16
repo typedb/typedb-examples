@@ -90,6 +90,7 @@ export default function CreatePage() {
       payload.tags = tags;
       promise = serviceContext.createOrganization(payload);
     } else if (type === 'group') {
+      payload.group_id = id;
       payload.page_visibility = pageVisibility;
       payload.post_visibility = postVisibility;
       payload.tags = tags;

@@ -114,7 +114,8 @@ async fn get_comments(
 struct CreateUserPayload {
     username: String,
     name: String,
-    profile_picture: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     badge: Option<String>,
     is_active: bool,
@@ -138,7 +139,7 @@ async fn post_create_user(
 ) -> impl IntoResponse {
     let transaction = driver.transaction("social-network", TransactionType::Write).await.unwrap();
     transaction
-        .query(query::create_person_query(payload))
+        .query(query::create_user_query(payload))
         .await
         .unwrap()
         .into_rows()
@@ -149,6 +150,41 @@ async fn post_create_user(
     transaction.commit().await.unwrap();
     (StatusCode::OK, Json(RawValue::NULL.to_owned()))
 }
+
+#[serde_as]
+#[derive(Debug, Deserialize)]
+struct CreateGroupPayload {
+    group_id: String,
+    name: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    profile_picture: Option<String>,
+    #[serde_as(as = "NoneAsEmptyString")]
+    badge: Option<String>,
+    is_active: bool,
+    tags: Vec<String>,
+    page_visibility: String,
+    post_visibility: String,
+    bio: String,
+}
+
+async fn post_create_group(
+    State(driver): State<Arc<TypeDBDriver>>,
+    Json(payload): Json<CreateGroupPayload>,
+) -> impl IntoResponse {
+    let transaction = driver.transaction("social-network", TransactionType::Write).await.unwrap();
+    transaction
+        .query(query::create_group_query(payload))
+        .await
+        .unwrap()
+        .into_rows()
+        .map_ok(drop)
+        .try_collect::<()>()
+        .await
+        .unwrap();
+    transaction.commit().await.unwrap();
+    (StatusCode::OK, Json(RawValue::NULL.to_owned()))
+}
+
 
 #[tokio::main]
 async fn main() {
@@ -165,7 +201,7 @@ async fn main() {
         .route("/api/pages", get(get_page_list))
         .route("/api/create-user", post(post_create_user))
         .route("/api/create-organization", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
-        .route("/api/create-group", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
+        .route("/api/create-group", post(post_create_group))
         .route("/api/location/{place_id}", get(get_location_page_list))
         .route("/api/user/{id}", get(get_profile))
         .route("/api/group/{id}", get(get_profile))
