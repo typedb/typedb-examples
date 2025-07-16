@@ -1,6 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ServiceContext } from "../service/ServiceContext";
+import { Page } from "../model/Page";
+import { User } from "../model/User";
+import { Organization } from "../model/Organization";
+import { Group } from "../model/Group";
 
 const genderOptions = ["male", "female", "other"];
 const relationshipStatusOptions = ["single", "relationship", "engaged", "married", "complicated"];
@@ -66,36 +70,48 @@ export default function CreatePage() {
     setFormLoading(true);
     setFormError(null);
     // Build payload based on type
-    let payload: any = {
+    const payload: Partial<Page> = {
       name,
       bio,
-      profile_picture: profilePicture,
+      profilePicture,
       badge,
-      is_active: isActive,
+      isActive,
     };
     let promise;
     if (type === 'person') {
-      payload.username = id;
-      payload.gender = gender;
-      payload.language = language;
-      payload.email = email;
-      payload.phone = phone;
-      payload.relationship_status = relationshipStatus;
-      payload.page_visibility = pageVisibility;
-      payload.post_visibility = postVisibility;
-      payload.can_publish = canPublish;
-      promise = serviceContext.createUser(payload);
+      const userPayload: Partial<User> = {
+        ...payload,
+        type: undefined,
+        username: id,
+        gender,
+        language,
+        email,
+        phone,
+        relationshipStatus,
+        pageVisibility,
+        postVisibility,
+        canPublish,
+      }
+      promise = serviceContext.createUser(userPayload);
     } else if (type === 'organization') {
-      payload.username = id;
-      payload.can_publish = canPublish;
-      payload.tags = tags;
-      promise = serviceContext.createOrganization(payload);
+      const orgPayload: Partial<Organization> = {
+        ...payload,
+        type: undefined,
+        username: id,
+        canPublish,
+        tags,
+      }
+      promise = serviceContext.createOrganization(orgPayload);
     } else if (type === 'group') {
-      payload.group_id = id;
-      payload.page_visibility = pageVisibility;
-      payload.post_visibility = postVisibility;
-      payload.tags = tags;
-      promise = serviceContext.createGroup(payload);
+      const groupPayload: Partial<Group> = {
+        ...payload,
+        type: undefined,
+        id,
+        pageVisibility,
+        postVisibility,
+        tags,
+      }
+      promise = serviceContext.createGroup(groupPayload);
     } else {
       throw new Error('Invalid page type');
     }

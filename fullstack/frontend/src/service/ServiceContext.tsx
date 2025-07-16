@@ -18,9 +18,9 @@ export type ServiceContextType = {
     fetchMedia: (mediaId: string) => Promise<Blob | null>;
 
     uploadMedia: (file: File) => Promise<string>;
-    createUser: (payload: User) => Promise<void>;
-    createOrganization: (payload: any) => Promise<void>;
-    createGroup: (payload: any) => Promise<void>;
+    createUser: (payload: Partial<User>) => Promise<void>;
+    createOrganization: (payload: Partial<Organization>) => Promise<void>;
+    createGroup: (payload: Partial<Group>) => Promise<void>;
 };
 
 export const ServiceContext = React.createContext<ServiceContextType>({
@@ -34,7 +34,7 @@ export const ServiceContext = React.createContext<ServiceContextType>({
     fetchOrganization: (id: string | undefined) => { throw new Error('ServiceContext should be provided') },
 
     uploadMedia: (file: File) => { throw new Error('ServiceContext should be provided') },
-    createUser: (payload: any) => { throw new Error('ServiceContext should be provided') },
-    createOrganization: (payload: any) => { throw new Error('ServiceContext should be provided') },
-    createGroup: (payload: any) => { throw new Error('ServiceContext should be provided') },
+    createUser: (payload: Partial<User>) => { throw new Error('ServiceContext should be provided') },
+    createOrganization: (payload: Partial<Organization>) => { throw new Error('ServiceContext should be provided') },
+    createGroup: (payload: Partial<Group>) => { throw new Error('ServiceContext should be provided') },
 });

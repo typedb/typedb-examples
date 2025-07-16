@@ -8,19 +8,19 @@ import { ServiceContextType } from "./service/ServiceContext";
 import { User } from "./model/User";
 
 export const service: ServiceContextType = {
-    fetchUser: pageQuery<User>,
-    fetchGroup: pageQuery<Group>,
-    fetchOrganization: pageQuery<Organization>,
+    fetchUser: fetchPage<User>,
+    fetchGroup: fetchPage<Group>,
+    fetchOrganization: fetchPage<Organization>,
 
-    fetchPages: pageListQuery,
-    fetchLocationPages: locationQuery,
-    fetchPosts: postsQuery,
-    fetchComments: commentsQuery,
+    fetchPages,
+    fetchLocationPages,
+    fetchPosts,
+    fetchComments,
 
     fetchMedia: async (mediaId: string) => null,
 
     uploadMedia: async (file: File) => "",
-    createUser: async (payload: any) => {},
+    createUser,
     createOrganization: async (payload: any) => {},
     createGroup: async (payload: any) => {},
 };
@@ -31,7 +31,7 @@ const driver = new TypeDBHttpDriver({
     password: TYPEDB_PASSWORD,
 });
 
-async function pageQuery<T extends User | Group | Organization>(id: string): Promise<T> {
+async function fetchPage<T extends Page>(id: string): Promise<T> {
     return readConceptDocuments<T>(`
         match $page isa page, has id "${id}";
         fetch {
@@ -83,7 +83,7 @@ async function pageQuery<T extends User | Group | Organization>(id: string): Pro
     `).then(res => res[0]);
 }
 
-async function pageListQuery(): Promise<Page[]> {
+async function fetchPages(): Promise<Page[]> {
     return readConceptDocuments(`
         match $page isa page;
         fetch {
@@ -108,8 +108,8 @@ async function pageListQuery(): Promise<Page[]> {
     `);
 }
 
-async function postsQuery(pageId: string): Promise<PostType[]> {
-    return readConceptDocuments<PostType>(`
+async function fetchPosts(pageId: string): Promise<PostType[]> {
+    return readConceptDocuments(`
         match
             $page has id "${pageId}";
             (page: $page, post: $post) isa posting;
@@ -146,7 +146,7 @@ async function postsQuery(pageId: string): Promise<PostType[]> {
     `);
 }
 
-async function commentsQuery(postId: string): Promise<Comment[]> {
+async function fetchComments(postId: string): Promise<Comment[]> {
     return readConceptDocuments(`
         match
             $post has id "${postId}";
@@ -176,7 +176,7 @@ async function commentsQuery(postId: string): Promise<Comment[]> {
     `);
 }
 
-async function locationQuery(placeId: string): Promise<LocationPage[]> {
+async function fetchLocationPages(placeId: string): Promise<LocationPage[]> {
     return readConceptDocuments(`
         match 
             $place has place-id "${placeId}", has name $place-name;
@@ -207,10 +207,31 @@ async function locationQuery(placeId: string): Promise<LocationPage[]> {
         };
     `);
 }
+
+async function createUser(payload: Partial<User>) {
+    const query = "insert $_ isa person"
+        + `, has name "${payload.name}"`
+        + `, has username "${payload.username}"`
+        + (payload.profilePicture ? `, has profile-picture "${payload.profilePicture}"` : '')
+        + (payload.gender ? `, has gender "${payload.gender}"` : '')
+        + (payload.language ? `, has language "${payload.language}"` : '')
+        + (payload.email ? `, has email "${payload.email}"` : '')
+        + (payload.phone ? `, has phone "${payload.phone}"` : '')
+        + (payload.relationshipStatus ? `, has relationship-status "${payload.relationshipStatus}"` : '')
+        + (payload.badge ? `, has badge "${payload.badge}"` : '')
+        + `, has bio "${payload.bio}"`
+        + `, has can-publish ${payload.canPublish ?? false}`
+        + `, has is-active ${payload.isActive ?? false}`
+        + `, has page-visibility "${payload.pageVisibility}"`
+        + `, has post-visibility "${payload.postVisibility}";`;
+
+    const res = await driver.oneShotQuery(query, true, TYPEDB_DATABASE, "write");
+    if (isApiErrorResponse(res)) throw res.err;
+}
+
 async function readConceptDocuments<T>(query: string): Promise<T[]> {
     const res = await driver.oneShotQuery(query, false, TYPEDB_DATABASE, "read");
     if (isApiErrorResponse(res)) throw res.err;
     if (res.ok.answerType !== 'conceptDocuments') throw new Error('Expected conceptDocuments repsonse');
-    console.debug(res.ok.answers);
     return res.ok.answers as T[];
 }
