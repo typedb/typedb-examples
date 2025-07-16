@@ -1,15 +1,15 @@
-# Python Backend (Flask)
+# Java Backend (Spring Boot)
 
-This is the Python backend for TypeSpace, implemented with Flask.
+This is the Java backend for TypeSpace, implemented with Spring Boot.
 
 ## Requirements
-- Python 3.8+
+- Java 17+
+- Gradle
 
 ## Setup & Run
 
 ```bash
-pip install -r requirements.txt
-python app.py
+./gradlew bootRun
 ```
 
 The API will be available at: http://localhost:8080
