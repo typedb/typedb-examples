@@ -33,10 +33,28 @@ fullstack/
 ## Setup & Running
 
 ### 1. TypeDB
-- Install [TypeDB](https://typedb.com/download) and start a local server.
+- Install [TypeDB Community Edition](https://typedb.com/docs/manual/install/CE) and start a local server:
+  ```
+  $ typedb server
+  =====================================================================================
+     ________ __      __ _____    _______  _____    _____       _______  _______
+    |__    __|\  \  /  /|   _  \ |   _   ||   _  \ |   _  \    |   _   ||   _   |
+       |  |    \  \/  / |  | |  ||  | |__||  | |  ||  | |  |   |  | |  ||  | |__|
+       |  |     \    /  |  |/  / |  |___  |  | |  ||  |/  /    |  | |__||  |___
+       |  |      |  |   |   __/  |   ___| |  | |  ||   _  \    |  |  __ |   ___|
+       |  |      |  |   |  |     |  |  __ |  | |  ||  | |  |   |  | |  ||  |  __
+       |  |      |  |   |  |     |  |_|  ||  |/  / |  |/  /    |  |_|  ||  |_|  |
+       |__|      |__|   |__|     |_______||_____/  |_____/     |_______||_______|
+
+=====================================================================================
+
+Running TypeDB CE 3.4.1.
+Serving gRPC on 0.0.0.0:1729 and HTTP on 0.0.0.0:8000.
+Ready!
+```
 - Load the schema and data:
   ```bash
-  typedb console --address localhost:1729 --username admin --password password --tls-disabled
+  $ typedb console --address localhost:1729 --username admin --password password --tls-disabled
   >> database create social-network
   >> transaction schema social-network
   social-network::schema>> source /path/to/schema.tql
