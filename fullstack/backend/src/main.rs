@@ -244,7 +244,7 @@ async fn main() {
         .route("/api/media/{id}", get(get_media))
         .with_state(driver)
         .layer(CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any));
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
+    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     println!("Backend running at http://{addr}");
     axum::serve(listener, app).await.unwrap();
