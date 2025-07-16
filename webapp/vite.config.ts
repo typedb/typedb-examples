@@ -5,5 +5,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     open: true
-  }
+  },
+  optimizeDeps: {
+    include: ['typedb-driver-http/**/*.js']
+  },
 }); 

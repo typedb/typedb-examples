@@ -49,7 +49,7 @@ async function pageQuery<T extends User | Group | Organization>(id: string): Pro
             "relationshipStatus": (match $page isa profile, has relationship-status $relationship-status; return first $relationship-status;),
             "pageVisibility": (match $page isa profile, has page-visibility $page-visibility; return first $page-visibility;),
             "postVisibility": (match $page isa profile, has post-visibility $post-visibility; return first $post-visibility;),
-            "tags": [match { $page isa group, has tag $tag; } or { $page isa organisation, has tag $tag; }; return {  $tag  };],
+            "tags": [match { $page isa group, has tag $tag; } or { $page isa organization, has tag $tag; }; return {  $tag  };],
             "friends": [
                 match ($page, $friend) isa friendship; $friend has id $friend-id;
                 limit 9;
@@ -96,8 +96,8 @@ async function pageListQuery(): Promise<Page[]> {
                     $page isa person;
                     let $ty = "person";
                 } or {
-                    $page isa organisation;
-                    let $ty = "organisation";
+                    $page isa organization;
+                    let $ty = "organization";
                 } or {
                     $page isa group;
                     let $ty = "group";
@@ -130,8 +130,8 @@ async function postsQuery(pageId: string): Promise<PostType[]> {
                     $page isa person;
                     let $ty = "person";
                 } or {
-                    $page isa organisation;
-                    let $ty = "organisation";
+                    $page isa organization;
+                    let $ty = "organization";
                 } or {
                     $page isa group;
                     let $ty = "group";
@@ -163,8 +163,8 @@ async function commentsQuery(postId: string): Promise<Comment[]> {
                     $author isa person;
                     let $ty = "person";
                 } or {
-                    $author isa organisation;
-                    let $ty = "organisation";
+                    $author isa organization;
+                    let $ty = "organization";
                 };
                 return first $ty;
             ),
@@ -197,8 +197,8 @@ async function locationQuery(placeId: string): Promise<LocationPage[]> {
                             $page isa person;
                             let $ty = "person";
                         } or {
-                            $page isa organisation;
-                            let $ty = "organisation";
+                            $page isa organization;
+                            let $ty = "organization";
                         };
                         return first $ty;
                     ),
