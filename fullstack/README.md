@@ -46,12 +46,12 @@ fullstack/
        |  |      |  |   |  |     |  |_|  ||  |/  / |  |/  /    |  |_|  ||  |_|  |
        |__|      |__|   |__|     |_______||_____/  |_____/     |_______||_______|
 
-=====================================================================================
+  =====================================================================================
 
-Running TypeDB CE 3.4.1.
-Serving gRPC on 0.0.0.0:1729 and HTTP on 0.0.0.0:8000.
-Ready!
-```
+  Running TypeDB CE 3.4.1.
+  Serving gRPC on 0.0.0.0:1729 and HTTP on 0.0.0.0:8000.
+  Ready!
+  ```
 - Load the schema and data:
   ```bash
   $ typedb console --address localhost:1729 --username admin --password password --tls-disabled
