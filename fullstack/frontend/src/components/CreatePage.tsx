@@ -106,7 +106,7 @@ export default function CreatePage() {
       const groupPayload: Partial<Group> = {
         ...payload,
         type: undefined,
-        id,
+        groupId: id,
         pageVisibility,
         postVisibility,
         tags,

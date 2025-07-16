@@ -21,8 +21,8 @@ export const service: ServiceContextType = {
 
     uploadMedia: async (file: File) => "",
     createUser,
-    createOrganization: async (payload: any) => {},
-    createGroup: async (payload: any) => {},
+    createOrganization,
+    createGroup,
 };
 
 const driver = new TypeDBHttpDriver({
@@ -220,10 +220,41 @@ async function createUser(payload: Partial<User>) {
         + (payload.relationshipStatus ? `, has relationship-status "${payload.relationshipStatus}"` : '')
         + (payload.badge ? `, has badge "${payload.badge}"` : '')
         + `, has bio "${payload.bio}"`
-        + `, has can-publish ${payload.canPublish ?? false}`
-        + `, has is-active ${payload.isActive ?? false}`
+        + `, has can-publish ${payload.canPublish}`
+        + `, has is-active ${payload.isActive}`
         + `, has page-visibility "${payload.pageVisibility}"`
         + `, has post-visibility "${payload.postVisibility}";`;
+
+    const res = await driver.oneShotQuery(query, true, TYPEDB_DATABASE, "write");
+    if (isApiErrorResponse(res)) throw res.err;
+}
+
+async function createGroup(payload: Partial<Group>) {
+    const query = "insert $_ isa group"
+        + `, has name "${payload.name}"`
+        + `, has group-id "${payload.groupId}"`
+        + (payload.profilePicture ? `, has profile-picture "${payload.profilePicture}"` : '')
+        + (payload.badge ? `, has badge "${payload.badge}"` : '')
+        + (payload.tags?.map(tag => `, has tag "${tag}"`).join('') ?? '')
+        + `, has bio "${payload.bio}"`
+        + `, has is-active ${payload.isActive}`
+        + `, has page-visibility "${payload.pageVisibility}"`
+        + `, has post-visibility "${payload.postVisibility}";`
+
+    const res = await driver.oneShotQuery(query, true, TYPEDB_DATABASE, "write");
+    if (isApiErrorResponse(res)) throw res.err;
+}
+
+async function createOrganization(payload: Partial<Organization>) {
+    const query = "insert $_ isa organization"
+        + `, has name "${payload.name}"`
+        + `, has username "${payload.username}"`
+        + (payload.profilePicture ? `, has profile-picture "${payload.profilePicture}"` : '')
+        + (payload.badge ? `, has badge "${payload.badge}"` : '')
+        + (payload.tags?.map(tag => `, has tag "${tag}"`).join('') ?? '')
+        + `, has bio "${payload.bio}"`
+        + `, has is-active ${payload.isActive}`
+        + `, has can-publish ${payload.canPublish};`
 
     const res = await driver.oneShotQuery(query, true, TYPEDB_DATABASE, "write");
     if (isApiErrorResponse(res)) throw res.err;
