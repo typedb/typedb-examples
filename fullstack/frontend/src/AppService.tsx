@@ -21,29 +21,29 @@ export const service: ServiceContextType = {
 }
 
 async function fetchUser(id: string): Promise<User> {
-    return fetch(`http://localhost:8000/api/user/${id}`)
+    return fetch(`http://localhost:8080/api/user/${id}`)
         .then(jsonOrError('Failed to fetch user'));
 }
 
 async function fetchPages(): Promise<Page[]> {
-    return fetch('http://localhost:8000/api/pages')
+    return fetch('http://localhost:8080/api/pages')
         .then(jsonOrError('Failed to fetch pages'));
 }
 
 async function fetchPosts(pageId: string): Promise<PostType[]> {
     if (!pageId) return [];
-    return fetch(`http://localhost:8000/api/posts?pageId=${pageId}`)
+    return fetch(`http://localhost:8080/api/posts?pageId=${pageId}`)
         .then(jsonOrError('Failed to fetch posts'));
 }
 
 async function fetchComments(postId: string): Promise<Comment[]> {
     if (!postId) return [];
-    return fetch(`http://localhost:8000/api/comments?postId=${postId}`)
+    return fetch(`http://localhost:8080/api/comments?postId=${postId}`)
         .then(jsonOrError('Failed to fetch comments'));
 }
 
 async function createUser(payload: User): Promise<void> {
-    return fetch('http://localhost:8000/api/create-user', {
+    return fetch('http://localhost:8080/api/create-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -51,7 +51,7 @@ async function createUser(payload: User): Promise<void> {
 }
 
 async function createOrganization(payload: Organization) {
-    return fetch('http://localhost:8000/api/create-organization', {
+    return fetch('http://localhost:8080/api/create-organization', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -59,7 +59,7 @@ async function createOrganization(payload: Organization) {
 }
 
 async function createGroup(payload: Group) {
-    return fetch('http://localhost:8000/api/create-group', {
+    return fetch('http://localhost:8080/api/create-group', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
@@ -67,7 +67,7 @@ async function createGroup(payload: Group) {
 }
 
 async function fetchMedia(mediaId: string): Promise<Blob | null> {
-    return fetch(`http://localhost:8000/api/media/${mediaId}`)
+    return fetch(`http://localhost:8080/api/media/${mediaId}`)
         .then(res => {
             if (res.status === 404) return null;
             else if (!res.ok) throw new Error('Media not found');
@@ -76,7 +76,7 @@ async function fetchMedia(mediaId: string): Promise<Blob | null> {
 }
 
 async function uploadMedia(file: File): Promise<string> {
-    return await fetch('http://localhost:8000/api/media', {
+    return await fetch('http://localhost:8080/api/media', {
         method: 'POST',
         body: file
     }).then(res => {
@@ -86,17 +86,17 @@ async function uploadMedia(file: File): Promise<string> {
 }
 
 async function fetchLocationPages(locationName: string): Promise<LocationPage[]> {
-    return fetch(`http://localhost:8000/api/location/${encodeURIComponent(locationName)}`)
+    return fetch(`http://localhost:8080/api/location/${encodeURIComponent(locationName)}`)
         .then(jsonOrError('Failed to fetch location pages'));
 }
 
 async function fetchGroup(id: string): Promise<Group> {
-    return fetch(`http://localhost:8000/api/group/${id}`)
+    return fetch(`http://localhost:8080/api/group/${id}`)
         .then(jsonOrError('Failed to fetch group'));
 }
 
 async function fetchOrganization(id: string): Promise<Organization> {
-    return fetch(`http://localhost:8000/api/organization/${id}`)
+    return fetch(`http://localhost:8080/api/organization/${id}`)
         .then(jsonOrError('Failed to fetch organization'));
 }
 

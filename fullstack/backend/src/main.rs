@@ -185,6 +185,38 @@ async fn post_create_group(
     (StatusCode::OK, Json(RawValue::NULL.to_owned()))
 }
 
+#[serde_as]
+#[derive(Debug, Deserialize)]
+struct CreateOrganizationPayload {
+    username: String,
+    name: String,
+    #[serde_as(as = "NoneAsEmptyString")]
+    profile_picture: Option<String>,
+    #[serde_as(as = "NoneAsEmptyString")]
+    badge: Option<String>,
+    is_active: bool,
+    can_publish: bool,
+    tags: Vec<String>,
+    bio: String,
+}
+
+async fn post_create_organization(
+    State(driver): State<Arc<TypeDBDriver>>,
+    Json(payload): Json<CreateOrganizationPayload>,
+) -> impl IntoResponse {
+    let transaction = driver.transaction("social-network", TransactionType::Write).await.unwrap();
+    transaction
+        .query(query::create_organization_query(payload))
+        .await
+        .unwrap()
+        .into_rows()
+        .map_ok(drop)
+        .try_collect::<()>()
+        .await
+        .unwrap();
+    transaction.commit().await.unwrap();
+    (StatusCode::OK, Json(RawValue::NULL.to_owned()))
+}
 
 #[tokio::main]
 async fn main() {
@@ -200,7 +232,7 @@ async fn main() {
     let app = Router::new()
         .route("/api/pages", get(get_page_list))
         .route("/api/create-user", post(post_create_user))
-        .route("/api/create-organization", post(async || (StatusCode::NOT_IMPLEMENTED, ())))
+        .route("/api/create-organization", post(post_create_organization))
         .route("/api/create-group", post(post_create_group))
         .route("/api/location/{place_id}", get(get_location_page_list))
         .route("/api/user/{id}", get(get_profile))
@@ -212,7 +244,7 @@ async fn main() {
         .route("/api/media/{id}", get(get_media))
         .with_state(driver)
         .layer(CorsLayer::new().allow_origin(Any).allow_methods(Any).allow_headers(Any));
-    let addr = SocketAddr::from(([127, 0, 0, 1], 8000));
+    let addr = SocketAddr::from(([127, 0, 0, 1], 8080));
     let listener = tokio::net::TcpListener::bind(addr).await.unwrap();
     println!("Backend running at http://{addr}");
     axum::serve(listener, app).await.unwrap();

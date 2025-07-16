@@ -1,6 +1,6 @@
 use std::fmt::Write;
 
-use crate::{CreateGroupPayload, CreateUserPayload};
+use crate::{CreateGroupPayload, CreateOrganizationPayload, CreateUserPayload};
 
 pub const PAGE_LIST_QUERY: &str = r#"
 match $page isa page;
@@ -255,6 +255,30 @@ pub fn create_group_query(payload: CreateGroupPayload) -> String {
     write!(&mut query, ", has is-active {is_active}").unwrap();
     write!(&mut query, ", has page-visibility {page_visibility:?}").unwrap();
     write!(&mut query, ", has post-visibility {post_visibility:?}").unwrap();
+    if let Some(badge) = badge {
+        write!(&mut query, ", has badge {badge:?}").unwrap();
+    }
+    for tag in tags {
+        write!(&mut query, ", has tag {tag:?}").unwrap();
+    }
+    query.push(';');
+
+    query
+}
+
+pub fn create_organization_query(payload: CreateOrganizationPayload) -> String {
+    let CreateOrganizationPayload { username, name, profile_picture, badge, is_active, can_publish, tags, bio } =
+        payload;
+
+    let mut query = String::from("insert $_ isa organization");
+    write!(&mut query, ", has name {name:?}").unwrap();
+    write!(&mut query, ", has username {username:?}").unwrap();
+    if let Some(profile_picture) = profile_picture {
+        write!(&mut query, ", has profile-picture {profile_picture:?}").unwrap();
+    }
+    write!(&mut query, ", has bio {bio:?}").unwrap();
+    write!(&mut query, ", has is-active {is_active}").unwrap();
+    write!(&mut query, ", has can-publish {can_publish}").unwrap();
     if let Some(badge) = badge {
         write!(&mut query, ", has badge {badge:?}").unwrap();
     }

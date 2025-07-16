@@ -86,6 +86,7 @@ export default function CreatePage() {
       payload.can_publish = canPublish;
       promise = serviceContext.createUser(payload);
     } else if (type === 'organization') {
+      payload.username = id;
       payload.can_publish = canPublish;
       payload.tags = tags;
       promise = serviceContext.createOrganization(payload);
