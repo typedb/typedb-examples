@@ -1,15 +1,14 @@
-# Python Backend (Flask)
+# Rust Backend (Axum)
 
-This is the Python backend for TypeSpace, implemented with Flask.
+This is the Rust backend for TypeSpace, implemented with Axum.
 
 ## Requirements
-- Python 3.8+
+- Rust 1.85+
 
 ## Setup & Run
 
 ```bash
-pip install -r requirements.txt
-python app.py
+cargo run
 ```
 
 The API will be available at: http://localhost:8080
