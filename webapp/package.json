@@ -6,7 +6,7 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.3",
-    "typedb-driver-http": "0.0.0-65722879306c5191377711473cf732727a3d1430"
+    "typedb-driver-http": "^0.0.0-7c95c26378fde81326c06d692b8b85d59179da18"
   },
   "scripts": {
     "dev": "vite",

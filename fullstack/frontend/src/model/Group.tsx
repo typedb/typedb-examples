@@ -1,14 +1,8 @@
-export interface Group {
-    name: string;
-    bio: string;
-    profilePicture?: string;
-    badge?: string;
-    isActive?: boolean;
-    groupId?: string;
+import { Page } from "./Page";
+
+export interface Group extends Page {
+    type: 'group';
     tags?: string[];
     pageVisibility?: string;
     postVisibility?: string;
-    posts: string[];
-    numberOfFollowers?: number;
-    followers?: string[];
 }

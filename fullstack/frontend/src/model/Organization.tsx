@@ -1,19 +1,6 @@
-import { LocationItem } from "./Location";
+import { Profile } from "./Page";
 
-export interface Organization {
-    name: string;
-    bio: string;
-    profilePicture?: string;
-    badge?: string;
-    isActive?: boolean;
-    username?: string;
-    canPublish?: boolean;
+export interface Organization extends Profile {
+    type: 'organization';
     tags?: string[];
-    email?: string;
-    language?: string;
-    phone?: string;
-    posts: string[];
-    numberOfFollowers?: number;
-    followers?: string[];
-    location?: LocationItem[];
 }

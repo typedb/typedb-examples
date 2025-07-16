@@ -1,13 +1,7 @@
-import { LocationItem } from "./Location";
+import { Profile } from "./Page";
 
-export interface User {
-    username: string;
-    name: string;
-    bio: string;
-    profilePicture?: string;
-    badge?: string;
-    isActive?: boolean;
-    canPublish?: boolean;
+export interface User extends Profile {
+    type: 'person';
     gender?: string;
     language?: string;
     email?: string;
@@ -15,9 +9,6 @@ export interface User {
     relationshipStatus?: string;
     pageVisibility?: string;
     postVisibility?: string;
-    posts: string[];
     friends: string[];
-    numberOfFollowers?: number;
     numberOfFriends?: number;
-    location?: LocationItem[];
 }
