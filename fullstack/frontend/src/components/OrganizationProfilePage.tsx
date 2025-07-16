@@ -158,9 +158,6 @@ export default function OrganizationProfilePage() {
             <div style={{ display: 'grid', gridTemplateColumns: 'max-content 1fr', rowGap: 8, columnGap: 16 }}>
               <span style={{ fontWeight: 500 }}>Badge:</span> <span>{org.badge || ''}</span>
               <span style={{ fontWeight: 500 }}>Tags:</span> <span>{org.tags?.length ? org.tags.join(', ') : ''}</span>
-              <span style={{ fontWeight: 500 }}>Email:</span> <span>{org.email || ''}</span>
-              <span style={{ fontWeight: 500 }}>Language:</span> <span>{org.language || ''}</span>
-              <span style={{ fontWeight: 500 }}>Phone:</span> <span>{org.phone || ''}</span>
               <span style={{ fontWeight: 500 }}>Location:</span>
               <span>
                 {getLocationParts(org.location).map((part, idx, arr) => (
