@@ -1,6 +1,9 @@
 # TypeSpace: Fullstack Social Network Example
 
-TypeSpace is a fullstack example project for a social network, demonstrating a multi-language backend (Java, Rust, Python), a React frontend, and a TypeDB database with a rich schema. It is designed for experimentation, learning, and showcasing how different backend stacks can serve the same API and data model.
+TypeSpace is a fullstack example project for a social network, demonstrating a multi-language backend (Java, Rust, Python), a React frontend, and a TypeDB database with a rich schema. 
+It is designed for experimentation, learning, and showcasing how different backend stacks can serve the same API and data model.
+
+The schema and data for this example can be found under `use-cases/social-network/schema.tql` and `use-cases/social-network/data.tql`.
 
 ---
 
@@ -13,8 +16,10 @@ fullstack/
 │   ├── rust/      # Axum backend (Rust)
 │   └── python/    # Flask backend (Python)
 ├── frontend/      # React + Vite frontend
-├── schema.tql     # TypeDB schema
-├── data.tql       # TypeDB data (sample)
+use-cases/
+├── social-network/
+│   ├── schema.tql  # TypeDB schema
+│   └── data.tql    # TypeDB data
 ```
 
 ---

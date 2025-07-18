@@ -3,7 +3,7 @@
 TypeSpace is an example project for a social network, demonstrating a React frontend connection directly to a TypeDB database with a rich schema. 
 It is designed for experimentation, learning, and showcasing TypeDB as a backend.
 
-The schema and data for this example can be found under `fullstack/schema.tql` and `fullstack/data.tql`.
+The schema and data for this example can be found under `use-cases/social-network/schema.tql` and `use-cases/social-network/data.tql`.
 
 ---
 

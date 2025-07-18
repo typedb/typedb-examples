@@ -368,65 +368,24 @@ fun child_places($place: place, $depth: integer) -> { place }:
       };
   return { $child };
 
+fun parent_places_linked_list($place: place) -> { place, place }:
+  match
+    {
+      location (located: $place, place: $parent);
+      $child is $place;
+    } or {
+      location (located: $place, place: $middle);
+      let $parent, $child in parent_places_linked_list($middle);
+    };
+  return { $parent, $child };
 
-
-#  rule page-view-permissions:
-#    when {
-#      $viewer isa $viewer-type;
-#      $page isa $page-type;
-#      {
-#        $viewer-type type profile;
-#        $page-type type person;
-#        $page has page-visibility "public";
-#      } or {
-#        (friend: $page, friend: $viewer) isa friendship;
-#      } or {
-#        $viewer-type type profile;
-#        $page-type type organization;
-#      } or {
-#        $viewer-type type profile;
-#        $page-type type group;
-#        $page has page-visibility "public";
-#      } or {
-#        (group: $page, member: $viewer) isa group-membership;
-#      };
-#    } then {
-#      (viewer: $viewer, viewable: $page) isa view-permission;
-#    };
-
-#  rule default-post-visibility-per-page:
-#    when {
-#      $page has post-visibility "default";
-#      $page has page-visibility $page-vis;
-#      ?post-vis = $page-vis;
-#    } then {
-#      $page has post-visibility ?post-vis;
-#    };
-
-#  rule default-post-visibility-per-post:
-#    when {
-#      (page: $page, post: $post) isa posting;
-#      $post has post-visibility "default";
-#      $page has post-visibility $default-vis;
-#    } then {
-#      $post has $default-vis;
-#    };
-
-#  rule post-view-permissions:
-#    when {
-#      $viewer isa $viewer-type;
-#      (page: $page, post: $post) isa posting;
-#      {
-#        $post has post-visibility "public";
-#        (viewer: $viewer, viewable: $page) isa view-permission;
-#      } or {
-#        (friend: $page, friend: $viewer) isa friendship;
-#      } or {
-#        $viewer-type type profile;
-#        $page isa organization;
-#      } or {
-#        (group: $page, member: $viewer) isa group-membership;
-#      };
-#    } then {
-#      (viewer: $viewer, viewable: $post) isa view-permission;
-#    };
+fun located_in_transitive($place: place, $location: place) -> place:
+  match
+    {
+      $location is $place;
+      $parent is $place;
+    } or {
+      location (located: $place, place: $parent);
+      let $_ = located_in_transitive($parent, $location);
+    };
+  return first $parent;
