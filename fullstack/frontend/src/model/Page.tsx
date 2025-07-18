@@ -1,8 +1,11 @@
 import { LocationItem } from "./Location";
 
+export const pageTypes = ['person', 'organization', 'group'] as const;
+export type PageType = typeof pageTypes[number];
+
 export interface Page {
     id: string;
-    type: 'person' | 'organization' | 'group';
+    type: PageType;
     name: string;
     bio: string;
     profilePicture?: string;
@@ -18,7 +21,7 @@ export type LocationPage = { placeName: string, pages: Page[] }
 export interface FollowerPage {
     id: string;
     name: string;
-    type: 'person' | 'organization' | 'group';
+    type: PageType;
     profilePictureId: string;
 }
 

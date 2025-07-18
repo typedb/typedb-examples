@@ -42,7 +42,7 @@ async function fetchComments(postId: string): Promise<Comment[]> {
         .then(jsonOrError('Failed to fetch comments'));
 }
 
-async function createUser(payload: User): Promise<void> {
+async function createUser(payload: Partial<User>): Promise<void> {
     return fetch('http://localhost:8080/api/create-user', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -50,7 +50,7 @@ async function createUser(payload: User): Promise<void> {
     }).then(jsonOrError('Failed to create page'));
 }
 
-async function createOrganization(payload: Organization) {
+async function createOrganization(payload: Partial<Organization>) {
     return fetch('http://localhost:8080/api/create-organization', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -58,7 +58,7 @@ async function createOrganization(payload: Organization) {
     }).then(jsonOrError('Failed to create organization'));
 }
 
-async function createGroup(payload: Group) {
+async function createGroup(payload: Partial<Group>) {
     return fetch('http://localhost:8080/api/create-group', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
