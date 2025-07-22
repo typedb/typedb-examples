@@ -9,8 +9,14 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class TypeDBConfig {
+    private static final String TYPEDB_ADDRESS = "localhost:1729";
+    private static final String TYPEDB_USERNAME = "admin";
+    private static final String TYPEDB_PASSWORD = "password";
+    private static final boolean TYPEDB_TLS_ENABLED = false;
+    public static final String TYPEDB_DATABASE = "social-network";
+
     @Bean
     public Driver typeDBDriver() {
-        return TypeDB.driver("localhost:1729", new Credentials("admin", "password"), new DriverOptions(false, null));
+        return TypeDB.driver(TYPEDB_ADDRESS, new Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD), new DriverOptions(TYPEDB_TLS_ENABLED, null));
     }
 } 

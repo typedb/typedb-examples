@@ -17,36 +17,14 @@ The schema and data for this example can be found under `use-cases/social-networ
 ## Setup & Running
 
 ### 1. TypeDB
-- Install [TypeDB Community Edition](https://typedb.com/docs/manual/install/CE) and start a local server:
-  ```
-  $ typedb server
-  =====================================================================================
-     ________ __      __ _____    _______  _____    _____       _______  _______
-    |__    __|\  \  /  /|   _  \ |   _   ||   _  \ |   _  \    |   _   ||   _   |
-       |  |    \  \/  / |  | |  ||  | |__||  | |  ||  | |  |   |  | |  ||  | |__|
-       |  |     \    /  |  |/  / |  |___  |  | |  ||  |/  /    |  | |__||  |___
-       |  |      |  |   |   __/  |   ___| |  | |  ||   _  \    |  |  __ |   ___|
-       |  |      |  |   |  |     |  |  __ |  | |  ||  | |  |   |  | |  ||  |  __
-       |  |      |  |   |  |     |  |_|  ||  |/  / |  |/  /    |  |_|  ||  |_|  |
-       |__|      |__|   |__|     |_______||_____/  |_____/     |_______||_______|
 
-  =====================================================================================
+- Sign up for TypeDB Cloud at https://cloud.typedb.com
+- Deploy a TypeDB Cloud instance, selecting the `social-network` sample dataset
 
-  Running TypeDB CE 3.4.1.
-  Serving gRPC on 0.0.0.0:1729 and HTTP on 0.0.0.0:8000.
-  Ready!
-  ```
-- Load the schema and data:
-  ```bash
-  $ typedb console --address localhost:1729 --username admin --password password --tls-disabled
-  >> database create social-network
-  >> transaction schema social-network
-  social-network::schema>> source /path/to/schema.tql
-  *social-network::schema>> commit
-  >> transaction write social-network
-  social-network::write>> source /path/to/data.tql
-  *social-network::write>> commit
-  ```
+OR
+
+- Visit [our docs](https://typedb.com/docs/manual/install/CE) to learn how to install and run TypeDB Community Edition
+- Follow the `use-cases/social-network` [README](../use-cases/social-network/README.md) to set up the schema and data
 
 ### 2. Frontend (React + Vite)
 - Requirements: Node.js, npm or pnpm
@@ -64,6 +42,16 @@ The schema and data for this example can be found under `use-cases/social-networ
   pnpm dev
   ```
 - App available at: `http://localhost:5173` (default Vite port)
+
+You may need to modify the config file to connect to your TypeDB instance.
+It can be found at `src/config.tsx`, and contains the following properties:
+
+| Property           | Type    | Description                                                              |
+|--------------------|---------|--------------------------------------------------------------------------|
+| TYPEDB_ADDRESS     | String  | The URL of your TypeDB instance.                                         |
+| TYPEDB_USERNAME    | String  | The username for authentication.                                         |
+| TYPEDB_PASSWORD    | String  | The password for authentication.                                         |
+| TYPEDB_DATABASE    | String  | The name of the TypeDB database containing the `social-network` dataset. |
 
 ---
 
