@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageCard from './PageCard';
 import { ServiceContext } from '../service/ServiceContext';
-import { Page, pageTypes } from "../model/Page";
+import { Page, pageTypeLabels } from "../model/Page";
 
 export default function PageList() {
   const [pages, setPages] = useState<Page[]>([]);
@@ -55,7 +55,7 @@ export default function PageList() {
                 All
               </button>
             </li>
-            {pageTypes.map(type => (
+            {pageTypeLabels.map(type => (
               <li key={type}>
                 <button
                   style={{
@@ -80,7 +80,7 @@ export default function PageList() {
         </div>
         {/* Main List */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: 16, flex: 1 }}>
-          {(filter ? pages.filter(page => page.type === filter) : pages).map(page => (
+          {(filter ? pages.filter(page => page.type.label === filter) : pages).map(page => (
             <div key={page.id} style={{ display: 'flex', gap: 16, padding: 16, border: '1px solid #eee', borderRadius: 8, alignItems: 'center' }}>
               <PageCard
                 id={page.id}

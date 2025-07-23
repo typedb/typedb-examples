@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { ServiceContext } from "../service/ServiceContext";
-import { Page } from "../model/Page";
+import { getProfileUrl, Page } from "../model/Page";
 import { User } from "../model/User";
 import { Organization } from "../model/Organization";
 import { Group } from "../model/Group";
@@ -118,10 +118,7 @@ export default function CreatePage() {
     promise
       .then(() => {
         setFormLoading(false);
-        if (type === 'person') navigate(`/user/${id}`);
-        else if (type === 'organization') navigate(`/organization/${id}`);
-        else if (type === 'group') navigate(`/group/${id}`);
-        else navigate('/');
+        navigate(getProfileUrl(type, id));
       })
       .catch(e => {
         setFormError(e.message);

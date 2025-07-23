@@ -7,12 +7,12 @@ import { ServiceContext } from '../service/ServiceContext';
 import userAvatar from '../assets/userAvatar.svg';
 import { User } from "../model/User";
 import { getLocationParts } from "../model/Location";
-import { Page } from "../model/Page";
+import { Page, PageType } from "../model/Page";
 
 interface FriendPage {
   id: string;
   name: string;
-  type: 'person' | 'organization' | 'group';
+  type: PageType;
   profilePictureId: string;
 }
 
@@ -60,7 +60,7 @@ export default function UserProfilePage() {
       serviceContext.fetchPages()
         .then((allPages: Page[]) => {
           const friendPages = allPages.filter(page => 
-            user.friends.includes(page.id) && page.type === 'person'
+            user.friends.includes(page.id) && page.type.label === 'person'
           ).map(page => ({
             id: page.id,
             name: page.name,

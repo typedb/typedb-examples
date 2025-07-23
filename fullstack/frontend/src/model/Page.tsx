@@ -1,7 +1,10 @@
 import { LocationItem } from "./Location";
 
-export const pageTypes = ['person', 'organization', 'group'] as const;
-export type PageType = typeof pageTypes[number];
+export const pageTypeLabels = ['person', 'organization', 'group'] as const;
+export type PageTypeLabel = typeof pageTypeLabels[number];
+export interface PageType<T extends PageTypeLabel = PageTypeLabel> {
+    label: T;
+}
 
 export interface Page {
     id: string;
@@ -26,9 +29,16 @@ export interface FollowerPage {
 }
 
 export interface Profile extends Page {
-    type: 'person' | 'organization';
+    type: PageType<'person' | 'organization'>;
     username?: string;
     canPublish?: boolean;
     location?: LocationItem[];
+}
+
+export function getProfileUrl(typeLabel: string, id: string): string {
+    if (typeLabel === 'person') return `/user/${id}`;
+    if (typeLabel === 'organization') return `/organization/${id}`;
+    if (typeLabel === 'group') return `/group/${id}`;
+    return '/';
 }
 

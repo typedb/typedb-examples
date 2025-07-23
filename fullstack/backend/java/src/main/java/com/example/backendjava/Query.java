@@ -9,16 +9,9 @@ public class Query {
             "id": $page.page-id,
             "profile-picture": $page.profile-picture,
             "type": (
-                match {
-                    $page isa person;
-                    let $ty = "person";
-                } or {
-                    $page isa organization;
-                    let $ty = "organization";
-                } or {
-                    $page isa group;
-                    let $ty = "group";
-                };
+                match
+                { $ty label person; } or { $ty label organization; } or { $ty label group; };
+                $page isa $ty;
                 return first $ty;
             ),
         };
@@ -41,13 +34,9 @@ public class Query {
                         "id": $page.page-id,
                         "profilePicture": $page.profile-picture,
                         "type": (
-                            match {
-                                $page isa person;
-                                let $ty = "person";
-                            } or {
-                                $page isa organization;
-                                let $ty = "organization";
-                            };
+                            match
+                            { $ty label person; } or { $ty label organization; };
+                            $page isa $ty;
                             return first $ty;
                         ),
                     };
@@ -124,16 +113,9 @@ public class Query {
                 "authorProfilePicture": $page.profile-picture,
                 "authorId": $page.page-id,
                 "authorType": (
-                    match {
-                        $page isa person;
-                        let $ty = "person";
-                    } or {
-                        $page isa organization;
-                        let $ty = "organization";
-                    } or {
-                        $page isa group;
-                        let $ty = "group";
-                    };
+                    match
+                    { $ty label person; } or { $ty label organization; } or { $ty label group; };
+                    $page isa $ty;
                     return first $ty;
                 ),
                 "reactions": [
@@ -156,13 +138,9 @@ public class Query {
                 "authorProfilePicture": $author.profile-picture,
                 "authorId": $author.page-id,
                 "authorType": (
-                    match {
-                        $author isa person;
-                        let $ty = "person";
-                    } or {
-                        $author isa organization;
-                        let $ty = "organization";
-                    };
+                    match
+                    { $ty label person; } or { $ty label organization; };
+                    $page isa $ty;
                     return first $ty;
                 ),
                 "reactions": [
