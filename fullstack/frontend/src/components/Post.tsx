@@ -6,6 +6,7 @@ import { ServiceContext } from "../service/ServiceContext";
 import { PostType } from "../model/Post";
 // @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
+import { PageType } from "../model/Page";
 
 interface PostProps {
   post: PostType;
@@ -43,10 +44,10 @@ export default function Post({ post }: PostProps) {
     setTimeout(() => setClicked(false), 150);
   }
 
-  function getProfileUrl(type: string, id: string): string {
-    if (type === 'person') return `/user/${id}`;
-    if (type === 'organization') return `/organization/${id}`;
-    if (type === 'group') return `/group/${id}`;
+  function getProfileUrl(type: PageType, id: string): string {
+    if (type.label === 'person') return `/user/${id}`;
+    if (type.label === 'organization') return `/organization/${id}`;
+    if (type.label === 'group') return `/group/${id}`;
     return '/';
   }
 

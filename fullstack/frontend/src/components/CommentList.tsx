@@ -4,6 +4,7 @@ import ReactionsBar from './ReactionsBar';
 import { Comment } from '../model/Post';
 // @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
+import { getProfileUrl } from "../model/Page";
 
 interface CommentListProps {
   postId: string;
@@ -58,13 +59,6 @@ export default function CommentList({ postId }: CommentListProps) {
     }
   }, [comments]);
 
-  function getProfileUrl(type: string, id: string): string {
-    if (type === 'person') return `/user/${id}`;
-    if (type === 'organization') return `/organization/${id}`;
-    if (type === 'group') return `/group/${id}`;
-    return '/';
-  }
-
   if (loading) return <div>No comments yet.</div>;
   if (error) return <div>Error: {error}</div>;
   if (!comments.length) return <div>No comments yet.</div>;
@@ -74,7 +68,7 @@ export default function CommentList({ postId }: CommentListProps) {
       {comments.map(c => (
         <div key={c.commentId} style={{ display: 'flex', gap: 12, alignItems: 'flex-start', position: 'relative', paddingBottom: 20, border: '1px solid #e0e0e0', borderRadius: 8, padding: 12 }}>
           <a 
-            href={getProfileUrl(c.authorType, c.authorId)}
+            href={getProfileUrl(c.authorType.label, c.authorId)}
             style={{ textDecoration: 'none' }}
           >
             <div 
@@ -107,7 +101,7 @@ export default function CommentList({ postId }: CommentListProps) {
           <div style={{ flex: 1 }}>
             <div style={{ display: 'block', marginBottom: 4 }}>
             <a 
-              href={getProfileUrl(c.authorType, c.authorId)}
+              href={getProfileUrl(c.authorType.label, c.authorId)}
               style={{ 
                 fontSize: '12px', 
                 color: '#007bff', 

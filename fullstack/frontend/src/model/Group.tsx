@@ -1,7 +1,7 @@
-import { Page } from "./Page";
+import { Page, PageType } from "./Page";
 
 export interface Group extends Page {
-    type: 'group';
+    type: PageType<'group'>;
     groupId?: string;
     tags?: string[];
     pageVisibility?: string;

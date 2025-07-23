@@ -1,7 +1,7 @@
-import { Profile } from "./Page";
+import { PageType, Profile } from "./Page";
 
 export interface User extends Profile {
-    type: 'person';
+    type: PageType<'person'>;
     gender?: string;
     language?: string;
     email?: string;

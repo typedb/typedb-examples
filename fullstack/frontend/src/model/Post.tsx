@@ -1,3 +1,5 @@
+import { PageType } from "./Page";
+
 export interface PostType {
     postText: string;
     postVisibility: string;
@@ -10,7 +12,7 @@ export interface PostType {
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
-    authorType: 'person' | 'organization' | 'group';
+    authorType: PageType;
     reactions: string[];
 }
 
@@ -22,6 +24,6 @@ export interface Comment {
     authorName: string;
     authorProfilePicture: string;
     authorId: string;
-    authorType: 'person' | 'organization' | 'group';
+    authorType: PageType;
     reactions: string[];
 }

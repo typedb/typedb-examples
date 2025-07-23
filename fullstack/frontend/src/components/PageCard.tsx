@@ -3,10 +3,11 @@ import { Link } from 'react-router-dom';
 // @ts-ignore
 import userAvatar from '../assets/userAvatar.svg';
 import { ServiceContext } from "../service/ServiceContext";
+import { getProfileUrl, PageType } from "../model/Page";
 
 interface PageCardProps {
   id: string;
-  type: 'person' | 'organization' | 'group';
+  type: PageType;
   name: string;
   profilePictureId: string;
   scale?: number;
@@ -33,11 +34,7 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
     return () => { isMounted = false; };
   }, [profilePictureId]);
 
-  let link = '/';
-  if (type === 'person') link = `/user/${id}`;
-  else if (type === 'organization') link = `/organization/${id}`;
-  else if (type === 'group') link = `/group/${id}`;
-
+  const link = getProfileUrl(type.label, id);
   const avatarSize = 80 * scale;
   const cardWidth = 150 * scale;
   const marginBottom = 8 * scale;
@@ -54,7 +51,7 @@ export default function PageCard({ id, type, name, profilePictureId, scale = 1 }
       </div>
       <div style={{ fontSize: fontSize, fontWeight: 500, color: '#1976d2', maxWidth: '100%', textOverflow: 'ellipsis', overflow: 'hidden' }}>{name}</div>
       <div style={{ fontSize: 12, color: '#888' }}>
-        {type === 'person' ? 'User' : type === 'organization' ? 'Organization' : 'Group'}
+        {type.label === 'person' ? 'User' : type.label === 'organization' ? 'Organization' : 'Group'}
       </div>
     </Link>
   );

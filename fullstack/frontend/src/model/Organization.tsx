@@ -1,6 +1,6 @@
-import { Profile } from "./Page";
+import { PageType, Profile } from "./Page";
 
 export interface Organization extends Profile {
-    type: 'organization';
+    type: PageType<'organization'>;
     tags?: string[];
 }

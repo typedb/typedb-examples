@@ -10,16 +10,9 @@ fetch {
     "id": $page.page-id,
     "profile-picture": $page.profile-picture,
     "type": (
-        match {
-            $page isa person;
-            let $ty = "person";
-        } or {
-            $page isa organization;
-            let $ty = "organization";
-        } or {
-            $page isa group;
-            let $ty = "group";
-        };
+        match
+        { $ty label person; } or { $ty label organization; } or { $ty label group; };
+        $page isa $ty;
         return first $ty;
     ),
 };"#;
@@ -42,13 +35,9 @@ pub fn location_query(place_id: &str) -> String {
                     "id": $page.page-id,
                     "profilePicture": $page.profile-picture,
                     "type": (
-                        match {{
-                            $page isa person;
-                            let $ty = "person";
-                        }} or {{
-                            $page isa organization;
-                            let $ty = "organization";
-                        }};
+                        match
+                        {{ $ty label person; }} or {{ $ty label organization; }};
+                        $page isa $ty;
                         return first $ty;
                     ),
                 }};
@@ -131,16 +120,9 @@ pub fn posts_query(page_id: &str) -> String {
             "authorProfilePicture": $page.profile-picture,
             "authorId": $page.page-id,
             "authorType": (
-                match {{
-                    $page isa person;
-                    let $ty = "person";
-                }} or {{
-                    $page isa organization;
-                    let $ty = "organization";
-                }} or {{
-                    $page isa group;
-                    let $ty = "group";
-                }};
+                match
+                {{ $ty label person; }} or {{ $ty label organization; }} or {{ $ty label group; }};
+                $page isa $ty;
                 return first $ty;
             ),
             "reactions": [
@@ -166,13 +148,9 @@ pub fn comments_query(post_id: &str) -> String {
             "authorProfilePicture": $author.profile-picture,
             "authorId": $author.page-id,
             "authorType": (
-                match {{
-                    $author isa person;
-                    let $ty = "person";
-                }} or {{
-                    $author isa organization;
-                    let $ty = "organization";
-                }};
+                match
+                {{ $ty label person; }} or {{ $ty label organization; }};
+                $page isa $ty;
                 return first $ty;
             ),
             "reactions": [
