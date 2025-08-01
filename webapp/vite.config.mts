@@ -10,7 +10,4 @@ export default defineConfig({
   server: {
     open: true
   },
-  optimizeDeps: {
-    include: ['typedb-driver-http/**/*.js']
-  },
 }); 
