@@ -1,26 +1,66 @@
+# Mac
 .DS_Store
 
-__pycache__
+# Bazel
+bazel-*
+.bazel-remote-cache.rc
+.bazel-cache-credential.json
 
+# IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+*.geany
+.ijwb/
+
+# VS Code
+.vscode/
+.settings/
+.project
+.classpath
+
+# Compiled
+dist/
+out/
+*.class
 target
 
-# dependencies
+# Package
+*.jarg
+*.war
+*.ear
+
+# Gradle
+.gradle/
+
+# Debug
+dep.tree
+
+# Node
 node_modules
 .pnp
 .pnp.js
 
-# testing
-/coverage
+# Databases
+db/
 
-# production
-/build
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml #
+hs_err_pid*
 
-# misc
-.env.local
-.env.development.local
-.env.test.local
-.env.production.local
+# Log
+logs/
+*.log
 
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
+# VIM swap
+*.swp
+*.swo
+
+# Python cache
+__pycache__
+
+# AI tools
+.aider*
+.clinerules
+.qodo
+memory-bank

@@ -1,22 +1,26 @@
 #
-# Copyright (C) 2024 Vaticle
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
 #
-# Licensed under the Apache License, Version 2.0 (the "License");
-# you may not use this file except in compliance with the License.
-# You may obtain a copy of the License at
+#   http://www.apache.org/licenses/LICENSE-2.0
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
-#
-# Unless required by applicable law or agreed to in writing, software
-# distributed under the License is distributed on an "AS IS" BASIS,
-# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-# See the License for the specific language governing permissions and
-# limitations under the License.
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
 #
 
 define
 
 entity book @abstract,
+    owns isbn @card(0..2),
     owns isbn-13 @key,
     owns isbn-10 @unique,
     owns title,
@@ -185,23 +189,23 @@ attribute success, value boolean;
 
 # TODO: Change to check
 fun is_review_verified_by_purchase($review: review) -> { order }:
-match
+  match
     ($review, $product) isa rating;
     ($order, $product) isa order-line;
     ($user, $review) isa action-execution, has timestamp $review-time;
     ($user, $order) isa action-execution, has timestamp $order-time;
     $review-time > $order-time;
-return { $order };
+  return { $order };
 
 fun book_recommendations_for($user: user) -> {book}:
-match
+  match
     $new-book isa book;
     { 
         let $new-book in book_recommendations_by_author($user); 
     } or {
         let $new-book in book_recommendations_by_genre($user); 
     };
-    return { $new-book };
+  return { $new-book };
 
 fun book_recommendations_by_genre($user: user) -> { book }:
 match
@@ -230,10 +234,10 @@ match
     } or {
         $shared-genre == "nonfiction";
     }; };
-return { $new-book };
+  return { $new-book };
 
 fun book_recommendations_by_author($user: user) -> { book }:
-match
+  match
     $user isa user;
     $liked-book isa book;
     {
@@ -254,10 +258,10 @@ match
     }; };
     ($liked-book, $shared-author) isa authoring;
     ($new-book, $shared-author) isa authoring;
-return { $new-book };
+  return { $new-book };
 
 fun order_line_best_price($line: order-line) -> { double }:
-match
+  match
     ($order) isa action-execution, has timestamp $order-time;
     $line isa order-line, links ($order, $item);
     $item has price $retail-price;
@@ -266,10 +270,10 @@ match
     let $discounted-price = round(100 * $retail-price * (1 - $best-discount)) / 100;
     $line has quantity $quantity;
     let $line-total = $quantity * $discounted-price;
-return { $line-total };
+  return { $line-total };
 
 fun best_discount_for_item($item: book, $order-time: datetime) -> double:
-match
+  match
     {
         $inclusion isa promotion-inclusion,
             links ($promotion, $item),
@@ -281,3 +285,13 @@ match
         let $discount = 0.0; # default
     };    
 return max($discount);
+
+fun transitive_places($place: place) -> { place }:
+  match
+    {
+      locating (located: $place, location: $parent);
+    } or {
+      locating (located: $place, location: $middle);
+      let $parent in transitive_places($middle);
+    };
+  return { $parent };

@@ -15,19 +15,10 @@
 # specific language governing permissions and limitations
 # under the License.
 
+load("@typedb_dependencies//tool/checkstyle:rules.bzl", "checkstyle_test")
 
-package(default_visibility = ["//visibility:public"])
-
-load("@rules_pkg//:mappings.bzl", "pkg_files")
-
-pkg_files(
-    name = "social-network-dataset",
-    srcs = [
-        ":schema.tql",
-        ":data.tql",
-    ],
-    renames = {
-        ":schema.tql" : "social-network-schema.tql",
-        ":data.tql" : "social-network-data.tql",
-    },
+checkstyle_test(
+    name = "checkstyle",
+    include = glob(["*"]),
+    license_type = "mpl-header",
 )

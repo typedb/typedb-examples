@@ -15,19 +15,11 @@
 # specific language governing permissions and limitations
 # under the License.
 
+load("@bazel_tools//tools/build_defs/repo:git.bzl", "git_repository")
 
-package(default_visibility = ["//visibility:public"])
-
-load("@rules_pkg//:mappings.bzl", "pkg_files")
-
-pkg_files(
-    name = "social-network-dataset",
-    srcs = [
-        ":schema.tql",
-        ":data.tql",
-    ],
-    renames = {
-        ":schema.tql" : "social-network-schema.tql",
-        ":data.tql" : "social-network-data.tql",
-    },
-)
+def typedb_dependencies():
+    git_repository(
+        name = "typedb_dependencies",
+        remote = "https://github.com/typedb/typedb-dependencies",
+        commit = "f6e710f9857b1c30ad1764c1c41afce4e4e02981", # sync-marker: do not remove this comment, this is used for sync-dependencies by @typedb_dependencies
+    )
