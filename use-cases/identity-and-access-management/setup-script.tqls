@@ -3,5 +3,5 @@ transaction schema iam
 source schema.tql
 commit
 transaction write iam
-source sample-data.tql
+source data.tql
 commit
