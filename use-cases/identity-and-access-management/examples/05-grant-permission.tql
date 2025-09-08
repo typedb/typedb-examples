@@ -7,7 +7,7 @@ match
 $u isa user, has email "filip.inaros@vaticle.com";
 $a isa application, has name "Sage";
 $os isa operation-set, has name "manage order";
-$ac ($a, $os) isa access;
+$ac isa access, links ($a, $os);
 insert
 (permitted-subject: $u, permitted-access: $ac) isa direct-permission;
 
@@ -17,8 +17,10 @@ insert
 #--------------------------------------------------
 # Exercise 05:
 
+# If a user has permission for an operation-set, they automatically have permission to perform all operations in the operation-set.
 # Write a new query that shows what individual permissions a user will get through the operation set "manage order".
-# Keyword hints: match
+# Keyword hints: match, let..in
 # Type hints: operation-set, operation, name
+# Function hints: set_members(operation-set)
 
 #--------------------------------------------------

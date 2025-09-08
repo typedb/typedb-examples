@@ -1,0 +1,316 @@
+#
+# Copyright (C) 2023 Vaticle
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+#--------------------------------------------------
+# Clean old data:
+
+match $t isa $_; delete $t; end;
+match $t isa user; insert $t has full-name "Rocinante"; end;
+
+#--------------------------------------------------
+# Users:
+
+insert $s isa contractor, has full-name "James Holden", has email "james.holden@rocinante-consulting.com"; end; # consultant engineer
+insert $s isa employee, has full-name "Naomi Nagata", has email "naomi.nagata@vaticle.com"; end; # engineer (core)
+insert $s isa employee, has full-name "Amos Burton", has email "amos.burton@vaticle.com"; end; # accountant
+insert $s isa employee, has full-name "Alex Kamal", has email "alex.kamal@vaticle.com"; end; # engineer (cloud)
+insert $s isa employee, has full-name "Bobbie Draper", has email "bobbie.draper@vaticle.com"; end; # sales rep
+insert $s isa employee, has full-name "Clarissa Mao", has email "clarissa.mao@vaticle.com"; end; # engineer (web)
+insert $s isa employee, has full-name "Joe Miller", has email "joe.miller@vaticle.com"; end; # support agent
+
+#--------------------------------------------------
+# User groups:
+
+insert $s isa business-unit, has name "Engineering"; end;
+insert $s isa business-unit, has name "Core"; end;
+insert $s isa business-unit, has name "Cloud"; end;
+insert $s isa business-unit, has name "Web"; end;
+insert $s isa business-unit, has name "Finance"; end;
+insert $s isa business-unit, has name "Customer Support"; end;
+insert $s isa user-role, has name "web admin"; end;
+insert $s isa user-role, has name "web editor"; end;
+insert $s isa user-role, has name "engineer"; end;
+insert $s isa user-account, has email "sales@vaticle.com"; end;
+
+#--------------------------------------------------
+# Group memberships:
+
+match $s isa subject, has id "Engineering"; $g isa user-group, has id "engineer"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "Cloud"; $g isa user-group, has id "Engineering"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "Core"; $g isa user-group, has id "Engineering"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "Web"; $g isa user-group, has id "Engineering"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "web admin"; $g isa user-group, has id "web editor"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "james.holden@rocinante-consulting.com"; $g isa user-group, has id "engineer"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "naomi.nagata@vaticle.com"; $g isa user-group, has id "Core"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "amos.burton@vaticle.com"; $g isa user-group, has id "Finance"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "alex.kamal@vaticle.com"; $g isa user-group, has id "Cloud"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "bobbie.draper@vaticle.com"; $g isa user-group, has id "sales@vaticle.com"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "clarissa.mao@vaticle.com"; $g isa user-group, has id "Web"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "clarissa.mao@vaticle.com"; $g isa user-group, has id "web admin"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "joe.miller@vaticle.com"; $g isa user-group, has id "Customer Support"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+
+#--------------------------------------------------
+# Resources:
+
+insert $o isa file, has path "root/engineering/typedb/feature_roadmap.docx", has object-type "file"; end;
+insert $o isa file, has path "root/engineering/typedb-cloud/pentest_results_oct22.pdf", has object-type "file"; end;
+insert $o isa file, has path "root/engineering/typedb-cloud/pentest_results_mar23.pdf", has object-type "file"; end;
+insert $o isa purchase-order, has reference "MCRN-01", has object-type "order"; end;
+insert $o isa purchase-order, has reference "MCRN-02", has object-type "order"; end;
+insert $o isa purchase-order, has reference "MCRN-03", has object-type "order"; end;
+insert $o isa customer-account, has email "chrisjen.avasarala@google.com", has object-type "account"; end;
+insert $o isa customer-account, has email "camina.drummer@ibm.com", has object-type "account"; end;
+insert $o isa customer-account, has email "klaes.ashford@nestle.com", has object-type "account"; end;
+insert $o isa record, has primary-key "google", has object-type "record"; end;
+insert $o isa record, has primary-key "ibm", has object-type "record"; end;
+insert $o isa record, has primary-key "nestle", has object-type "record"; end;
+insert $o isa record, has primary-key "ibm-nov-21", has object-type "record"; end;
+insert $o isa record, has primary-key "ibm-nov-22", has object-type "record"; end;
+insert $o isa record, has primary-key "nestle-aug-22", has object-type "record"; end;
+insert $o isa record, has primary-key "google-feb-23", has object-type "record"; end;
+insert $o isa pull-request, has hash "0c1022dbb07f427e40f900fc6209134dd4c58a0a", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "03bb369cda4bc10f32bf39283e5f6cf68da7d7ce", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "1aa95605877265544fc432004be6449bdec7cf56", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "1aa95605877265544fc432004be6449bdec7cf56", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "4003ab4cf4f5776a72280e599f39553bd0c01528", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "b00a22929bd997dfbb9294f6716645b71f8150ad", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "949106635c7fae57ec11b77e7e86c7a9aaa0e57d", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "5ca615182e6e2a324f92660629e240b56dc0a8f3", has object-type "pull request"; end;
+insert $o isa pull-request, has hash "2c82e01378ba5ccf54b42b9038f132d43ece650c", has object-type "pull request"; end;
+
+#--------------------------------------------------
+# Resource collections:
+
+insert $o isa directory, has path "root", has object-type "directory"; end;
+insert $o isa directory, has path "root/engineering", has object-type "directory"; end;
+insert $o isa directory, has path "root/engineering/typedb", has object-type "directory"; end;
+insert $o isa directory, has path "root/engineering/typedb-cloud", has object-type "directory"; end;
+insert $o isa application, has name "Sage", has object-type "erp application"; end;
+insert $o isa application, has name "Salesforce", has object-type "crm application"; end;
+insert $o isa application, has name "PostgreSQL", has object-type "dbm application"; end;
+insert $o isa application, has name "GitHub", has object-type "vcs application"; end;
+insert $o isa database, has name "customer_accounts", has object-type "database"; end;
+insert $o isa table, has name "customer", has object-type "table"; end;
+insert $o isa table, has name "order", has object-type "table"; end;
+insert $o isa branch, has name "core/master", has object-type "branch"; end;
+insert $o isa branch, has name "cloud/master", has object-type "branch"; end;
+insert $o isa branch, has name "web/master", has object-type "branch"; end;
+insert $o isa repository, has name "core", has object-type "repository"; end;
+insert $o isa repository, has name "cloud", has object-type "repository"; end;
+insert $o isa repository, has name "web", has object-type "repository"; end;
+
+#--------------------------------------------------
+# Collection memberships:
+
+match $o isa object, has id "root/engineering"; $c isa resource-collection, has id "root"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "root/engineering/typedb"; $c isa resource-collection, has id "root/engineering"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "root/engineering/typedb-cloud"; $c isa resource-collection, has id "root/engineering"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "customer"; $c isa resource-collection, has id "customer_accounts"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "order"; $c isa resource-collection, has id "customer_accounts"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $c isa resource-collection, has id "root/engineering/typedb"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "root/engineering/typedb-cloud/pentest_results_oct22.pdf"; $c isa resource-collection, has id "root/engineering/typedb-cloud"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "root/engineering/typedb-cloud/pentest_results_mar23.pdf"; $c isa resource-collection, has id "root/engineering/typedb-cloud"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "MCRN-01"; $c isa resource-collection, has id "Sage"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "MCRN-02"; $c isa resource-collection, has id "Sage"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "MCRN-03"; $c isa resource-collection, has id "Sage"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "chrisjen.avasarala@google.com"; $c isa resource-collection, has id "Salesforce"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "camina.drummer@ibm.com"; $c isa resource-collection, has id "Salesforce"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "klaes.ashford@nestle.com"; $c isa resource-collection, has id "Salesforce"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "google"; $c isa resource-collection, has id "customer"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "ibm"; $c isa resource-collection, has id "customer"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "nestle"; $c isa resource-collection, has id "customer"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "ibm-nov-21"; $c isa resource-collection, has id "order"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "nestle-aug-22"; $c isa resource-collection, has id "order"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "ibm-nov-22"; $c isa resource-collection, has id "order"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "google-feb-23"; $c isa resource-collection, has id "order"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "order"; $c isa resource-collection, has id "customer_accounts"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "customer"; $c isa resource-collection, has id "customer_accounts"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "customer_accounts"; $c isa resource-collection, has id "PostgreSQL"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "0c1022dbb07f427e40f900fc6209134dd4c58a0a"; $c isa resource-collection, has id "core/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "03bb369cda4bc10f32bf39283e5f6cf68da7d7ce"; $c isa resource-collection, has id "core/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "1aa95605877265544fc432004be6449bdec7cf56"; $c isa resource-collection, has id "core/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $c isa resource-collection, has id "cloud/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "b00a22929bd997dfbb9294f6716645b71f8150ad"; $c isa resource-collection, has id "cloud/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "949106635c7fae57ec11b77e7e86c7a9aaa0e57d"; $c isa resource-collection, has id "cloud/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "5ca615182e6e2a324f92660629e240b56dc0a8f3"; $c isa resource-collection, has id "web/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "2c82e01378ba5ccf54b42b9038f132d43ece650c"; $c isa resource-collection, has id "web/master"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "core/master"; $c isa resource-collection, has id "core"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "cloud/master"; $c isa resource-collection, has id "cloud"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "web/master"; $c isa resource-collection, has id "web"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "core"; $c isa resource-collection, has id "GitHub"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "cloud"; $c isa resource-collection, has id "GitHub"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+match $o isa object, has id "web"; $c isa resource-collection, has id "GitHub"; insert (resource-collection: $c, collection-member: $o) isa collection-membership; end;
+
+#--------------------------------------------------
+# Operations:
+
+insert $a isa operation, has name "create file", has object-type "directory"; end;
+insert $a isa operation, has name "view file", has object-type "file", has object-type "directory"; end;
+insert $a isa operation, has name "move file", has object-type "directory"; end;
+insert $a isa operation, has name "edit file", has object-type "file", has object-type "directory"; end;
+insert $a isa operation, has name "delete file", has object-type "file", has object-type "directory"; end;
+insert $a isa operation, has name "create subdirectory", has object-type "directory"; end;
+insert $a isa operation, has name "move subdirectory", has object-type "directory"; end;
+insert $a isa operation, has name "delete subdirectory", has object-type "directory"; end;
+insert $a isa operation, has name "create order", has object-type "erp application"; end;
+insert $a isa operation, has name "submit order", has object-type "order", has object-type "erp application"; end;
+insert $a isa operation, has name "approve order", has object-type "order", has object-type "erp application"; end;
+insert $a isa operation, has name "create account", has object-type "crm application"; end;
+insert $a isa operation, has name "view account", has object-type "account", has object-type "crm application"; end;
+insert $a isa operation, has name "modify account", has object-type "account", has object-type "crm application"; end;
+insert $a isa operation, has name "delete account", has object-type "account", has object-type "crm application"; end;
+insert $a isa operation, has name "insert record", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "select record", has object-type "record", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "update record", has object-type "record", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "delete record", has object-type "record", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "create table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "alter table", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "drop table", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "create database", has object-type "dbm application"; end;
+insert $a isa operation, has name "drop database", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation, has name "push commit", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "open pull request", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "approve pull request", has object-type "pull request", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "merge pull request", has object-type "pull request", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "create branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "rename branch", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "delete branch", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "create repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "rename repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "delete repository", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation, has name "grant permission", has object-type "object"; end;
+insert $a isa operation, has name "revoke permission", has object-type "object"; end;
+insert $a isa operation, has name "grant ownership", has object-type "object"; end;
+insert $a isa operation, has name "revoke ownership", has object-type "object"; end;
+
+#--------------------------------------------------
+# Operation sets:
+
+insert $a isa operation-set, has name "write file", has object-type "file", has object-type "directory"; end;
+insert $a isa operation-set, has name "manage subdirectory", has object-type "directory"; end;
+insert $a isa operation-set, has name "manage directory", has object-type "directory"; end;
+insert $a isa operation-set, has name "manage order", has object-type "order", has object-type "erp application"; end;
+insert $a isa operation-set, has name "manage account", has object-type "account", has object-type "crm application"; end;
+insert $a isa operation-set, has name "write record", has object-type "record", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation-set, has name "manage table", has object-type "table", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation-set, has name "manage database", has object-type "database", has object-type "dbm application"; end;
+insert $a isa operation-set, has name "manage pull request", has object-type "pull request", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation-set, has name "manage branch", has object-type "branch", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation-set, has name "manage repository", has object-type "repository", has object-type "vcs application"; end;
+insert $a isa operation-set, has name "manage permissions", has object-type "object"; end;
+insert $a isa operation-set, has name "manage ownership", has object-type "object"; end;
+
+#--------------------------------------------------
+# Set memberships:
+
+match $a isa action, has name "create file"; $s isa operation-set, has name "write file"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "view file"; $s isa operation-set, has name "write file"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "edit file"; $s isa operation-set, has name "write file"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete file"; $s isa operation-set, has name "write file"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create subdirectory"; $s isa operation-set, has name "manage subdirectory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "move subdirectory"; $s isa operation-set, has name "manage subdirectory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete subdirectory"; $s isa operation-set, has name "manage subdirectory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "move file"; $s isa operation-set, has name "manage subdirectory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "write file"; $s isa operation-set, has name "manage directory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "manage subdirectory"; $s isa operation-set, has name "manage directory"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create order"; $s isa operation-set, has name "manage order"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "submit order"; $s isa operation-set, has name "manage order"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "approve order"; $s isa operation-set, has name "manage order"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create account"; $s isa operation-set, has name "manage account"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "view account"; $s isa operation-set, has name "manage account"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "modify account"; $s isa operation-set, has name "manage account"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete account"; $s isa operation-set, has name "manage account"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "insert record"; $s isa operation-set, has name "write record"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "select record"; $s isa operation-set, has name "write record"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "update record"; $s isa operation-set, has name "write record"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete record"; $s isa operation-set, has name "write record"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create table"; $s isa operation-set, has name "manage table"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "alter table"; $s isa operation-set, has name "manage table"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "drop table"; $s isa operation-set, has name "manage table"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "write record"; $s isa operation-set, has name "manage table"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create database"; $s isa operation-set, has name "manage database"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "drop database"; $s isa operation-set, has name "manage database"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "manage table"; $s isa operation-set, has name "manage database"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "open pull request"; $s isa operation-set, has name "manage pull request"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "approve pull request"; $s isa operation-set, has name "manage pull request"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "merge pull request"; $s isa operation-set, has name "manage pull request"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "push commit"; $s isa operation-set, has name "manage branch"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create branch"; $s isa operation-set, has name "manage branch"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "rename branch"; $s isa operation-set, has name "manage branch"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete branch"; $s isa operation-set, has name "manage branch"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "manage pull request"; $s isa operation-set, has name "manage branch"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "create repository"; $s isa operation-set, has name "manage repository"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "rename repository"; $s isa operation-set, has name "manage repository"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "delete repository"; $s isa operation-set, has name "manage repository"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "manage branch"; $s isa operation-set, has name "manage repository"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "grant permission"; $s isa operation-set, has name "manage permissions"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "revoke permission"; $s isa operation-set, has name "manage permissions"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "grant ownership"; $s isa operation-set, has name "manage ownership"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "revoke ownership"; $s isa operation-set, has name "manage ownership"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+match $a isa action, has name "manage permissions"; $s isa operation-set, has name "manage ownership"; insert (operation-set: $s, set-member: $a) isa set-membership; end;
+
+#--------------------------------------------------
+# Accesses:
+
+match
+$o isa object;
+not { $o has object-type "object"; };
+insert
+$o has object-type "object";
+end;
+
+match
+$o isa object, has object-type $type;
+$a isa action, has object-type $type;
+not { (accessed-object: $o, valid-action: $a) isa access; };
+not {
+  $o has object-type $type2;
+  $a has object-type $type2;
+  $type2 < $type;
+};
+insert
+(accessed-object: $o, valid-action: $a) isa access;
+end;
+
+#--------------------------------------------------
+# Permissions:
+
+match $s isa subject, has id "engineer"; $o isa object, has id "root/engineering"; $a isa action, has id "view file"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Core"; $o isa object, has id "root/engineering/typedb"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Cloud"; $o isa object, has id "root/engineering/typedb-cloud"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Finance"; $o isa object, has id "Sage"; $a isa action, has id "manage order"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "Salesforce"; $a isa action, has id "manage account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Customer Support"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Core"; $o isa object, has id "core"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Cloud"; $o isa object, has id "cloud"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "Web"; $o isa object, has id "web"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "web editor"; $o isa object, has id "web"; $a isa action, has id "manage branch"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "web admin"; $o isa object, has id "web"; $a isa action, has id "manage repository"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+
+#--------------------------------------------------
+# Access histories:
+
+match $s isa subject, has id "bobbie.draper@vaticle.com"; $o isa object, has id "camina.drummer@ibm.com"; $a isa action, has id "view account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-05T09:19:17; end;
+match $s isa subject, has id "joe.miller@vaticle.com"; $o isa object, has id "customer"; $a isa action, has id "insert record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-07T13:11:26; end;
+match $s isa subject, has id "alex.kamal@vaticle.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
+match $s isa subject, has id "naomi.nagata@vaticle.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
+

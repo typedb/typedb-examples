@@ -15,9 +15,8 @@ $u isa employee, has full-name $fn, has email $e;
 match
 $u isa user, has full-name $fn;
 $ug isa user-group, has id $id;
-$gm ($ug, $u) isa group-membership;
-group $fn;
-count;
+let $ug in group_memberships($u);
+reduce $c = count($ug) groupby $fn;
 
 #--------------------------------------------------
 # Exercise 03 solution:
@@ -34,9 +33,9 @@ match
 $e isa employee, has email "filip.inaros@vaticle.com";
 $o isa directory, has path "root/engineering/typedb-cloud";
 $a isa operation, has name $n;
-$ac ($o, $a) isa access;
-$p ($e, $ac) isa permission;
-get $n;
+$ac isa access ($o, $a);
+true == has_permission($e, $ac);
+select $n;
 
 #--------------------------------------------------
 # Exercise 05 solution:
@@ -44,7 +43,7 @@ get $n;
 match
 $o isa operation, has name $n;
 $os isa operation-set, has name "manage order";
-$sm ($os, $o) isa set-membership;
+let $o in set_members($os);
 
 #--------------------------------------------------
 # Exercise 06 solution:
@@ -53,8 +52,9 @@ $sm ($os, $o) isa set-membership;
 match
 $a isa action, has name $n;
 $o isa pull-request;
-($a, $o) isa access;
-get $n;
+$_ isa access ($a, $o);
+select $n;
+distinct;
 
 # Query to insert policy:
 match
@@ -80,8 +80,8 @@ $u isa user, has email $e;
 $o isa! $type, has id $id;
 $type sub object;
 $op isa operation, has name $n;
-$ac ($o, $op) isa access;
-$h ($u, $ac) isa access-history, has access-time $at;
+$ac isa access ($o, $op);
+$h isa access-history ($u, $ac), has access-time $at;
 
 #--------------------------------------------------
 # Exercise 09 solution:
@@ -90,9 +90,10 @@ match
 $u isa user, has full-name $n;
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
-$ac ($po, $o) isa access;
-$p ($u, $ac) isa permission, has validity true;
-get $n;
+$ac isa access ($po, $o);
+true == has_permission($u, $ac);
+false == violates_policies($u, $ac);
+select $n;
 
 #--------------------------------------------------
 # Exercise 10 solution:
@@ -101,7 +102,7 @@ match
 $u isa user, has email "amos.burton@vaticle.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "approve order";
-$ac ($po, $o) isa access;
+$ac isa access ($po, $o);
 insert
 (accessing-subject: $u, exercised-access: $ac) isa access-history, has access-time 2023-05-16T15:07:47;
 
