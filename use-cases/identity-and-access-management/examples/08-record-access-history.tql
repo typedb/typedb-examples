@@ -3,7 +3,7 @@
 # Because Filip excercised his permission to submit a purchase order, we need to record this fact in the database:
 
 match
-$u isa user, has email "filip.inaros@vaticle.com";
+$u isa user, has email "filip.inaros@typedb.com";
 $po isa purchase-order, has reference "MCRN-02";
 $o isa operation, has name "submit order";
 $ac isa access ($po, $o);

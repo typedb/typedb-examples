@@ -6,34 +6,38 @@ The database schema uses TypeDB 3.0, and showcases various features of the type 
 
 ## Setup
 
-The easiest way to load this example is using TypeDB Console.
+Ensure you have a running TypeDB 3.0 server.
 
-1. Boot up TypeDB 3.0
-2. In TypeDB Console, create a database - we'll use `bookstore` in this etup
-3.  open a `schema` transaction
-4. Load the `schema.tql` - the easiest is to use `source <path to schema.tql>`
-5. Commit the schema and verify no errors appear
-6. Open a `write` transaction
-7. Load the `data.tql` - the easiest is to use `source <path to data.tql>`
-8. Commit the schema
+The easiest way to load this example is using TypeDB Console. If you're using version 3.5.0, you can load the schema and data files in one line:
 
-The full copy-pasteable console script goes as follows, assuming you replace the paths correctly:
+Non-interactive mode:
 ```
-database create bookstore
-transaction schema bookstore
-source <path to schema.tql>
-commit
-transaction write bookstore
-source <path to data.tql>
-commit
+typedb console --username=<username> --address=<address>  --command="database create-init bookstore <path to schema.tql> <path to data.tql>"
 ```
 
-Now you can go to the 'Example Queries' section and plug them into a `read` transaction.
+The `database create-init` can also be run interactively if you're already in Console!
 
-Have fun!
+This example dataset is also released under the releases page so you **can load from URL**:
+```
+typdb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
+```
+
+### Manual setup
+
+If you wanted to load the dataset step-by-step or using an older version of TypeDB Console, you can do the following:
+
+1. In TypeDB Console, create a database - we'll use `bookstore` in this etup
+2.  open a `schema` transaction
+3. Load the `schema.tql` - the easiest is to use `source <path to schema.tql>`
+4. Commit the schema and verify no errors appear
+5. Open a `write` transaction
+6. Load the `data.tql` - the easiest is to use `source <path to data.tql>`
+7. Commit the schema
+
 
 ## Example Queries
-Here are some example queries that demonstrate common operations in our bookstore schema:
+
+Here are some example queries that demonstrate common operations in our bookstore you can run.
 
 ### Basic Book Queries
 

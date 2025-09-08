@@ -32,7 +32,7 @@ This demo assumes knowledge of:
 - All basic TypeQL syntax elements.
 - TypeDB Studio's interface.
 
-For more information, please see our [documentation](https://docs.vaticle.com/docs/general/introduction).
+For more information, please see our [documentation](https://typedb.com/docs/).
 
 ## Getting started
 

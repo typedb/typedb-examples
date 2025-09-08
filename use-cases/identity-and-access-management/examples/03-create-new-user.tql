@@ -5,7 +5,7 @@
 match
 $bu isa business-unit, has name "Cloud";
 insert
-$e isa employee, has full-name "Filip Inaros", has email "filip.inaros@vaticle.com";
+$e isa employee, has full-name "Filip Inaros", has email "filip.inaros@typedb.com";
 (user-group: $bu, group-member: $e) isa group-membership;
 
 # Here we're doing a match-insert query. First we match the existing group Cloud, then we insert the new user and give
@@ -14,7 +14,7 @@ $e isa employee, has full-name "Filip Inaros", has email "filip.inaros@vaticle.c
 #--------------------------------------------------
 # Exercise 03:
 
-# Write a new query to give Filip a second email address: "filip@vaticle.com". Try re-running Example 01 afterwards to
+# Write a new query to give Filip a second email address: "filip@typedb.com". Try re-running Example 01 afterwards to
 # see the results of these queries.
 # Keyword hints: match, insert
 # Type hints: employee, email

@@ -3,7 +3,7 @@
 # Now we're going to check what permissions our newly inserted user Filip has:
 
 match
-$e isa employee, has email "filip.inaros@vaticle.com";
+$e isa employee, has email "filip.inaros@typedb.com";
 $o isa object, has id $id;
 $a isa action, has name $n;
 $ac isa access, links ($o, $a);
@@ -14,7 +14,7 @@ $p isa direct-permission, links ($e, $ac);
 # as a member of the Cloud Team. 
 
 match
-$e isa employee, has email "filip.inaros@vaticle.com";
+$e isa employee, has email "filip.inaros@typedb.com";
 let $ac in list_permissions($e);
 $ac isa access, links ($o, $a);
 $o isa object, has id $id;
@@ -29,7 +29,7 @@ $a isa action, has name $n;
 
 #--------------------------------------------------
 match
-$e isa employee, has email "filip.inaros@vaticle.com";
+$e isa employee, has email "filip.inaros@typedb.com";
 $o isa directory, has path "root/engineering/typedb-cloud";
 $a isa operation, has name $n;
 $ac isa access ($o, $a);

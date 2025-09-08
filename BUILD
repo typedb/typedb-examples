@@ -27,7 +27,8 @@ pkg_tar(
     name = "typedb-examples-usecase-datasets-tar",
     srcs = [
         "//use-cases/bookstore:bookstore-dataset",
-        "//use-cases/social-network:social-network-dataset"
+        "//use-cases/social-network:social-network-dataset",
+        "//use-cases/identity-and-access-management:iam-dataset",
     ],
 )
 

@@ -15,7 +15,7 @@ This demo assumes knowledge of:
 - All basic TypeQL syntax elements.
 - TypeDB Studio's interface.
 
-For more information, please see our [documentation](https://docs.vaticle.com/docs/general/introduction). 
+For more information, please see our [documentation](https://docs.typedb.com/docs/general/introduction). 
 
 General knowledge of STIX2.1 would be a plus.
 

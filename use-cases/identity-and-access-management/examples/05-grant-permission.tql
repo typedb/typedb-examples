@@ -4,7 +4,7 @@
 # the department, so we're going to give him permission to manage purchase orders:
 
 match
-$u isa user, has email "filip.inaros@vaticle.com";
+$u isa user, has email "filip.inaros@typedb.com";
 $a isa application, has name "Sage";
 $os isa operation-set, has name "manage order";
 $ac isa access, links ($a, $os);

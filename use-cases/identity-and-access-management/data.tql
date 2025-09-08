@@ -1,6 +1,3 @@
-#
-# Copyright (C) 2023 Vaticle
-#
 # Licensed to the Apache Software Foundation (ASF) under one
 # or more contributor license agreements.  See the NOTICE file
 # distributed with this work for additional information
@@ -17,7 +14,6 @@
 # KIND, either express or implied.  See the License for the
 # specific language governing permissions and limitations
 # under the License.
-#
 
 #--------------------------------------------------
 # Clean old data:
@@ -29,12 +25,12 @@ match $t isa user; insert $t has full-name "Rocinante"; end;
 # Users:
 
 insert $s isa contractor, has full-name "James Holden", has email "james.holden@rocinante-consulting.com"; end; # consultant engineer
-insert $s isa employee, has full-name "Naomi Nagata", has email "naomi.nagata@vaticle.com"; end; # engineer (core)
-insert $s isa employee, has full-name "Amos Burton", has email "amos.burton@vaticle.com"; end; # accountant
-insert $s isa employee, has full-name "Alex Kamal", has email "alex.kamal@vaticle.com"; end; # engineer (cloud)
-insert $s isa employee, has full-name "Bobbie Draper", has email "bobbie.draper@vaticle.com"; end; # sales rep
-insert $s isa employee, has full-name "Clarissa Mao", has email "clarissa.mao@vaticle.com"; end; # engineer (web)
-insert $s isa employee, has full-name "Joe Miller", has email "joe.miller@vaticle.com"; end; # support agent
+insert $s isa employee, has full-name "Naomi Nagata", has email "naomi.nagata@typedb.com"; end; # engineer (core)
+insert $s isa employee, has full-name "Amos Burton", has email "amos.burton@typedb.com"; end; # accountant
+insert $s isa employee, has full-name "Alex Kamal", has email "alex.kamal@typedb.com"; end; # engineer (cloud)
+insert $s isa employee, has full-name "Bobbie Draper", has email "bobbie.draper@typedb.com"; end; # sales rep
+insert $s isa employee, has full-name "Clarissa Mao", has email "clarissa.mao@typedb.com"; end; # engineer (web)
+insert $s isa employee, has full-name "Joe Miller", has email "joe.miller@typedb.com"; end; # support agent
 
 #--------------------------------------------------
 # User groups:
@@ -48,7 +44,7 @@ insert $s isa business-unit, has name "Customer Support"; end;
 insert $s isa user-role, has name "web admin"; end;
 insert $s isa user-role, has name "web editor"; end;
 insert $s isa user-role, has name "engineer"; end;
-insert $s isa user-account, has email "sales@vaticle.com"; end;
+insert $s isa user-account, has email "sales@typedb.com"; end;
 
 #--------------------------------------------------
 # Group memberships:
@@ -59,13 +55,13 @@ match $s isa subject, has id "Core"; $g isa user-group, has id "Engineering"; in
 match $s isa subject, has id "Web"; $g isa user-group, has id "Engineering"; insert (user-group: $g, group-member: $s) isa group-membership; end;
 match $s isa subject, has id "web admin"; $g isa user-group, has id "web editor"; insert (user-group: $g, group-member: $s) isa group-membership; end;
 match $s isa subject, has id "james.holden@rocinante-consulting.com"; $g isa user-group, has id "engineer"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "naomi.nagata@vaticle.com"; $g isa user-group, has id "Core"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "amos.burton@vaticle.com"; $g isa user-group, has id "Finance"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "alex.kamal@vaticle.com"; $g isa user-group, has id "Cloud"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "bobbie.draper@vaticle.com"; $g isa user-group, has id "sales@vaticle.com"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "clarissa.mao@vaticle.com"; $g isa user-group, has id "Web"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "clarissa.mao@vaticle.com"; $g isa user-group, has id "web admin"; insert (user-group: $g, group-member: $s) isa group-membership; end;
-match $s isa subject, has id "joe.miller@vaticle.com"; $g isa user-group, has id "Customer Support"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "naomi.nagata@typedb.com"; $g isa user-group, has id "Core"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "amos.burton@typedb.com"; $g isa user-group, has id "Finance"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "alex.kamal@typedb.com"; $g isa user-group, has id "Cloud"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "bobbie.draper@typedb.com"; $g isa user-group, has id "sales@typedb.com"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "clarissa.mao@typedb.com"; $g isa user-group, has id "Web"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "clarissa.mao@typedb.com"; $g isa user-group, has id "web admin"; insert (user-group: $g, group-member: $s) isa group-membership; end;
+match $s isa subject, has id "joe.miller@typedb.com"; $g isa user-group, has id "Customer Support"; insert (user-group: $g, group-member: $s) isa group-membership; end;
 
 #--------------------------------------------------
 # Resources:
@@ -297,8 +293,8 @@ match $s isa subject, has id "engineer"; $o isa object, has id "root/engineering
 match $s isa subject, has id "Core"; $o isa object, has id "root/engineering/typedb"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 match $s isa subject, has id "Cloud"; $o isa object, has id "root/engineering/typedb-cloud"; $a isa action, has id "manage directory"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 match $s isa subject, has id "Finance"; $o isa object, has id "Sage"; $a isa action, has id "manage order"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "Salesforce"; $a isa action, has id "manage account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
-match $s isa subject, has id "sales@vaticle.com"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@typedb.com"; $o isa object, has id "Salesforce"; $a isa action, has id "manage account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
+match $s isa subject, has id "sales@typedb.com"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 match $s isa subject, has id "Customer Support"; $o isa object, has id "customer_accounts"; $a isa action, has id "write record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 match $s isa subject, has id "Core"; $o isa object, has id "core"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
 match $s isa subject, has id "Cloud"; $o isa object, has id "cloud"; $a isa action, has id "manage pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (permitted-subject: $s, permitted-access: $ac) isa direct-permission; end;
@@ -309,8 +305,8 @@ match $s isa subject, has id "web admin"; $o isa object, has id "web"; $a isa ac
 #--------------------------------------------------
 # Access histories:
 
-match $s isa subject, has id "bobbie.draper@vaticle.com"; $o isa object, has id "camina.drummer@ibm.com"; $a isa action, has id "view account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-05T09:19:17; end;
-match $s isa subject, has id "joe.miller@vaticle.com"; $o isa object, has id "customer"; $a isa action, has id "insert record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-07T13:11:26; end;
-match $s isa subject, has id "alex.kamal@vaticle.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
-match $s isa subject, has id "naomi.nagata@vaticle.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
+match $s isa subject, has id "bobbie.draper@typedb.com"; $o isa object, has id "camina.drummer@ibm.com"; $a isa action, has id "view account"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-05T09:19:17; end;
+match $s isa subject, has id "joe.miller@typedb.com"; $o isa object, has id "customer"; $a isa action, has id "insert record"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-07T13:11:26; end;
+match $s isa subject, has id "alex.kamal@typedb.com"; $o isa object, has id "4003ab4cf4f5776a72280e599f39553bd0c01528"; $a isa action, has id "merge pull request"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-10T09:12:21; end;
+match $s isa subject, has id "naomi.nagata@typedb.com"; $o isa object, has id "root/engineering/typedb/feature_roadmap.docx"; $a isa action, has id "edit file"; $ac isa access, links (accessed-object: $o, valid-action: $a); insert (accessing-subject: $s, exercised-access: $ac) isa access-history, has access-time 2023-05-12T11:47:34; end;
 
