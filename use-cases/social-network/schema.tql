@@ -382,7 +382,7 @@ fun parent_places_linked_list($place: place) -> { place, place }:
     };
   return { $parent, $child };
 
-fun located_in_transitive($place: place, $location: place) -> place:
+fun located_in_transitive($place: place, $location: place) -> { place }:
   match
     {
       $location is $place;
@@ -391,4 +391,4 @@ fun located_in_transitive($place: place, $location: place) -> place:
       location (located: $place, place: $parent);
       let $_ = located_in_transitive($parent, $location);
     };
-  return first $parent;
+  return { $parent };
