@@ -50,6 +50,7 @@ jobs:
 
   test-backends:
     name: Test Backend (${{ matrix.backend }})
+    needs: launch-typedb-cloud
     runs-on: ubuntu-latest
     env:
       TYPEDB_ADDRESS: ${{ needs.launch.outputs.address }}
@@ -136,6 +137,7 @@ jobs:
 
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
+    needs: test-backends
     runs-on: ubuntu-latest
 
     env:
@@ -168,20 +170,13 @@ jobs:
     if: always()
     
     steps:
-    - name: Download test results
-      uses: actions/download-artifact@v4
-      with:
-        name: test-reports
-        path: test-reports/
-    
     - name: Upload test results
       uses: actions/upload-artifact@v4
       with:
         name: test-reports
         path: |
           test-reports/test-report-*.html
-          test-reports/junit-*.xml
-    
+
     - name: Check test results
       if: contains(needs.*.result, 'failure')
       run: |
