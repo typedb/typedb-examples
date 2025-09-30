@@ -28,6 +28,8 @@ jobs:
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
         id: launch
         run: |
+          set -E
+          
           export CLOUD_API_KEY=$(curl --fail --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
@@ -148,6 +150,8 @@ jobs:
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
         id: destroy
         run: |
+          set -E
+          
           export CLOUD_API_KEY=$(curl --fail --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
