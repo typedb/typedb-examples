@@ -36,10 +36,13 @@ jobs:
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
-          RES=$(curl --fail-with-body --request POST \
+          RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
             --json '{"id":"$CLUSTER_ID","serverCount":1,"storageSizeGB":10,"provider":"gcp","region":"europe-west2","isFree":false,"machineType":"c2d-highcpu-2","storageType":"standard-rwo","version":"3.5.1"}')
+          
+          echo $RES | jq
+          if [[ $(echo $RES | jq -r '.message') != null ]]; then exit 1; fi 
           
           sleep 600 # Wait for the cluster to be ready TODO:sam - make this do some like polling loop i guess
           
