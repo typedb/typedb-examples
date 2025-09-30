@@ -1,0 +1,185 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'fullstack/backend/**'
+      - '.github/workflows/backend-ci.yml'
+  pull_request:
+    paths:
+      - 'fullstack/backend/**'
+      - '.github/workflows/backend-ci.yml'
+
+jobs:
+  launch-typedb-cloud:
+    name: Launch TypeDB Cloud cluster
+    runs-on: ubuntu-latest
+
+    outputs:
+      address: ${{ steps.launch.outputs.address }}
+      cluster_id: ${{ steps.launch.outputs.cluster_id }}
+
+    steps:
+      - name: Launch Cluster
+        env:
+          CLOUD_CLIENT_ID: ${{ vars.TYPEDB_CLOUD_CLIENT_ID }}
+          CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
+          TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
+          SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
+        id: launch
+        run: |
+          export CLOUD_API_KEY=$(curl --request POST \
+            --url https://cloud.typedb.com/api/auth \
+            --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
+          
+          export CLUSTER_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c10)
+          
+          export RES=$(curl --request POST \
+            --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
+            --header "Authorization: Bearer $CLOUD_API_KEY" \
+            --json '{"id":"$CLUSTER_ID","serverCount":1,"storageSizeGB":10,"provider":"gcp","region":"europe-west2","isFree":true,"machineType":"c2d-highcpu-2","storageType":"standard-rwo","version":"3.5.1"}')
+          
+          sleep 600 # Wait for the cluster to be ready TODO:sam - make this do some like polling loop i guess
+          
+          export ADDRESS=$(echo $RES | jq -r '.servers[0].address')
+          
+          echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
+          echo "address=$ADDRESS" >> $GITHUB_OUTPUT
+
+  test-backends:
+    name: Test Backend (${{ matrix.backend }})
+    runs-on: ubuntu-latest
+    env:
+      TYPEDB_ADDRESS: ${{ needs.launch.outputs.address }}
+    strategy:
+      matrix:
+        backend: [java, python, rust]
+        include:
+          - backend: java
+            working-directory: fullstack/backend/java
+          - backend: python
+            working-directory: fullstack/backend/python
+          - backend: rust
+            working-directory: fullstack/backend/rust
+    
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up JDK 17 (Java only)
+      if: matrix.backend == 'java'
+      uses: actions/setup-java@v3
+      with:
+        java-version: '17'
+        distribution: 'temurin'
+
+    - name: Set up Python (Python only)
+      if: matrix.backend == 'python'
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.8'
+
+    - name: Set up Rust (Rust only)
+      if: matrix.backend == 'rust'
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: stable
+        components: rustfmt, clippy
+
+    - name: Install dependencies (Python)
+      if: matrix.backend == 'python'
+      working-directory: ${{ matrix.working-directory }}
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    # Run the API tests against the running backend
+    - name: Run API tests
+      working-directory: ${{ github.workspace }}
+      run: |
+        # Start the backend in the background
+        cd ${{ matrix.working-directory }}
+        case ${{ matrix.backend }} in
+          java)
+            ./gradlew bootRun &
+            BACKEND_PID=$!
+            ;;
+          python)
+            python app.py &
+            BACKEND_PID=$!
+            ;;
+          rust)
+            cargo run &
+            BACKEND_PID=$!
+            ;;
+        esac
+        
+        # Give the backend time to start
+        sleep 15
+        
+        # Install test dependencies
+        cd ${{ github.workspace }}
+        pip install -r fullstack/backend/tests/requirements.txt
+        
+        # Run the API tests against the backend
+        echo "Running API tests against ${{ matrix.backend }} backend"
+        PYTHONPATH=$PYTHONPATH:${{ github.workspace }}/fullstack/backend/tests \
+          pytest fullstack/backend/tests/ -v \
+          --base-url=http://localhost:8000 \
+          --html=test-report-${{ matrix.backend }}.html \
+          --self-contained-html
+        
+        # Clean up
+        kill $BACKEND_PID
+
+  destroy-typedb-cloud:
+    name: Destroy TypeDB Cloud cluster
+    runs-on: ubuntu-latest
+
+    env:
+      CLUSTER_ID: ${{ needs.launch.outputs.cluster_id }}
+
+    steps:
+      - name: Destroy Cluster
+        env:
+          CLOUD_CLIENT_ID: ${{ vars.TYPEDB_CLOUD_CLIENT_ID }}
+          CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
+          TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
+          SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
+        id: destroy
+        run: |
+          export CLOUD_API_KEY=$(curl --request POST \
+            --url https://cloud.typedb.com/api/auth \
+            --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
+          
+          curl --request DELETE \
+            --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
+            --header "Authorization: Bearer $CLOUD_API_KEY"
+
+  # This job runs the full test suite against all backends with test reports
+  test-reports:
+    name: Test Reports
+    needs: test-backends
+    runs-on: ubuntu-latest
+    if: always()
+    
+    steps:
+    - name: Download test results
+      uses: actions/download-artifact@v3
+      with:
+        name: test-reports
+        path: test-reports/
+    
+    - name: Upload test results
+      uses: actions/upload-artifact@v3
+      with:
+        name: test-reports
+        path: |
+          test-reports/test-report-*.html
+          test-reports/junit-*.xml
+    
+    - name: Check test results
+      if: contains(needs.*.result, 'failure')
+      run: |
+        echo "Some tests failed. Check the test reports for details."
+        exit 1
