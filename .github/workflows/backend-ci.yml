@@ -34,6 +34,8 @@ jobs:
           
           CLUSTER_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c10)
           
+          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
+          
           RES=$(curl --fail-with-body --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
