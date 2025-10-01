@@ -3,7 +3,7 @@
 This is the Python backend for TypeSpace, implemented with Flask.
 
 ## Requirements
-- Python 3.8+
+- Python 3.9+
 
 ## Setup & Run
 
