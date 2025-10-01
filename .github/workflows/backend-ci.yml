@@ -66,16 +66,16 @@ jobs:
     strategy:
       matrix:
         backend:
-#          - java
+          - java
           - python
-#          - rust
+          - rust
         include:
-#          - backend: java
-#            working-directory: fullstack/backend/java
+          - backend: java
+            working-directory: fullstack/backend/java
           - backend: python
             working-directory: fullstack/backend/python
-#          - backend: rust
-#            working-directory: fullstack/backend/rust
+          - backend: rust
+            working-directory: fullstack/backend/rust
     
     steps:
     - name: Checkout repository
