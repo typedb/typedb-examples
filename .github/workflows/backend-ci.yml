@@ -62,6 +62,7 @@ jobs:
     runs-on: ubuntu-latest
     env:
       TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
+      TYPEDB_TLS_ENABLED: "True"
     strategy:
       matrix:
         backend:
