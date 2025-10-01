@@ -32,7 +32,7 @@ jobs:
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
           
-          CLUSTER_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c10)
+          CLUSTER_ID=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c10)
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID with $CLOUD_API_KEY"
           
