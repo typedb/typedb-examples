@@ -18,6 +18,7 @@ class Page(BaseModel):
 
 class Profile(Page):
     username: Optional[str] = None
+    can_publish: Optional[bool] = Field(alias="canPublish", default=True)
 
 class User(Profile):
     type: Literal[PageType.PERSON] = PageType.PERSON
@@ -31,7 +32,7 @@ class User(Profile):
     friends: List[str] = []
     number_of_friends: int = Field(alias="numberOfFriends", default=0)
 
-class Group(Profile):
+class Group(Page):
     type: Literal[PageType.GROUP] = PageType.GROUP
     group_id: Optional[str] = Field(alias="groupId", default=None)
     tags: List[str] = []

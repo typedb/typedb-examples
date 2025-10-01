@@ -13,7 +13,6 @@ class TestGroupsAPI:
             "isActive": True,
             "pageVisibility": "public",
             "postVisibility": "public",
-            "canPublish": True,
         }
         return group_data
     
@@ -24,8 +23,11 @@ class TestGroupsAPI:
         group_res = api_client.get(f"/api/organization/{test_group['groupId']}")
         group = Group(**group_res.json())
         assert group.name == test_group["name"]
-        assert group.username == test_group["groupId"]
         assert group.type == PageType.GROUP
+        assert group.bio == test_group["bio"]
+        assert group.is_active == test_group["isActive"]
+        assert group.page_visibility == test_group["pageVisibility"]
+        assert group.post_visibility == test_group["postVisibility"]
         return group
 
 class TestOrganizationsAPI:
@@ -49,4 +51,7 @@ class TestOrganizationsAPI:
         assert org.name == test_organization["name"]
         assert org.username == test_organization["username"]
         assert org.type == PageType.ORGANIZATION
+        assert org.bio == test_organization["bio"]
+        assert org.is_active == test_organization["isActive"]
+        assert org.can_publish == test_organization["canPublish"]
         return org
