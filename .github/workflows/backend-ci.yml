@@ -84,7 +84,8 @@ jobs:
     - name: Create and initialise database
       run: |
         curl -sSL https://typedb.com/install.sh | sh && export PATH="$HOME/.typedb:$PATH"
-        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-schema.tql https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-data.tql"
+        touch emptydata.tql
+        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-schema.tql emptydata.tql"
 
     - name: Set up JDK 17 (Java only)
       if: matrix.backend == 'java'
@@ -116,6 +117,8 @@ jobs:
     # Run the API tests against the running backend
     - name: Run API tests
       working-directory: ${{ github.workspace }}
+      env:
+        TYPEDB_DATABASE: ${{ matrix.backend }}
       run: |
         # Start the backend in the background
         cd ${{ matrix.working-directory }}
