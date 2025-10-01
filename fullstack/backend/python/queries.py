@@ -153,17 +153,17 @@ def create_user_query(payload):
     query = "insert $_ isa person"
     query += f", has name \"{payload['name']}\""
     query += f", has username \"{payload['username']}\""
-    if payload['profilePicture']:
+    if payload.get('profilePicture'):
         query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has gender \"{payload['gender']}\""
-    if payload['language']:
+    if payload.get('language'):
         query += f", has language \"{payload['language']}\""
     query += f", has email \"{payload['email']}\""
-    if payload['phone']:
+    if payload.get('phone'):
         query += f", has phone \"{payload['phone']}\""
-    if payload['relationshipStatus']:
+    if payload.get('relationshipStatus'):
         query += f", has relationship-status \"{payload['relationshipStatus']}\""
-    if payload['badge']:
+    if payload.get('badge'):
         query += f", has badge \"{payload['badge']}\""
     query += f", has bio \"{payload['bio']}\""
     query += f", has can-publish {payload['canPublish']}".lower()
@@ -177,13 +177,13 @@ def create_group_query(payload):
     query = "insert $_ isa group"
     query += f", has name \"{payload['name']}\""
     query += f", has group-id \"{payload['groupId']}\""
-    if payload['profilePicture']:
+    if payload.get('profilePicture'):
         query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has bio \"{payload['bio']}\""
     query += f", has is-active {payload['isActive']}".lower()
     query += f", has page-visibility \"{payload['pageVisibility']}\""
     query += f", has post-visibility \"{payload['postVisibility']}\""
-    if payload['badge']:
+    if payload.get('badge'):
         query += f", has badge \"{payload['badge']}\""
     for tag in payload['tags']:
         query += f", has tag \"{tag}\""
@@ -194,12 +194,12 @@ def create_organization_query(payload):
     query = "insert $_ isa organization"
     query += f", has name \"{payload['name']}\""
     query += f", has username \"{payload['username']}\""
-    if payload['profilePicture']:
+    if payload.get('profilePicture'):
         query += f", has profile-picture \"{payload['profilePicture']}\""
     query += f", has bio \"{payload['bio']}\""
     query += f", has is-active {payload['isActive']}".lower()
     query += f", has can-publish {payload['canPublish']}".lower()
-    if payload['badge']:
+    if payload.get('badge'):
         query += f", has badge \"{payload['badge']}\""
     for tag in payload['tags']:
         query += f", has tag \"{tag}\""
