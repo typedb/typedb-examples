@@ -34,12 +34,12 @@ jobs:
           
           CLUSTER_ID=$(LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c10)
           
-          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
+          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID with $CLOUD_API_KEY"
           
           RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
-            --json '{"id":"$CLUSTER_ID","serverCount":1,"storageSizeGB":10,"provider":"gcp","region":"europe-west2","isFree":false,"machineType":"c2d-highcpu-2","storageType":"standard-rwo","version":"3.5.1"}')
+            --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"3.5.1\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
           
           echo $RES | jq
           if [[ $(echo $RES | jq -r '.message') != null ]]; then exit 1; fi 
