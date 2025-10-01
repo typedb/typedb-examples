@@ -65,6 +65,7 @@ jobs:
       TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
       TYPEDB_TLS_ENABLED: "true"
     strategy:
+      fail-fast: false
       matrix:
         backend:
           - java
