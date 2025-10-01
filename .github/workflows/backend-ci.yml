@@ -140,7 +140,7 @@ jobs:
         echo "Running API tests against ${{ matrix.backend }} backend"
         PYTHONPATH=$PYTHONPATH:${{ github.workspace }}/fullstack/backend/tests \
           pytest fullstack/backend/tests/ -v \
-          --base-url=http://localhost:8000 \
+          --base-url=http://localhost:8080 \
           --html=test-report-${{ matrix.backend }}.html \
           --self-contained-html
         
