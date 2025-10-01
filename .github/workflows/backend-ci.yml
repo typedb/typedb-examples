@@ -51,6 +51,7 @@ jobs:
           done
           
           ADDRESS=$(echo $RES | jq -r '.servers[0].address')
+          echo "recording address as $ADDRESS"
           
           echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
           echo "address=$ADDRESS" >> $GITHUB_OUTPUT
