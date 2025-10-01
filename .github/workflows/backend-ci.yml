@@ -33,10 +33,11 @@ jobs:
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
+          TYPEDB_VERSION="3.5.2"
           CLUSTER_RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
-            --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"3.5.1\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
+            --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"$TYPEDB_VERSION\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
           
           while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running' ]]; do 
             echo
