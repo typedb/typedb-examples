@@ -8,7 +8,7 @@ class PageType(str, Enum):
     ORGANIZATION = "organization"
 
 class Page(BaseModel):
-    id: str
+    id: Optional[str] = None
     type: PageType
     name: str
     bio: str
