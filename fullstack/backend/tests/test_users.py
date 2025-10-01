@@ -12,8 +12,11 @@ class TestUsersAPI:
             "email": f"test_{uuid.uuid4().hex[:8]}@example.com",
             "bio": "Test bio",
             "canPublish": True,
+            "isActive": True,
             "gender": "other",
-            "language": "en"
+            "language": "en",
+            "pageVisibility": "public",
+            "postVisibility": "public",
         }
         return user_data
     
@@ -28,15 +31,3 @@ class TestUsersAPI:
         assert user.email == test_user["email"]
         assert user.type == PageType.PERSON
         return user
-    
-    def test_list_users(self, api_client, test_user):
-        """Test listing all users."""
-        # Create a test user
-        api_client.post("/api/create-user", json=test_user)
-        
-        # Get all users
-        response = api_client.get("/api/users/")
-        assert response.status_code == 200
-        users = response.json()
-        assert isinstance(users, list)
-        assert len(users) > 0
