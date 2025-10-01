@@ -8,7 +8,7 @@ class TestGroupsAPI:
         """Fixture to create a test group."""
         group_data = {
             "name": f"Test Group {uuid.uuid4().hex[:4]}",
-            "username": f"group_{uuid.uuid4().hex[:8]}",
+            "groupId": f"group_{uuid.uuid4().hex[:8]}",
             "bio": "Test group description",
             "canPublish": True
         }
