@@ -17,7 +17,6 @@ jobs:
 
     outputs:
       address: ${{ steps.launch.outputs.address }}
-      cluster_id: ${{ steps.launch.outputs.cluster_id }}
 
     steps:
       - name: Launch Cluster
@@ -26,22 +25,21 @@ jobs:
           CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
           TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
+          CLUSTER_ID: ${{ github.sha }}
         id: launch
         run: |
           CLOUD_API_KEY=$(curl --fail-with-body --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
           
-          CLUSTER_ID=$(LC_ALL=C tr -dc 'a-z0-9' < /dev/urandom | head -c10)
-          
-          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID with $CLOUD_API_KEY"
+          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
           CLUSTER_RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
             --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"3.5.1\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
           
-          while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running ]]; do 
+          while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running' ]]; do 
             echo
             echo $CLUSTER_RES | jq
             if [[ $(echo $CLUSTER_RES | jq -r '.message') != null ]]; then exit 1; fi
@@ -154,9 +152,6 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
 
-    env:
-      CLUSTER_ID: ${{ needs.launch.outputs.cluster_id }}
-
     steps:
       - name: Destroy Cluster
         env:
@@ -164,11 +159,14 @@ jobs:
           CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
           TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
+          CLUSTER_ID: ${{ github.sha }}
         id: destroy
         run: |
           CLOUD_API_KEY=$(curl --fail-with-body --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
+          
+          echo "Destroying $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
           curl --fail-with-body --request DELETE \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
