@@ -1,5 +1,5 @@
 import pytest
-from models import GroupCreate, OrganizationCreate, GroupResponse, OrganizationResponse, PageType
+from models import Group, Organization, PageType
 import uuid
 
 class TestGroupsAPI:
@@ -21,8 +21,8 @@ class TestGroupsAPI:
         """Test creating a new group."""
         response = api_client.post("/api/create-group", json=test_group)
         assert response.status_code == 200
-        group_response = api_client.get(f"/api/organization/{test_group['username']}")
-        group = GroupResponse(**group_response.json())
+        group_res = api_client.get(f"/api/organization/{test_group['username']}")
+        group = Group(**group_res.json())
         assert group.name == test_group["name"]
         assert group.username == test_group["groupId"]
         assert group.type == PageType.GROUP
@@ -44,8 +44,8 @@ class TestOrganizationsAPI:
         """Test creating a new organization."""
         response = api_client.post("/api/create-organization", json=test_organization)
         assert response.status_code == 200
-        org_response = api_client.get(f"/api/organization/{test_organization['username']}")
-        org = OrganizationResponse(**org_response.json())
+        org_res = api_client.get(f"/api/organization/{test_organization['username']}")
+        org = Organization(**org_res.json())
         assert org.name == test_organization["name"]
         assert org.username == test_organization["username"]
         assert org.type == PageType.ORGANIZATION
