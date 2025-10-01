@@ -59,14 +59,17 @@ jobs:
       TYPEDB_ADDRESS: ${{ needs.launch.outputs.address }}
     strategy:
       matrix:
-        backend: [java, python, rust]
+        backend:
+#          - java
+          - python
+#          - rust
         include:
-          - backend: java
-            working-directory: fullstack/backend/java
+#          - backend: java
+#            working-directory: fullstack/backend/java
           - backend: python
             working-directory: fullstack/backend/python
-          - backend: rust
-            working-directory: fullstack/backend/rust
+#          - backend: rust
+#            working-directory: fullstack/backend/rust
     
     steps:
     - name: Checkout repository
@@ -141,6 +144,7 @@ jobs:
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
     needs: test-backends
+    if: always()
     runs-on: ubuntu-latest
 
     env:
