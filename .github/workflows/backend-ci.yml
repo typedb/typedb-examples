@@ -90,7 +90,7 @@ jobs:
       if: matrix.backend == 'python'
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.9'
 
     - name: Set up Rust (Rust only)
       if: matrix.backend == 'rust'
@@ -104,7 +104,7 @@ jobs:
       working-directory: ${{ matrix.working-directory }}
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip3 install -r requirements.txt
 
     # Run the API tests against the running backend
     - name: Run API tests
