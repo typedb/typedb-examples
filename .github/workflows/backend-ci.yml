@@ -25,12 +25,13 @@ jobs:
           CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
           TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
-          CLUSTER_ID: ${{ github.sha }}
         id: launch
         run: |
           CLOUD_API_KEY=$(curl --fail-with-body --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
+          
+          CLUSTER_ID=echo ${{ github.sha }} | head -c10
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
@@ -159,13 +160,13 @@ jobs:
           CLOUD_CLIENT_SECRET: ${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}
           TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
           SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
-          CLUSTER_ID: ${{ github.sha }}
         id: destroy
         run: |
           CLOUD_API_KEY=$(curl --fail-with-body --request POST \
             --url https://cloud.typedb.com/api/auth \
             --header "Authorization: Basic $CLOUD_CLIENT_ID:$CLOUD_CLIENT_SECRET")
           
+          CLUSTER_ID=echo ${{ github.sha }} | head -c10
           echo "Destroying $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
           curl --fail-with-body --request DELETE \
