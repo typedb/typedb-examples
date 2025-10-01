@@ -54,7 +54,7 @@ def wait_for_api(api_client):
     max_attempts = 30
     for attempt in range(max_attempts):
         try:
-            response = api_client.get("/health")
+            response = api_client.get("/")
             if response.status_code == 200:
                 return
         except (requests.exceptions.ConnectionError, requests.exceptions.RequestException):
