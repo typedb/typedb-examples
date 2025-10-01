@@ -140,7 +140,7 @@ jobs:
         esac
         
         # Give the backend time to start
-        sleep 15
+        sleep 60
         
         # Install test dependencies
         cd ${{ github.workspace }}
