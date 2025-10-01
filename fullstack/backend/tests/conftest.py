@@ -7,12 +7,12 @@ from dataclasses import dataclass
 # Test configuration
 @dataclass
 class TestConfig:
-    base_url: str = "http://localhost:8000"  # Default port, can be overridden
+    base_url: str = "http://localhost:8080"  # Default port, can be overridden
     timeout: int = 10  # seconds
 
 # Fixture to get test configuration
 def pytest_addoption(parser):
-    parser.addoption("--base-url", action="store", default="http://localhost:8000")
+    parser.addoption("--base-url", action="store", default="http://localhost:8080")
 
 @pytest.fixture(scope="session")
 def config(pytestconfig):
