@@ -7,16 +7,19 @@ class PageType(str, Enum):
     GROUP = "group"
     ORGANIZATION = "organization"
 
-class ProfileBase(BaseModel):
+class Page(BaseModel):
+    id: str
+    type: PageType
     name: str
-    bio: Optional[str] = None
+    bio: str
     profile_picture: Optional[str] = Field(alias="profilePicture", default=None)
     badge: Optional[str] = None
     is_active: bool = Field(alias="isActive", default=True)
-    username: str
-    can_publish: bool = Field(alias="canPublish", default=False)
 
-class UserCreate(ProfileBase):
+class Profile(BaseModel):
+    username: Optional[str] = None
+
+class User(Profile):
     type: Literal[PageType.PERSON] = PageType.PERSON
     gender: Optional[str] = None
     language: Optional[str] = None
@@ -25,25 +28,19 @@ class UserCreate(ProfileBase):
     relationship_status: Optional[str] = Field(alias="relationshipStatus", default=None)
     page_visibility: Optional[str] = Field(alias="pageVisibility", default=None)
     post_visibility: Optional[str] = Field(alias="postVisibility", default=None)
-
-class UserResponse(UserCreate):
-    id: str
     friends: List[str] = []
     number_of_friends: int = Field(alias="numberOfFriends", default=0)
 
-class GroupCreate(ProfileBase):
+class Group(Profile):
     type: Literal[PageType.GROUP] = PageType.GROUP
-    members: List[str] = []
+    group_id: Optional[str] = Field(alias="groupId", default=None)
+    tags: List[str] = []
+    page_visibility: Optional[str] = Field(alias="pageVisibility", default=None)
+    post_visibility: Optional[str] = Field(alias="postVisibility", default=None)
 
-class GroupResponse(GroupCreate):
-    id: str
-
-class OrganizationCreate(ProfileBase):
+class Organization(Profile):
     type: Literal[PageType.ORGANIZATION] = PageType.ORGANIZATION
-    members: List[str] = []
-
-class OrganizationResponse(OrganizationCreate):
-    id: str
+    tags: List[str] = []
 
 class PostType(str, Enum):
     TEXT = "text"

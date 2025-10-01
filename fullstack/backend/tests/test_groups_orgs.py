@@ -20,11 +20,11 @@ class TestGroupsAPI:
     def test_create_group(self, api_client, test_group):
         """Test creating a new group."""
         response = api_client.post("/api/create-group", json=test_group)
-        assert response.status_code == 201
+        assert response.status_code == 200
         group_response = api_client.get(f"/api/organization/{test_group['username']}")
         group = GroupResponse(**group_response.json())
         assert group.name == test_group["name"]
-        assert group.username == test_group["username"]
+        assert group.username == test_group["groupId"]
         assert group.type == PageType.GROUP
         return group
 
