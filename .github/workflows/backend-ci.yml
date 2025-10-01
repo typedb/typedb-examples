@@ -61,7 +61,7 @@ jobs:
     needs: launch-typedb-cloud
     runs-on: ubuntu-latest
     env:
-      TYPEDB_ADDRESS: ${{ needs.launch.outputs.address }}
+      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
     strategy:
       matrix:
         backend:
