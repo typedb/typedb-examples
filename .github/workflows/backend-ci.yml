@@ -50,8 +50,7 @@ jobs:
               --header "Authorization: Bearer $CLOUD_API_KEY")
           done
           
-          ADDRESS=$(echo $RES | jq -r '.servers[0].address')
-          echo "recording address as $ADDRESS"
+          ADDRESS=$(echo $CLUSTER_RES | jq -r '.servers[0].address')
           
           echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
           echo "address=$ADDRESS" >> $GITHUB_OUTPUT
