@@ -14,7 +14,7 @@ public class TypeDBConfig {
     private String TYPEDB_ADDRESS = env.getOrDefault("TYPEDB_ADDRESS", "localhost:1729");
     private String TYPEDB_USERNAME = env.getOrDefault("TYPEDB_USERNAME", "admin");
     private String TYPEDB_PASSWORD = env.getOrDefault("TYPEDB_PASSWORD", "password");
-    private boolean TYPEDB_TLS_ENABLED = env.getOrDefault("TYPEDB_TLS_ENABLED", "false") == "true";
+    private boolean TYPEDB_TLS_ENABLED = env.getOrDefault("TYPEDB_TLS_ENABLED", "false").toLowerCase().equals("true");
     public String TYPEDB_DATABASE = env.getOrDefault("TYPEDB_DATABASE", "social-network");
 
     @Bean
