@@ -185,7 +185,7 @@ def create_group_query(payload):
     query += f", has post-visibility \"{payload['postVisibility']}\""
     if payload.get('badge'):
         query += f", has badge \"{payload['badge']}\""
-    for tag in payload['tags']:
+    for tag in payload.get('tags', []):
         query += f", has tag \"{tag}\""
     query += ";"
     return query
@@ -201,7 +201,7 @@ def create_organization_query(payload):
     query += f", has can-publish {payload['canPublish']}".lower()
     if payload.get('badge'):
         query += f", has badge \"{payload['badge']}\""
-    for tag in payload['tags']:
+    for tag in payload.get('tags', []):
         query += f", has tag \"{tag}\""
     query += ";"
     return query
