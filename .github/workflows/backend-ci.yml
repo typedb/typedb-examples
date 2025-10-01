@@ -36,15 +36,22 @@ jobs:
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID with $CLOUD_API_KEY"
           
-          RES=$(curl --request POST \
+          CLUSTER_RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
             --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"3.5.1\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
           
-          echo $RES | jq
-          if [[ $(echo $RES | jq -r '.message') != null ]]; then exit 1; fi 
-          
-          sleep 600 # Wait for the cluster to be ready TODO:sam - make this do some like polling loop i guess
+          while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running ]]; do 
+            echo
+            echo $CLUSTER_RES | jq
+            if [[ $(echo $CLUSTER_RES | jq -r '.message') != null ]]; then exit 1; fi
+            echo
+            echo "sleeping"
+            sleep 30
+            CLUSTER_RES=$(curl --request GET \
+              --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
+              --header "Authorization: Bearer $CLOUD_API_KEY")
+          done
           
           ADDRESS=$(echo $RES | jq -r '.servers[0].address')
           
