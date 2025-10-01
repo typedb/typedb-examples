@@ -21,7 +21,7 @@ class TestGroupsAPI:
         """Test creating a new group."""
         response = api_client.post("/api/create-group", json=test_group)
         assert response.status_code == 200
-        group_res = api_client.get(f"/api/organization/{test_group['username']}")
+        group_res = api_client.get(f"/api/organization/{test_group['groupId']}")
         group = Group(**group_res.json())
         assert group.name == test_group["name"]
         assert group.username == test_group["groupId"]
