@@ -10,7 +10,10 @@ class TestGroupsAPI:
             "name": f"Test Group {uuid.uuid4().hex[:4]}",
             "groupId": f"group_{uuid.uuid4().hex[:8]}",
             "bio": "Test group description",
-            "canPublish": True
+            "isActive": True,
+            "pageVisibility": True,
+            "postVisibility": True,
+            "canPublish": True,
         }
         return group_data
     
@@ -33,7 +36,8 @@ class TestOrganizationsAPI:
             "name": f"Test Org {uuid.uuid4().hex[:4]}",
             "username": f"org_{uuid.uuid4().hex[:8]}",
             "bio": "Test organization description",
-            "canPublish": True
+            "isActive": True,
+            "canPublish": True,
         }
     
     def test_create_organization(self, api_client, test_organization):
