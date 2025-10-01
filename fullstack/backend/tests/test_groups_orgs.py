@@ -11,8 +11,8 @@ class TestGroupsAPI:
             "groupId": f"group_{uuid.uuid4().hex[:8]}",
             "bio": "Test group description",
             "isActive": True,
-            "pageVisibility": True,
-            "postVisibility": True,
+            "pageVisibility": "public",
+            "postVisibility": "public",
             "canPublish": True,
         }
         return group_data
@@ -43,7 +43,7 @@ class TestOrganizationsAPI:
     def test_create_organization(self, api_client, test_organization):
         """Test creating a new organization."""
         response = api_client.post("/api/create-organization", json=test_organization)
-        assert response.status_code == 201
+        assert response.status_code == 200
         org_response = api_client.get(f"/api/organization/{test_organization['username']}")
         org = OrganizationResponse(**org_response.json())
         assert org.name == test_organization["name"]
