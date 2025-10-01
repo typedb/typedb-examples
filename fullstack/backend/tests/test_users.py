@@ -30,4 +30,3 @@ class TestUsersAPI:
         assert user.username == test_user["username"]
         assert user.email == test_user["email"]
         assert user.type == PageType.PERSON
-        return user
