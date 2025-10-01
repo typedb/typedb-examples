@@ -42,38 +42,3 @@ class Group(Page):
 class Organization(Profile):
     type: Literal[PageType.ORGANIZATION] = PageType.ORGANIZATION
     tags: List[str] = []
-
-class PostType(str, Enum):
-    TEXT = "text"
-    IMAGE = "image"
-    VIDEO = "video"
-
-class PostBase(BaseModel):
-    content: str
-    post_type: PostType = Field(alias="postType", default=PostType.TEXT)
-    media_url: Optional[str] = Field(alias="mediaUrl", default=None)
-
-class PostCreate(PostBase):
-    author_id: str = Field(alias="authorId")
-
-class PostResponse(PostBase):
-    id: str
-    author_id: str = Field(alias="authorId")
-    created_at: str = Field(alias="createdAt")
-    likes: int = 0
-    comments: List['CommentResponse'] = []
-
-class CommentBase(BaseModel):
-    content: str
-
-class CommentCreate(CommentBase):
-    post_id: str = Field(alias="postId")
-    author_id: str = Field(alias="authorId")
-
-class CommentResponse(CommentBase):
-    id: str
-    author_id: str = Field(alias="authorId")
-    created_at: str = Field(alias="createdAt")
-
-# Update forward refs for nested models
-PostResponse.update_forward_refs()
