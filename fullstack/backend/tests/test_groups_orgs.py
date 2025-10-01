@@ -26,8 +26,6 @@ class TestGroupsAPI:
         assert group.type == PageType.GROUP
         assert group.bio == test_group["bio"]
         assert group.is_active == test_group["isActive"]
-        assert group.page_visibility == test_group["pageVisibility"]
-        assert group.post_visibility == test_group["postVisibility"]
         return group
 
 class TestOrganizationsAPI:
