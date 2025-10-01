@@ -16,7 +16,7 @@ class Page(BaseModel):
     badge: Optional[str] = None
     is_active: bool = Field(alias="isActive", default=True)
 
-class Profile(BaseModel):
+class Profile(Page):
     username: Optional[str] = None
 
 class User(Profile):
