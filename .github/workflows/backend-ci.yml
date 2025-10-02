@@ -194,7 +194,7 @@ jobs:
       with:
         name: test-reports
         path: |
-          test-reports/test-report-*.html
+          **/test-report-*.html
 
     - name: Check test results
       if: contains(needs.*.result, 'failure')
