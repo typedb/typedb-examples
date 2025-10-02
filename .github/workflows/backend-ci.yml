@@ -156,6 +156,11 @@ jobs:
         
         # Clean up
         kill $BACKEND_PID
+    - uses: actions/upload-artifact@v4
+      with:
+        name: test-reports-${{ matrix.backend }}
+        path: |
+          **/test-report-*.html
 
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
@@ -181,21 +186,13 @@ jobs:
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
             --header "Authorization: Bearer $CLOUD_API_KEY"
 
-  # This job runs the full test suite against all backends with test reports
   test-reports:
     name: Test Reports
     needs: test-backends
     runs-on: ubuntu-latest
     if: always()
-    
-    steps:
-    - name: Upload test results
-      uses: actions/upload-artifact@v4
-      with:
-        name: test-reports
-        path: |
-          **/test-report-*.html
 
+    steps:
     - name: Check test results
       if: contains(needs.*.result, 'failure')
       run: |
