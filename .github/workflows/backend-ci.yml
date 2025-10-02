@@ -157,6 +157,7 @@ jobs:
         # Clean up
         kill $BACKEND_PID
     - uses: actions/upload-artifact@v4
+      if: always()
       with:
         name: test-reports-${{ matrix.backend }}
         path: |
