@@ -126,15 +126,15 @@ jobs:
         cd ${{ matrix.working-directory }}
         case ${{ matrix.backend }} in
           java)
-            ./gradlew bootRun &> application-${{ matrix.backend }}.log &
+            ./gradlew bootRun &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
           python)
-            python app.py &> application-${{ matrix.backend }}.log &
+            python app.py &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
           rust)
-            cargo run &> application-${{ matrix.backend }}.log &
+            cargo run &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
         esac
@@ -155,7 +155,6 @@ jobs:
           --self-contained-html
         
         # Clean up
-        cat application-${{ matrix.backend }}.log
         kill $BACKEND_PID
     - uses: actions/upload-artifact@v4
       if: always()
