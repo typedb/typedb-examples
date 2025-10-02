@@ -29,7 +29,7 @@ def api_client(config):
         def request(self, method, endpoint, **kwargs):
             url = f"{self.base_url}{endpoint}"
             response = self.session.request(method, url, timeout=config.timeout, **kwargs)
-            if response.status_code >= 400: raise Exception(f"Error response with status {response.status_code}: {response.body}")
+            if not response.ok: raise Exception(f"Error response with status {response.status_code}: {response.json()}")
             return response
             
         def get(self, endpoint, **kwargs):
