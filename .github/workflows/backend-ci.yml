@@ -155,14 +155,15 @@ jobs:
           --self-contained-html
         
         # Clean up
+        cat application-${{ matrix.backend }}.log
         kill $BACKEND_PID
     - uses: actions/upload-artifact@v4
       if: always()
       with:
         name: test-reports-${{ matrix.backend }}
         path: |
-          test-report-${{ matrix.backend }}.html
-          application-${{ matrix.backend }}.log
+          **/test-report-${{ matrix.backend }}.html
+          **/application-${{ matrix.backend }}.log
 
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
@@ -187,16 +188,3 @@ jobs:
           curl --fail-with-body --request DELETE \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
             --header "Authorization: Bearer $CLOUD_API_KEY"
-
-  test-reports:
-    name: Test Reports
-    needs: test-backends
-    runs-on: ubuntu-latest
-    if: always()
-
-    steps:
-    - name: Check test results
-      if: contains(needs.*.result, 'failure')
-      run: |
-        echo "Some tests failed. Check the test reports for details."
-        exit 1
