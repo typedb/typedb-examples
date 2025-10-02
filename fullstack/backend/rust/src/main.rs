@@ -117,19 +117,24 @@ struct CreateUserPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
     gender: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     language: Option<String>,
     email: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     phone: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "relationshipStatus")]
+    #[serde(default)]
     relationship_status: Option<String>,
     #[serde(rename = "canPublish")]
     can_publish: bool,
@@ -166,11 +171,14 @@ struct CreateGroupPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
+    #[serde(default)]
     tags: Vec<String>,
     #[serde(rename = "pageVisibility")]
     page_visibility: String,
@@ -204,13 +212,16 @@ struct CreateOrganizationPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
     #[serde(rename = "canPublish")]
     can_publish: bool,
+    #[serde(default)]
     tags: Vec<String>,
     bio: String,
 }

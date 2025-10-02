@@ -197,8 +197,10 @@ public class Query {
         if (payload.badge != null && !payload.badge.isEmpty()) {
             query.append(", has badge \"").append(payload.badge).append("\"");
         }
-        for (String tag : payload.tags) {
-            query.append(", has tag \"").append(tag).append("\"");
+        if (payload.tags != null) {
+            for (String tag : payload.tags) {
+                query.append(", has tag \"").append(tag).append("\"");
+            }
         }
         query.append(";");
         return query.toString();
@@ -217,8 +219,10 @@ public class Query {
         if (payload.badge != null && !payload.badge.isEmpty()) {
             query.append(", has badge \"").append(payload.badge).append("\"");
         }
-        for (String tag : payload.tags) {
-            query.append(", has tag \"").append(tag).append("\"");
+        if (payload.tags != null) {
+            for (String tag : payload.tags) {
+                query.append(", has tag \"").append(tag).append("\"");
+            }
         }
         query.append(";");
         return query.toString();
