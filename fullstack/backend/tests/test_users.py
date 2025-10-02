@@ -6,7 +6,7 @@ class TestUsersAPI:
     @pytest.fixture
     def test_user(self):
         """Fixture to create a test user and clean up after."""
-        user_data = {
+        return {
             "name": "Test User",
             "username": f"testuser_{uuid.uuid4().hex[:8]}",
             "email": f"test_{uuid.uuid4().hex[:8]}@example.com",
@@ -18,9 +18,8 @@ class TestUsersAPI:
             "pageVisibility": "public",
             "postVisibility": "public",
         }
-        return user_data
-    
-    def test_create_user(self, api_client, test_user):
+
+    def test_create_get_user(self, api_client, test_user):
         """Test creating a new user."""
         response = api_client.post("/api/create-user", json=test_user)
         assert response.status_code == 200
