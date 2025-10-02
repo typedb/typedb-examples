@@ -154,7 +154,6 @@ public class PageController {
     @PostMapping(value = "/api/create-user", produces = "application/json")
     public ResponseEntity<?> createUser(@RequestBody CreateUserPayload payload) {
         try (Transaction tx = driver.transaction(config.TYPEDB_DATABASE, Transaction.Type.WRITE)) {
-            System.out.println(Query.createUserQuery(payload));
             tx.query(Query.createUserQuery(payload)).resolve();
             tx.commit();
             return ResponseEntity.ok().body("null");
