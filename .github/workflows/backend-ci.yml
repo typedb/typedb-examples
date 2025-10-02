@@ -126,15 +126,15 @@ jobs:
         cd ${{ matrix.working-directory }}
         case ${{ matrix.backend }} in
           java)
-            ./gradlew bootRun &
+            ./gradlew bootRun &> application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
           python)
-            python app.py &
+            python app.py &> application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
           rust)
-            cargo run &
+            cargo run &> application-${{ matrix.backend }}.log &
             BACKEND_PID=$!
             ;;
         esac
@@ -161,7 +161,8 @@ jobs:
       with:
         name: test-reports-${{ matrix.backend }}
         path: |
-          **/test-report-*.html
+          test-report-${{ matrix.backend }}.html
+          application-${{ matrix.backend }}.log
 
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
