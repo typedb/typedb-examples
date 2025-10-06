@@ -4,10 +4,12 @@ on:
   push:
     paths:
       - 'fullstack/backend/**'
+      - 'use-cases/social-network/**'
       - '.github/workflows/backend-ci.yml'
   pull_request:
     paths:
       - 'fullstack/backend/**'
+      - 'use-cases/social-network/**'
       - '.github/workflows/backend-ci.yml'
 
 jobs:
@@ -33,7 +35,7 @@ jobs:
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
-          TYPEDB_VERSION="3.7.0"
+          TYPEDB_VERSION="3.5.2"
           CLUSTER_RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
@@ -87,7 +89,7 @@ jobs:
       run: |
         curl -sSL https://typedb.com/install.sh | sh && export PATH="$HOME/.typedb:$PATH"
         touch emptydata.tql
-        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-schema.tql emptydata.tql"
+        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
     - name: Set up JDK 17 (Java only)
       if: matrix.backend == 'java'
