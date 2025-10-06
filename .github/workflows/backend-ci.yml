@@ -33,7 +33,7 @@ jobs:
           
           echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
           
-          TYPEDB_VERSION="3.5.2"
+          TYPEDB_VERSION="3.7.0"
           CLUSTER_RES=$(curl --request POST \
             --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
             --header "Authorization: Bearer $CLOUD_API_KEY" \
