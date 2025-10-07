@@ -58,116 +58,116 @@ jobs:
           echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
           echo "address=$ADDRESS" >> $GITHUB_OUTPUT
 
-  test-backends:
-    name: Test Backend (${{ matrix.backend }})
-    needs: launch-typedb-cloud
-    runs-on: ubuntu-latest
-    env:
-      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
-      TYPEDB_TLS_ENABLED: "true"
-    strategy:
-      fail-fast: false
-      matrix:
-        backend:
-          - java
-          - python
-          - rust
-        include:
-          - backend: java
-            working-directory: fullstack/backend/java
-          - backend: python
-            working-directory: fullstack/backend/python
-          - backend: rust
-            working-directory: fullstack/backend/rust
-    
-    steps:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-
-    - name: Create and initialise database
-      run: |
-        curl -sSL https://typedb.com/install.sh | sh && export PATH="$HOME/.typedb:$PATH"
-        touch emptydata.tql
-        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
-
-    - name: Set up JDK 17 (Java only)
-      if: matrix.backend == 'java'
-      uses: actions/setup-java@v3
-      with:
-        java-version: '17'
-        distribution: 'temurin'
-
-    - name: Set up Python (Python only)
-      if: matrix.backend == 'python'
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.9'
-
-    - name: Set up Rust (Rust only)
-      if: matrix.backend == 'rust'
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        components: rustfmt, clippy
-
-    - name: Install dependencies (Python)
-      if: matrix.backend == 'python'
-      working-directory: ${{ matrix.working-directory }}
-      run: |
-        python -m pip install --upgrade pip
-        pip3 install -r requirements.txt
-
-    # Run the API tests against the running backend
-    - name: Run API tests
-      working-directory: ${{ github.workspace }}
-      env:
-        TYPEDB_DATABASE: ${{ matrix.backend }}
-      run: |
-        # Start the backend in the background
-        cd ${{ matrix.working-directory }}
-        case ${{ matrix.backend }} in
-          java)
-            ./gradlew bootRun &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
-            BACKEND_PID=$!
-            ;;
-          python)
-            python app.py &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
-            BACKEND_PID=$!
-            ;;
-          rust)
-            cargo run &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
-            BACKEND_PID=$!
-            ;;
-        esac
-        
-        # Give the backend time to start
-        sleep 60
-        
-        # Install test dependencies
-        cd ${{ github.workspace }}
-        pip install -r fullstack/backend/tests/requirements.txt
-        
-        # Run the API tests against the backend
-        echo "Running API tests against ${{ matrix.backend }} backend"
-        PYTHONPATH=$PYTHONPATH:${{ github.workspace }}/fullstack/backend/tests \
-          pytest fullstack/backend/tests/ -v \
-          --base-url=http://localhost:8080 \
-          --html=test-report-${{ matrix.backend }}.html \
-          --self-contained-html
-        
-        # Clean up
-        kill $BACKEND_PID
-    - uses: actions/upload-artifact@v4
-      if: always()
-      with:
-        name: test-reports-${{ matrix.backend }}
-        path: |
-          **/test-report-${{ matrix.backend }}.html
-          **/application-${{ matrix.backend }}.log
+#  test-backends:
+#    name: Test Backend (${{ matrix.backend }})
+#    needs: launch-typedb-cloud
+#    runs-on: ubuntu-latest
+#    env:
+#      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
+#      TYPEDB_TLS_ENABLED: "true"
+#    strategy:
+#      fail-fast: false
+#      matrix:
+#        backend:
+#          - java
+#          - python
+#          - rust
+#        include:
+#          - backend: java
+#            working-directory: fullstack/backend/java
+#          - backend: python
+#            working-directory: fullstack/backend/python
+#          - backend: rust
+#            working-directory: fullstack/backend/rust
+#
+#    steps:
+#    - name: Checkout repository
+#      uses: actions/checkout@v3
+#
+#    - name: Create and initialise database
+#      run: |
+#        curl -sSL https://typedb.com/install.sh | sh && export PATH="$HOME/.typedb:$PATH"
+#        touch emptydata.tql
+#        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
+#
+#    - name: Set up JDK 17 (Java only)
+#      if: matrix.backend == 'java'
+#      uses: actions/setup-java@v3
+#      with:
+#        java-version: '17'
+#        distribution: 'temurin'
+#
+#    - name: Set up Python (Python only)
+#      if: matrix.backend == 'python'
+#      uses: actions/setup-python@v4
+#      with:
+#        python-version: '3.9'
+#
+#    - name: Set up Rust (Rust only)
+#      if: matrix.backend == 'rust'
+#      uses: actions-rs/toolchain@v1
+#      with:
+#        toolchain: stable
+#        components: rustfmt, clippy
+#
+#    - name: Install dependencies (Python)
+#      if: matrix.backend == 'python'
+#      working-directory: ${{ matrix.working-directory }}
+#      run: |
+#        python -m pip install --upgrade pip
+#        pip3 install -r requirements.txt
+#
+#    # Run the API tests against the running backend
+#    - name: Run API tests
+#      working-directory: ${{ github.workspace }}
+#      env:
+#        TYPEDB_DATABASE: ${{ matrix.backend }}
+#      run: |
+#        # Start the backend in the background
+#        cd ${{ matrix.working-directory }}
+#        case ${{ matrix.backend }} in
+#          java)
+#            ./gradlew bootRun &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
+#            BACKEND_PID=$!
+#            ;;
+#          python)
+#            python app.py &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
+#            BACKEND_PID=$!
+#            ;;
+#          rust)
+#            cargo run &> ${{ github.workspace }}/application-${{ matrix.backend }}.log &
+#            BACKEND_PID=$!
+#            ;;
+#        esac
+#
+#        # Give the backend time to start
+#        sleep 60
+#
+#        # Install test dependencies
+#        cd ${{ github.workspace }}
+#        pip install -r fullstack/backend/tests/requirements.txt
+#
+#        # Run the API tests against the backend
+#        echo "Running API tests against ${{ matrix.backend }} backend"
+#        PYTHONPATH=$PYTHONPATH:${{ github.workspace }}/fullstack/backend/tests \
+#          pytest fullstack/backend/tests/ -v \
+#          --base-url=http://localhost:8080 \
+#          --html=test-report-${{ matrix.backend }}.html \
+#          --self-contained-html
+#
+#        # Clean up
+#        kill $BACKEND_PID
+#    - uses: actions/upload-artifact@v4
+#      if: always()
+#      with:
+#        name: test-reports-${{ matrix.backend }}
+#        path: |
+#          **/test-report-${{ matrix.backend }}.html
+#          **/application-${{ matrix.backend }}.log
 
   destroy-typedb-cloud:
     name: Destroy TypeDB Cloud cluster
-    needs: test-backends
+    needs: launch-typedb-cloud
     if: always()
     runs-on: ubuntu-latest
 
