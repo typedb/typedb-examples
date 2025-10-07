@@ -19,6 +19,7 @@ jobs:
 
     outputs:
       address: ${{ steps.launch.outputs.address }}
+      cluster_id: ${{ steps.launch.outputs.cluster_id }}
 
     steps:
       - name: Launch Cluster
@@ -53,10 +54,8 @@ jobs:
           
           ADDRESS=$(echo $CLUSTER_RES | jq -r '.servers[0].address')
           
-          {
-              "cluster_id=$CLUSTER_ID"
-              "address=$ADDRESS"
-          } >> $GITHUB_OUTPUT
+          echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
+          echo "address=$ADDRESS" >> $GITHUB_OUTPUT
 
   test-backends:
     name: Test Backend (${{ matrix.backend }})
