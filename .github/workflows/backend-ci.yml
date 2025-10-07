@@ -53,8 +53,10 @@ jobs:
           
           ADDRESS=$(echo $CLUSTER_RES | jq -r '.servers[0].address')
           
-          echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
-          echo "address=$ADDRESS" >> $GITHUB_OUTPUT
+          {
+              "cluster_id=$CLUSTER_ID"
+              "address=$ADDRESS"
+          } >> $GITHUB_OUTPUT
 
   test-backends:
     name: Test Backend (${{ matrix.backend }})
