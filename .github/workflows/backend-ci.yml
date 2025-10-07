@@ -88,7 +88,8 @@ jobs:
     - name: Create and initialise database
       run: |
         curl -sSL https://typedb.com/install.sh | sh && export PATH="$HOME/.typedb:$PATH"
-        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql use-cases/social-network/data.tql"
+        touch emptydata.tql
+        typedb console --address=${{ needs.launch-typedb-cloud.outputs.address }} --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
     - name: Set up JDK 17 (Java only)
       if: matrix.backend == 'java'
