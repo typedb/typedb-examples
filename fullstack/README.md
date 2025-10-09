@@ -84,7 +84,7 @@ Each contains the following properties:
   ```
 
 #### Python (Flask)
-- Requirements: Python 3.8+, Flask
+- Requirements: Python 3.9+, Flask
 - Install dependencies:
   ```bash
   cd backend/python

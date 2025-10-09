@@ -20,7 +20,7 @@ mod config;
 mod query;
 
 async fn get_page_list(State(driver): State<Arc<TypeDBDriver>>) -> Json<Vec<Box<RawValue>>> {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Read).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Read).await.unwrap();
     let result = transaction.query(query::PAGE_LIST_QUERY).await.unwrap();
     Json(
         result
@@ -36,7 +36,7 @@ async fn get_location_page_list(
     State(driver): State<Arc<TypeDBDriver>>,
     Path(place_id): Path<String>,
 ) -> Json<Vec<Box<RawValue>>> {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Read).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Read).await.unwrap();
     let result = transaction.query(query::location_query(&place_id)).await.unwrap();
     Json(
         result
@@ -49,7 +49,7 @@ async fn get_location_page_list(
 }
 
 async fn get_profile(State(driver): State<Arc<TypeDBDriver>>, Path(id): Path<String>) -> Json<Option<Box<RawValue>>> {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Read).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Read).await.unwrap();
     let result = transaction.query(query::page_query(&id)).await.unwrap();
     let doc = result.into_documents().next().await;
     Json(doc.map(|doc| RawValue::from_string(doc.unwrap().into_json().to_string()).unwrap()))
@@ -76,7 +76,7 @@ async fn get_posts(
     State(driver): State<Arc<TypeDBDriver>>,
     Query(PostQuery { page_id }): Query<PostQuery>,
 ) -> Json<Vec<Box<RawValue>>> {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Read).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Read).await.unwrap();
     let result = transaction.query(query::posts_query(&page_id)).await.unwrap();
     Json(
         result
@@ -98,7 +98,7 @@ async fn get_comments(
     State(driver): State<Arc<TypeDBDriver>>,
     Query(CommentQuery { post_id }): Query<CommentQuery>,
 ) -> Json<Vec<Box<RawValue>>> {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Read).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Read).await.unwrap();
     let result = transaction.query(query::comments_query(&post_id)).await.unwrap();
     Json(
         result
@@ -117,19 +117,24 @@ struct CreateUserPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
     gender: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     language: Option<String>,
     email: String,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     phone: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "relationshipStatus")]
+    #[serde(default)]
     relationship_status: Option<String>,
     #[serde(rename = "canPublish")]
     can_publish: bool,
@@ -144,7 +149,7 @@ async fn post_create_user(
     State(driver): State<Arc<TypeDBDriver>>,
     Json(payload): Json<CreateUserPayload>,
 ) -> impl IntoResponse {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Write).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Write).await.unwrap();
     transaction
         .query(query::create_user_query(payload))
         .await
@@ -166,11 +171,14 @@ struct CreateGroupPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
+    #[serde(default)]
     tags: Vec<String>,
     #[serde(rename = "pageVisibility")]
     page_visibility: String,
@@ -183,7 +191,7 @@ async fn post_create_group(
     State(driver): State<Arc<TypeDBDriver>>,
     Json(payload): Json<CreateGroupPayload>,
 ) -> impl IntoResponse {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Write).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Write).await.unwrap();
     transaction
         .query(query::create_group_query(payload))
         .await
@@ -204,13 +212,16 @@ struct CreateOrganizationPayload {
     name: String,
     #[serde_as(as = "NoneAsEmptyString")]
     #[serde(rename = "profilePicture")]
+    #[serde(default)]
     profile_picture: Option<String>,
     #[serde_as(as = "NoneAsEmptyString")]
+    #[serde(default)]
     badge: Option<String>,
     #[serde(rename = "isActive")]
     is_active: bool,
     #[serde(rename = "canPublish")]
     can_publish: bool,
+    #[serde(default)]
     tags: Vec<String>,
     bio: String,
 }
@@ -219,7 +230,7 @@ async fn post_create_organization(
     State(driver): State<Arc<TypeDBDriver>>,
     Json(payload): Json<CreateOrganizationPayload>,
 ) -> impl IntoResponse {
-    let transaction = driver.transaction(config::TYPEDB_DATABASE, TransactionType::Write).await.unwrap();
+    let transaction = driver.transaction(config::typedb_database(), TransactionType::Write).await.unwrap();
     transaction
         .query(query::create_organization_query(payload))
         .await
@@ -237,9 +248,9 @@ async fn post_create_organization(
 async fn main() {
     let driver = Arc::new(
         TypeDBDriver::new(
-            config::TYPEDB_ADDRESS,
-            Credentials::new(config::TYPEDB_USERNAME, config::TYPEDB_PASSWORD),
-            DriverOptions::new(config::TYPEDB_TLS_ENABLED, None).unwrap(),
+            config::typedb_address(),
+            Credentials::new(&config::typedb_username(), &config::typedb_password()),
+            DriverOptions::new(config::typedb_tls_enabled(), None).unwrap(),
         )
         .await
         .unwrap(),
