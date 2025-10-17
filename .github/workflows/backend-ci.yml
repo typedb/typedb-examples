@@ -91,8 +91,8 @@ jobs:
 
     - name: Run TypeDB
       run: |
-        cat ~/.bashrc
         source ~/.bashrc
+        echo $PATH
         nohup typedb server --development-mode.enabled=true &
 
     - name: Create and initialise database
