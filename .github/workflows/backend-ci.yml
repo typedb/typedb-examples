@@ -87,17 +87,16 @@ jobs:
     - name: Install TypeDB
       run: |
         curl -sSL https://typedb.com/install.sh | sh
+        source ~/.bashrc
 
     - name: Run TypeDB
+      shell: bash --rcfile ~/.bashrc
       run: |
-        cd $HOME/.typedb
-        ls
         nohup typedb server --development-mode.enabled=true &
 
     - name: Create and initialise database
+      shell: bash --rcfile ~/.bashrc
       run: |
-        cd $HOME/.typedb
-        ls
         touch emptydata.tql
         typedb console --address=localhost:1729 --tls-disabled --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
