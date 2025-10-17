@@ -90,10 +90,13 @@ jobs:
 
     - name: Run TypeDB
       run: |
+        echo ~/.bashrc
+        export PATH="$HOME/.typedb:$PATH"
         nohup typedb server --development-mode.enabled &
 
     - name: Create and initialise database
       run: |
+        export PATH="$HOME/.typedb:$PATH"
         touch emptydata.tql
         typedb console --address=localhost:1729 --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
