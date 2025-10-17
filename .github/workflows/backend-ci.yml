@@ -90,15 +90,15 @@ jobs:
 
     - name: Run TypeDB
       run: |
-        echo ~/.bashrc
+        cat ~/.bashrc
         export PATH="$HOME/.typedb:$PATH"
-        nohup typedb server --development-mode.enabled &
+        nohup typedb server --development-mode.enabled=true &
 
     - name: Create and initialise database
       run: |
         export PATH="$HOME/.typedb:$PATH"
         touch emptydata.tql
-        typedb console --address=localhost:1729 --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
+        typedb console --address=localhost:1729 --tls-disabled --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
     - name: Set up JDK 17 (Java only)
       if: matrix.backend == 'java'
