@@ -91,6 +91,7 @@ jobs:
 
     - name: Run TypeDB
       run: |
+        cat ~/.bashrc
         source ~/.bashrc
         nohup typedb server --development-mode.enabled=true &
 
