@@ -18,6 +18,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Install TypeDB
+        shell: bash
         run: |
           #!/bin/sh
 
