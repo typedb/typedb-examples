@@ -62,7 +62,7 @@ jobs:
     name: Test Backend (${{ matrix.backend }})
 #    needs: launch-typedb-cloud
     runs-on: ubuntu-latest
-    env:
+#    env:
 #      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
 #      TYPEDB_TLS_ENABLED: "true"
     strategy:
@@ -90,7 +90,7 @@ jobs:
 
     - name: Run TypeDB
       run: |
-        typedb server --development-mode.enabled
+        nohup typedb server --development-mode.enabled &
 
     - name: Create and initialise database
       run: |
