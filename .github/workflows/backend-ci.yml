@@ -90,13 +90,13 @@ jobs:
         source ~/.bashrc
 
     - name: Run TypeDB
-      shell: bash --rcfile ~/.bashrc {0}
       run: |
+        source ~/.bashrc
         nohup typedb server --development-mode.enabled=true &
 
     - name: Create and initialise database
-      shell: bash --rcfile ~/.bashrc {0}
       run: |
+        source ~/.bashrc
         touch emptydata.tql
         typedb console --address=localhost:1729 --tls-disabled --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
