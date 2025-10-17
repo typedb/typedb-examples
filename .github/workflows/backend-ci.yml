@@ -91,11 +91,13 @@ jobs:
     - name: Run TypeDB
       run: |
         cd $HOME/.typedb
+        ls
         nohup typedb server --development-mode.enabled=true &
 
     - name: Create and initialise database
       run: |
         cd $HOME/.typedb
+        ls
         touch emptydata.tql
         typedb console --address=localhost:1729 --tls-disabled --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
