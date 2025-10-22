@@ -86,7 +86,7 @@ jobs:
 
     - name: Install TypeDB
       run: |
-        curl -sSL https://typedb.com/install.sh | sh
+        curl -sSL https://typedb.com/install.sh | sh -s -- --version 3.5.3 
         source ~/.bashrc
 
     - name: Run TypeDB
