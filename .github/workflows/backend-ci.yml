@@ -61,7 +61,7 @@ jobs:
   test-backends:
     name: Test Backend (${{ matrix.backend }})
 #    needs: launch-typedb-cloud
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
 #    env:
 #      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
 #      TYPEDB_TLS_ENABLED: "true"
