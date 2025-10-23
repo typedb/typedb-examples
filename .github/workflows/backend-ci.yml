@@ -85,7 +85,7 @@ jobs:
       uses: actions/checkout@v3
 
     - name: Setup TypeDB
-      uses: typedb/setup-typedb@fae895a16d59de322acecd13bf23347abedb344d
+      uses: typedb/setup-typedb@1.0.0-rc0
       with:
         typedb_version: 3.5.1
         typedb_args: "--development-mode.enabled=true"
