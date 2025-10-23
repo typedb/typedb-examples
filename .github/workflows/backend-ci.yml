@@ -84,14 +84,11 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
-    - name: Install TypeDB
-      run: |
-        curl -sSL https://typedb.com/install.sh | sh -s -- --version 3.5.1
-        echo "$HOME/.typedb" >> $GITHUB_PATH
-
-    - name: Run TypeDB
-      run: |
-        nohup typedb server --development-mode.enabled=true &
+    - name: Setup TypeDB
+      uses: typedb/setup-typedb@fae895a16d59de322acecd13bf23347abedb344d
+      with:
+        typedb_version: 3.5.1
+        typedb_args: "--development-mode.enabled=true"
 
     - name: Create and initialise database
       run: |
