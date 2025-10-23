@@ -108,13 +108,6 @@ jobs:
       with:
         python-version: '3.9'
 
-    - name: Set up Rust (Rust only)
-      if: matrix.backend == 'rust'
-      uses: actions-rs/toolchain@v1
-      with:
-        toolchain: stable
-        components: rustfmt, clippy
-
     - name: Install dependencies (Python)
       if: matrix.backend == 'python'
       working-directory: ${{ matrix.working-directory }}
