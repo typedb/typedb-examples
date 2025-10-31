@@ -1,95 +1,45 @@
 # Solutions
 
-# The solutions to each of the exercises can be found here. To run the query in a solution: make sure the correct
-# session and transaction type are selected, highlight the intended query, right click and select "Run Selection".
+# The solutions to each of the exercises can be found here.
 
 #--------------------------------------------------
 # Exercise 01 solution:
 
-match 
-$t isa id-unknown, has name $n, has description $d;
+match
+$indicator-domain isa indicator,
+  has indicator-type "domain",
+  has name $name,
+  has description $description;
 
 #--------------------------------------------------
 # Exercise 02 solution:
 
-match 
-$t isa identity, has $attribute;
-not{$t isa organization;};
+#display
+match
+  $t isa threat-actor, has id "threat-actor--bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+
+#insert new threat-actor-types
+match
+  $t isa threat-actor, has id "threat-actor--bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+insert
+  $t has threat-actor-type "insider";
 
 #--------------------------------------------------
 # Exercise 03 solution:
 
-#display
 match
-$t isa threat-actor, has stix-id $n;
-$n = "bravo-threat";
+  $bravo-ca isa campaign, has id "campaign--d4e5f6a7-8b9c-0d1e-2f3a-4b5c6d7e8f9a";
+  $bravo-ma isa malware, has id "malware--bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
 
-#insert new threat-actor-types
-match
-$t isa threat-actor, has stix-id $n;
-$n = "bravo-threat";
-
-insert 
-$t has threat-actor-types "insider";
-
-
+insert
+  (used-target: $bravo-ma, using-source: $bravo-ca) isa uses,
+    has id "relationship--01234567-89ab-cdef-0123-456789abcdef";
 
 #--------------------------------------------------
 # Exercise 04 solution:
 
 match
-$bravo-id isa id-unknown, has stix-id "bravo-id-unknown";
-$bravo-ma isa malware, has stix-id "bravo-malware";
-
-insert
-(used: $bravo-ma, using: $bravo-id) isa uses,
-    has stix-id "bravo-uses";
-    
-#--------------------------------------------------
-# Exercise 06 solution:
-
-match 
-{$bravo-1 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
-{$bravo-1 isa malware, has stix-id "bravo-malware";} or
-{$bravo-1 isa threat-actor, has stix-id "bravo-threat";};
-
-{$bravo-2 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
-{$bravo-2 isa malware, has stix-id "bravo-malware";} or
-{$bravo-2 isa threat-actor, has stix-id "bravo-threat";};
-
-$new ($bravo-1, $bravo-2) isa uses;
-
-#--------------------------------------------------
-# Exercise 07 solution:
-
-match 
-
-$e isa external-reference, has url-link $c;
-$e has $eid;
-$a isa attack-pattern, has name $d;
-$rel (referencing: $a, referenced: $e) isa external-references; sort $d;
-
-#--------------------------------------------------
-# Exercise 08 solution:
-
-# insert new intrusion-set and uses relation
-match 
-$bravo-2 isa malware, has stix-id "bravo-malware";
-
-insert 
-$intrusion isa intrusion-set, has stix-id "bravo-intrusion";
-$bravo-uses (using: $intrusion, used: $bravo-2) isa uses, has stix-id "bravo-uses-3"; 
-
-# search for uses between attack-pattern, malware, threat-actor and intrusion-set
-match 
-{$bravo-1 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
-{$bravo-1 isa malware, has stix-id "bravo-malware";} or
-{$bravo-1 isa threat-actor, has stix-id "bravo-threat";} or
-{$bravo-1 isa intrusion-set, has stix-id "bravo-intrusion";};
-
-{$bravo-2 isa attack-pattern, has stix-id "attack-pattern-bravo";} or
-{$bravo-2 isa malware, has stix-id "bravo-malware";} or
-{$bravo-2 isa threat-actor, has stix-id "bravo-threat";} or
-{$bravo-2 isa intrusion-set, has stix-id "bravo-intrusion";};
-
-$new ($bravo-1, $bravo-2) isa uses;
+  $e isa external-reference, has url-value $c;
+  $a isa indicator, has name $d;
+  (external-reference: $e, owner: $a);
+sort $d;

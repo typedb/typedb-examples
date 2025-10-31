@@ -1,0 +1,22 @@
+# Example 07:
+
+# Some indicators have external references.
+# An external reference refers to a link or identifier that points to additional
+#   information or context about a specific threat or indicator. 
+
+match 
+$e isa external-reference;
+$a isa indicator;
+(external-reference: $e, owner: $a);
+
+#--------------------------------------------------
+# Exercise 07:
+
+# Find all indicators that have external references.
+# Return the name of the attack pattern and the external reference URL.
+# Order by the name of the indicator.
+# Keyword hints: match, sort
+# Type hints: indicator, external-reference
+
+#--------------------------------------------------
+
