@@ -13,58 +13,9 @@ on:
       - '.github/workflows/backend-ci.yml'
 
 jobs:
-#  launch-typedb-cloud:
-#    name: Launch TypeDB Cloud cluster
-#    runs-on: ubuntu-latest
-#
-#    outputs:
-#      address: ${{ steps.launch.outputs.address }}
-#      cluster_id: ${{ steps.launch.outputs.cluster_id }}
-#
-#    steps:
-#      - name: Launch Cluster
-#        env:
-#          TEAM_ID: ${{ vars.TYPEDB_CLOUD_TEAM_ID }}
-#          SPACE_ID: ${{ vars.TYPEDB_CLOUD_SPACE_ID }}
-#        id: launch
-#        run: |
-#          CLOUD_API_KEY=$(curl --fail-with-body --request POST \
-#            --url https://cloud.typedb.com/api/auth \
-#            --header "Authorization: Basic ${{ vars.TYPEDB_CLOUD_CLIENT_ID }}:${{ secrets.TYPEDB_CLOUD_CLIENT_SECRET }}")
-#
-#          CLUSTER_ID=$(echo ${{ github.sha }} | head -c10)
-#
-#          echo "Launching $CLUSTER_ID in $TEAM_ID/$SPACE_ID"
-#
-#          TYPEDB_VERSION="3.5.3"
-#          CLUSTER_RES=$(curl --request POST \
-#            --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy \
-#            --header "Authorization: Bearer $CLOUD_API_KEY" \
-#            --json "{\"id\":\"$CLUSTER_ID\",\"serverCount\":1,\"storageSizeGB\":10,\"provider\":\"gcp\",\"region\":\"europe-west2\",\"isFree\":false,\"machineType\":\"c2d-highcpu-2\",\"storageType\":\"standard-rwo\",\"version\":\"$TYPEDB_VERSION\",\"backupConfiguration\":{\"frequency\":\"disabled\",\"retentionDays\":7}}")
-#
-#          while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running' ]]; do
-#            if [[ $(echo $CLUSTER_RES | jq -r '.message') != null ]]; then exit 1; fi
-#            echo
-#            echo "sleeping"
-#            sleep 30
-#            CLUSTER_RES=$(curl --request GET \
-#              --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
-#              --header "Authorization: Bearer $CLOUD_API_KEY")
-#          done
-#
-#          ADDRESS=$(echo $CLUSTER_RES | jq -r '.servers[0].address')
-#
-#          echo "cluster_id=$CLUSTER_ID"
-#          echo "cluster_id=$CLUSTER_ID" >> $GITHUB_OUTPUT
-#          echo "address=$ADDRESS" >> $GITHUB_OUTPUT
-
   test-backends:
     name: Test Backend (${{ matrix.backend }})
-#    needs: launch-typedb-cloud
     runs-on: ubuntu-latest
-#    env:
-#      TYPEDB_ADDRESS: ${{ needs.launch-typedb-cloud.outputs.address }}
-#      TYPEDB_TLS_ENABLED: "true"
     strategy:
       fail-fast: false
       matrix:
@@ -93,7 +44,9 @@ jobs:
     - name: Create and initialise database
       run: |
         touch emptydata.tql
-        typedb console --address=localhost:1729 --tls-disabled --username=admin --password=password --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
+        typedb console --address=localhost:1729 --tls-disabled \
+          --username=admin --password=password \
+          --command="database create-init ${{ matrix.backend}} use-cases/social-network/schema.tql emptydata.tql"
 
     - name: Set up JDK 17 (Java only)
       if: matrix.backend == 'java'
