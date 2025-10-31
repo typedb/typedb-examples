@@ -1,0 +1,29 @@
+# Example 03:
+
+# Now let's insert a new targets relation between a specific malware and a specific id-unknown.
+# We will use the stix-id attribute to identify the malware and the name attribute to identify the id-unknown.
+# We will also assign a stix-id attribute to identify the new targets relation.
+
+match
+  $bravo-id isa identity, has name "Salt Typhoon";
+  $bravo-ma isa malware, has id "malware--bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb";
+insert
+  (targeting-source: $bravo-ma, targeted-target: $bravo-id) isa targets,
+    has type "relationship",
+    has relationship-type "targets",
+    has spec-version "2.1",
+    has id "relationship--01234567-bbbb-bbbb-bbbb-bbbbbbbbbbbb",
+    has created 2022-05-07T14:22:14.760Z,
+    has modified 2022-05-07T14:22:14.760Z;
+
+#--------------------------------------------------
+# Exercise 04:
+
+# Write a new query to find the campaign with id "campaign--d4e5f6a7-8b9c-0d1e-2f3a-4b5c6d7e8f9a",
+#   as well as the malware with stix-id "malware--bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb"
+# and then, create a uses relationship to descibe the fact that the campaign is using the malware.
+# You will need to give a new unique id to your uses relationship.
+# Keyword hints: match, insert, has
+# Type hints: id-unknown, malware, uses
+
+#--------------------------------------------------
