@@ -22,7 +22,7 @@ CLUSTER_ID=$4
 # Get a short-lived access token
 TYPEDB_CLOUD_ACCESS_TOKEN=$(
   curl --request POST \
-    --url https://cloud.typedb.com/api/auth \
+    --url https://cloud.typedb.com/api/v1/auth \
     --header "Authorization: Basic $TYPEDB_CLOUD_CLIENT_ID:$TYPEDB_CLOUD_CLIENT_SECRET"
 )
   
@@ -35,13 +35,13 @@ CLUSTER_CONFIG="{
   \"isFree\":true,
   \"machineType\":\"c2d-highcpu-2\",
   \"storageType\":\"standard-rwo\",
-  \"version\":\"3.5.5\"
+  \"version\":\"latest\"
 }"
 
 # Deploy the cluster
 CLUSTER_RES=$(
   curl --request POST \
-    --url "https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy" \
+    --url "https://cloud.typedb.com/api/v1/team/$TEAM_ID/spaces/$SPACE_ID/clusters/deploy" \
     --header "Authorization: Bearer $TYPEDB_CLOUD_ACCESS_TOKEN" \
     --json "$CLUSTER_CONFIG"
 )
@@ -57,6 +57,6 @@ while [[ $(echo $CLUSTER_RES | jq -r '.status') != 'running' ]]; do
   echo
   sleep 15
   CLUSTER_RES=$(curl --request GET \
-    --url https://cloud.typedb.com/api/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
+    --url https://cloud.typedb.com/api/v1/team/$TEAM_ID/spaces/$SPACE_ID/clusters/$CLUSTER_ID \
     --header "Authorization: Bearer $TYPEDB_CLOUD_ACCESS_TOKEN")
 done
