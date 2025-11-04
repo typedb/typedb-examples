@@ -3,12 +3,12 @@ name: Backend CI
 on:
   push:
     paths:
-      - 'use-cases/bookstore/**'
-      - '.github/workflows/bookstore.yml'
+      - 'use-cases/**'
+      - '.github/workflows/datasets.yml'
   pull_request:
     paths:
-      - 'use-cases/bookstore/**'
-      - '.github/workflows/bookstore.yml'
+      - 'use-cases/**'
+      - '.github/workflows/datasets.yml'
 
 jobs:
   load:
