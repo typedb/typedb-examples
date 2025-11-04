@@ -28,11 +28,7 @@ def main():
         "storageSizeGB": 10,
         "provider": "gcp",
         "region": region,
-        "isFree": False,
-        "backupConfiguration": {
-            "retentionDays": 7,
-            "frequency": "daily"
-        },
+        "isFree": True,
         "machineType": "c2d-highcpu-2",
         "storageType": "standard-rwo",
         "version": "latest"
