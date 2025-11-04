@@ -1,0 +1,42 @@
+name: Backend CI
+
+on:
+  push:
+    paths:
+      - 'use-cases/**'
+      - '.github/workflows/datasets.yml'
+  pull_request:
+    paths:
+      - 'use-cases/**'
+      - '.github/workflows/datasets.yml'
+
+jobs:
+  load:
+    name: Load dataset
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        dataset:
+          - { directory: bookstore, schema: schema.tql, data: data.tql }
+          - { directory: cyber-threat-intelligence, schema: define-schema.tql, data: insert-data.tql }
+          - { directory: identity-and-access-management, schema: schema.tql, data: data.tql }
+          - { directory: social-network, schema: schema.tql, data: data.tql }
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup TypeDB
+      uses: typedb/setup-typedb@1.0.0
+      with:
+        typedb_version: 3.5.5
+        typedb_args: "--development-mode.enabled=true"
+
+    - name: Load dataset
+      run: |
+        typedb console --address=localhost:1729 --tls-disabled \
+          --username=admin --password=password \
+          --command="database create-init ${{ matrix.dataset.directory}} \
+          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.schema}} \
+          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.data}}"

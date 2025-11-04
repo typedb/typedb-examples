@@ -41,27 +41,27 @@ As well as two simpler dataset used for documentation and learning:
 * Bookstore (an ecommerce-style example)
 * Social network
 
-### [Identity and access management](https://github.com/typedb/typedb-examples/tree/master/use-cases/identity-and-access-management)
+### [Identity and access management](/use-cases/identity-and-access-management)
 
 Learn how to use TypeDB as the database for an identity and access management (IAM) system. Uses a flexible data model
 to automate permission inheritance and policy enforcement at the schema level using function composition.
 
-### [Cyber threat intelligence](https://github.com/typedb/typedb-examples/tree/master/use-cases/cyber-threat-intelligence)
+### [Cyber threat intelligence](/use-cases/cyber-threat-intelligence)
 
 Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries
 and rule-inference.
 
-### [Drug discovery](https://github.com/typedb/typedb-examples/tree/master/use-cases/drug-discovery)
+### [Drug discovery](/use-cases/drug-discovery)
 
 Learn how to use TypeDB to accelerate the drug discovery process. Explore the relations between biomolecules using
 polymorphism and advanced rule-inference strategies, and leverage them to identify potential cancer treatments.
 
-### [Bookstore](https://github.com/typedb/typedb-examples/tree/master/use-cases/bookstore)
+### [Bookstore](/use-cases/bookstore)
 
 Learn how to use TypeDB as the database for a simple ecommerce-style bookstore. Includes a complete schema, sample data,
 and example queries demonstrating basic TypeDB concepts.
 
-### [Social network](https://github.com/typedb/typedb-examples/tree/master/use-cases/social-network)
+### [Social network](/use-cases/social-network)
 
 This example demonstrates how to model a social network using TypeDB 3.0. The schema captures the complex relationships and interactions between users, their content, and various social entities in a modern social networking platform.
 
@@ -81,10 +81,20 @@ http://github.com/typedb/typedb-examples/releases/latest/download/<file>
 
 So for example, to load the latest Bookstore example dataset, you could use this Console command:
 ```
-typdb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
+typedb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
 ```
 
 If you wanted to use a specific version, you'd use this structure of URL instead:
 ```
 https://github.com/typedb/typedb-examples/releases/download/<version>/<file>
 ```
+
+## [Cloud API Scripts](/cloud-api-scripts)
+
+This repository also includes a set of scripts for interacting with the TypeDB Cloud API,
+specifically for deploying a new TypeDB cluster.
+These are located in the `cloud-api-scripts` directory.
+
+We have examples written in bash, python, and node.js 
+\- which should be adaptable to your language of choice, 
+as well as other API operations. 
