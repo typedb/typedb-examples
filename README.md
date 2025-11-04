@@ -41,27 +41,27 @@ As well as two simpler dataset used for documentation and learning:
 * Bookstore (an ecommerce-style example)
 * Social network
 
-### [Identity and access management](https://github.com/typedb/typedb-examples/tree/master/use-cases/identity-and-access-management)
+### [Identity and access management](/use-cases/identity-and-access-management)
 
 Learn how to use TypeDB as the database for an identity and access management (IAM) system. Uses a flexible data model
 to automate permission inheritance and policy enforcement at the schema level using function composition.
 
-### [Cyber threat intelligence](https://github.com/typedb/typedb-examples/tree/master/use-cases/cyber-threat-intelligence)
+### [Cyber threat intelligence](/use-cases/cyber-threat-intelligence)
 
 Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries
 and rule-inference.
 
-### [Drug discovery](https://github.com/typedb/typedb-examples/tree/master/use-cases/drug-discovery)
+### [Drug discovery](/use-cases/drug-discovery)
 
 Learn how to use TypeDB to accelerate the drug discovery process. Explore the relations between biomolecules using
 polymorphism and advanced rule-inference strategies, and leverage them to identify potential cancer treatments.
 
-### [Bookstore](https://github.com/typedb/typedb-examples/tree/master/use-cases/bookstore)
+### [Bookstore](/use-cases/bookstore)
 
 Learn how to use TypeDB as the database for a simple ecommerce-style bookstore. Includes a complete schema, sample data,
 and example queries demonstrating basic TypeDB concepts.
 
-### [Social network](https://github.com/typedb/typedb-examples/tree/master/use-cases/social-network)
+### [Social network](/use-cases/social-network)
 
 This example demonstrates how to model a social network using TypeDB 3.0. The schema captures the complex relationships and interactions between users, their content, and various social entities in a modern social networking platform.
 
