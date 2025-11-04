@@ -33,7 +33,7 @@ The `database create-init` can also be run interactively if you're already in Co
 
 This example dataset is also released under the releases page so you **can load from URL**:
 ```
-typdb console --username=<username> --address=<address> --command="database create-init iam http://github.com/typedb/typedb-examples/releases/latest/download/iam-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/iam-data.tql"
+typedb console --username=<username> --address=<address> --command="database create-init iam http://github.com/typedb/typedb-examples/releases/latest/download/iam-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/iam-data.tql"
 ```
 
 ### Manual setup

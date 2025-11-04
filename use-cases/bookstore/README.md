@@ -19,7 +19,7 @@ The `database create-init` can also be run interactively if you're already in Co
 
 This example dataset is also released under the releases page so you **can load from URL**:
 ```
-typdb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
+typedb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
 ```
 
 ### Manual setup

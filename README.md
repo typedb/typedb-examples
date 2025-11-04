@@ -81,10 +81,20 @@ http://github.com/typedb/typedb-examples/releases/latest/download/<file>
 
 So for example, to load the latest Bookstore example dataset, you could use this Console command:
 ```
-typdb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
+typedb console --username=<username> --address=<address> --command="database create-init bookstore http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-schema.tql http://github.com/typedb/typedb-examples/releases/latest/download/bookstore-data.tql"
 ```
 
 If you wanted to use a specific version, you'd use this structure of URL instead:
 ```
 https://github.com/typedb/typedb-examples/releases/download/<version>/<file>
 ```
+
+## [Cloud API Scripts](https://github.com/typedb/typedb-examples/tree/master/cloud-api-scripts)
+
+This repository also includes a set of scripts for interacting with the TypeDB Cloud API,
+specifically for deploying a new TypeDB cluster.
+These are located in the `cloud-api-scripts` directory.
+
+We have examples written in bash, python, and node.js 
+\- which should be adaptable to your language of choice, 
+as well as other API operations. 
