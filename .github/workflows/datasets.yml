@@ -37,4 +37,6 @@ jobs:
       run: |
         typedb console --address=localhost:1729 --tls-disabled \
           --username=admin --password=password \
-          --command="database create-init ${{ matrix.directory}} use-cases/${{matrix.directory}}/${{matrix.schema}} use-cases/${{matrix.directory}}/${{matrix.data}}"
+          --command="database create-init ${{ matrix.dataset.directory}} \
+          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.schema}} \
+          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.data}}"
