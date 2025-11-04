@@ -24,13 +24,13 @@ typedb console --username=<username> --address=<address> --command="database cre
 
 If you wanted to load the dataset step-by-step or using an older version of TypeDB Console, you can do the following:
 
-2. In TypeDB Console, create a database - we'll use `social-network` in this setup
-3. Open a `schema` transaction
-4. Load the `schema.tql` - the easiest is to use `source <path to schema.tql>`
-5. Commit the schema and verify no errors appear
-6. Open a `write` transaction
-7. Load the `data.tql` - the easiest is to use `source <path to data.tql>`
-8. Commit the schema
+1. In TypeDB Console, create a database - we'll use `social-network` in this setup
+2. Open a `schema` transaction
+3. Load the `schema.tql` - the easiest is to use `source <path to schema.tql>`
+4. Commit the schema and verify no errors appear
+5. Open a `write` transaction
+6. Load the `data.tql` - the easiest is to use `source <path to data.tql>`
+7. Commit the data
 
 
 ## Example queries

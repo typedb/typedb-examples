@@ -26,13 +26,13 @@ typedb console --username=<username> --address=<address> --command="database cre
 
 If you wanted to load the dataset step-by-step or using an older version of TypeDB Console, you can do the following:
 
-1. In TypeDB Console, create a database - we'll use `bookstore` in this etup
-2.  open a `schema` transaction
+1. In TypeDB Console, create a database - we'll use `bookstore` in this setup
+2. Open a `schema` transaction
 3. Load the `schema.tql` - the easiest is to use `source <path to schema.tql>`
 4. Commit the schema and verify no errors appear
 5. Open a `write` transaction
 6. Load the `data.tql` - the easiest is to use `source <path to data.tql>`
-7. Commit the schema
+7. Commit the data
 
 
 ## Example Queries
