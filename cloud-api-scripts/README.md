@@ -8,7 +8,7 @@ The examples are presented in three languages - bash, python, and node.js
 All examples required a Cloud API token, 
 which can be acquired from the [team settings](https://cloud.typedb.com/?team_action=/settings#api-tokens) page. 
 
-## Bash
+## [Bash](/bash)
 
 The bash script is located at `cloud-api-scripts/bash/deploy.sh`.
 
@@ -20,7 +20,7 @@ export TYPEDB_CLOUD_CLIENT_SECRET=...
 ./deploy.sh my-team my-space gcp europe-west2 api-cluster
 ```
 
-## Python
+## [Python](/python)
 
 The python script is located at `cloud-api-scripts/python/main.py`.
 
@@ -48,7 +48,7 @@ python -m pip install .
 python main.py my-team my-space gcp europe-west2 api-cluster
 ```
 
-## Node.js
+## [Node.js](/nodejs)
 
 The node.js script is located at `cloud-api-scripts/bash/deploy.js`.
 
