@@ -89,7 +89,7 @@ If you wanted to use a specific version, you'd use this structure of URL instead
 https://github.com/typedb/typedb-examples/releases/download/<version>/<file>
 ```
 
-## [Cloud API Scripts](https://github.com/typedb/typedb-examples/tree/master/cloud-api-scripts)
+## [Cloud API Scripts](/cloud-api-scripts)
 
 This repository also includes a set of scripts for interacting with the TypeDB Cloud API,
 specifically for deploying a new TypeDB cluster.
