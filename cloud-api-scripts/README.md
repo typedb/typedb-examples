@@ -24,8 +24,7 @@ export TYPEDB_CLOUD_CLIENT_SECRET=...
 
 The python script is located at `cloud-api-scripts/python/main.py`.
 
-It was built using `uv`, and is designed to be run with it - 
-however it can also be run with a standard python installation.
+It was built using `uv`, but should run in any python environment.
 
 Example usage:
 
