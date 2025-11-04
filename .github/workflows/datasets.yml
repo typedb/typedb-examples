@@ -18,10 +18,10 @@ jobs:
       fail-fast: false
       matrix:
         dataset:
-          - { directory: bookstore, schema: schema.tql, data: data.tql }
-          - { directory: cyber-threat-intelligence, schema: define-schema.tql, data: insert-data.tql }
-          - { directory: identity-and-access-management, schema: schema.tql, data: data.tql }
-          - { directory: social-network, schema: schema.tql, data: data.tql }
+          - bookstore
+          - cyber-threat-intelligence
+          - identity-and-access-management
+          - social-network
 
     steps:
     - name: Checkout repository
@@ -38,5 +38,5 @@ jobs:
         typedb console --address=localhost:1729 --tls-disabled \
           --username=admin --password=password \
           --command="database create-init ${{ matrix.dataset.directory}} \
-          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.schema}} \
-          use-cases/${{matrix.dataset.directory}}/${{matrix.dataset.data}}"
+          use-cases/${{matrix.dataset.directory}}/schema.tql \
+          use-cases/${{matrix.dataset.directory}}/data.tql"
