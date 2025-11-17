@@ -200,10 +200,10 @@ fun is_review_verified_by_purchase($review: review) -> { order }:
 fun book_recommendations_for($user: user) -> {book}:
   match
     $new-book isa book;
-    { 
-        let $new-book in book_recommendations_by_author($user); 
+    {
+        let $new-book in book_recommendations_by_author($user);
     } or {
-        let $new-book in book_recommendations_by_genre($user); 
+        let $new-book in book_recommendations_by_genre($user);
     };
   return { $new-book };
 
@@ -283,7 +283,7 @@ fun best_discount_for_item($item: book, $order-time: datetime) -> double:
         let $discount = $discount-attr;
     } or {
         let $discount = 0.0; # default
-    };    
+    };
 return max($discount);
 
 fun transitive_places($place: place) -> { place }:
