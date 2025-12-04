@@ -202,25 +202,25 @@ put $contributor isa contributor, has name "J.R.R. Tolkien"; match $book isa ebo
 put $publisher isa publisher, has name "Harper Collins"; match $book isa ebook, has isbn-13 "9780008627843"; $city isa city, has name "New York City"; insert $publication isa publication, has year 2023; (published: $book, publisher: $publisher, publication: $publication) isa publishing; (location: $city, located: $publication) isa locating;end;
 
 # user
-match $city isa city, has name "San Francisco"; insert $user isa user, has id "u0001", has name "Kevin Morrison", has birth-date 1995-10-29; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "San Francisco"; insert $user isa user, has id "u0001", has name "Kevin Morrison", has birth-date 1995-10-29, has total-spending 263.08, has loyalty-tier 1; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Austin"; insert $user isa user, has id "u0002", has name "Cameron Osborne", has birth-date 1954-11-11; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Austin"; insert $user isa user, has id "u0002", has name "Cameron Osborne", has birth-date 1954-11-11, has total-spending 22.51, has loyalty-tier 0; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Newark"; insert $user isa user, has id "u0003", has name "Keyla Pineda", has birth-date 1977-06-20; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Newark"; insert $user isa user, has id "u0003", has name "Keyla Pineda", has birth-date 1977-06-20, has total-spending 1026.65, has loyalty-tier 3; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Seattle"; insert $user isa user, has id "u0004", has name "Lorenzo Nixon", has birth-date 1985-08-15; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Seattle"; insert $user isa user, has id "u0004", has name "Lorenzo Nixon", has birth-date 1985-08-15, has total-spending 3811.99, has loyalty-tier 5; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Boston"; insert $user isa user, has id "u0005", has name "Xavier Martinez", has birth-date 1985-01-03; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Boston"; insert $user isa user, has id "u0005", has name "Xavier Martinez", has birth-date 1985-01-03, has total-spending 74.18, has loyalty-tier 0; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Santa Fe"; insert $user isa user, has id "u0006", has name "Giovanni Beard", has birth-date 1992-11-01; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Santa Fe"; insert $user isa user, has id "u0006", has name "Giovanni Beard", has birth-date 1992-11-01, has total-spending 1894.24, has loyalty-tier 4; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Toronto"; insert $user isa user, has id "u0007", has name "Skyler Townsend", has birth-date 1971-04-24; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Toronto"; insert $user isa user, has id "u0007", has name "Skyler Townsend", has birth-date 1971-04-24, has total-spending 943.87, has loyalty-tier 3; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Bristol"; insert $user isa user, has id "u0008", has name "Alia Hartman", has birth-date 1962-10-08; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Bristol"; insert $user isa user, has id "u0008", has name "Alia Hartman", has birth-date 1962-10-08, has total-spending 766.51, has loyalty-tier 2; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Montreal"; insert $user isa user, has id "u0009", has name "Isaac Winters", has birth-date 1984-08-03; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Montreal"; insert $user isa user, has id "u0009", has name "Isaac Winters", has birth-date 1984-08-03, has total-spending 442.90, has loyalty-tier 2; (location: $city, located: $user) isa locating;end;
 # user
-match $city isa city, has name "Liverpool"; insert $user isa user, has id "u0010", has name "Madison Everett", has birth-date 1981-02-10; (location: $city, located: $user) isa locating;end;
+match $city isa city, has name "Liverpool"; insert $user isa user, has id "u0010", has name "Madison Everett", has birth-date 1981-02-10, has total-spending 1854.86, has loyalty-tier 5; (location: $city, located: $user) isa locating;end;
 
 # order
 put $courier isa courier, has name "UPS"; end;
