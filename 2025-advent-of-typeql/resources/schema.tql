@@ -17,10 +17,7 @@ define
   relation production,
     relates builder @card(0..),
     relates blueprint @card(1),
-    owns start-date @card(1),
-    owns completion-date @card(1),
     owns quantity-required @card(1),
-	  owns quantity-pruduced,
     plays present-distribution:source;
   
   relation lives-in,
@@ -83,20 +80,20 @@ define
     relates route @card(1),
     owns stop-number @card(1),
     plays present-distribution:distribution-stop;
+  
+  entity country, plays distribution-stop:country;
 
   relation present-distribution,
     relates distribution-stop @card(1),
     relates source @card(1);
 
   attribute start-date, value datetime;
-  attribute completion-date, value datetime;
   attribute is-capital, value boolean;
   attribute status, value string;
   attribute name, value string;
   attribute description, value string;
   attribute email, value string;
   attribute quantity-required, value integer;
-  attribute quantity-pruduced, value integer;
 
   attribute population, value integer;
   attribute proportion-under-12, value double;
