@@ -4,7 +4,7 @@ This repository contains the sources and texts for the 2025 Advent of TypeQL. It
 
 ## Format
 
-Each day will be one file/blog post. There will be 15 days from December 10 to December 24, inclusive.
+Each day will be one file/blog post. There will be 14 days from December 11 to December 24, inclusive.
 
 The first day will come with a setup schema and data file, and subsequent days will build up on previous days' work. 
 However, each subsequent day will also have a shortcut setup to just setup a database for that day's activity.
