@@ -1,0 +1,1032 @@
+insert
+# --- Continents ---
+$asia isa continent, has name "Asia";
+$north-america isa continent, has name "North America";
+$south-america isa continent, has name "South America";
+$europe isa continent, has name "Europe";
+$africa isa continent, has name "Africa";
+$oceania isa continent, has name "Oceania";
+$antarctica isa continent, has name "Antarctica";
+
+# --- Countries ---
+$c1 isa country, has name "India"; location-contains (parent: $asia, child: $c1);
+$c1-stats isa country-statistics, has population 1450000000, has proportion-under-12 0.2;
+demographics (place: $c1, statistics: $c1-stats);
+$c1-capital isa city, has is-capital true, has city-population 33000000, has name "New Delhi"; location-contains (parent: $c1, child: $c1-capital);
+
+$c2 isa country, has name "China"; location-contains (parent: $asia, child: $c2);
+$c2-stats isa country-statistics, has population 1410000000, has proportion-under-12 0.13;
+demographics (place: $c2, statistics: $c2-stats);
+$c2-capital isa city, has is-capital true, has city-population 22000000, has name "Beijing"; location-contains (parent: $c2, child: $c2-capital); 
+$c2-biggest isa city, has is-capital false, has city-population 29900000, has name "Shanghai"; location-contains (parent: $c2, child: $c2-biggest);
+
+$c3 isa country, has name "United States"; location-contains (parent: $north-america, child: $c3);
+$c3-stats isa country-statistics, has population 346000000, has proportion-under-12 0.145;
+demographics (place: $c3, statistics: $c3-stats);
+$c3-capital isa city, has is-capital true, has city-population 6000000, has name "Washington D.C."; location-contains (parent: $c3, child: $c3-capital); 
+$c3-biggest isa city, has is-capital false, has city-population 19000000, has name "New York City"; location-contains (parent: $c3, child: $c3-biggest);
+
+$c4 isa country, has name "Indonesia"; location-contains (parent: $asia, child: $c4);
+$c4-stats isa country-statistics, has population 282000000, has proportion-under-12 0.2;
+demographics (place: $c4, statistics: $c4-stats);
+$c4-capital isa city, has is-capital true, has city-population 34000000, has name "Jakarta"; location-contains (parent: $c4, child: $c4-capital);
+
+$c5 isa country, has name "Pakistan"; location-contains (parent: $asia, child: $c5);
+$c5-stats isa country-statistics, has population 245000000, has proportion-under-12 0.29;
+demographics (place: $c5, statistics: $c5-stats);
+$c5-capital isa city, has is-capital true, has city-population 1200000, has name "Islamabad"; location-contains (parent: $c5, child: $c5-capital); 
+$c5-biggest isa city, has is-capital false, has city-population 17600000, has name "Karachi"; location-contains (parent: $c5, child: $c5-biggest);
+
+$c6 isa country, has name "Nigeria"; location-contains (parent: $africa, child: $c6);
+$c6-stats isa country-statistics, has population 229000000, has proportion-under-12 0.33;
+demographics (place: $c6, statistics: $c6-stats);
+$c6-capital isa city, has is-capital true, has city-population 4000000, has name "Abuja"; location-contains (parent: $c6, child: $c6-capital); 
+$c6-biggest isa city, has is-capital false, has city-population 16500000, has name "Lagos"; location-contains (parent: $c6, child: $c6-biggest);
+
+$c7 isa country, has name "Brazil"; location-contains (parent: $south-america, child: $c7);
+$c7-stats isa country-statistics, has population 212000000, has proportion-under-12 0.16;
+demographics (place: $c7, statistics: $c7-stats);
+$c7-capital isa city, has is-capital true, has city-population 3000000, has name "Brasília"; location-contains (parent: $c7, child: $c7-capital); 
+$c7-biggest isa city, has is-capital false, has city-population 22000000, has name "São Paulo"; location-contains (parent: $c7, child: $c7-biggest);
+
+$c8 isa country, has name "Bangladesh"; location-contains (parent: $asia, child: $c8);
+$c8-stats isa country-statistics, has population 175000000, has proportion-under-12 0.22;
+demographics (place: $c8, statistics: $c8-stats);
+$c8-capital isa city, has is-capital true, has city-population 23900000, has name "Dhaka"; location-contains (parent: $c8, child: $c8-capital);
+
+$c9 isa country, has name "Russia"; location-contains (parent: $europe, child: $c9);
+$c9-stats isa country-statistics, has population 144000000, has proportion-under-12 0.14;
+demographics (place: $c9, statistics: $c9-stats);
+$c9-capital isa city, has is-capital true, has city-population 13000000, has name "Moscow"; location-contains (parent: $c9, child: $c9-capital);
+
+$c10 isa country, has name "Ethiopia"; location-contains (parent: $africa, child: $c10);
+$c10-stats isa country-statistics, has population 129000000, has proportion-under-12 0.31;
+demographics (place: $c10, statistics: $c10-stats);
+$c10-capital isa city, has is-capital true, has city-population 5700000, has name "Addis Ababa"; location-contains (parent: $c10, child: $c10-capital);
+
+$c11 isa country, has name "Mexico"; location-contains (parent: $north-america, child: $c11);
+$c11-stats isa country-statistics, has population 129000000, has proportion-under-12 0.19;
+demographics (place: $c11, statistics: $c11-stats);
+$c11-capital isa city, has is-capital true, has city-population 22000000, has name "Mexico City"; location-contains (parent: $c11, child: $c11-capital);
+
+$c12 isa country, has name "Japan"; location-contains (parent: $asia, child: $c12);
+$c12-stats isa country-statistics, has population 123000000, has proportion-under-12 0.09;
+demographics (place: $c12, statistics: $c12-stats);
+$c12-capital isa city, has is-capital true, has city-population 37000000, has name "Tokyo"; location-contains (parent: $c12, child: $c12-capital);
+
+$c13 isa country, has name "Philippines"; location-contains (parent: $asia, child: $c13);
+$c13-stats isa country-statistics, has population 119000000, has proportion-under-12 0.22;
+demographics (place: $c13, statistics: $c13-stats);
+$c13-capital isa city, has is-capital true, has city-population 14900000, has name "Manila"; location-contains (parent: $c13, child: $c13-capital); 
+$c13-biggest isa city, has is-capital false, has city-population 2900000, has name "Quezon City"; location-contains (parent: $c13, child: $c13-biggest);
+
+$c14 isa country, has name "Egypt"; location-contains (parent: $africa, child: $c14);
+$c14-stats isa country-statistics, has population 114000000, has proportion-under-12 0.26;
+demographics (place: $c14, statistics: $c14-stats);
+$c14-capital isa city, has is-capital true, has city-population 22600000, has name "Cairo"; location-contains (parent: $c14, child: $c14-capital);
+
+$c15 isa country, has name "DR Congo"; location-contains (parent: $africa, child: $c15);
+$c15-stats isa country-statistics, has population 105000000, has proportion-under-12 0.37;
+demographics (place: $c15, statistics: $c15-stats);
+$c15-capital isa city, has is-capital true, has city-population 17000000, has name "Kinshasa"; location-contains (parent: $c15, child: $c15-capital);
+
+$c16 isa country, has name "Vietnam"; location-contains (parent: $asia, child: $c16);
+$c16-stats isa country-statistics, has population 100000000, has proportion-under-12 0.18;
+demographics (place: $c16, statistics: $c16-stats);
+$c16-capital isa city, has is-capital true, has city-population 8000000, has name "Hanoi"; location-contains (parent: $c16, child: $c16-capital);
+$c16-biggest isa city, has is-capital false, has city-population 9300000, has name "Ho Chi Minh City"; location-contains (parent: $c16, child: $c16-biggest);
+
+$c17 isa country, has name "Iran"; location-contains (parent: $asia, child: $c17);
+$c17-stats isa country-statistics, has population 89000000, has proportion-under-12 0.19;
+demographics (place: $c17, statistics: $c17-stats);
+$c17-capital isa city, has is-capital true, has city-population 16000000, has name "Tehran"; location-contains (parent: $c17, child: $c17-capital);
+
+$c18 isa country, has name "Turkey"; location-contains (parent: $asia, child: $c18);
+$c18-stats isa country-statistics, has population 86000000, has proportion-under-12 0.18;
+demographics (place: $c18, statistics: $c18-stats);
+$c18-capital isa city, has is-capital true, has city-population 5400000, has name "Ankara"; location-contains (parent: $c18, child: $c18-capital);
+$c18-biggest isa city, has is-capital false, has city-population 15600000, has name "Istanbul"; location-contains (parent: $c18, child: $c18-biggest);
+
+$c19 isa country, has name "Germany"; location-contains (parent: $europe, child: $c19);
+$c19-stats isa country-statistics, has population 84000000, has proportion-under-12 0.11;
+demographics (place: $c19, statistics: $c19-stats);
+$c19-capital isa city, has is-capital true, has city-population 3800000, has name "Berlin"; location-contains (parent: $c19, child: $c19-capital);
+
+$c20 isa country, has name "Thailand"; location-contains (parent: $asia, child: $c20);
+$c20-stats isa country-statistics, has population 71000000, has proportion-under-12 0.12;
+demographics (place: $c20, statistics: $c20-stats);
+$c20-capital isa city, has is-capital true, has city-population 11000000, has name "Bangkok"; location-contains (parent: $c20, child: $c20-capital);
+
+$c21 isa country, has name "United Kingdom"; location-contains (parent: $europe, child: $c21);
+$c21-stats isa country-statistics, has population 68000000, has proportion-under-12 0.14;
+demographics (place: $c21, statistics: $c21-stats);
+$c21-capital isa city, has is-capital true, has city-population 14000000, has name "London"; location-contains (parent: $c21, child: $c21-capital);
+
+$c22 isa country, has name "France"; location-contains (parent: $europe, child: $c22);
+$c22-stats isa country-statistics, has population 68000000, has proportion-under-12 0.14;
+demographics (place: $c22, statistics: $c22-stats);
+$c22-capital isa city, has is-capital true, has city-population 13000000, has name "Paris"; location-contains (parent: $c22, child: $c22-capital);
+
+$c23 isa country, has name "South Africa"; location-contains (parent: $africa, child: $c23);
+$c23-stats isa country-statistics, has population 64000000, has proportion-under-12 0.22;
+demographics (place: $c23, statistics: $c23-stats);
+$c23-capital isa city, has is-capital true, has city-population 2900000, has name "Pretoria"; location-contains (parent: $c23, child: $c23-capital); 
+$c23-biggest isa city, has is-capital false, has city-population 6300000, has name "Johannesburg"; location-contains (parent: $c23, child: $c23-biggest);
+
+$c24 isa country, has name "Italy"; location-contains (parent: $europe, child: $c24);
+$c24-stats isa country-statistics, has population 59000000, has proportion-under-12 0.095;
+demographics (place: $c24, statistics: $c24-stats);
+$c24-capital isa city, has is-capital true, has city-population 4300000, has name "Rome"; location-contains (parent: $c24, child: $c24-capital);
+
+$c25 isa country, has name "South Korea"; location-contains (parent: $asia, child: $c25);
+$c25-stats isa country-statistics, has population 51000000, has proportion-under-12 0.085;
+demographics (place: $c25, statistics: $c25-stats);
+$c25-capital isa city, has is-capital true, has city-population 26000000, has name "Seoul"; location-contains (parent: $c25, child: $c25-capital);
+
+$c26 isa country, has name "Kenya"; location-contains (parent: $africa, child: $c26);
+$c26-stats isa country-statistics, has population 58000000, has proportion-under-12 0.3;
+demographics (place: $c26, statistics: $c26-stats);
+$c26-capital isa city, has is-capital true, has city-population 5500000, has name "Nairobi"; location-contains (parent: $c26, child: $c26-capital);
+
+$c27 isa country, has name "Myanmar"; location-contains (parent: $asia, child: $c27);
+$c27-stats isa country-statistics, has population 57000000, has proportion-under-12 0.2;
+demographics (place: $c27, statistics: $c27-stats);
+$c27-capital isa city, has is-capital true, has city-population 375000, has name "Naypyidaw"; location-contains (parent: $c27, child: $c27-capital); 
+$c27-biggest isa city, has is-capital false, has city-population 7000000, has name "Yangon"; location-contains (parent: $c27, child: $c27-biggest);
+
+$c28 isa country, has name "South Korea"; location-contains (parent: $asia, child: $c28);
+$c28-stats isa country-statistics, has population 52000000, has proportion-under-12 0.09;
+demographics (place: $c28, statistics: $c28-stats);
+$c28-capital isa city, has is-capital true, has city-population 26000000, has name "Seoul"; location-contains (parent: $c28, child: $c28-capital);
+
+$c29 isa country, has name "Sudan"; location-contains (parent: $africa, child: $c29);
+$c29-stats isa country-statistics, has population 50000000, has proportion-under-12 0.32;
+demographics (place: $c29, statistics: $c29-stats);
+$c29-capital isa city, has is-capital true, has city-population 6000000, has name "Khartoum"; location-contains (parent: $c29, child: $c29-capital); 
+$c29-biggest isa city, has is-capital false, has city-population 2800000, has name "Omdurman"; location-contains (parent: $c29, child: $c29-biggest);
+
+$c30 isa country, has name "Colombia"; location-contains (parent: $south-america, child: $c30);
+$c30-stats isa country-statistics, has population 49000000, has proportion-under-12 0.18;
+demographics (place: $c30, statistics: $c30-stats);
+$c30-capital isa city, has is-capital true, has city-population 11000000, has name "Bogotá"; location-contains (parent: $c30, child: $c30-capital);
+
+$c31 isa country, has name "Uganda"; location-contains (parent: $africa, child: $c31);
+$c31-stats isa country-statistics, has population 49000000, has proportion-under-12 0.36;
+demographics (place: $c31, statistics: $c31-stats);
+$c31-capital isa city, has is-capital true, has city-population 4000000, has name "Kampala"; location-contains (parent: $c31, child: $c31-capital);
+
+$c32 isa country, has name "Spain"; location-contains (parent: $europe, child: $c32);
+$c32-stats isa country-statistics, has population 47000000, has proportion-under-12 0.11;
+demographics (place: $c32, statistics: $c32-stats);
+$c32-capital isa city, has is-capital true, has city-population 6700000, has name "Madrid"; location-contains (parent: $c32, child: $c32-capital);
+
+$c33 isa country, has name "Algeria"; location-contains (parent: $africa, child: $c33);
+$c33-stats isa country-statistics, has population 47000000, has proportion-under-12 0.24;
+demographics (place: $c33, statistics: $c33-stats);
+$c33-capital isa city, has is-capital true, has city-population 4500000, has name "Algiers"; location-contains (parent: $c33, child: $c33-capital);
+
+$c34 isa country, has name "Argentina"; location-contains (parent: $south-america, child: $c34);
+$c34-stats isa country-statistics, has population 47000000, has proportion-under-12 0.19;
+demographics (place: $c34, statistics: $c34-stats);
+$c34-capital isa city, has is-capital true, has city-population 15000000, has name "Buenos Aires"; location-contains (parent: $c34, child: $c34-capital);
+
+$c35 isa country, has name "Iraq"; location-contains (parent: $asia, child: $c35);
+$c35-stats isa country-statistics, has population 46000000, has proportion-under-12 0.3;
+demographics (place: $c35, statistics: $c35-stats);
+$c35-capital isa city, has is-capital true, has city-population 7500000, has name "Baghdad"; location-contains (parent: $c35, child: $c35-capital);
+
+$c36 isa country, has name "Afghanistan"; location-contains (parent: $asia, child: $c36);
+$c36-stats isa country-statistics, has population 43000000, has proportion-under-12 0.34;
+demographics (place: $c36, statistics: $c36-stats);
+$c36-capital isa city, has is-capital true, has city-population 4900000, has name "Kabul"; location-contains (parent: $c36, child: $c36-capital);
+
+$c37 isa country, has name "Canada"; location-contains (parent: $north-america, child: $c37);
+$c37-stats isa country-statistics, has population 41000000, has proportion-under-12 0.12;
+demographics (place: $c37, statistics: $c37-stats);
+$c37-capital isa city, has is-capital true, has city-population 1500000, has name "Ottawa"; location-contains (parent: $c37, child: $c37-capital); 
+$c37-biggest isa city, has is-capital false, has city-population 6700000, has name "Toronto"; location-contains (parent: $c37, child: $c37-biggest);
+
+$c38 isa country, has name "Poland"; location-contains (parent: $europe, child: $c38);
+$c38-stats isa country-statistics, has population 38000000, has proportion-under-12 0.12;
+demographics (place: $c38, statistics: $c38-stats);
+$c38-capital isa city, has is-capital true, has city-population 3000000, has name "Warsaw"; location-contains (parent: $c38, child: $c38-capital);
+
+$c39 isa country, has name "Morocco"; location-contains (parent: $africa, child: $c39);
+$c39-stats isa country-statistics, has population 38000000, has proportion-under-12 0.21;
+demographics (place: $c39, statistics: $c39-stats);
+$c39-capital isa city, has is-capital true, has city-population 1200000, has name "Rabat"; location-contains (parent: $c39, child: $c39-capital);
+$c39-biggest isa city, has is-capital false, has city-population 4300000, has name "Casablanca"; location-contains (parent: $c39, child: $c39-biggest);
+
+$c40 isa country, has name "Angola"; location-contains (parent: $africa, child: $c40);
+$c40-stats isa country-statistics, has population 37000000, has proportion-under-12 0.37;
+demographics (place: $c40, statistics: $c40-stats);
+$c40-capital isa city, has is-capital true, has city-population 9000000, has name "Luanda"; location-contains (parent: $c40, child: $c40-capital);
+
+$c41 isa country, has name "Saudi Arabia"; location-contains (parent: $asia, child: $c41);
+$c41-stats isa country-statistics, has population 36000000, has proportion-under-12 0.19;
+demographics (place: $c41, statistics: $c41-stats);
+$c41-capital isa city, has is-capital true, has city-population 7700000, has name "Riyadh"; location-contains (parent: $c41, child: $c41-capital);
+
+$c42 isa country, has name "Uzbekistan"; location-contains (parent: $asia, child: $c42);
+$c42-stats isa country-statistics, has population 36000000, has proportion-under-12 0.24;
+demographics (place: $c42, statistics: $c42-stats);
+$c42-capital isa city, has is-capital true, has city-population 3000000, has name "Tashkent"; location-contains (parent: $c42, child: $c42-capital);
+
+$c43 isa country, has name "Ukraine"; location-contains (parent: $europe, child: $c43);
+$c43-stats isa country-statistics, has population 35000000, has proportion-under-12 0.11;
+demographics (place: $c43, statistics: $c43-stats);
+$c43-capital isa city, has is-capital true, has city-population 2900000, has name "Kyiv"; location-contains (parent: $c43, child: $c43-capital);
+
+$c44 isa country, has name "Ghana"; location-contains (parent: $africa, child: $c44);
+$c44-stats isa country-statistics, has population 34000000, has proportion-under-12 0.29;
+demographics (place: $c44, statistics: $c44-stats);
+$c44-capital isa city, has is-capital true, has city-population 5400000, has name "Accra"; location-contains (parent: $c44, child: $c44-capital);
+
+$c45 isa country, has name "Malaysia"; location-contains (parent: $asia, child: $c45);
+$c45-stats isa country-statistics, has population 34000000, has proportion-under-12 0.18;
+demographics (place: $c45, statistics: $c45-stats);
+$c45-capital isa city, has is-capital true, has city-population 8000000, has name "Kuala Lumpur"; location-contains (parent: $c45, child: $c45-capital);
+
+$c46 isa country, has name "Mozambique"; location-contains (parent: $africa, child: $c46);
+$c46-stats isa country-statistics, has population 33000000, has proportion-under-12 0.35;
+demographics (place: $c46, statistics: $c46-stats);
+$c46-capital isa city, has is-capital true, has city-population 2700000, has name "Maputo"; location-contains (parent: $c46, child: $c46-capital);
+
+$c47 isa country, has name "Peru"; location-contains (parent: $south-america, child: $c47);
+$c47-stats isa country-statistics, has population 33000000, has proportion-under-12 0.19;
+demographics (place: $c47, statistics: $c47-stats);
+$c47-capital isa city, has is-capital true, has city-population 11000000, has name "Lima"; location-contains (parent: $c47, child: $c47-capital);
+
+$c48 isa country, has name "Yemen"; location-contains (parent: $asia, child: $c48);
+$c48-stats isa country-statistics, has population 32000000, has proportion-under-12 0.33;
+demographics (place: $c48, statistics: $c48-stats);
+$c48-capital isa city, has is-capital true, has city-population 3900000, has name "Sana'a"; location-contains (parent: $c48, child: $c48-capital);
+
+$c49 isa country, has name "Venezuela"; location-contains (parent: $south-america, child: $c49);
+$c49-stats isa country-statistics, has population 31000000, has proportion-under-12 0.2;
+demographics (place: $c49, statistics: $c49-stats);
+$c49-capital isa city, has is-capital true, has city-population 3000000, has name "Caracas"; location-contains (parent: $c49, child: $c49-capital);
+
+$c50 isa country, has name "Cameroon"; location-contains (parent: $africa, child: $c50);
+$c50-stats isa country-statistics, has population 31000000, has proportion-under-12 0.33;
+demographics (place: $c50, statistics: $c50-stats);
+$c50-capital isa city, has is-capital true, has city-population 4500000, has name "Yaoundé"; location-contains (parent: $c50, child: $c50-capital); 
+$c50-biggest isa city, has is-capital false, has city-population 4100000, has name "Douala"; location-contains (parent: $c50, child: $c50-biggest);
+
+$c51 isa country, has name "Ivory Coast"; location-contains (parent: $africa, child: $c51);
+$c51-stats isa country-statistics, has population 31000000, has proportion-under-12 0.34;
+demographics (place: $c51, statistics: $c51-stats);
+$c51-capital isa city, has is-capital true, has city-population 400000, has name "Yamoussoukro"; location-contains (parent: $c51, child: $c51-capital); 
+$c51-biggest isa city, has is-capital false, has city-population 6300000, has name "Abidjan"; location-contains (parent: $c51, child: $c51-biggest);
+
+$c52 isa country, has name "Madagascar"; location-contains (parent: $africa, child: $c52);
+$c52-stats isa country-statistics, has population 31000000, has proportion-under-12 0.32;
+demographics (place: $c52, statistics: $c52-stats);
+$c52-capital isa city, has is-capital true, has city-population 3800000, has name "Antananarivo"; location-contains (parent: $c52, child: $c52-capital);
+
+$c53 isa country, has name "Australia"; location-contains (parent: $oceania, child: $c53);
+$c53-stats isa country-statistics, has population 27000000, has proportion-under-12 0.14;
+demographics (place: $c53, statistics: $c53-stats);
+$c53-capital isa city, has is-capital true, has city-population 470000, has name "Canberra"; location-contains (parent: $c53, child: $c53-capital); 
+$c53-biggest isa city, has is-capital false, has city-population 5300000, has name "Sydney"; location-contains (parent: $c53, child: $c53-biggest);
+
+$c54 isa country, has name "Niger"; location-contains (parent: $africa, child: $c54);
+$c54-stats isa country-statistics, has population 27000000, has proportion-under-12 0.4;
+demographics (place: $c54, statistics: $c54-stats);
+$c54-capital isa city, has is-capital true, has city-population 1500000, has name "Niamey"; location-contains (parent: $c54, child: $c54-capital);
+
+$c55 isa country, has name "North Korea"; location-contains (parent: $asia, child: $c55);
+$c55-stats isa country-statistics, has population 26000000, has proportion-under-12 0.16;
+demographics (place: $c55, statistics: $c55-stats);
+$c55-capital isa city, has is-capital true, has city-population 3100000, has name "Pyongyang"; location-contains (parent: $c55, child: $c55-capital);
+
+$c56 isa country, has name "Syria"; location-contains (parent: $asia, child: $c56);
+$c56-stats isa country-statistics, has population 24000000, has proportion-under-12 0.26;
+demographics (place: $c56, statistics: $c56-stats);
+$c56-capital isa city, has is-capital true, has city-population 5000000, has name "Damascus"; location-contains (parent: $c56, child: $c56-capital);
+
+$c57 isa country, has name "Taiwan"; location-contains (parent: $asia, child: $c57);
+$c57-stats isa country-statistics, has population 23500000, has proportion-under-12 0.09;
+demographics (place: $c57, statistics: $c57-stats);
+$c57-capital isa city, has is-capital true, has city-population 7000000, has name "Taipei"; location-contains (parent: $c57, child: $c57-capital); 
+$c57-biggest isa city, has is-capital false, has city-population 4000000, has name "New Taipei City";location-contains (parent: $c57, child: $c57-biggest);
+
+$c58 isa country, has name "Burkina Faso"; location-contains (parent: $africa, child: $c58);
+$c58-stats isa country-statistics, has population 23500000, has proportion-under-12 0.35;
+demographics (place: $c58, statistics: $c58-stats);
+$c58-capital isa city, has is-capital true, has city-population 3200000, has name "Ouagadougou"; location-contains (parent: $c58, child: $c58-capital);
+
+$c59 isa country, has name "Mali"; location-contains (parent: $africa, child: $c59);
+$c59-stats isa country-statistics, has population 23000000, has proportion-under-12 0.38;
+demographics (place: $c59, statistics: $c59-stats);
+$c59-capital isa city, has is-capital true, has city-population 2900000, has name "Bamako"; location-contains (parent: $c59, child: $c59-capital);
+
+$c60 isa country, has name "Sri Lanka"; location-contains (parent: $asia, child: $c60);
+$c60-stats isa country-statistics, has population 22000000, has proportion-under-12 0.19;
+demographics (place: $c60, statistics: $c60-stats);
+$c60-capital isa city, has is-capital true, has city-population 100000, has name "Sri Jayawardenepura Kotte"; location-contains (parent: $c60, child: $c60-capital); 
+$c60-biggest isa city, has is-capital false, has city-population 5600000, has name "Colombo"; location-contains (parent: $c60, child: $c60-biggest);
+
+$c61 isa country, has name "Malawi"; location-contains (parent: $africa, child: $c61);
+$c61-stats isa country-statistics, has population 21500000, has proportion-under-12 0.35;
+demographics (place: $c61, statistics: $c61-stats);
+$c61-capital isa city, has is-capital true, has city-population 1300000, has name "Lilongwe"; location-contains (parent: $c61, child: $c61-capital);
+
+$c62 isa country, has name "Zambia"; location-contains (parent: $africa, child: $c62);
+$c62-stats isa country-statistics, has population 21000000, has proportion-under-12 0.34;
+demographics (place: $c62, statistics: $c62-stats);
+$c62-capital isa city, has is-capital true, has city-population 3500000, has name "Lusaka"; location-contains (parent: $c62, child: $c62-capital);
+
+$c63 isa country, has name "Kazakhstan"; location-contains (parent: $asia, child: $c63);
+$c63-stats isa country-statistics, has population 20000000, has proportion-under-12 0.23;
+demographics (place: $c63, statistics: $c63-stats);
+$c63-capital isa city, has is-capital true, has city-population 1400000, has name "Astana"; location-contains (parent: $c63, child: $c63-capital);
+$c63-biggest isa city, has is-capital false, has city-population 2200000, has name "Almaty"; location-contains (parent: $c63, child: $c63-biggest);
+
+$c64 isa country, has name "Chile"; location-contains (parent: $south-america, child: $c64);
+$c64-stats isa country-statistics, has population 19800000, has proportion-under-12 0.14;
+demographics (place: $c64, statistics: $c64-stats);
+$c64-capital isa city, has is-capital true, has city-population 6900000, has name "Santiago"; location-contains (parent: $c64, child: $c64-capital);
+
+$c65 isa country, has name "Romania"; location-contains (parent: $europe, child: $c65);
+$c65-stats isa country-statistics, has population 19000000, has proportion-under-12 0.12;
+demographics (place: $c65, statistics: $c65-stats);
+$c65-capital isa city, has is-capital true, has city-population 2300000, has name "Bucharest"; location-contains (parent: $c65, child: $c65-capital);
+
+$c66 isa country, has name "Chad"; location-contains (parent: $africa, child: $c66);
+$c66-stats isa country-statistics, has population 19000000, has proportion-under-12 0.38;
+demographics (place: $c66, statistics: $c66-stats);
+$c66-capital isa city, has is-capital true, has city-population 1600000, has name "N'Djamena"; location-contains (parent: $c66, child: $c66-capital);
+
+$c67 isa country, has name "Ecuador"; location-contains (parent: $south-america, child: $c67);
+$c67-stats isa country-statistics, has population 18500000, has proportion-under-12 0.2;
+demographics (place: $c67, statistics: $c67-stats);
+$c67-capital isa city, has is-capital true, has city-population 3000000, has name "Quito"; location-contains (parent: $c67, child: $c67-capital);
+$c67-biggest isa city, has is-capital false, has city-population 3500000, has name "Guayaquil"; location-contains (parent: $c67, child: $c67-biggest);
+
+$c68 isa country, has name "Somalia"; location-contains (parent: $africa, child: $c68);
+$c68-stats isa country-statistics, has population 18000000, has proportion-under-12 0.38;
+demographics (place: $c68, statistics: $c68-stats);
+$c68-capital isa city, has is-capital true, has city-population 2600000, has name "Mogadishu"; location-contains (parent: $c68, child: $c68-capital);
+
+$c69 isa country, has name "Guatemala"; location-contains (parent: $north-america, child: $c69);
+$c69-stats isa country-statistics, has population 18000000, has proportion-under-12 0.25;
+demographics (place: $c69, statistics: $c69-stats);
+$c69-capital isa city, has is-capital true, has city-population 3000000, has name "Guatemala City"; location-contains (parent: $c69, child: $c69-capital);
+
+$c70 isa country, has name "Senegal"; location-contains (parent: $africa, child: $c70);
+$c70-stats isa country-statistics, has population 18000000, has proportion-under-12 0.34;
+demographics (place: $c70, statistics: $c70-stats);
+$c70-capital isa city, has is-capital true, has city-population 3900000, has name "Dakar"; location-contains (parent: $c70, child: $c70-capital);
+
+$c71 isa country, has name "Netherlands"; location-contains (parent: $europe, child: $c71);
+$c71-stats isa country-statistics, has population 18000000, has proportion-under-12 0.12;
+demographics (place: $c71, statistics: $c71-stats);
+$c71-capital isa city, has is-capital true, has city-population 2500000, has name "Amsterdam"; location-contains (parent: $c71, child: $c71-capital);
+
+$c72 isa country, has name "Cambodia"; location-contains (parent: $asia, child: $c72);
+$c72-stats isa country-statistics, has population 17000000, has proportion-under-12 0.24;
+demographics (place: $c72, statistics: $c72-stats);
+$c72-capital isa city, has is-capital true, has city-population 2300000, has name "Phnom Penh"; location-contains (parent: $c72, child: $c72-capital);
+
+$c73 isa country, has name "Zimbabwe"; location-contains (parent: $africa, child: $c73);
+$c73-stats isa country-statistics, has population 17000000, has proportion-under-12 0.32;
+demographics (place: $c73, statistics: $c73-stats);
+$c73-capital isa city, has is-capital true, has city-population 2200000, has name "Harare"; location-contains (parent: $c73, child: $c73-capital);
+
+$c74 isa country, has name "Benin"; location-contains (parent: $africa, child: $c74);
+$c74-stats isa country-statistics, has population 14500000, has proportion-under-12 0.34;
+demographics (place: $c74, statistics: $c74-stats);
+$c74-capital isa city, has is-capital true, has city-population 270000, has name "Porto-Novo"; location-contains (parent: $c74, child: $c74-capital);
+$c74-biggest isa city, has is-capital false, has city-population 1200000, has name "Cotonou"; location-contains (parent: $c74, child: $c74-biggest);
+
+$c75 isa country, has name "Guinea"; location-contains (parent: $africa, child: $c75);
+$c75-stats isa country-statistics, has population 14900000, has proportion-under-12 0.36;
+demographics (place: $c75, statistics: $c75-stats);
+$c75-capital isa city, has is-capital true, has city-population 2500000, has name "Conakry"; location-contains (parent: $c75, child: $c75-capital);
+
+$c76 isa country, has name "Rwanda"; location-contains (parent: $africa, child: $c76);
+$c76-stats isa country-statistics, has population 14700000, has proportion-under-12 0.33;
+demographics (place: $c76, statistics: $c76-stats);
+$c76-capital isa city, has is-capital true, has city-population 1700000, has name "Kigali"; location-contains (parent: $c76, child: $c76-capital);
+
+$c77 isa country, has name "Burundi"; location-contains (parent: $africa, child: $c77);
+$c77-stats isa country-statistics, has population 14000000, has proportion-under-12 0.37;
+demographics (place: $c77, statistics: $c77-stats);
+$c77-capital isa city, has is-capital true, has city-population 135000, has name "Gitega"; location-contains (parent: $c77, child: $c77-capital);
+$c77-biggest isa city, has is-capital false, has city-population 1200000, has name "Bujumbura"; location-contains (parent: $c77, child: $c77-biggest);
+
+$c78 isa country, has name "Bolivia"; location-contains (parent: $south-america, child: $c78);
+$c78-stats isa country-statistics, has population 12700000, has proportion-under-12 0.24;
+demographics (place: $c78, statistics: $c78-stats);
+$c78-capital isa city, has is-capital true, has city-population 1900000, has name "La Paz"; location-contains (parent: $c78, child: $c78-capital);
+$c78-biggest isa city, has is-capital false, has city-population 2300000, has name "Santa Cruz"; location-contains (parent: $c78, child: $c78-biggest);
+
+$c79 isa country, has name "Tunisia"; location-contains (parent: $africa, child: $c79);
+$c79-stats isa country-statistics, has population 12700000, has proportion-under-12 0.19;
+demographics (place: $c79, statistics: $c79-stats);
+$c79-capital isa city, has is-capital true, has city-population 2700000, has name "Tunis"; location-contains (parent: $c79, child: $c79-capital);
+
+$c81 isa country, has name "South Sudan"; location-contains (parent: $africa, child: $c81);
+$c81-stats isa country-statistics, has population 12300000, has proportion-under-12 0.35;
+demographics (place: $c81, statistics: $c81-stats);
+$c81-capital isa city, has is-capital true, has city-population 1000000, has name "Juba"; location-contains (parent: $c81, child: $c81-capital);
+
+$c82 isa country, has name "Haiti"; location-contains (parent: $north-america, child: $c82);
+$c82-stats isa country-statistics, has population 12000000, has proportion-under-12 0.26;
+demographics (place: $c82, statistics: $c82-stats);
+$c82-capital isa city, has is-capital true, has city-population 2600000, has name "Port-au-Prince"; location-contains (parent: $c82, child: $c82-capital);
+
+$c83 isa country, has name "Belgium"; location-contains (parent: $europe, child: $c83);
+$c83-stats isa country-statistics, has population 11700000, has proportion-under-12 0.13;
+demographics (place: $c83, statistics: $c83-stats);
+$c83-capital isa city, has is-capital true, has city-population 2500000, has name "Brussels"; location-contains (parent: $c83, child: $c83-capital);
+
+$c84 isa country, has name "Jordan"; location-contains (parent: $asia, child: $c84);
+$c84-stats isa country-statistics, has population 11500000, has proportion-under-12 0.25;
+demographics (place: $c84, statistics: $c84-stats);
+$c84-capital isa city, has is-capital true, has city-population 4000000, has name "Amman"; location-contains (parent: $c84, child: $c84-capital);
+
+$c85 isa country, has name "Dominican Rep."; location-contains (parent: $north-america, child: $c85);
+$c85-stats isa country-statistics, has population 11500000, has proportion-under-12 0.23;
+demographics (place: $c85, statistics: $c85-stats);
+$c85-capital isa city, has is-capital true, has city-population 3000000, has name "Santo Domingo"; location-contains (parent: $c85, child: $c85-capital);
+
+$c86 isa country, has name "Cuba"; location-contains (parent: $north-america, child: $c86);
+$c86-stats isa country-statistics, has population 11200000, has proportion-under-12 0.13;
+demographics (place: $c86, statistics: $c86-stats);
+$c86-capital isa city, has is-capital true, has city-population 2100000, has name "Havana"; location-contains (parent: $c86, child: $c86-capital);
+
+$c87 isa country, has name "UAE"; location-contains (parent: $asia, child: $c87);
+$c87-stats isa country-statistics, has population 11000000, has proportion-under-12 0.12;
+demographics (place: $c87, statistics: $c87-stats);
+$c87-capital isa city, has is-capital true, has city-population 1500000, has name "Abu Dhabi"; location-contains (parent: $c87, child: $c87-capital);
+$c87-biggest isa city, has is-capital false, has city-population 3600000, has name "Dubai"; location-contains (parent: $c87, child: $c87-biggest);
+
+$c88 isa country, has name "Czechia"; location-contains (parent: $europe, child: $c88);
+$c88-stats isa country-statistics, has population 10900000, has proportion-under-12 0.13;
+demographics (place: $c88, statistics: $c88-stats);
+$c88-capital isa city, has is-capital true, has city-population 2700000, has name "Prague"; location-contains (parent: $c88, child: $c88-capital);
+
+$c89 isa country, has name "Honduras"; location-contains (parent: $north-america, child: $c89);
+$c89-stats isa country-statistics, has population 10900000, has proportion-under-12 0.24;
+demographics (place: $c89, statistics: $c89-stats);
+$c89-capital isa city, has is-capital true, has city-population 1500000, has name "Tegucigalpa"; location-contains (parent: $c89, child: $c89-capital);
+
+$c90 isa country, has name "Sweden"; location-contains (parent: $europe, child: $c90);
+$c90-stats isa country-statistics, has population 10700000, has proportion-under-12 0.14;
+demographics (place: $c90, statistics: $c90-stats);
+$c90-capital isa city, has is-capital true, has city-population 2400000, has name "Stockholm"; location-contains (parent: $c90, child: $c90-capital);
+
+$c91 isa country, has name "Papua New Guinea"; location-contains (parent: $oceania, child: $c91);
+$c91-stats isa country-statistics, has population 10500000, has proportion-under-12 0.29;
+demographics (place: $c91, statistics: $c91-stats);
+$c91-capital isa city, has is-capital true, has city-population 400000, has name "Port Moresby"; location-contains (parent: $c91, child: $c91-capital);
+
+$c92 isa country, has name "Tajikistan"; location-contains (parent: $asia, child: $c92);
+$c92-stats isa country-statistics, has population 10500000, has proportion-under-12 0.28;
+demographics (place: $c92, statistics: $c92-stats);
+$c92-capital isa city, has is-capital true, has city-population 863000, has name "Dushanbe"; location-contains (parent: $c92, child: $c92-capital);
+
+$c93 isa country, has name "Azerbaijan"; location-contains (parent: $asia, child: $c93);
+$c93-stats isa country-statistics, has population 10500000, has proportion-under-12 0.19;
+demographics (place: $c93, statistics: $c93-stats);
+$c93-capital isa city, has is-capital true, has city-population 2300000, has name "Baku"; location-contains (parent: $c93, child: $c93-capital);
+
+$c94 isa country, has name "Greece"; location-contains (parent: $europe, child: $c94);
+$c94-stats isa country-statistics, has population 10300000, has proportion-under-12 0.11;
+demographics (place: $c94, statistics: $c94-stats);
+$c94-capital isa city, has is-capital true, has city-population 3000000, has name "Athens"; location-contains (parent: $c94, child: $c94-capital);
+
+$c95 isa country, has name "Portugal"; location-contains (parent: $europe, child: $c95);
+$c95-stats isa country-statistics, has population 10200000, has proportion-under-12 0.11;
+demographics (place: $c95, statistics: $c95-stats);
+$c95-capital isa city, has is-capital true, has city-population 2800000, has name "Lisbon"; location-contains (parent: $c95, child: $c95-capital);
+
+$c96 isa country, has name "Hungary"; location-contains (parent: $europe, child: $c96);
+$c96-stats isa country-statistics, has population 9900000, has proportion-under-12 0.12;
+demographics (place: $c96, statistics: $c96-stats);
+$c96-capital isa city, has is-capital true, has city-population 2500000, has name "Budapest"; location-contains (parent: $c96, child: $c96-capital);
+
+$c97 isa country, has name "Israel"; location-contains (parent: $asia, child: $c97);
+$c97-stats isa country-statistics, has population 9800000, has proportion-under-12 0.23;
+demographics (place: $c97, statistics: $c97-stats);
+$c97-capital isa city, has is-capital true, has city-population 970000, has name "Jerusalem"; location-contains (parent: $c97, child: $c97-capital);
+
+$c98 isa country, has name "Togo"; location-contains (parent: $africa, child: $c98);
+$c98-stats isa country-statistics, has population 9500000, has proportion-under-12 0.34;
+demographics (place: $c98, statistics: $c98-stats);
+$c98-capital isa city, has is-capital true, has city-population 1900000, has name "Lomé"; location-contains (parent: $c98, child: $c98-capital);
+
+$c99 isa country, has name "Belarus"; location-contains (parent: $europe, child: $c99);
+$c99-stats isa country-statistics, has population 9400000, has proportion-under-12 0.13;
+demographics (place: $c99, statistics: $c99-stats);
+$c99-capital isa city, has is-capital true, has city-population 2000000, has name "Minsk"; location-contains (parent: $c99, child: $c99-capital);
+
+$c100 isa country, has name "Austria"; location-contains (parent: $europe, child: $c100);
+$c100-stats isa country-statistics, has population 9100000, has proportion-under-12 0.12;
+demographics (place: $c100, statistics: $c100-stats);
+$c100-capital isa city, has is-capital true, has city-population 2900000, has name "Vienna"; location-contains (parent: $c100, child: $c100-capital);
+
+$c101 isa country, has name "Switzerland"; location-contains (parent: $europe, child: $c101);
+$c101-stats isa country-statistics, has population 8900000, has proportion-under-12 0.12;
+demographics (place: $c101, statistics: $c101-stats);
+$c101-capital isa city, has is-capital true, has city-population 440000, has name "Bern"; location-contains (parent: $c101, child: $c101-capital);
+$c101-biggest isa city, has is-capital false, has city-population 1400000, has name "Zürich"; location-contains (parent: $c101, child: $c101-biggest);
+
+$c103 isa country, has name "Sierra Leone"; location-contains (parent: $africa, child: $c103);
+$c103-stats isa country-statistics, has population 8800000, has proportion-under-12 0.33;
+demographics (place: $c103, statistics: $c103-stats);
+$c103-capital isa city, has is-capital true, has city-population 1300000, has name "Freetown"; location-contains (parent: $c103, child: $c103-capital);
+
+$c105 isa country, has name "Laos"; location-contains (parent: $asia, child: $c105);
+$c105-stats isa country-statistics, has population 7900000, has proportion-under-12 0.26;
+demographics (place: $c105, statistics: $c105-stats);
+$c105-capital isa city, has is-capital true, has city-population 990000, has name "Vientiane"; location-contains (parent: $c105, child: $c105-capital);
+
+$c106 isa country, has name "Paraguay"; location-contains (parent: $south-america, child: $c106);
+$c106-stats isa country-statistics, has population 7500000, has proportion-under-12 0.23;
+demographics (place: $c106, statistics: $c106-stats);
+$c106-capital isa city, has is-capital true, has city-population 2300000, has name "Asunción"; location-contains (parent: $c106, child: $c106-capital);
+
+$c107 isa country, has name "Hong Kong"; location-contains (parent: $asia, child: $c107);
+$c107-stats isa country-statistics, has population 7500000, has proportion-under-12 0.1;
+demographics (place: $c107, statistics: $c107-stats);
+$c107-capital isa city, has is-capital true, has city-population 7500000, has name "Hong Kong"; location-contains (parent: $c107, child: $c107-capital);
+
+$c108 isa country, has name "Libya"; location-contains (parent: $africa, child: $c108);
+$c108-stats isa country-statistics, has population 7400000, has proportion-under-12 0.23;
+demographics (place: $c108, statistics: $c108-stats);
+$c108-capital isa city, has is-capital true, has city-population 3000000, has name "Tripoli"; location-contains (parent: $c108, child: $c108-capital);
+
+$c109 isa country, has name "Kyrgyzstan"; location-contains (parent: $asia, child: $c109);
+$c109-stats isa country-statistics, has population 7200000, has proportion-under-12 0.27;
+demographics (place: $c109, statistics: $c109-stats);
+$c109-capital isa city, has is-capital true, has city-population 1100000, has name "Bishkek"; location-contains (parent: $c109, child: $c109-capital);
+
+$c110 isa country, has name "Turkmenistan"; location-contains (parent: $asia, child: $c110);
+$c110-stats isa country-statistics, has population 7000000, has proportion-under-12 0.26;
+demographics (place: $c110, statistics: $c110-stats);
+$c110-capital isa city, has is-capital true, has city-population 1000000, has name "Ashgabat"; location-contains (parent: $c110, child: $c110-capital);
+
+$c111 isa country, has name "Nicaragua"; location-contains (parent: $north-america, child: $c111);
+$c111-stats isa country-statistics, has population 6900000, has proportion-under-12 0.24;
+demographics (place: $c111, statistics: $c111-stats);
+$c111-capital isa city, has is-capital true, has city-population 1400000, has name "Managua"; location-contains (parent: $c111, child: $c111-capital);
+
+$c112 isa country, has name "Serbia"; location-contains (parent: $europe, child: $c112);
+$c112-stats isa country-statistics, has population 6600000, has proportion-under-12 0.12;
+demographics (place: $c112, statistics: $c112-stats);
+$c112-capital isa city, has is-capital true, has city-population 1700000, has name "Belgrade"; location-contains (parent: $c112, child: $c112-capital);
+
+$c113 isa country, has name "El Salvador"; location-contains (parent: $north-america, child: $c113);
+$c113-stats isa country-statistics, has population 6600000, has proportion-under-12 0.2;
+demographics (place: $c113, statistics: $c113-stats);
+$c113-capital isa city, has is-capital true, has city-population 1800000, has name "San Salvador"; location-contains (parent: $c113, child: $c113-capital);
+
+$c114 isa country, has name "Bulgaria"; location-contains (parent: $europe, child: $c114);
+$c114-stats isa country-statistics, has population 6400000, has proportion-under-12 0.11;
+demographics (place: $c114, statistics: $c114-stats);
+$c114-capital isa city, has is-capital true, has city-population 1700000, has name "Sofia"; location-contains (parent: $c114, child: $c114-capital);
+
+$c115 isa country, has name "Congo (Rep.)"; location-contains (parent: $africa, child: $c115);
+$c115-stats isa country-statistics, has population 6300000, has proportion-under-12 0.33;
+demographics (place: $c115, statistics: $c115-stats);
+$c115-capital isa city, has is-capital true, has city-population 2400000, has name "Brazzaville"; location-contains (parent: $c115, child: $c115-capital);
+
+$c116 isa country, has name "Denmark"; location-contains (parent: $europe, child: $c116);
+$c116-stats isa country-statistics, has population 6000000, has proportion-under-12 0.13;
+demographics (place: $c116, statistics: $c116-stats);
+$c116-capital isa city, has is-capital true, has city-population 2100000, has name "Copenhagen"; location-contains (parent: $c116, child: $c116-capital);
+
+$c117 isa country, has name "Singapore"; location-contains (parent: $asia, child: $c117);
+$c117-stats isa country-statistics, has population 6000000, has proportion-under-12 0.09;
+demographics (place: $c117, statistics: $c117-stats);
+$c117-capital isa city, has is-capital true, has city-population 6000000, has name "Singapore"; location-contains (parent: $c117, child: $c117-capital);
+
+$c118 isa country, has name "Central African Rep."; location-contains (parent: $africa, child: $c118);
+$c118-stats isa country-statistics, has population 5600000, has proportion-under-12 0.4;
+demographics (place: $c118, statistics: $c118-stats);
+$c118-capital isa city, has is-capital true, has city-population 900000, has name "Bangui"; location-contains (parent: $c118, child: $c118-capital);
+
+$c119 isa country, has name "Finland"; location-contains (parent: $europe, child: $c119);
+$c119-stats isa country-statistics, has population 5600000, has proportion-under-12 0.12;
+demographics (place: $c119, statistics: $c119-stats);
+$c119-capital isa city, has is-capital true, has city-population 1300000, has name "Helsinki"; location-contains (parent: $c119, child: $c119-capital);
+
+$c120 isa country, has name "Norway"; location-contains (parent: $europe, child: $c120);
+$c120-stats isa country-statistics, has population 5500000, has proportion-under-12 0.13;
+demographics (place: $c120, statistics: $c120-stats);
+$c120-capital isa city, has is-capital true, has city-population 1600000, has name "Oslo"; location-contains (parent: $c120, child: $c120-capital);
+
+$c121 isa country, has name "Slovakia"; location-contains (parent: $europe, child: $c121);
+$c121-stats isa country-statistics, has population 5400000, has proportion-under-12 0.13;
+demographics (place: $c121, statistics: $c121-stats);
+$c121-capital isa city, has is-capital true, has city-population 700000, has name "Bratislava"; location-contains (parent: $c121, child: $c121-capital);
+
+$c122 isa country, has name "Palestine"; location-contains (parent: $asia, child: $c122);
+$c122-stats isa country-statistics, has population 5400000, has proportion-under-12 0.31;
+demographics (place: $c122, statistics: $c122-stats);
+$c122-capital isa city, has is-capital true, has city-population 0, has name "Ramallah"; location-contains (parent: $c122, child: $c122-capital);
+$c122-biggest isa city, has is-capital false, has city-population 600000, has name "Gaza City"; location-contains (parent: $c122, child: $c122-biggest);
+
+$c123 isa country, has name "Lebanon"; location-contains (parent: $asia, child: $c123);
+$c123-stats isa country-statistics, has population 5300000, has proportion-under-12 0.18;
+demographics (place: $c123, statistics: $c123-stats);
+$c123-capital isa city, has is-capital true, has city-population 2400000, has name "Beirut"; location-contains (parent: $c123, child: $c123-capital);
+
+$c124 isa country, has name "New Zealand"; location-contains (parent: $oceania, child: $c124);
+$c124-stats isa country-statistics, has population 5300000, has proportion-under-12 0.15;
+demographics (place: $c124, statistics: $c124-stats);
+$c124-capital isa city, has is-capital true, has city-population 440000, has name "Wellington"; location-contains (parent: $c124, child: $c124-capital);
+$c124-biggest isa city, has is-capital false, has city-population 1500000, has name "Auckland"; location-contains (parent: $c124, child: $c124-biggest);
+
+$c125 isa country, has name "Costa Rica"; location-contains (parent: $north-america, child: $c125);
+$c125-stats isa country-statistics, has population 5200000, has proportion-under-12 0.15;
+demographics (place: $c125, statistics: $c125-stats);
+$c125-capital isa city, has is-capital true, has city-population 2100000, has name "San José"; location-contains (parent: $c125, child: $c125-capital);
+
+$c126 isa country, has name "Liberia"; location-contains (parent: $africa, child: $c126);
+$c126-stats isa country-statistics, has population 5600000, has proportion-under-12 0.33;
+demographics (place: $c126, statistics: $c126-stats);
+$c126-capital isa city, has is-capital true, has city-population 2200000, has name "Monrovia"; location-contains (parent: $c126, child: $c126-capital);
+
+$c127 isa country, has name "Mauritania"; location-contains (parent: $africa, child: $c127);
+$c127-stats isa country-statistics, has population 5100000, has proportion-under-12 0.34;
+demographics (place: $c127, statistics: $c127-stats);
+$c127-capital isa city, has is-capital true, has city-population 1400000, has name "Nouakchott"; location-contains (parent: $c127, child: $c127-capital);
+
+$c128 isa country, has name "Ireland"; location-contains (parent: $europe, child: $c128);
+$c128-stats isa country-statistics, has population 5100000, has proportion-under-12 0.16;
+demographics (place: $c128, statistics: $c128-stats);
+$c128-capital isa city, has is-capital true, has city-population 1200000, has name "Dublin"; location-contains (parent: $c128, child: $c128-capital);
+
+$c129 isa country, has name "Oman"; location-contains (parent: $asia, child: $c129);
+$c129-stats isa country-statistics, has population 4800000, has proportion-under-12 0.19;
+demographics (place: $c129, statistics: $c129-stats);
+$c129-capital isa city, has is-capital true, has city-population 1600000, has name "Muscat"; location-contains (parent: $c129, child: $c129-capital);
+
+$c130 isa country, has name "Panama"; location-contains (parent: $north-america, child: $c130);
+$c130-stats isa country-statistics, has population 4500000, has proportion-under-12 0.2;
+demographics (place: $c130, statistics: $c130-stats);
+$c130-capital isa city, has is-capital true, has city-population 1900000, has name "Panama City"; location-contains (parent: $c130, child: $c130-capital);
+
+$c131 isa country, has name "Kuwait"; location-contains (parent: $asia, child: $c131);
+$c131-stats isa country-statistics, has population 4400000, has proportion-under-12 0.17;
+demographics (place: $c131, statistics: $c131-stats);
+$c131-capital isa city, has is-capital true, has city-population 3000000, has name "Kuwait City"; location-contains (parent: $c131, child: $c131-capital);
+
+$c132 isa country, has name "Croatia"; location-contains (parent: $europe, child: $c132);
+$c132-stats isa country-statistics, has population 3900000, has proportion-under-12 0.11;
+demographics (place: $c132, statistics: $c132-stats);
+$c132-capital isa city, has is-capital true, has city-population 1100000, has name "Zagreb"; location-contains (parent: $c132, child: $c132-capital);
+
+$c133 isa country, has name "Eritrea"; location-contains (parent: $africa, child: $c133);
+$c133-stats isa country-statistics, has population 3700000, has proportion-under-12 0.3;
+demographics (place: $c133, statistics: $c133-stats);
+$c133-capital isa city, has is-capital true, has city-population 1000000, has name "Asmara"; location-contains (parent: $c133, child: $c133-capital);
+
+$c134 isa country, has name "Georgia"; location-contains (parent: $asia, child: $c134);
+$c134-stats isa country-statistics, has population 3700000, has proportion-under-12 0.17;
+demographics (place: $c134, statistics: $c134-stats);
+$c134-capital isa city, has is-capital true, has city-population 1200000, has name "Tbilisi"; location-contains (parent: $c134, child: $c134-capital);
+
+$c135 isa country, has name "Mongolia"; location-contains (parent: $asia, child: $c135);
+$c135-stats isa country-statistics, has population 3500000, has proportion-under-12 0.26;
+demographics (place: $c135, statistics: $c135-stats);
+$c135-capital isa city, has is-capital true, has city-population 1600000, has name "Ulaanbaatar"; location-contains (parent: $c135, child: $c135-capital);
+
+$c136 isa country, has name "Uruguay"; location-contains (parent: $south-america, child: $c136);
+$c136-stats isa country-statistics, has population 3400000, has proportion-under-12 0.15;
+demographics (place: $c136, statistics: $c136-stats);
+$c136-capital isa city, has is-capital true, has city-population 1700000, has name "Montevideo"; location-contains (parent: $c136, child: $c136-capital);
+
+$c137 isa country, has name "Moldova"; location-contains (parent: $europe, child: $c137);
+$c137-stats isa country-statistics, has population 3300000, has proportion-under-12 0.13;
+demographics (place: $c137, statistics: $c137-stats);
+$c137-capital isa city, has is-capital true, has city-population 700000, has name "Chișinău"; location-contains (parent: $c137, child: $c137-capital);
+
+$c138 isa country, has name "Bosnia & Herz."; location-contains (parent: $europe, child: $c138);
+$c138-stats isa country-statistics, has population 3200000, has proportion-under-12 0.1;
+demographics (place: $c138, statistics: $c138-stats);
+$c138-capital isa city, has is-capital true, has city-population 555000, has name "Sarajevo"; location-contains (parent: $c138, child: $c138-capital);
+
+$c139 isa country, has name "Gambia"; location-contains (parent: $africa, child: $c139);
+$c139-stats isa country-statistics, has population 2900000, has proportion-under-12 0.32;
+demographics (place: $c139, statistics: $c139-stats);
+$c139-capital isa city, has is-capital true, has city-population 400000, has name "Banjul"; location-contains (parent: $c139, child: $c139-capital);
+$c139-biggest isa city, has is-capital false, has city-population 340000, has name "Serekunda"; location-contains (parent: $c139, child: $c139-biggest);
+
+$c140 isa country, has name "Jamaica"; location-contains (parent: $north-america, child: $c140);
+$c140-stats isa country-statistics, has population 2800000, has proportion-under-12 0.16;
+demographics (place: $c140, statistics: $c140-stats);
+$c140-capital isa city, has is-capital true, has city-population 1200000, has name "Kingston"; location-contains (parent: $c140, child: $c140-capital);
+
+$c141 isa country, has name "Albania"; location-contains (parent: $europe, child: $c141);
+$c141-stats isa country-statistics, has population 2800000, has proportion-under-12 0.14;
+demographics (place: $c141, statistics: $c141-stats);
+$c141-capital isa city, has is-capital true, has city-population 900000, has name "Tirana"; location-contains (parent: $c141, child: $c141-capital);
+
+$c142 isa country, has name "Armenia"; location-contains (parent: $asia, child: $c142);
+$c142-stats isa country-statistics, has population 2800000, has proportion-under-12 0.16;
+demographics (place: $c142, statistics: $c142-stats);
+$c142-capital isa city, has is-capital true, has city-population 1100000, has name "Yerevan"; location-contains (parent: $c142, child: $c142-capital);
+
+$c143 isa country, has name "Botswana"; location-contains (parent: $africa, child: $c143);
+$c143-stats isa country-statistics, has population 2700000, has proportion-under-12 0.26;
+demographics (place: $c143, statistics: $c143-stats);
+$c143-capital isa city, has is-capital true, has city-population 400000, has name "Gaborone"; location-contains (parent: $c143, child: $c143-capital);
+
+$c144 isa country, has name "Qatar"; location-contains (parent: $asia, child: $c144);
+$c144-stats isa country-statistics, has population 2700000, has proportion-under-12 0.11;
+demographics (place: $c144, statistics: $c144-stats);
+$c144-capital isa city, has is-capital true, has city-population 2400000, has name "Doha"; location-contains (parent: $c144, child: $c144-capital);
+
+$c145 isa country, has name "Namibia"; location-contains (parent: $africa, child: $c145);
+$c145-stats isa country-statistics, has population 2700000, has proportion-under-12 0.3;
+demographics (place: $c145, statistics: $c145-stats);
+$c145-capital isa city, has is-capital true, has city-population 486000, has name "Windhoek"; location-contains (parent: $c145, child: $c145-capital);
+
+$c146 isa country, has name "Lithuania"; location-contains (parent: $europe, child: $c146);
+$c146-stats isa country-statistics, has population 2700000, has proportion-under-12 0.12;
+demographics (place: $c146, statistics: $c146-stats);
+$c146-capital isa city, has is-capital true, has city-population 700000, has name "Vilnius"; location-contains (parent: $c146, child: $c146-capital);
+
+$c147 isa country, has name "Gabon"; location-contains (parent: $africa, child: $c147);
+$c147-stats isa country-statistics, has population 2500000, has proportion-under-12 0.29;
+demographics (place: $c147, statistics: $c147-stats);
+$c147-capital isa city, has is-capital true, has city-population 850000, has name "Libreville"; location-contains (parent: $c147, child: $c147-capital);
+
+$c148 isa country, has name "Lesotho"; location-contains (parent: $africa, child: $c148);
+$c148-stats isa country-statistics, has population 2300000, has proportion-under-12 0.27;
+demographics (place: $c148, statistics: $c148-stats);
+$c148-capital isa city, has is-capital true, has city-population 330000, has name "Maseru"; location-contains (parent: $c148, child: $c148-capital);
+
+$c149 isa country, has name "Guinea-Bissau"; location-contains (parent: $africa, child: $c149);
+$c149-stats isa country-statistics, has population 2200000, has proportion-under-12 0.31;
+demographics (place: $c149, statistics: $c149-stats);
+$c149-capital isa city, has is-capital true, has city-population 492000, has name "Bissau"; location-contains (parent: $c149, child: $c149-capital);
+
+$c150 isa country, has name "Slovenia"; location-contains (parent: $europe, child: $c150);
+$c150-stats isa country-statistics, has population 2100000, has proportion-under-12 0.12;
+demographics (place: $c150, statistics: $c150-stats);
+$c150-capital isa city, has is-capital true, has city-population 537000, has name "Ljubljana"; location-contains (parent: $c150, child: $c150-capital);
+
+$c151 isa country, has name "Eq. Guinea"; location-contains (parent: $africa, child: $c151);
+$c151-stats isa country-statistics, has population 1900000, has proportion-under-12 0.3;
+demographics (place: $c151, statistics: $c151-stats);
+$c151-capital isa city, has is-capital true, has city-population 297000, has name "Malabo"; location-contains (parent: $c151, child: $c151-capital);
+$c151-biggest isa city, has is-capital false, has city-population 425000, has name "Bata"; location-contains (parent: $c151, child: $c151-biggest);
+
+$c152 isa country, has name "Latvia"; location-contains (parent: $europe, child: $c152);
+$c152-stats isa country-statistics, has population 1860000, has proportion-under-12 0.12;
+demographics (place: $c152, statistics: $c152-stats);
+$c152-capital isa city, has is-capital true, has city-population 592000, has name "Riga"; location-contains (parent: $c152, child: $c152-capital);
+
+$c153 isa country, has name "Bahrain"; location-contains (parent: $asia, child: $c153);
+$c153-stats isa country-statistics, has population 1600000, has proportion-under-12 0.15;
+demographics (place: $c153, statistics: $c153-stats);
+$c153-capital isa city, has is-capital true, has city-population 700000, has name "Manama"; location-contains (parent: $c153, child: $c153-capital);
+
+$c154 isa country, has name "Trinidad & Tobago"; location-contains (parent: $north-america, child: $c154);
+$c154-stats isa country-statistics, has population 1500000, has proportion-under-12 0.16;
+demographics (place: $c154, statistics: $c154-stats);
+$c154-capital isa city, has is-capital true, has city-population 81000, has name "Port of Spain"; location-contains (parent: $c154, child: $c154-capital);
+$c154-biggest isa city, has is-capital false, has city-population 67000, has name "Chaguanas"; location-contains (parent: $c154, child: $c154-biggest);
+
+$c155 isa country, has name "Timor-Leste"; location-contains (parent: $asia, child: $c155);
+$c155-stats isa country-statistics, has population 1400000, has proportion-under-12 0.29;
+demographics (place: $c155, statistics: $c155-stats);
+$c155-capital isa city, has is-capital true, has city-population 285000, has name "Dili"; location-contains (parent: $c155, child: $c155-capital);
+
+$c156 isa country, has name "Estonia"; location-contains (parent: $europe, child: $c156);
+$c156-stats isa country-statistics, has population 1370000, has proportion-under-12 0.13;
+demographics (place: $c156, statistics: $c156-stats);
+$c156-capital isa city, has is-capital true, has city-population 457000, has name "Tallinn"; location-contains (parent: $c156, child: $c156-capital);
+
+$c157 isa country, has name "Cyprus"; location-contains (parent: $asia, child: $c157);
+$c157-stats isa country-statistics, has population 1350000, has proportion-under-12 0.13;
+demographics (place: $c157, statistics: $c157-stats);
+$c157-capital isa city, has is-capital true, has city-population 350000, has name "Nicosia"; location-contains (parent: $c157, child: $c157-capital);
+
+$c158 isa country, has name "Mauritius"; location-contains (parent: $africa, child: $c158);
+$c158-stats isa country-statistics, has population 1260000, has proportion-under-12 0.11;
+demographics (place: $c158, statistics: $c158-stats);
+$c158-capital isa city, has is-capital true, has city-population 145000, has name "Port Louis"; location-contains (parent: $c158, child: $c158-capital);
+
+$c159 isa country, has name "Eswatini"; location-contains (parent: $africa, child: $c159);
+$c159-stats isa country-statistics, has population 1240000, has proportion-under-12 0.29;
+demographics (place: $c159, statistics: $c159-stats);
+$c159-capital isa city, has is-capital true, has city-population 68000, has name "Mbabane"; location-contains (parent: $c159, child: $c159-capital);
+$c159-biggest isa city, has is-capital false, has city-population 110000, has name "Manzini"; location-contains (parent: $c159, child: $c159-biggest);
+
+$c160 isa country, has name "Djibouti"; location-contains (parent: $africa, child: $c160);
+$c160-stats isa country-statistics, has population 1170000, has proportion-under-12 0.25;
+demographics (place: $c160, statistics: $c160-stats);
+$c160-capital isa city, has is-capital true, has city-population 600000, has name "Djibouti City"; location-contains (parent: $c160, child: $c160-capital);
+
+$c161 isa country, has name "Fiji"; location-contains (parent: $oceania, child: $c161);
+$c161-stats isa country-statistics, has population 930000, has proportion-under-12 0.24;
+demographics (place: $c161, statistics: $c161-stats);
+$c161-capital isa city, has is-capital true, has city-population 185000, has name "Suva"; location-contains (parent: $c161, child: $c161-capital);
+
+$c162 isa country, has name "Comoros"; location-contains (parent: $africa, child: $c162);
+$c162-stats isa country-statistics, has population 880000, has proportion-under-12 0.31;
+demographics (place: $c162, statistics: $c162-stats);
+$c162-capital isa city, has is-capital true, has city-population 111000, has name "Moroni"; location-contains (parent: $c162, child: $c162-capital);
+
+$c163 isa country, has name "Guyana"; location-contains (parent: $south-america, child: $c163);
+$c163-stats isa country-statistics, has population 830000, has proportion-under-12 0.24;
+demographics (place: $c163, statistics: $c163-stats);
+$c163-capital isa city, has is-capital true, has city-population 200000, has name "Georgetown"; location-contains (parent: $c163, child: $c163-capital);
+
+$c164 isa country, has name "Solomon Islands"; location-contains (parent: $oceania, child: $c164);
+$c164-stats isa country-statistics, has population 820000, has proportion-under-12 0.34;
+demographics (place: $c164, statistics: $c164-stats);
+$c164-capital isa city, has is-capital true, has city-population 92000, has name "Honiara"; location-contains (parent: $c164, child: $c164-capital);
+
+$c165 isa country, has name "Bhutan"; location-contains (parent: $asia, child: $c165);
+$c165-stats isa country-statistics, has population 785000, has proportion-under-12 0.17;
+demographics (place: $c165, statistics: $c165-stats);
+$c165-capital isa city, has is-capital true, has city-population 114000, has name "Thimphu"; location-contains (parent: $c165, child: $c165-capital);
+
+$c166 isa country, has name "Luxembourg"; location-contains (parent: $europe, child: $c166);
+$c166-stats isa country-statistics, has population 670000, has proportion-under-12 0.12;
+demographics (place: $c166, statistics: $c166-stats);
+$c166-capital isa city, has is-capital true, has city-population 134000, has name "Luxembourg City"; location-contains (parent: $c166, child: $c166-capital);
+
+$c167 isa country, has name "Montenegro"; location-contains (parent: $europe, child: $c167);
+$c167-stats isa country-statistics, has population 625000, has proportion-under-12 0.15;
+demographics (place: $c167, statistics: $c167-stats);
+$c167-capital isa city, has is-capital true, has city-population 190000, has name "Podgorica"; location-contains (parent: $c167, child: $c167-capital);
+
+$c168 isa country, has name "Suriname"; location-contains (parent: $south-america, child: $c168);
+$c168-stats isa country-statistics, has population 620000, has proportion-under-12 0.21;
+demographics (place: $c168, statistics: $c168-stats);
+$c168-capital isa city, has is-capital true, has city-population 223000, has name "Paramaribo"; location-contains (parent: $c168, child: $c168-capital);
+
+$c169 isa country, has name "Maldives"; location-contains (parent: $asia, child: $c169);
+$c169-stats isa country-statistics, has population 560000, has proportion-under-12 0.18;
+demographics (place: $c169, statistics: $c169-stats);
+$c169-capital isa city, has is-capital true, has city-population 212000, has name "Malé"; location-contains (parent: $c169, child: $c169-capital);
+
+$c170 isa country, has name "Malta"; location-contains (parent: $europe, child: $c170);
+$c170-stats isa country-statistics, has population 535000, has proportion-under-12 0.11;
+demographics (place: $c170, statistics: $c170-stats);
+$c170-capital isa city, has is-capital true, has city-population 6000, has name "Valletta"; location-contains (parent: $c170, child: $c170-capital);
+
+$c171 isa country, has name "Cape Verde"; location-contains (parent: $africa, child: $c171);
+$c171-stats isa country-statistics, has population 520000, has proportion-under-12 0.21;
+demographics (place: $c171, statistics: $c171-stats);
+$c171-capital isa city, has is-capital true, has city-population 160000, has name "Praia"; location-contains (parent: $c171, child: $c171-capital);
+
+$c172 isa country, has name "Brunei"; location-contains (parent: $asia, child: $c172);
+$c172-stats isa country-statistics, has population 460000, has proportion-under-12 0.17;
+demographics (place: $c172, statistics: $c172-stats);
+$c172-capital isa city, has is-capital true, has city-population 280000, has name "Bandar Seri Begawan"; location-contains (parent: $c172, child: $c172-capital);
+
+$c173 isa country, has name "Belize"; location-contains (parent: $north-america, child: $c173);
+$c173-stats isa country-statistics, has population 420000, has proportion-under-12 0.23;
+demographics (place: $c173, statistics: $c173-stats);
+$c173-capital isa city, has is-capital true, has city-population 27000, has name "Belmopan"; location-contains (parent: $c173, child: $c173-capital);
+$c173-biggest isa city, has is-capital false, has city-population 67000, has name "Belize City"; location-contains (parent: $c173, child: $c173-biggest);
+
+$c174 isa country, has name "Bahamas"; location-contains (parent: $north-america, child: $c174);
+$c174-stats isa country-statistics, has population 410000, has proportion-under-12 0.15;
+demographics (place: $c174, statistics: $c174-stats);
+$c174-capital isa city, has is-capital true, has city-population 274000, has name "Nassau"; location-contains (parent: $c174, child: $c174-capital);
+
+$c175 isa country, has name "Iceland"; location-contains (parent: $europe, child: $c175);
+$c175-stats isa country-statistics, has population 390000, has proportion-under-12 0.15;
+demographics (place: $c175, statistics: $c175-stats);
+$c175-capital isa city, has is-capital true, has city-population 240000, has name "Reykjavík"; location-contains (parent: $c175, child: $c175-capital);
+
+$c176 isa country, has name "Vanuatu"; location-contains (parent: $oceania, child: $c176);
+$c176-stats isa country-statistics, has population 335000, has proportion-under-12 0.31;
+demographics (place: $c176, statistics: $c176-stats);
+$c176-capital isa city, has is-capital true, has city-population 55000, has name "Port Vila"; location-contains (parent: $c176, child: $c176-capital);
+
+$c177 isa country, has name "French Guiana"; location-contains (parent: $south-america, child: $c177);
+$c177-stats isa country-statistics, has population 312000, has proportion-under-12 0.26;
+demographics (place: $c177, statistics: $c177-stats);
+$c177-capital isa city, has is-capital true, has city-population 150000, has name "Cayenne"; location-contains (parent: $c177, child: $c177-capital);
+
+$c178 isa country, has name "New Caledonia"; location-contains (parent: $oceania, child: $c178);
+$c178-stats isa country-statistics, has population 295000, has proportion-under-12 0.18;
+demographics (place: $c178, statistics: $c178-stats);
+$c178-capital isa city, has is-capital true, has city-population 180000, has name "Nouméa"; location-contains (parent: $c178, child: $c178-capital);
+
+$c179 isa country, has name "Barbados"; location-contains (parent: $north-america, child: $c179);
+$c179-stats isa country-statistics, has population 282000, has proportion-under-12 0.15;
+demographics (place: $c179, statistics: $c179-stats);
+$c179-capital isa city, has is-capital true, has city-population 110000, has name "Bridgetown"; location-contains (parent: $c179, child: $c179-capital);
+
+$c180 isa country, has name "French Polynesia"; location-contains (parent: $oceania, child: $c180);
+$c180-stats isa country-statistics, has population 282000, has proportion-under-12 0.18;
+demographics (place: $c180, statistics: $c180-stats);
+$c180-capital isa city, has is-capital true, has city-population 136000, has name "Papeete"; location-contains (parent: $c180, child: $c180-capital);
+$c180-biggest isa city, has is-capital false, has city-population 30000, has name "Faa'a"; location-contains (parent: $c180, child: $c180-biggest);
+
+$c181 isa country, has name "Sao Tome & Principe"; location-contains (parent: $africa, child: $c181);
+$c181-stats isa country-statistics, has population 236000, has proportion-under-12 0.32;
+demographics (place: $c181, statistics: $c181-stats);
+$c181-capital isa city, has is-capital true, has city-population 72000, has name "São Tomé"; location-contains (parent: $c181, child: $c181-capital);
+
+$c182 isa country, has name "Samoa"; location-contains (parent: $oceania, child: $c182);
+$c182-stats isa country-statistics, has population 228000, has proportion-under-12 0.3;
+demographics (place: $c182, statistics: $c182-stats);
+$c182-capital isa city, has is-capital true, has city-population 36000, has name "Apia"; location-contains (parent: $c182, child: $c182-capital);
+
+$c183 isa country, has name "Saint Lucia"; location-contains (parent: $north-america, child: $c183);
+$c183-stats isa country-statistics, has population 180000, has proportion-under-12 0.14;
+demographics (place: $c183, statistics: $c183-stats);
+$c183-capital isa city, has is-capital true, has city-population 70000, has name "Castries"; location-contains (parent: $c183, child: $c183-capital);
+
+$c184 isa country, has name "Guam"; location-contains (parent: $oceania, child: $c184);
+$c184-stats isa country-statistics, has population 173000, has proportion-under-12 0.22;
+demographics (place: $c184, statistics: $c184-stats);
+$c184-capital isa city, has is-capital true, has city-population 1000, has name "Hagåtña"; location-contains (parent: $c184, child: $c184-capital);
+$c184-biggest isa city, has is-capital false, has city-population 45000, has name "Dededo"; location-contains (parent: $c184, child: $c184-biggest);
+
+$c185 isa country, has name "Curaçao"; location-contains (parent: $north-america, child: $c185);
+$c185-stats isa country-statistics, has population 155000, has proportion-under-12 0.15;
+demographics (place: $c185, statistics: $c185-stats);
+$c185-capital isa city, has is-capital true, has city-population 125000, has name "Willemstad"; location-contains (parent: $c185, child: $c185-capital);
+
+$c186 isa country, has name "Kiribati"; location-contains (parent: $oceania, child: $c186);
+$c186-stats isa country-statistics, has population 135000, has proportion-under-12 0.29;
+demographics (place: $c186, statistics: $c186-stats);
+$c186-capital isa city, has is-capital true, has city-population 63000, has name "South Tarawa"; location-contains (parent: $c186, child: $c186-capital);
+
+$c187 isa country, has name "Grenada"; location-contains (parent: $north-america, child: $c187);
+$c187-stats isa country-statistics, has population 127000, has proportion-under-12 0.19;
+demographics (place: $c187, statistics: $c187-stats);
+$c187-capital isa city, has is-capital true, has city-population 34000, has name "St. George's"; location-contains (parent: $c187, child: $c187-capital);
+
+$c188 isa country, has name "Micronesia"; location-contains (parent: $oceania, child: $c188);
+$c188-stats isa country-statistics, has population 116000, has proportion-under-12 0.23;
+demographics (place: $c188, statistics: $c188-stats);
+$c188-capital isa city, has is-capital true, has city-population 6000, has name "Palikir"; location-contains (parent: $c188, child: $c188-capital);
+$c188-biggest isa city, has is-capital false, has city-population 13000, has name "Weno"; location-contains (parent: $c188, child: $c188-biggest);
+
+$c189 isa country, has name "Aruba"; location-contains (parent: $north-america, child: $c189);
+$c189-stats isa country-statistics, has population 108000, has proportion-under-12 0.14;
+demographics (place: $c189, statistics: $c189-stats);
+$c189-capital isa city, has is-capital true, has city-population 30000, has name "Oranjestad"; location-contains (parent: $c189, child: $c189-capital);
+
+$c190 isa country, has name "Tonga"; location-contains (parent: $oceania, child: $c190);
+$c190-stats isa country-statistics, has population 108000, has proportion-under-12 0.29;
+demographics (place: $c190, statistics: $c190-stats);
+$c190-capital isa city, has is-capital true, has city-population 25000, has name "Nuku'alofa"; location-contains (parent: $c190, child: $c190-capital);
+
+$c191 isa country, has name "Seychelles"; location-contains (parent: $africa, child: $c191);
+$c191-stats isa country-statistics, has population 108000, has proportion-under-12 0.18;
+demographics (place: $c191, statistics: $c191-stats);
+$c191-capital isa city, has is-capital true, has city-population 26000, has name "Victoria"; location-contains (parent: $c191, child: $c191-capital);
+
+$c192 isa country, has name "St. Vincent & Gren."; location-contains (parent: $north-america, child: $c192);
+$c192-stats isa country-statistics, has population 100000, has proportion-under-12 0.19;
+demographics (place: $c192, statistics: $c192-stats);
+$c192-capital isa city, has is-capital true, has city-population 26000, has name "Kingstown"; location-contains (parent: $c192, child: $c192-capital);
+
+$c193 isa country, has name "US Virgin Islands"; location-contains (parent: $north-america, child: $c193);
+$c193-stats isa country-statistics, has population 98000, has proportion-under-12 0.16;
+demographics (place: $c193, statistics: $c193-stats);
+$c193-capital isa city, has is-capital true, has city-population 14000, has name "Charlotte Amalie"; location-contains (parent: $c193, child: $c193-capital);
+
+$c194 isa country, has name "Antigua & Barbuda"; location-contains (parent: $north-america, child: $c194);
+$c194-stats isa country-statistics, has population 95000, has proportion-under-12 0.18;
+demographics (place: $c194, statistics: $c194-stats);
+$c194-capital isa city, has is-capital true, has city-population 22000, has name "St. John's"; location-contains (parent: $c194, child: $c194-capital);
+
+$c195 isa country, has name "Isle of Man"; location-contains (parent: $europe, child: $c195);
+$c195-stats isa country-statistics, has population 85000, has proportion-under-12 0.13;
+demographics (place: $c195, statistics: $c195-stats);
+$c195-capital isa city, has is-capital true, has city-population 27000, has name "Douglas"; location-contains (parent: $c195, child: $c195-capital);
+
+$c196 isa country, has name "Andorra"; location-contains (parent: $europe, child: $c196);
+$c196-stats isa country-statistics, has population 80000, has proportion-under-12 0.12;
+demographics (place: $c196, statistics: $c196-stats);
+$c196-capital isa city, has is-capital true, has city-population 22000, has name "Andorra la Vella"; location-contains (parent: $c196, child: $c196-capital);
+
+$c197 isa country, has name "Dominica"; location-contains (parent: $north-america, child: $c197);
+$c197-stats isa country-statistics, has population 73000, has proportion-under-12 0.18;
+demographics (place: $c197, statistics: $c197-stats);
+$c197-capital isa city, has is-capital true, has city-population 15000, has name "Roseau"; location-contains (parent: $c197, child: $c197-capital);
+
+$c198 isa country, has name "Cayman Islands"; location-contains (parent: $north-america, child: $c198);
+$c198-stats isa country-statistics, has population 70000, has proportion-under-12 0.14;
+demographics (place: $c198, statistics: $c198-stats);
+$c198-capital isa city, has is-capital true, has city-population 35000, has name "George Town"; location-contains (parent: $c198, child: $c198-capital);
+
+$c199 isa country, has name "Bermuda"; location-contains (parent: $north-america, child: $c199);
+$c199-stats isa country-statistics, has population 64000, has proportion-under-12 0.13;
+demographics (place: $c199, statistics: $c199-stats);
+$c199-capital isa city, has is-capital true, has city-population 3000, has name "Hamilton"; location-contains (parent: $c199, child: $c199-capital);
+$c199-biggest isa city, has is-capital false, has city-population 1500, has name "St. George's"; location-contains (parent: $c199, child: $c199-biggest);
+
+$c200 isa country, has name "Greenland"; location-contains (parent: $north-america, child: $c200);
+$c200-stats isa country-statistics, has population 57000, has proportion-under-12 0.16;
+demographics (place: $c200, statistics: $c200-stats);
+$c200-capital isa city, has is-capital true, has city-population 19000, has name "Nuuk"; location-contains (parent: $c200, child: $c200-capital);
+
