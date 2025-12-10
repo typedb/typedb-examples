@@ -5,7 +5,7 @@ define
   entity present-blueprint,
     owns name,
     owns description,
-	  plays production:blueprint @card(1);
+	  plays production:blueprint;
   
   entity elf,
     owns name,
