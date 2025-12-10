@@ -21,8 +21,7 @@ insert
   $elf7 isa elf, has name "Ginger", has email "ginger@northpole.com", has status "retired";
   $elf8 isa elf, has name "Pepper", has email "pepper@northpole.com", has status "retired";
 
-  # Elves - 7 working
-  $elf9 isa elf, has name "Cinnamon", has email "cinnamon@northpole.com", has status "working";
+  # Elves - 6 working, 1 missing
   $elf10 isa elf, has name "Nutmeg", has email "nutmeg@northpole.com", has status "working";
   $elf11 isa elf, has name "Clove", has email "clove@northpole.com", has status "working";
   $elf12 isa elf, has name "Sugar", has email "sugar@northpole.com", has status "working";
@@ -30,57 +29,13 @@ insert
   $elf14 isa elf, has name "Vanilla", has email "vanilla@northpole.com", has status "working";
   $elf15 isa elf, has name "Honey", has email "honey@northpole.com", has status "working";
 
-  # Production assignments for the 7 working elves
-  # $production1 isa production (builder: $elf9, blueprint: $blueprint1),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production2 isa production (builder: $elf10, blueprint: $blueprint2),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production3 isa production (builder: $elf11, blueprint: $blueprint3),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production4 isa production (builder: $elf12, blueprint: $blueprint4),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production5 isa production (builder: $elf13, blueprint: $blueprint5),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production6 isa production (builder: $elf14, blueprint: $blueprint6),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production7 isa production (builder: $elf15, blueprint: $blueprint7),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production8 isa production (builder: $elf9, blueprint: $blueprint8),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production9 isa production (builder: $elf10, blueprint: $blueprint9),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-  # $production10 isa production (builder: $elf11, blueprint: $blueprint10),
-  #   has start-date 2024-12-24T00:00:00,
-  #   has completion-date 2024-12-25T00:00:00,
-  #   has quantity-required 0;
-
-  # Lives-in for 7 working elves
-  $lives1 isa lives-in (location: $asia, being: $elf9);
+  # Lives-in for 6 working elves (asia missing)
   $lives2 isa lives-in (location: $north-america, being: $elf10);
   $lives3 isa lives-in (location: $south-america, being: $elf11);
   $lives4 isa lives-in (location: $europe, being: $elf12);
   $lives5 isa lives-in (location: $africa, being: $elf13);
   $lives6 isa lives-in (location: $oceania, being: $elf14);
   $lives7 isa lives-in (location: $antarctica, being: $elf15);
-
 
   # --- Continents ---
   $asia isa continent, has name "Asia";

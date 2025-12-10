@@ -120,3 +120,5 @@ _Answer_
 
 _Hint_
 >! https://typedb.com/docs/typeql-reference/statements/links/
+
+It seems like Santa has one elf working on each continent... looks like he's got supersonic little workers to produce all his presents!
