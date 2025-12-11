@@ -29,6 +29,7 @@ pkg_tar(
         "//use-cases/bookstore:bookstore-dataset",
         "//use-cases/social-network:social-network-dataset",
         "//use-cases/identity-and-access-management:iam-dataset",
+        "//use-cases/cyber-threat-intelligence:cti-dataset",
     ],
 )
 
