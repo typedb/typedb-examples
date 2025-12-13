@@ -48,7 +48,6 @@ If you've done it right - you should have 1 answer, with the `continent`, the `e
 
 Now, all we need to do is delete the `$lives` relation! You'll need a `delete` clause following the `match` you wrote before.
 
-
 Answer
 ```typeql
 match
@@ -96,18 +95,48 @@ match
 delete 
   has $old-status of $elf;
 insert 
-  $elf has status $new-status; 
   $new-status isa status "retired";
+  $elf has $new-status; 
 ```
 
 Hint
 https://typedb.com/docs/core-concepts/typedb/crud/#_updates_with_delete_insert
 
-This style of `match-delete-insert` is extremely powerful, and lets you do arbitrary "migration"-style modifications, rewriting large swathes of data in a declarative way.
+This style of `match-delete-insert` is extremely powerful, and lets you do arbitrary "migration"-style modifications, rewriting large amounts of data in a declarative way.
+
+Santa is worried that his population data might be a bit out of date. It would be better to assume there are 1% more people in each country and not run short of presents for kids!
+
+The schema has two types of population statistics: `country-statistics` and `city-statistics`. Luckily, they both subtype `population-statistics`, which is declared to have a `population` attribute. Let's rewrite all the owned population attributes to be 1% higher! 
+
+Answer
+```typeql
+match 
+  $statistics isa population-statistics, has population $population;
+  let $new-population-count = round($population * 1.01);
+delete 
+  has $population of $statistics;
+insert 
+  $new-population isa population $new-population-count;
+  $statistics has $new-population; 
+```
+
+Alternatively, if you want to use a contraction:
+```typeql
+match 
+  $statistics isa population-statistics, has population $population;
+  let $new-population-count = round($population * 1.01);
+delete 
+  has $population of $statistics;
+insert 
+  $statistics has population == $new-population; 
+```
+
+Hint
+https://typedb.com/docs/typeql-reference/expressions/operators/
 
 
 ## See you soon!
 
-We've made progress rebuilding Santa's data - great job! We'll continue our work tomorrow - Day 4.
+We've made more progress rebuilding Santa's data - great job! We'll continue our work tomorrow - Day 4.
 
 If you encounter any issues, want to chat, or anything else – feel free to post in our Discord or feel free to email me directly.

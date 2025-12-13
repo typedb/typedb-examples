@@ -62,12 +62,12 @@ Ok - let's work out the total number of kids in the whole world! We'll need to g
 
 _Answer_
  ```typeql
- match
-   $c isa country;
-   demographics ($c, $stats);
-   $stats isa country-statistics, has population $pop, has proportion-under-12 $under-12;
-   let $kids = $pop * $under-12;
- reduce $total = sum($kids);
+match
+  $c isa country;
+  demographics ($c, $stats);
+  $stats isa country-statistics, has population $pop, has proportion-under-12 $under-12;
+  let $kids = $pop * $under-12;
+reduce $total = sum($kids);
  ```
 
 _Hint_
@@ -97,11 +97,11 @@ We'll do this by `match`-ing the new elf and the Asian continent, and `insert`-i
 
 _Answer_
  ```typeql
- match
-   $elf isa elf, has name "Cardamom";
-   $asia isa continent, has name "Asia";
- insert
-   lives-in (location: $asia, being: $elf);
+match
+  $elf isa elf, has name "Cardamom";
+  $asia isa continent, has name "Asia";
+insert
+  lives-in (location: $asia, being: $elf);
  ```
 
 _Hint_
