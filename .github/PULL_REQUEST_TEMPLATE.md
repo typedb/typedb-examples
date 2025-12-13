@@ -4,4 +4,4 @@ Summarize new feature, bugs fixed, or internal change. Include: relevant example
 
 ## Implementation
 
-Include architectural decisions, new assumptions, unimplemented paths/technical debt and tests written.
+Further details
