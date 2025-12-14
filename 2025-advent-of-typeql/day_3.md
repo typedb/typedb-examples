@@ -8,13 +8,21 @@ Santa contacted support and was able to recover some of his plans. However, they
 
 ## Setup
 
-You can load Santa’s recovered database schema by copying the linked schema text into a schema transaction’s query interface in Studio or Console, and then commit (note: by default, Studio auto-commits each query when set to “auto” mode).
+If you've done Day 2, you can continue without setting anything up - just open up Studio or Console and get going!
 
-You'll also need data corresponding to completing day 1 and day 2, which you can get _here_. Load by doing the same (follow link, copy text, paste into Studio or Console), but this time use a write transaction – then commit.
+If you're new here, you'll first want to spin up a TypeDB instance and connect with Studio or Console, and create a new database. 
 
-At this point, you should have a database setup for today!
+Then, you can get Santa's recovered database schema by copying the linked schema text into a schema transaction's query interface in Studio or Console, and the commit (note: by default, Studio auto-commits each query when set to "auto" mode).
+
+Get the initial dataset plus day 2's changes as a data file, and load it by doing the same (follow link, copy text, paste into Studio or Console), but this time use a write transaction - and make sure you have committed.
+
+At this point, you should have a database ready to go!
 
 ## Day 3
+
+Yesterday explored a bit more of the dataset and recruited the missing elf to cover Asia's present production!
+
+Today, we'll continue fix up some of the issues in Santa's dataset!
 
 ### #1 - deleting data
 
@@ -134,6 +142,7 @@ insert
 Hint
 https://typedb.com/docs/typeql-reference/expressions/operators/
 
+This is one small query to update all ~200 statistics entities. How easy is that!
 
 ## See you soon!
 
