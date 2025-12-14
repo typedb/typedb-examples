@@ -16,3 +16,8 @@ It's likely you'll use [TypeDB Studio](https://studio.typedb.com) or [TypeDB Con
 If you encounter any errors, want to chat, please open an issue, post in our [Discord Help Forum or Discussion channel](https://typedb.com/discord), or [email me directly](mailto:joshua@typedb.com).
 
 Have fun!
+
+## Disclaimer
+
+Most of the data for this project was hallucinated by LLMs! 
+Factual accuracy is not guaranteed nor intended.
