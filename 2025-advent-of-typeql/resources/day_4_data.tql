@@ -21,14 +21,14 @@ insert
   $elf7 isa elf, has name "Ginger", has email "ginger@northpole.com", has status "retired";
   $elf8 isa elf, has name "Pepper", has email "pepper@northpole.com", has status "retired";
 
-  # Elves - 7 working, including one created on day 2
+  # Elves - 6 , including one created on day 2 and one required on day 3
   $elf9 isa elf, has name "Cardamom", has email "cardamom@northpole.com", has status "working";
   $elf10 isa elf, has name "Nutmeg", has email "nutmeg@northpole.com", has status "working";
   $elf11 isa elf, has name "Clove", has email "clove@northpole.com", has status "working";
   $elf12 isa elf, has name "Sugar", has email "sugar@northpole.com", has status "working";
   $elf13 isa elf, has name "Cocoa", has email "cocoa@northpole.com", has status "working";
   $elf14 isa elf, has name "Vanilla", has email "vanilla@northpole.com", has status "working";
-  $elf15 isa elf, has name "Honey", has email "honey@northpole.com", has status "working";
+  $elf15 isa elf, has name "Honey", has email "honey@northpole.com", has status "retired";
 
   # Lives-in for 7 working elves
   $lives1 isa lives-in (location: $asia, being: $elf9);
