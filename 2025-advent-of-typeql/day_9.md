@@ -101,7 +101,7 @@ insert
   $santaland isa country, has name "Santaland";
   $northpole isa city, has name "North Pole";
   location-contains (parent: $mars, child: $santaland);
-  location-contains (parent: $mars, child: $northpole);
+  location-contains (parent: $santaland, child: $northpole);
 ```
 
 For symmetry, we also should create Earth as a planet, and then add each continent as a location within the earth. _Hint_: to do this in one query, you'll want an `insert-match-insert` pipeline.

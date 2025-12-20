@@ -111,7 +111,73 @@ insert
   $prod59 isa production (builder: $elf14, blueprint: $blueprint9), has quantity-required 861865;
   $prod60 isa production (builder: $elf14, blueprint: $blueprint10), has quantity-required 861865;
 
-  # --- Continents ---
+  # --- Coffee Boost relations ---
+  # Cardamom's coffee
+  $coffee1 isa coffee, has cups 1449;
+  $boost1 isa coffee-boost,
+    links (coffee: $coffee1, elf: $elf9, 
+	   production: $prod1, production: $prod2, production: $prod3, production: $prod4, production: $prod5, 
+	   production: $prod6, production: $prod7, production: $prod8, production: $prod9, production: $prod10
+    );
+  # Nutmeg's coffee
+  $coffee2 isa coffee, has cups 166;
+  $boost2 isa coffee-boost,
+    links (coffee: $coffee2, elf: $elf10, 
+	   production: $prod11, production: $prod12, production: $prod13, production: $prod14, production: $prod15, 
+  	   production: $prod16, production: $prod17, production: $prod18, production: $prod19, production: $prod20
+    ); 
+  # Clove's coffee
+  $coffee3 isa coffee, has cups 127;
+  $boost3 isa coffee-boost,
+    links (coffee: $coffee3, elf: $elf11,
+      production: $prod21, production: $prod22, production: $prod23, production: $prod24, production: $prod25, 
+      production: $prod26, production: $prod27, production: $prod28, production: $prod29, production: $prod30 
+    );
+
+  # Sugar's coffee
+  $coffee4 isa coffee, has cups 152;
+  $boost4 isa coffee-boost,
+    links (coffee: $coffee4, elf: $elf12,
+      production: $prod31, production: $prod32, production: $prod33, production: $prod34, production: $prod35, 
+      production: $prod36, production: $prod37, production: $prod38, production: $prod39, production: $prod40 
+    );
+
+  # Cocoa's coffee
+  $coffee5 isa coffee, has cups 755;
+  $boost5 isa coffee-boost,
+    links (coffee: $coffee5, elf: $elf13,
+      production: $prod41, production: $prod42, production: $prod43, production: $prod44, production: $prod45, 
+      production: $prod46, production: $prod47, production: $prod48, production: $prod49, production: $prod50
+    );
+
+  # Vanilla's coffee
+  $coffee6 isa coffee, has cups 14;
+  $boost6 isa coffee-boost,
+    links (coffee: $coffee6, elf: $elf14,
+      production: $prod51, production: $prod52, production: $prod53, production: $prod54, production: $prod55, 
+      production: $prod56, production: $prod57, production: $prod58, production: $prod59, production: $prod60
+    );
+
+  # -- Mars facts ---
+  $mars isa planet, has name "Mars";
+  $santaland isa country, has name "Santaland";
+  $northpole isa city, has name "North Pole";
+  location-contains (parent: $mars, child: $santaland);
+  location-contains (parent: $santaland, child: $northpole);
+
+  lives-in (being: $elf1, location: $santaland);
+  lives-in (being: $elf2, location: $santaland);
+  lives-in (being: $elf3, location: $santaland);
+  lives-in (being: $elf4, location: $santaland);
+  lives-in (being: $elf5, location: $santaland);
+  lives-in (being: $elf6, location: $santaland);
+  lives-in (being: $elf7, location: $santaland);
+  lives-in (being: $elf8, location: $santaland);
+  lives-in (being: $elf15, location: $santaland);
+
+  # --- Earth & Earth continents ---
+  $earth isa planet, has name "Earth";
+
   $asia isa continent, has name "Asia";
   $north-america isa continent, has name "North America";
   $south-america isa continent, has name "South America";
@@ -119,6 +185,14 @@ insert
   $africa isa continent, has name "Africa";
   $oceania isa continent, has name "Oceania";
   $antarctica isa continent, has name "Antarctica";
+
+  location-contains (parent: $earth, child: $asia);
+  location-contains (parent: $earth, child: $north-america);
+  location-contains (parent: $earth, child: $south-america);
+  location-contains (parent: $earth, child: $europe);
+  location-contains (parent: $earth, child: $africa);
+  location-contains (parent: $earth, child: $oceania);
+  location-contains (parent: $earth, child: $antarctica);
 
   # --- Countries ---
   $c1 isa country, has name "India"; location-contains (parent: $asia, child: $c1);

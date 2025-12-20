@@ -30,14 +30,13 @@ insert
   $elf14 isa elf, has name "Vanilla", has email "vanilla@northpole.com", has status "working";
   $elf15 isa elf, has name "Honey", has email "honey@northpole.com", has status "retired";
 
-  # Lives-in for 7 working elves
+  # Lives-in for 6 working elves
   $lives1 isa lives-in (location: $asia, being: $elf9);
   $lives2 isa lives-in (location: $north-america, being: $elf10);
   $lives3 isa lives-in (location: $south-america, being: $elf11);
   $lives4 isa lives-in (location: $europe, being: $elf12);
   $lives5 isa lives-in (location: $africa, being: $elf13);
   $lives6 isa lives-in (location: $oceania, being: $elf14);
-  $lives7 isa lives-in (location: $antarctica, being: $elf15);
 
   # --- Production relations ---
   # Cardamom productions (quantity-required: 87665773)

@@ -1,0 +1,119 @@
+define
+
+  # --- presents and workers ---
+
+  entity present-blueprint,
+    owns name,
+    owns description,
+	  plays production:blueprint;
+  
+  entity elf,
+    owns name,
+	  owns email @key,
+    owns status @values("working", "retired"),
+    plays production:builder,
+	  plays lives-in:being @card(0..1),
+    plays coffee-boost:elf;
+  
+  relation production,
+    relates builder @card(0..),
+    relates blueprint @card(1),
+    owns quantity-required @card(1),
+    plays present-distribution:source,
+    plays coffee-boost:production;
+  
+  relation lives-in,
+    relates location @card(1),
+	  relates being @card(1);
+
+  entity coffee,
+    owns cups,
+    plays coffee-boost:coffee;
+
+  relation coffee-boost,
+    relates elf,
+    relates production @card(0..),
+    relates coffee;
+
+  # --- places and demographics ---
+
+  entity region @abstract,
+    owns name,
+    plays lives-in:location;
+
+  # Day 9 additions included!
+  entity planet,
+    sub region,
+    plays location-contains:parent;
+
+  entity continent,
+    sub region,
+    plays location-contains:parent,
+    plays location-contains:child;
+
+  entity country,
+   	sub region,
+    plays location-contains:parent,
+    plays location-contains:child,
+    plays demographics:place;
+
+  entity city,
+    sub region,
+    owns is-capital,
+    owns city-population,
+    plays location-contains:child;
+
+  relation location-contains,
+    relates parent,
+	  relates child @card(1);
+
+  entity population-statistics,
+    owns population,
+    plays demographics:statistics @card(1);
+
+  entity city-statistics,
+    sub population-statistics;
+  
+  entity country-statistics,
+    sub population-statistics,
+    owns proportion-under-12;
+
+  relation demographics,
+    relates place,
+    relates statistics;
+
+  # --- travel plans ---
+
+  # santa needs to plot a route to each country in the world
+
+  entity santa-distribution-route,
+    owns start-date @key,
+    plays distribution-stop:route;
+
+  relation distribution-stop,
+    relates country @card(1),
+    relates route @card(1),
+    owns stop-number @card(1),
+    plays present-distribution:distribution-stop; # NOTE: not going to get used, too much complexity
+  
+  entity country, plays distribution-stop:country;
+
+  # NOTE: not going to get used, too much complexity.
+  relation present-distribution,
+    relates distribution-stop @card(1),
+    relates source @card(1);
+
+  attribute start-date, value datetime;
+  attribute is-capital, value boolean;
+  attribute status, value string;
+  attribute name, value string;
+  attribute description, value string;
+  attribute email, value string;
+  attribute quantity-required, value integer;
+
+  attribute population, value integer;
+  attribute proportion-under-12, value double;
+  attribute city-population, value integer;
+  attribute stop-number, value integer;
+
+  attribute cups, value integer;
