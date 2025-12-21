@@ -39,7 +39,7 @@ match
   $country isa country, has name $name;
   try { 
     demographics ($country, $statistics);
-    $statistics isa statistics, has population $population;
+    $statistics has population $population;
   };
 ```
 
@@ -125,7 +125,7 @@ match
   $other isa planet, has name $other-name; # name for readability of output
 ```
 
-Notice that the second planet could _also_ be Mars! Let's just filter this out with a `not { ... is ... };` comparison.
+When you execute this, you'll get two pairs: Mars, Earth, and Mars, Mars - there's nothing to prevent the second planet from being the same as the first!  Let's just filter this out with a `not { ... is ... };` comparison.
 
 Answer
 ```typeql
