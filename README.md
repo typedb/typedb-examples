@@ -1,3 +1,5 @@
+[![TypeDB](https://github.com/typedb/.github/raw/master/profile/banner.png)](https://typedb.com/)
+
 # TypeDB Examples
 
 A collection of TypeDB example projects and tutorials, designed for users with a range of familiarity with TypeDB,
