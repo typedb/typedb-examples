@@ -2,6 +2,7 @@
 # Only TypeDB server versions >= 3.5.0 are covered.
 # Clients may optionally include pre-release server builds (e.g. 3.8.0-alpha-1) in server ranges.
 # This file should be updated when adding new datasets or releasing new versions of existing ones.
+# Do NOT delete this file - it is used by live clients.
 
 schemaVersion: 1
 
