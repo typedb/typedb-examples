@@ -1,0 +1,94 @@
+# Sample dataset manifest for TypeDB clients (Studio, Cloud platform, etc.).
+# Only TypeDB server versions >= 3.5.0 are covered.
+# This file should be updated when adding new datasets or releasing new versions of existing ones.
+
+schemaVersion: 1
+
+datasets:
+  bookstore:
+    displayName: "Bookstore"
+    description: "A simplified ecommerce model of a bookstore, with books, users, orders, reviews, and promotions."
+    homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/bookstore"
+    versions:
+      - version: "3.7.1"
+        compatibleServers: ">=3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.1/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.1/bookstore-data.tql"
+      - version: "3.7.0"
+        compatibleServers: ">=3.7.0 <3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.0/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.0/bookstore-data.tql"
+      - version: "3.5.5"
+        compatibleServers: ">=3.5.5 <3.7.0"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.5/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.5/bookstore-data.tql"
+      - version: "3.5.2"
+        compatibleServers: ">=3.5.2 <3.5.5"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.2/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.2/bookstore-data.tql"
+      - version: "3.5.1"
+        compatibleServers: ">=3.5.1 <3.5.2"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.1/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.1/bookstore-data.tql"
+      - version: "3.5.0"
+        compatibleServers: ">=3.5.0 <3.5.1"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.0/bookstore-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.0/bookstore-data.tql"
+
+  social-network:
+    displayName: "Social Network"
+    description: "A moderately complex model of a modern social network, capturing users, content, and their interactions."
+    homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/social-network"
+    versions:
+      - version: "3.7.1"
+        compatibleServers: ">=3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.1/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.1/social-network-data.tql"
+      - version: "3.7.0"
+        compatibleServers: ">=3.7.0 <3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.0/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.0/social-network-data.tql"
+      - version: "3.5.5"
+        compatibleServers: ">=3.5.5 <3.7.0"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.5/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.5/social-network-data.tql"
+      - version: "3.5.2"
+        compatibleServers: ">=3.5.2 <3.5.5"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.2/social-network-data.tql"
+      - version: "3.5.1"
+        compatibleServers: ">=3.5.1 <3.5.2"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.1/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.1/social-network-data.tql"
+      - version: "3.5.0"
+        compatibleServers: ">=3.5.0 <3.5.1"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.0/social-network-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.0/social-network-data.tql"
+
+  cti:
+    displayName: "Cyber Threat Intelligence"
+    description: "A STIX 2.1-based model of threat actors, campaigns, and their relationships, demonstrating TypeDB in a CTI context."
+    homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/cyber-threat-intelligence"
+    versions:
+      - version: "3.7.1"
+        compatibleServers: ">=3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.1/cti-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.1/cti-data.tql"
+      - version: "3.7.0"
+        compatibleServers: ">=3.7.0 <3.7.3"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.7.0/cti-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.7.0/cti-data.tql"
+      - version: "3.5.5"
+        compatibleServers: ">=3.5.6 <3.7.0"
+        schemaFile: "https://github.com/typedb/typedb-examples/releases/download/3.5.5/cti-schema.tql"
+        dataFile:   "https://github.com/typedb/typedb-examples/releases/download/3.5.5/cti-data.tql"
+
+  robotics:
+    displayName: "Robotics"
+    description: "A knowledge base for an autonomous robotic agent, based on a real-world application of TypeDB."
+    homepage: "https://github.com/typedb-osi/typedb-robotics"
+    versions:
+      - version: "1.0.0"
+        compatibleServers: ">=3.5.0"
+        schemaFile: "https://github.com/typedb-osi/typedb-robotics/releases/download/1.0.0/schema_floorplan.tql"
+        dataFile:   "https://github.com/typedb-osi/typedb-robotics/releases/download/1.0.0/data_floorplan_assignment.tql"
