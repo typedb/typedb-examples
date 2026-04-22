@@ -1,5 +1,6 @@
 # Sample dataset manifest for TypeDB clients (Studio, Cloud platform, etc.).
 # Only TypeDB server versions >= 3.5.0 are covered.
+# Clients may optionally include pre-release server builds (e.g. 3.8.0-alpha-1) in server ranges.
 # This file should be updated when adding new datasets or releasing new versions of existing ones.
 
 schemaVersion: 1
