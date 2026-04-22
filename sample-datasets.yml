@@ -2,12 +2,8 @@
 # Only TypeDB server versions >= 3.5.0 are covered.
 # Clients may optionally include pre-release server builds (e.g. 3.8.0-alpha-1) in server ranges.
 # This file should be updated when adding new datasets or releasing new versions of existing ones.
+# URLs use raw.githubusercontent.com because browser clients can't consume github.com release URLs due to CORS.
 # Do NOT delete this file - it is used by live clients.
-#
-# URLs use raw.githubusercontent.com with tag-pinned refs. Browser clients can't consume
-# github.com release-download URLs directly because the 302 redirect to
-# objects.githubusercontent.com lacks an Access-Control-Allow-Origin header; raw.githubusercontent.com
-# serves CORS headers for cross-origin fetches.
 
 schemaVersion: 1
 
