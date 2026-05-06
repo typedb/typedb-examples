@@ -139,7 +139,7 @@ This returns
 match
   let $order-time = 2023-12-02T00:00:00;
   $book isa book, has title "Hokusai's Fuji";
-  let $discount = best_discount_for_item($book, $order-time);
+  let $discount? = best_discount_for_item($book, $order-time);
   $book has price $price;
 fetch {
   "title": $book.title,
