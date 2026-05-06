@@ -263,19 +263,22 @@ fun book_recommendations_by_author($user: user) -> { book }:
     ($new-book, $shared-author) isa authoring;
   return { $new-book };
 
-fun order_line_best_price($line: order-line) -> { double }:
+fun order_line_best_price($line: order-line) -> { double? }:
   match
     ($order) isa action-execution, has timestamp $order-time;
     $line isa order-line, links ($order, $item);
     $item has price $retail-price;
     let $time_value = $order-time;
-    let $best-discount = best_discount_for_item($item, $time_value);
-    let $discounted-price = round(100 * $retail-price * (1 - $best-discount)) / 100;
+    try { let $best-discount? = best_discount_for_item($item, $time_value); };
     $line has quantity $quantity;
-    let $line-total = $quantity * $discounted-price;
+ match
+    try {
+        let $discounted-price = round(100 * $retail-price * (1 - $best-discount)) / 100;
+        let $line-total = $quantity * $discounted-price;
+    };
   return { $line-total };
 
-fun best_discount_for_item($item: book, $order-time: datetime) -> double:
+fun best_discount_for_item($item: book, $order-time: datetime) -> double?:
   match
     {
         $inclusion isa promotion-inclusion,
