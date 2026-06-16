@@ -38,6 +38,16 @@ datasets:
         schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.5.0/use-cases/bookstore/schema.tql"
         dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.5.0/use-cases/bookstore/data.tql"
 
+  social-network:
+    displayName: "Social Network"
+    description: "A moderately complex model of a modern social network, capturing users, content, and their interactions."
+    homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/social-network"
+    versions:
+      - version: "3.11.5"
+        compatibleServers: ">=3.11.5"
+        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.11.5/use-cases/social-network/schema.tql"
+        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.11.5/use-cases/social-network/data.tql"
+
   cti:
     displayName: "Cyber Threat Intelligence"
     description: "A STIX 2.1-based model of threat actors, campaigns, and their relationships, demonstrating TypeDB in a CTI context."
