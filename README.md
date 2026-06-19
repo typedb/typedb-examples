@@ -28,6 +28,7 @@ There are some smaller, though still complex, examples that are fully contained 
 
 * Bookstore: a simple ecommerce-like model of a bookstore, including sample data
 * Social network: a moderately complex model of a social network, including sample data
+* Fraud detection: a credit-card transaction model that surfaces suspect transactions, including sample data
 
 These folders contain their own descriptions, instructions, and sample queries.
 
@@ -66,6 +67,12 @@ and example queries demonstrating basic TypeDB concepts.
 ### [Social network](/use-cases/social-network)
 
 This example demonstrates how to model a social network using TypeDB 3.0. The schema captures the complex relationships and interactions between users, their content, and various social entities in a modern social networking platform.
+
+### [Fraud detection](/use-cases/fraud-detection)
+
+Learn how to use TypeDB to model credit-card transactions and detect suspect ones. The schema captures cardholders, cards,
+banks, merchants, and geographic location, and uses function composition to flag transactions where the cardholder and
+merchant are not at the same place. Includes a complete schema, sample data, and example queries.
 
 ## Released datasets
 
