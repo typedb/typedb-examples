@@ -11,7 +11,7 @@ https://www.kaggle.com/datasets/kartik2112/fraud-detection?select=fraudTrain.csv
 
 Ensure you have a running TypeDB 3.x server.
 
-The easiest way to load this example is with TypeDB Console. On version 3.5.0+ you can create the database and load both the schema and data in one line:
+The easiest way to load this example is with TypeDB Console or via TypeDB Studio's built-in sample dataset loader. On version 3.5.0+ you can create the database and load both the schema and data in one line:
 
 ```
 typedb console --username=<username> --address=<address> --command="database create-init fraud <path to schema.tql> <path to data.tql>"
