@@ -23,37 +23,21 @@
 define
 
 attribute name, value string;
-
 attribute first_name, value string;
-
 attribute last_name, value string;
-
 attribute job, value string;
-
 attribute gender, value string @regex("^(F|M|O)$");
-
 attribute company_type, value string;
-
 attribute timestamp, value datetime;
-
 attribute date_of_birth, value datetime;
-
 attribute card_number, value integer;
-
 attribute amount, value double;
-
 attribute transaction_number, value string;
-
 attribute street, value string;
-
 attribute city, value string;
-
 attribute state, value string;
-
 attribute zip, value integer;
-
 attribute longitude, value double;
-
 attribute latitude, value double;
 
 entity Geo_coordinate,
@@ -129,7 +113,7 @@ fun at_same_place($per: Person, $com: Company) -> boolean:
 fun transaction_is_safe($tx: transaction) -> boolean:
     match
         $tx links (used_card: $card, to: $com);
-        $account isa bank_account, links (owner: $per, attached_card: $card);
+        bank_account (owner: $per, attached_card: $card);
         let $same in at_same_place($per, $com);
         $same == true;
     return check;

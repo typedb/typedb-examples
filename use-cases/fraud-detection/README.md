@@ -1,8 +1,8 @@
 # TypeDB Fraud Detection Example
 
-This example models credit-card transactions for fraud analysis. It captures cardholders, the cards and bank accounts they own, the merchants they pay, and the geographic location of each party, so that suspicious transactions can be surfaced with a single query.
+This example models credit-card transactions for fraud analysis: cardholders, the cards and bank accounts they own, the merchants they pay, and the location of each party, so that suspicious transactions can be surfaced with a single query.
 
-The schema uses TypeDB 3.x and showcases entity/relation modelling, role inheritance, and **functions** (which replace the rules used in older TypeDB versions).
+It uses TypeDB 3.x and showcases entity/relation modelling, role inheritance, and **functions** (which replace the rules used in older TypeDB versions).
 
 The dataset is adapted from the Kaggle credit-card fraud dataset:
 https://www.kaggle.com/datasets/kartik2112/fraud-detection?select=fraudTrain.csv
@@ -220,7 +220,7 @@ Returns (excerpt):
 }
 ```
 
-> **Note on this dataset:** every cardholder's home coordinates differ from the merchant's coordinates, so `transaction_is_safe` evaluates to `false` for all 201 transactions and the safe-transaction count is 0. The query mechanics are the point of the example; the heuristic is deliberately simple. To see a "safe" transaction, insert one where the cardholder's `Geo_coordinate` has the same `latitude`/`longitude` as the merchant's.
+> **Note:** in this dataset every cardholder's coordinates differ from the merchant's, so `transaction_is_safe` is `false` for all 201 transactions. To see a "safe" one, insert a transaction where the cardholder's `Geo_coordinate` matches the merchant's `latitude`/`longitude`.
 
 ### 7. Paginate transactions
 
