@@ -194,8 +194,7 @@ match
     links (used_card: $card, to: $merchant),
     has amount $amount,
     has transaction_number $num;
-  let $safe in transaction_is_safe($tx);
-  $safe == false;
+  false == transaction_is_safe($tx);
   $merchant has name $merchant_name;
   bank_account (owner: $person, attached_card: $card);
   $person has first_name $first, has last_name $last;
