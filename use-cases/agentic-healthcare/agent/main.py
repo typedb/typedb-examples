@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+load_dotenv()
 """
 Entrypoint: find every high-risk, not-yet-followed-up patient in TypeDB and
 run the per-patient LangGraph for each of them.

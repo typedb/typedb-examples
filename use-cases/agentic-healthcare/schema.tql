@@ -4,7 +4,7 @@ define
 attribute patient-id, value string;
 attribute clinician-id, value string;
 attribute name, value string;
-attribute role, value string;
+attribute job-role, value string;
 attribute dob, value date;
 attribute phone, value string;
 attribute lives-alone, value boolean;
@@ -43,7 +43,7 @@ entity patient,
 entity clinician,
     owns clinician-id @key,
     owns name,
-    owns role,
+    owns job-role,
     plays prescription:prescriber,
     plays follow-up:assigned-clinician,
     plays escalation:on-call-clinician;

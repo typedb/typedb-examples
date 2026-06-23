@@ -9,7 +9,7 @@ driver directly.
 import os
 from typing import TypedDict
 
-from typedb.driver import Credentials, DriverOptions, TransactionType, TypeDB
+from typedb.driver import Credentials, DriverOptions, DriverTlsConfig, TransactionType, TypeDB
 
 TYPEDB_ADDRESS = os.getenv("TYPEDB_ADDRESS", "localhost:1729")
 TYPEDB_USERNAME = os.getenv("TYPEDB_USERNAME", "admin")
@@ -27,10 +27,11 @@ class Interaction(TypedDict):
 
 
 def _driver():
+    tls_config = DriverTlsConfig.enabled_with_native_root_ca() if TYPEDB_TLS_ENABLED else DriverTlsConfig.disabled()
     return TypeDB.driver(
         TYPEDB_ADDRESS,
         Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD),
-        DriverOptions(is_tls_enabled=TYPEDB_TLS_ENABLED),
+        DriverOptions(tls_config),
     )
 
 
@@ -85,8 +86,6 @@ def schedule_followup(patient_id: str, clinician_id: str, scheduled_time: str, c
 
 
 def raise_escalation(patient_id: str, clinician_id: str, reason: str, raised_at: str) -> None:
-    # Escape double quotes defensively since `reason` may contain an
-    # LLM-drafted clinical note.
     safe_reason = reason.replace('"', "'")
     query = f"""
         match

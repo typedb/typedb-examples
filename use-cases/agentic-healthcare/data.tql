@@ -7,8 +7,8 @@ $p1 isa patient,
     has lives-alone true,
     has readmission-risk-score 0.81;
 
-$c1 isa clinician, has clinician-id "C-01", has name "Dr. Amara Idris", has role "cardiology";
-$c2 isa clinician, has clinician-id "C-02", has name "Nurse Tom Becker", has role "on-call";
+$c1 isa clinician, has clinician-id "C-01", has name "Dr. Amara Idris", has job-role "cardiology";
+$c2 isa clinician, has clinician-id "C-02", has name "Nurse Tom Becker", has job-role "on-call";
 
 $m1 isa medication, has med-name "Furosemide", has rxnorm-code "4603";
 $m2 isa medication, has med-name "Lisinopril",  has rxnorm-code "29046";
