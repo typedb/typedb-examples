@@ -1,0 +1,11 @@
+# Schedule a follow-up call/visit for a patient with no flagged interactions.
+# Backs the agent's "schedule_followup" tool.
+
+match
+    $p isa patient, has patient-id "P-1002";
+    $c isa clinician, has clinician-id "C-01";
+insert
+    follow-up (patient: $p, assigned-clinician: $c),
+        has scheduled-time 2026-06-30T14:00:00,
+        has channel "telehealth",
+        has status "scheduled";

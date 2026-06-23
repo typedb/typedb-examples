@@ -1,0 +1,34 @@
+insert
+$p1 isa patient,
+    has patient-id "P-1001",
+    has name "Joan Whitfield",
+    has dob 1948-03-12,
+    has phone "+44 7700 900123",
+    has lives-alone true,
+    has readmission-risk-score 0.81;
+
+$c1 isa clinician, has clinician-id "C-01", has name "Dr. Amara Idris", has role "cardiology";
+$c2 isa clinician, has clinician-id "C-02", has name "Nurse Tom Becker", has role "on-call";
+
+$m1 isa medication, has med-name "Furosemide", has rxnorm-code "4603";
+$m2 isa medication, has med-name "Lisinopril",  has rxnorm-code "29046";
+$m3 isa medication, has med-name "Potassium Chloride", has rxnorm-code "8591";
+
+# Lisinopril + Potassium Chloride: known interaction (hyperkalemia risk)
+interaction (drug-a: $m2, drug-b: $m3), has severity "high";
+
+prescription (patient: $p1, drug: $m1, prescriber: $c1),
+    has dose "40mg", has frequency "once daily", has start-date 2026-06-20T09:00:00, has status "active";
+prescription (patient: $p1, drug: $m2, prescriber: $c1),
+    has dose "10mg", has frequency "once daily", has start-date 2026-06-20T09:00:00, has status "active";
+prescription (patient: $p1, drug: $m3, prescriber: $c1),
+    has dose "20mEq", has frequency "twice daily", has start-date 2026-06-20T09:00:00, has status "active";
+
+# A second, lower-risk patient with no interaction issue, for contrast
+$p2 isa patient,
+    has patient-id "P-1002",
+    has name "Raj Patel",
+    has dob 1972-11-02,
+    has phone "+44 7700 900456",
+    has lives-alone false,
+    has readmission-risk-score 0.32;
