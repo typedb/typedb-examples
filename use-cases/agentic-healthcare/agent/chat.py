@@ -24,17 +24,13 @@ from langgraph.prebuilt import create_react_agent
 import typedb_client as db
 
 
-# -----------------------
 # CONFIG
-# -----------------------
 
 MODEL_NAME = os.getenv("AGENT_MODEL", "claude-3-5-haiku-latest")
 MAX_RETRIES = 5
 
 
-# -----------------------
 # TOOLS (ALL MUST HAVE DOCSTRINGS)
-# -----------------------
 
 @tool
 def list_patients() -> list[dict]:
@@ -84,9 +80,7 @@ TOOLS = [
 ]
 
 
-# -----------------------
 # LLM + AGENT
-# -----------------------
 
 llm = ChatAnthropic(
     model=MODEL_NAME,
@@ -97,9 +91,8 @@ llm = ChatAnthropic(
 agent = create_react_agent(llm, TOOLS)
 
 
-# -----------------------
 # SAFE INVOKE (IMPORTANT FIX)
-# -----------------------
+
 
 def invoke_agent(messages):
     last_error = None
@@ -129,9 +122,7 @@ def invoke_agent(messages):
     raise RuntimeError(f"Agent failed after retries: {last_error}")
 
 
-# -----------------------
 # MAIN LOOP
-# -----------------------
 
 def main():
     print("Agentic Healthcare Assistant (stable)\n")
