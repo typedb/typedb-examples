@@ -1,6 +1,5 @@
 define
 
-# ---------- Attributes ----------
 attribute patient-id, value string;
 attribute clinician-id, value string;
 attribute name, value string;
@@ -27,7 +26,6 @@ attribute raised-at, value datetime;
 attribute symptom-text, value string;
 attribute reported-at, value datetime;
 
-# ---------- Entities ----------
 entity patient,
     owns patient-id @key,
     owns name,
@@ -55,7 +53,6 @@ entity medication,
     plays interaction:drug-a,
     plays interaction:drug-b;
 
-# ---------- Relations ----------
 relation prescription,
     relates patient,
     relates drug,
@@ -89,8 +86,6 @@ relation symptom-report,
     owns symptom-text,
     owns reported-at;
 
-# ---------- Functions ----------
-# Find any active prescriptions for a patient that have a known interaction with each other.
 fun flag_drug_interactions($p: patient) -> { medication, medication, severity }:
     match
         prescription (patient: $p, drug: $m1), has status "active";
@@ -99,7 +94,6 @@ fun flag_drug_interactions($p: patient) -> { medication, medication, severity }:
         not { $m1 is $m2; };
     return { $m1, $m2, $sev };
 
-# Patients above a risk threshold who do NOT yet have a scheduled follow-up.
 fun patients_needing_followup($threshold: double) -> { patient }:
     match
         $p isa patient, has readmission-risk-score $score;
