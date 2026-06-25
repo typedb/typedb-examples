@@ -68,7 +68,7 @@ datasets:
 
   fraud-detection:
     displayName: "Fraud Detection"
-    description: "A model of cardholders, banks, companies, and geolocated card transactions, with functions that flag transactions as safe or potentially fraudulent."
+    description: "A model of users, banks and geolocated card payments, with functions that flag payments as safe or potentially fraudulent."
     homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/fraud-detection"
     versions:
       - version: "3.7.2"
