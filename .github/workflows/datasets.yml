@@ -20,6 +20,7 @@ jobs:
         dataset:
           - bookstore
           - cyber-threat-intelligence
+          - fraud-detection
           - identity-and-access-management
           - social-network
 

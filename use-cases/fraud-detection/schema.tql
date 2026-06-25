@@ -1,0 +1,119 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+# Fraud detection example, adapted from the Kaggle credit-card fraud dataset:
+# https://www.kaggle.com/datasets/kartik2112/fraud-detection?select=fraudTrain.csv
+
+define
+
+attribute name, value string;
+attribute first_name, value string;
+attribute last_name, value string;
+attribute job, value string;
+attribute gender, value string @regex("^(F|M|O)$");
+attribute company_type, value string;
+attribute timestamp, value datetime;
+attribute date_of_birth, value datetime;
+attribute card_number, value integer;
+attribute amount, value double;
+attribute transaction_number, value string;
+attribute street, value string;
+attribute city, value string;
+attribute state, value string;
+attribute zip, value integer;
+attribute longitude, value double;
+attribute latitude, value double;
+
+entity Geo_coordinate,
+    owns longitude,
+    owns latitude,
+    plays geolocate:coordinates;
+
+entity Address,
+    owns street,
+    owns city,
+    owns state,
+    owns zip,
+    plays locate:address;
+
+entity Card,
+    owns card_number,
+    plays bank_account:attached_card,
+    plays transaction:used_card;
+
+entity Person,
+    owns first_name,
+    owns last_name,
+    owns gender,
+    owns job,
+    owns date_of_birth,
+    plays bank_account:owner,
+    plays geolocate:transacting_party;
+
+entity Company,
+    owns name,
+    owns company_type,
+    plays transaction:to,
+    plays geolocate:transacting_party;
+
+entity Bank sub Company,
+    plays bank_account:attached_bank;
+
+relation bank_account,
+    relates owner,
+    relates attached_card,
+    relates attached_bank;
+
+relation transaction,
+    owns timestamp,
+    owns amount,
+    owns transaction_number,
+    relates used_card,
+    relates to;
+
+relation geolocate,
+    relates coordinates,
+    relates transacting_party;
+
+relation locate sub geolocate,
+    relates address;
+
+# In TypeDB 3.x rules no longer exist; inference is expressed with functions.
+# These functions reproduce the "is this transaction safe?" logic that the
+# original example expressed with rules.
+
+# A buyer (cardholder) and a company share a location when the coordinates
+# attached to the person and to the company have the same longitude/latitude.
+fun at_same_place($per: Person, $com: Company) -> boolean:
+    match
+        locate (transacting_party: $per, coordinates: $per_coord);
+        geolocate (transacting_party: $com, coordinates: $com_coord);
+        $per_coord has longitude $lon, has latitude $lat;
+        $com_coord has longitude $lon, has latitude $lat;
+    return check;
+
+# A transaction is considered safe when the cardholder who owns the card used
+# in the transaction is located in the same place as the company being paid.
+fun transaction_is_safe($tx: transaction) -> boolean:
+    match
+        $tx links (used_card: $card, to: $com);
+        bank_account (owner: $per, attached_card: $card);
+        let $same in at_same_place($per, $com);
+        $same == true;
+    return check;

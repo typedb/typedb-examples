@@ -66,6 +66,16 @@ datasets:
         schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.5.5/use-cases/cyber-threat-intelligence/schema.tql"
         dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.5.5/use-cases/cyber-threat-intelligence/data.tql"
 
+  fraud-detection:
+    displayName: "Fraud Detection"
+    description: "A model of cardholders, banks, companies, and geolocated card transactions, with functions that flag transactions as safe or potentially fraudulent."
+    homepage: "https://github.com/typedb/typedb-examples/tree/master/use-cases/fraud-detection"
+    versions:
+      - version: "3.7.2"
+        compatibleServers: ">=3.7.3"
+        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.7.2/use-cases/fraud-detection/schema.tql"
+        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.7.2/use-cases/fraud-detection/data.tql"
+
   robotics:
     displayName: "Robotics"
     description: "A knowledge base for an autonomous robotic agent, based on a real-world application of TypeDB."

@@ -30,6 +30,7 @@ pkg_tar(
         "//use-cases/social-network:social-network-dataset",
         "//use-cases/identity-and-access-management:iam-dataset",
         "//use-cases/cyber-threat-intelligence:cti-dataset",
+        "//use-cases/fraud-detection:fraud-detection-dataset",
     ],
 )
 

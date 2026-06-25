@@ -8,7 +8,7 @@ The database schema uses TypeDB 3.0, and showcases various features of the type 
 
 Ensure you have a running TypeDB 3.0 server.
 
-The easiest way to load this example is using TypeDB Console. If you're using version 3.5.0, you can load the schema and data files in one line:
+The easiest way to load this example is using TypeDB Console or via TypeDB Studio's built in sample dataset loader. If you're using version 3.5.0, you can load the schema and data files in one line:
 
 Non-interactive mode:
 ```
