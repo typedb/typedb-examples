@@ -1,0 +1,13 @@
+# Check whether a patient's active prescriptions contain a known interaction.
+# Backs the agent's safety check before scheduling outreach.
+
+match
+    $p isa patient, has patient-id "P-1001";
+    let $m1, $m2, $sev in flag_drug_interactions($p);
+    $m1 has med-name $n1;
+    $m2 has med-name $n2;
+fetch {
+    "drugA": $n1,
+    "drugB": $n2,
+    "severity": $sev,
+};

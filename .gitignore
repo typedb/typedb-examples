@@ -67,3 +67,6 @@ memory-bank
 
 # Advent of TypeQL
 2025-advent-of-typeql/outline.md
+use-cases/agentic-healthcare/agent/.env
+use-cases/agentic-healthcare/agent/patient_status_export.csv
+use-cases/agentic-healthcare/agent/__pycache__/
