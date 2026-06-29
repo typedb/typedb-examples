@@ -45,8 +45,8 @@ datasets:
     versions:
       - version: "3.11.5"
         compatibleServers: ">=3.11.5"
-        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.11.5/use-cases/social-network/schema.tql"
-        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.11.5/use-cases/social-network/data.tql"
+        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.12.0/use-cases/social-network/schema.tql"
+        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.12.0/use-cases/social-network/data.tql"
 
   cti:
     displayName: "Cyber Threat Intelligence"
