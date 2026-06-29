@@ -1,0 +1,104 @@
+define
+
+attribute patient-id, value string;
+attribute clinician-id, value string;
+attribute name, value string;
+attribute job-role, value string;
+attribute dob, value date;
+attribute phone, value string;
+attribute lives-alone, value boolean;
+attribute readmission-risk-score, value double;
+
+attribute med-name, value string;
+attribute rxnorm-code, value string;
+attribute dose, value string;
+attribute frequency, value string;
+attribute start-date, value datetime;
+attribute severity, value string;
+
+attribute scheduled-time, value datetime;
+attribute channel, value string;
+attribute status, value string;
+
+attribute reason, value string;
+attribute raised-at, value datetime;
+
+attribute symptom-text, value string;
+attribute reported-at, value datetime;
+
+entity patient,
+    owns patient-id @key,
+    owns name,
+    owns dob,
+    owns phone,
+    owns lives-alone,
+    owns readmission-risk-score,
+    plays prescription:patient,
+    plays follow-up:patient,
+    plays escalation:patient,
+    plays symptom-report:patient;
+
+entity clinician,
+    owns clinician-id @key,
+    owns name,
+    owns job-role,
+    plays prescription:prescriber,
+    plays follow-up:assigned-clinician,
+    plays escalation:on-call-clinician;
+
+entity medication,
+    owns med-name @key,
+    owns rxnorm-code,
+    plays prescription:drug,
+    plays interaction:drug-a,
+    plays interaction:drug-b;
+
+relation prescription,
+    relates patient,
+    relates drug,
+    relates prescriber,
+    owns dose,
+    owns frequency,
+    owns start-date,
+    owns status @card(0..1);
+
+relation interaction,
+    relates drug-a,
+    relates drug-b,
+    owns severity;
+
+relation follow-up,
+    relates patient,
+    relates assigned-clinician,
+    owns scheduled-time,
+    owns channel,
+    owns status;
+
+relation escalation,
+    relates patient,
+    relates on-call-clinician @card(0..1),
+    owns reason,
+    owns raised-at,
+    owns status;
+
+relation symptom-report,
+    relates patient,
+    owns symptom-text,
+    owns reported-at;
+
+fun flag_drug_interactions($p: patient) -> { medication, medication, severity }:
+    match
+        prescription (patient: $p, drug: $m1), has status "active";
+        prescription (patient: $p, drug: $m2), has status "active";
+        interaction (drug-a: $m1, drug-b: $m2), has severity $sev;
+        not { $m1 is $m2; };
+    return { $m1, $m2, $sev };
+
+fun patients_needing_followup($threshold: double) -> { patient }:
+    match
+        $p isa patient, has readmission-risk-score $score;
+        $score >= $threshold;
+        not {
+            follow-up (patient: $p), has status "scheduled";
+        };
+    return { $p };

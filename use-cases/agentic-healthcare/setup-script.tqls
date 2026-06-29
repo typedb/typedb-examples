@@ -1,0 +1,7 @@
+database create agentic-healthcare
+transaction schema agentic-healthcare
+source schema.tql
+commit
+transaction write agentic-healthcare
+source data.tql
+commit
