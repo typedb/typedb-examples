@@ -73,8 +73,8 @@ datasets:
     versions:
       - version: "3.7.2"
         compatibleServers: ">=3.7.3"
-        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.7.2/use-cases/fraud-detection/schema.tql"
-        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/refs/tags/3.7.2/use-cases/fraud-detection/data.tql"
+        schemaFile: "https://raw.githubusercontent.com/typedb/typedb-examples/78d7deff25149575b87a2e923eb6d1d04c9b2746/use-cases/fraud-detection/schema.tql"
+        dataFile:   "https://raw.githubusercontent.com/typedb/typedb-examples/78d7deff25149575b87a2e923eb6d1d04c9b2746/use-cases/fraud-detection/data.tql"
 
   robotics:
     displayName: "Robotics"
