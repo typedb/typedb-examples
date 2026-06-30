@@ -4,6 +4,17 @@ A Bloomberg-lite market-data terminal. A LangGraph ReAct agent (Claude Opus 4.8)
 answers natural-language questions about companies, securities, indices, currencies
 and analyst coverage by querying a [TypeDB](https://typedb.com) database over MCP.
 
+## What this is
+
+An agentic app in the finance domain. It shows how to build a LangGraph AI agent backed by TypeDB:
+
+- **Persistent** — conversation state is checkpointed in TypeDB via the [TypeDB
+  LangGraph integration](https://typedb.com), so it survives restarts.
+- **Works with the database** — uses `typeql-check` to validate TypeQL syntax before
+  running it, and connects to TypeDB through the TypeDB MCP server.
+- **Showcases TypeDB in finance** — models complex financial constructs with
+  cardinality, subtyping, and functions (see below).
+
 The example is intentionally small but exercises TypeDB's modelling features:
 
 - **Subtyping** — abstract `security` → `equity` and `bond`.
@@ -13,7 +24,7 @@ The example is intentionally small but exercises TypeDB's modelling features:
 - **Functions** — `latest_price`, `market_cap` (which calls `latest_price`),
   `constituent_count`, `consensus_rating`.
 
-See `schema/finance.tql` for the full model and `data/seed.tql` for the sample data.
+See `database/schema.tql` for the full model and `database/data.tql` for the sample data.
 
 ## Setup
 
@@ -54,7 +65,7 @@ poetry run seed
 ```
 
 This drops and recreates `TYPEDB_DATABASE` (`ticker`), defines the schema from
-`schema/finance.tql`, and loads the seed data from `data/seed.tql`.
+`database/schema.tql`, and loads the seed data from `database/data.tql`.
 
 ## Run the agent
 
@@ -77,8 +88,8 @@ Then ask things like:
 
 ```
 docker-compose.yml   typedb-server + typedb-mcp
-schema/finance.tql   TypeDB schema (entities, relations, cardinality, functions)
-data/seed.tql        sample market data
+database/schema.tql  TypeDB schema (entities, relations, cardinality, functions)
+database/data.tql    sample market data
 src/agent/graph.py   LangGraph agent wired to the TypeDB MCP tools
 src/agent/main.py    REPL entry point  (poetry run agent)
 src/agent/seed.py    schema + data loader (poetry run seed)

@@ -8,10 +8,10 @@ from typedb.driver import TransactionType
 
 from agent.db import connect
 
-# schema/ and data/ live at the repo root, two levels up from this file.
+# database/ lives at the repo root, two levels up from this file.
 _ROOT = Path(__file__).resolve().parents[2]
-SCHEMA_FILE = _ROOT / "schema" / "finance.tql"
-DATA_FILE = _ROOT / "data" / "seed.tql"
+SCHEMA_FILE = _ROOT / "database" / "schema.tql"
+DATA_FILE = _ROOT / "database" / "data.tql"
 
 
 def _split_queries(text: str) -> list[str]:
