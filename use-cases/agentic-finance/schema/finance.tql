@@ -1,0 +1,168 @@
+define
+
+# ============================================================
+# Attributes
+# ============================================================
+attribute name, value string;
+attribute ticker, value string;                 # "AAPL"
+attribute mic, value string;                    # exchange code, "XNAS"
+attribute iso_code, value string;               # currency, "USD"
+attribute description, value string;
+attribute sector, value string;
+attribute shares_outstanding, value integer;
+attribute face_value, value double;
+attribute coupon_rate, value double;
+attribute maturity_date, value date;
+attribute price, value double;
+attribute as_of, value datetime;
+attribute rating, value integer @range(1..5);   # analyst rating 1 (sell) .. 5 (buy)
+
+# ============================================================
+# Securities  (SUBTYPING: abstract security -> equity, bond)
+# ============================================================
+entity security @abstract,
+  owns ticker @key,
+  owns name,
+  owns description @card(0..1),                  # 0..1  optional blurb
+  plays issuance:issued,
+  plays listing:listed,
+  plays index_membership:constituent,
+  plays pricing:instrument,
+  plays coverage:covered;
+
+entity equity sub security,
+  owns shares_outstanding @card(1),              # exactly 1
+  owns sector @card(0..1);                       # 0..1
+
+entity bond sub security,
+  owns face_value @card(1),
+  owns coupon_rate @card(1),
+  owns maturity_date @card(1),
+  plays underwriting:underwritten;
+
+# ============================================================
+# Other entities
+# ============================================================
+entity company,
+  owns name @key,
+  owns sector @card(0..1),
+  plays issuance:issuer;
+
+entity exchange,
+  owns mic @key,
+  owns name,
+  plays listing:venue;
+
+entity index,
+  owns name @key,
+  plays index_membership:basket;
+
+entity currency,
+  owns iso_code @key,
+  owns name,
+  plays fx_pair:side;
+
+entity bank,
+  owns name @key,
+  plays underwriting:underwriter;
+
+entity analyst,
+  owns name,
+  plays coverage:analyst;
+
+entity price_bar,
+  owns price,
+  owns as_of,
+  plays pricing:bar;
+
+# ============================================================
+# Relations  (the CARDINALITY showcase)
+# ============================================================
+
+# Exactly-one issuer per security; a company issues 0..many securities.
+relation issuance,
+  relates issuer @card(1),                       # 1   each issuance has one issuer
+  relates issued @card(1);                        # 1   ...and one issued security
+# company plays issuance:issuer @card(0..)  -> a company issues 0..many securities
+# security plays issuance:issued @card(1)   -> a security has exactly one issuer
+
+# Cross-listing: many securities <-> many exchanges.
+relation listing,
+  relates listed @card(1),
+  relates venue @card(1);
+
+# An index basket holds 1..many constituents; a security sits in 0..many baskets.
+relation index_membership,
+  relates basket @card(1),
+  relates constituent @card(1..);                # 1..many constituents per basket
+
+# FX pair relates EXACTLY 2 currencies (base + quote).
+relation fx_pair,
+  relates side @card(2);                         # niche: exactly 2
+
+# A bond's underwriting syndicate has 2..5 banks.
+relation underwriting,
+  relates underwritten @card(1),
+  relates underwriter @card(2..5);               # niche: 2..5
+
+# Time series of prices for a security.
+relation pricing,
+  relates instrument @card(1),
+  relates bar @card(1);
+
+# Analyst coverage carries a 1..5 rating.
+relation coverage,
+  relates covered @card(1),
+  relates analyst @card(1),
+  owns rating;
+
+# ============================================================
+# plays-side cardinalities (the many..many / 0..many constraints)
+# ============================================================
+company plays issuance:issuer @card(0..);        # 0..many securities issued
+security plays issuance:issued @card(1);          # exactly one issuer
+security plays listing:listed @card(0..);         # listed on 0..many venues  ) many
+exchange plays listing:venue @card(0..);          # lists 0..many securities   ) ..many
+security plays index_membership:constituent @card(0..);  # in 0..many indices ) many
+index plays index_membership:basket @card(1);     #                            ) ..many
+currency plays fx_pair:side @card(0..);
+bond plays underwriting:underwritten @card(0..1); # a bond has 0..1 syndicate
+bank plays underwriting:underwriter @card(0..);
+security plays pricing:instrument @card(0..);     # 0..many price bars over time
+price_bar plays pricing:bar @card(1);
+security plays coverage:covered @card(0..);
+analyst plays coverage:analyst @card(0..);
+
+# ============================================================
+# Functions
+# ============================================================
+
+# Most recent traded price of a security.
+fun latest_price($s: security) -> double:
+  match
+    pricing (instrument: $s, bar: $b);
+    $b has price $p, has as_of $t;
+    let $pv = $p;                     # bind the double value (a function may not return an attribute where a value is declared)
+  sort $t desc;
+  return first $pv;
+
+# Market cap = latest price * shares outstanding  (calls latest_price).
+fun market_cap($e: equity) -> double:
+  match
+    $e has shares_outstanding $n;
+    let $px in latest_price($e);
+    let $mc = $px * $n;
+  return first $mc;
+
+# How many securities are in an index.
+fun constituent_count($i: index) -> integer:
+  match
+    index_membership (basket: $i, constituent: $c);
+  return count;
+
+# Average analyst rating for a security (consensus).
+fun consensus_rating($s: security) -> double:
+  match
+    $cov isa coverage, links (covered: $s, analyst: $a);
+    $cov has rating $r;
+  return mean($r);
