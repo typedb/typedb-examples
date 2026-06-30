@@ -1,0 +1,160 @@
+# Seed data for the "Ticker" finance example.
+# Queries are separated by blank lines; the loader (agent.seed) runs them in order.
+
+# ---- Companies (issuers) ----
+insert $_ isa company, has name "Apple Inc", has sector "Technology";
+
+insert $_ isa company, has name "NVIDIA Corp", has sector "Technology";
+
+insert $_ isa company, has name "Tesla Inc", has sector "Automotive";
+
+insert $_ isa company, has name "Acme Corp", has sector "Industrials";
+
+# ---- Equities ----
+insert $_ isa equity, has ticker "AAPL", has name "Apple Inc.",
+  has sector "Technology", has shares_outstanding 15000000000,
+  has description "Designs and sells consumer electronics, software and services.";
+
+insert $_ isa equity, has ticker "NVDA", has name "NVIDIA Corporation",
+  has sector "Technology", has shares_outstanding 2460000000,
+  has description "Designs GPUs and accelerated-computing platforms.";
+
+insert $_ isa equity, has ticker "TSLA", has name "Tesla, Inc.",
+  has sector "Automotive", has shares_outstanding 3180000000;
+
+# ---- Bond (no shares; carries face value, coupon, maturity) ----
+insert $_ isa bond, has ticker "ACME30", has name "Acme Corp 4.5% 2030",
+  has face_value 1000.0, has coupon_rate 4.5, has maturity_date 2030-12-31;
+
+# ---- Exchanges ----
+insert $_ isa exchange, has mic "XNAS", has name "Nasdaq Stock Market";
+
+insert $_ isa exchange, has mic "XNYS", has name "New York Stock Exchange";
+
+# ---- Indices ----
+insert $_ isa index, has name "Nasdaq 100";
+
+insert $_ isa index, has name "S&P 500";
+
+# ---- Currencies ----
+insert $_ isa currency, has iso_code "USD", has name "US Dollar";
+
+insert $_ isa currency, has iso_code "EUR", has name "Euro";
+
+insert $_ isa currency, has iso_code "GBP", has name "British Pound";
+
+insert $_ isa currency, has iso_code "JPY", has name "Japanese Yen";
+
+# ---- Banks (bond underwriters) ----
+insert $_ isa bank, has name "Goldman Sachs";
+
+insert $_ isa bank, has name "JPMorgan";
+
+insert $_ isa bank, has name "Morgan Stanley";
+
+# ---- Analysts ----
+insert $_ isa analyst, has name "Jane Doe";
+
+insert $_ isa analyst, has name "John Smith";
+
+insert $_ isa analyst, has name "Maria Garcia";
+
+# ---- Issuance: each security has exactly one issuer ----
+match $c isa company, has name "Apple Inc"; $s isa equity, has ticker "AAPL";
+insert $_ isa issuance, links (issuer: $c, issued: $s);
+
+match $c isa company, has name "NVIDIA Corp"; $s isa equity, has ticker "NVDA";
+insert $_ isa issuance, links (issuer: $c, issued: $s);
+
+match $c isa company, has name "Tesla Inc"; $s isa equity, has ticker "TSLA";
+insert $_ isa issuance, links (issuer: $c, issued: $s);
+
+match $c isa company, has name "Acme Corp"; $s isa bond, has ticker "ACME30";
+insert $_ isa issuance, links (issuer: $c, issued: $s);
+
+# ---- Listings: many securities <-> many exchanges (AAPL is cross-listed) ----
+match $s isa security, has ticker "AAPL"; $e isa exchange, has mic "XNAS";
+insert $_ isa listing, links (listed: $s, venue: $e);
+
+match $s isa security, has ticker "AAPL"; $e isa exchange, has mic "XNYS";
+insert $_ isa listing, links (listed: $s, venue: $e);
+
+match $s isa security, has ticker "NVDA"; $e isa exchange, has mic "XNAS";
+insert $_ isa listing, links (listed: $s, venue: $e);
+
+match $s isa security, has ticker "TSLA"; $e isa exchange, has mic "XNAS";
+insert $_ isa listing, links (listed: $s, venue: $e);
+
+match $s isa security, has ticker "ACME30"; $e isa exchange, has mic "XNYS";
+insert $_ isa listing, links (listed: $s, venue: $e);
+
+# ---- Index membership: one basket per index holding 1..many constituents ----
+match $i isa index, has name "Nasdaq 100";
+  $a isa equity, has ticker "AAPL"; $n isa equity, has ticker "NVDA"; $t isa equity, has ticker "TSLA";
+insert $_ isa index_membership, links (basket: $i, constituent: $a, constituent: $n, constituent: $t);
+
+match $i isa index, has name "S&P 500";
+  $a isa equity, has ticker "AAPL"; $n isa equity, has ticker "NVDA"; $t isa equity, has ticker "TSLA";
+insert $_ isa index_membership, links (basket: $i, constituent: $a, constituent: $n, constituent: $t);
+
+# ---- FX pairs: each pair relates EXACTLY two currencies ----
+match $eur isa currency, has iso_code "EUR"; $usd isa currency, has iso_code "USD";
+insert $_ isa fx_pair, links (side: $eur, side: $usd);
+
+match $gbp isa currency, has iso_code "GBP"; $usd isa currency, has iso_code "USD";
+insert $_ isa fx_pair, links (side: $gbp, side: $usd);
+
+match $usd isa currency, has iso_code "USD"; $jpy isa currency, has iso_code "JPY";
+insert $_ isa fx_pair, links (side: $usd, side: $jpy);
+
+# ---- Underwriting: ACME30 syndicate has 3 banks (within the 2..5 bound) ----
+match $b isa bond, has ticker "ACME30";
+  $gs isa bank, has name "Goldman Sachs"; $jpm isa bank, has name "JPMorgan"; $ms isa bank, has name "Morgan Stanley";
+insert $_ isa underwriting, links (underwritten: $b, underwriter: $gs, underwriter: $jpm, underwriter: $ms);
+
+# ---- Price bars (two per name so latest_price has something to sort) ----
+match $s isa security, has ticker "AAPL";
+insert $b isa price_bar, has price 210.50, has as_of 2026-06-17T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "AAPL";
+insert $b isa price_bar, has price 213.25, has as_of 2026-06-18T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "NVDA";
+insert $b isa price_bar, has price 131.10, has as_of 2026-06-17T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "NVDA";
+insert $b isa price_bar, has price 134.80, has as_of 2026-06-18T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "TSLA";
+insert $b isa price_bar, has price 178.00, has as_of 2026-06-17T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "TSLA";
+insert $b isa price_bar, has price 182.40, has as_of 2026-06-18T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+match $s isa security, has ticker "ACME30";
+insert $b isa price_bar, has price 98.75, has as_of 2026-06-18T16:00:00; $_ isa pricing, links (instrument: $s, bar: $b);
+
+# ---- Analyst coverage with 1..5 ratings (drives consensus_rating) ----
+match $s isa security, has ticker "AAPL"; $a isa analyst, has name "Jane Doe";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 5;
+
+match $s isa security, has ticker "AAPL"; $a isa analyst, has name "John Smith";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 4;
+
+match $s isa security, has ticker "AAPL"; $a isa analyst, has name "Maria Garcia";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 4;
+
+match $s isa security, has ticker "NVDA"; $a isa analyst, has name "Jane Doe";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 5;
+
+match $s isa security, has ticker "NVDA"; $a isa analyst, has name "John Smith";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 5;
+
+match $s isa security, has ticker "TSLA"; $a isa analyst, has name "Jane Doe";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 3;
+
+match $s isa security, has ticker "TSLA"; $a isa analyst, has name "John Smith";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 2;
+
+match $s isa security, has ticker "TSLA"; $a isa analyst, has name "Maria Garcia";
+insert $_ isa coverage, links (covered: $s, analyst: $a), has rating 4;

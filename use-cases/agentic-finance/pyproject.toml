@@ -1,0 +1,42 @@
+[project]
+name = "typedb-langgraph-example"
+version = "0.0.1"
+description = "Example langgraph agent that uses TypeDB for memory."
+# The langgraph-*-typedb plugins require >=3.11,<3.13; only 3.12 is available here.
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "langgraph>=1.1,<2.0",
+    "langchain-core>=0.3.0",
+    "langchain-anthropic>=0.3.0",
+    "langchain-mcp-adapters>=0.1.0,<0.2.0",
+    "langgraph-checkpoint-typedb>=0.0.2",
+    "langgraph-store-typedb>=0.1.0",
+    "typedb-driver>=3.8,<4",
+    "python-dotenv>=1.0.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.7.0",
+    "pytest>=8.0.0",
+]
+
+[project.scripts]
+agent = "agent.main:main"
+seed = "agent.seed:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/agent"]
+
+# Poetry's editable install of the root project needs the package location too,
+# since it doesn't read the hatchling config above.
+[tool.poetry]
+packages = [{ include = "agent", from = "src" }]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"

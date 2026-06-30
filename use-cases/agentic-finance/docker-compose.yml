@@ -1,0 +1,34 @@
+services:
+  typedb:
+    image: typedb/typedb:3.11.5
+    ports:
+      - "1729:1729"   # gRPC
+      - "8000:8000"   # HTTP (driver + MCP connect here)
+    volumes:
+      - typedb-data:/var/lib/typedb/data
+    healthcheck:
+      # The HTTP endpoint answers once the server is accepting connections.
+      test: ["CMD", "bash", "-c", "exec 3<>/dev/tcp/localhost/8000"]
+      interval: 5s
+      timeout: 5s
+      retries: 20
+      start_period: 10s
+
+  typedb-mcp:
+    image: typedb/typedb-mcp:1.0.1
+    platform: linux/amd64   # ponytail: no arm64 build; emulate on Apple Silicon
+    depends_on:
+      typedb:
+        condition: service_healthy
+    command: >-
+      --typedb-address http://typedb:8000
+      --typedb-username admin
+      --typedb-password password
+    ports:
+      - "8001:8001"   # /mcp (streamable HTTP)
+    restart: on-failure
+    # ponytail: depends_on+healthcheck+restart instead of a wait-for script;
+    # add a wait script only if MCP still races startup.
+
+volumes:
+  typedb-data:
