@@ -1,0 +1,20 @@
+define
+
+attribute name, value string;
+attribute age, value integer;
+attribute active, value boolean;
+attribute balance, value decimal;
+attribute birthday, value date;
+attribute joined-at, value datetime-tz;
+
+relation friendship,
+  relates friend @card(2);
+
+entity person,
+  owns name @key,
+  owns age,
+  owns active,
+  owns balance,
+  owns birthday,
+  owns joined-at,
+  plays friendship:friend;

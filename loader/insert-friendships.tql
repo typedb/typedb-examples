@@ -1,0 +1,6 @@
+given $name-a: string, $name-b: string;
+match
+  $a isa person, has name == $name-a;
+  $b isa person, has name == $name-b;
+insert
+  friendship (friend: $a, friend: $b);

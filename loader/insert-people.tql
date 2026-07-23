@@ -1,0 +1,10 @@
+given $name: string, $age: integer?, $active: boolean,
+      $balance: decimal, $birthday: date?, $joined-at: datetime-tz;
+insert
+  $p isa person,
+    has name == $name,
+    has active == $active,
+    has balance == $balance,
+    has joined-at == $joined-at;
+  try { $p has age == $age; };
+  try { $p has birthday == $birthday; };
