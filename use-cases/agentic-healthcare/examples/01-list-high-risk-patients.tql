@@ -1,0 +1,11 @@
+# List patients above the readmission-risk threshold who don't yet have a
+# follow-up scheduled. Backs the agent's "who needs outreach" step.
+
+match
+    let $p in patients_needing_followup(0.7);
+    $p has patient-id $id, has name $name, has readmission-risk-score $score;
+fetch {
+    "id": $id,
+    "name": $name,
+    "riskScore": $score,
+};

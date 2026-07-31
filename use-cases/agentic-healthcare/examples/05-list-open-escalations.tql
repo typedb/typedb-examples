@@ -1,0 +1,13 @@
+# Audit trail: list every open escalation, the patient it concerns, and the
+# reason it was raised. Demonstrates that every agent decision is queryable
+# after the fact, not just logged as unstructured text.
+
+match
+    escalation (patient: $p, on-call-clinician: $c), has reason $reason, has status "open";
+    $p has name $patient-name;
+    $c has name $clinician-name;
+fetch {
+    "patient": $patient-name,
+    "onCallClinician": $clinician-name,
+    "reason": $reason,
+};
