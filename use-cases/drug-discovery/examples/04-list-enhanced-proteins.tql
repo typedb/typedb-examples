@@ -3,33 +3,27 @@
 # Now let's ask something higher-level, for the proteins that have enhanced expression within the heart muscle:
 
 match
-$t isa tissue, has name $n;
-$n == "heart muscle";
-$te ($t, $p) isa tissue-enhancement;
-$p isa protein, has id $id;
+let $t, $p in tissue_enhancements();
+$t has name "heart muscle";
+$p has id $id;
+fetch { "protein": $id };
 
-# The result we get, protein P20645, is inferred by the following rule:
+# The result we get, protein P20645, comes from the following function:
 #
-# rule inferred-tissue-enhancement:
-#     when {
-#         $p isa protein;
-#         $g isa gene;
-#         $t isa tissue;
-#         (encoded-protein: $p, encoding-gene: $g) isa protein-encoding;
-#         (expressed-gene: $g, expressing-tissue: $t) isa tissue-expression;
-#     } then {
-#         (expressed-protein: $p, enhanced-tissue: $t) isa tissue-enhancement;
-#     };
+# fun tissue_enhancements() -> { tissue, protein }:
+# match
+#     let $g, $p in protein_encodings();
+#     let $t, $g in tissue_expressions();
+# select $t, $p;
+# distinct;
+# return { $t, $p };
 #
-# Looking closely at the condition of the rule, we can see that tissue-enhancements are inferred by protein-encodings
-# and tissue-expressions, which we saw were themselves inferred in Examples 02 and 03. If we explain the
-# tissue-enhancement relation, these two relations appear in the graph visualiser, and we can double-click on them to
-# explain them as well.
+# This function calls the protein_encodings and tissue_expressions functions we saw in Examples 02 and 03.
 #
-# This is one of TypeDB's most powerful features: sequential inference, where the conclusion of one rule triggers the
-# condition of another. This can lead to extremely complex behaviour by the combination of relatively simple rules. In
-# TypeDB Studio, we can explain each level of inference in sequence, following a high-level inferred concept back to the
-# raw data that generated it.
+# This is one of TypeDB's most powerful features: function composition, where the results of one function feed into
+# another. Relatively simple functions can combine to produce extremely complex behaviour. To trace a result back to the
+# raw data, we can query each function in the chain in turn, following a high-level conclusion down to the stored
+# relations that produced it.
 
 #--------------------------------------------------
 # Exercise 04:
@@ -38,7 +32,8 @@ $p isa protein, has id $id;
 # structure, denoted by an encoding gene with a symbol commencing with the letters "LRR", and retrieve the function
 # descriptions of those proteins.
 # Keyword hints: like
-# Type hints: function-description, protein-encoding, gene, gene-symbol
+# Function hints: protein_encodings
+# Type hints: function-description, gene-symbol
 # Regex hints: "LRR.*"
 
 #--------------------------------------------------

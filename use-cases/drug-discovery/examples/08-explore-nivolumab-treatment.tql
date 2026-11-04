@@ -1,30 +1,34 @@
 # Example 08:
 
-# Finally, let's explore the nivolumab response. Let's query just that treatment:
+# Finally, let's explore the nivolumab result, starting from the two proteins that interact directly with the drug and
+# the disease:
 
 match
-$di isa disease, has name $di-n;
-$dr isa drug, has name $dr-n;
-$pdt ($di, $dr) isa potential-disease-treatment;
-$di-n = "Neoplasms";
-$dr-n = "NIVOLUMAB";
+let $dr, $p1 in drug_protein_interactions();
+let $di, $p3 in disease_protein_interactions();
+let $p1, $p2 in protein_associations();
+let $p2, $p3 in protein_associations();
+$di has name "Neoplasms";
+$dr has dgidb-name "NIVOLUMAB";
+$p1 has uniprot-id $drug-protein;
+$p2 has uniprot-id $linking-protein;
+$p3 has uniprot-id $disease-protein;
+fetch { "drug-protein": $drug-protein, "linking-protein": $linking-protein, "disease-protein": $disease-protein };
 
-# If we explain the potential-disease-treatment relation, TypeDB shows us that it was inferred from two associations
-# between neoplasms and nivolumab with a particular protein, just like with cyclophosphamode in Example 07. If we
-# explain the two new relations, we see something different to cyclophosphamide. Rather than directly interacting with
-# the same protein, we see that neoplasms and nivolumab both have interactions with seperate proteins, which themselves
-# are associated with a single common protein via protein-protein-assocations, like we saw in Example 05. If we explain
-# those associations, we see that the three proteins are associated with each other via participation in two metabolic
-# pathways. This explains how the treatment might work: the drug affects a protein, which has an impact on a metabolic
-# pathway, which has an impact on the expression of a second protein, which has an impact on a second metabolic pathway,
-# which has an impact on a third protein, which finally impacts the spread of the cancer.
+# We see something different to cyclophosphamide in Example 07. Rather than directly interacting with the same protein,
+# neoplasms and nivolumab interact with separate proteins: O00763 and O14497. Both of those are associated with a single
+# common protein, O00231, via the protein_associations function we saw in Example 05.
+#
+# The three proteins are associated with each other via participation in shared metabolic pathways. This explains how
+# the treatment might work: the drug affects a protein, which has an impact on a pathway, which has an impact on the
+# expression of a second protein, which has an impact on a second pathway, which has an impact on a third protein, which
+# finally impacts the spread of the cancer.
 #
 # Once again we can dig even deeper into the data, but this is sufficient to understand the treatment. TypeDB has
-# revealed an extremely complex set of interactions between different biomolecules, which might lead to the discovery
-# of a new treatment for neoplasms. We didn't specify any of this, but by utilising the rules we defined to trigger
-# sequential and branching rule-inference, TypeDB can piece together these connections. Not only that, the explanations
-# for cyclophosphamide and nivolumab are completely different, but our query for neoplasm treatments in Example 06 gave
-# us both results by describing what we were looking for at a high-level.
+# revealed an extremely complex set of interactions between different biomolecules, which might lead to the discovery of
+# a new treatment for neoplasms. We didn't specify any of this: composing the functions we defined pieced together the
+# connections. Not only that, the derivations for cyclophosphamide and nivolumab are completely different, but our query
+# for neoplasm treatments in Example 06 gave us both results by describing what we were looking for at a high level.
 
 #--------------------------------------------------
 # Exercise 08:

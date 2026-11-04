@@ -1,16 +1,11 @@
 # Drug discovery
 
-## Compatibility note
-
-**This demo has not yet been updated to be compatible with TypeDB 3.0**
-
 ## Introduction
 
-In this demo, you'll learn how to use harness the power of TypeDB's inference engine to accelerate the drug discovery
-process. We'll begin by seeing how we can utilise polymorphism to simplify queries, then explore the building blocks of
-rule-inference to identify relations involving proteins, including advanced strategies such as sequential inference and
-branching inference. Finally, we'll bring these techniques together to identify potential treatments for neoplasms, a
-form of cancer.
+In this demo, you'll learn how to harness the power of TypeQL functions to accelerate the drug discovery process. We'll
+begin by seeing how we can utilise polymorphism to simplify queries, then use functions to derive relationships
+involving proteins, including advanced strategies such as function composition and disjunctions. Finally, we'll bring
+these techniques together to identify potential treatments for neoplasms, a form of cancer.
 
 Many of the techniques described in this demonstration can be applied to general knowledge discovery use cases, and so
 those working in the field can benefit from it, even if not working with biomedical data. A high-level understanding of
@@ -21,43 +16,49 @@ small subset of the data in the project is included in order to simplify this de
 incomplete to a seasoned microbiologist. To explore and build on the full dataset, you can download the project
 [here](https://github.com/typedb-osi/typedb-bio).
 
-![Screenshot 2023-08-24 at 12 47 13](https://github.com/james-whiteside/typedb-examples/assets/117453030/e7717db8-0a33-45f7-ba6c-f4fe70cf9fe9)
-
 ## Required knowledge
 
 This demo assumes knowledge of:
 
 - High-level concepts in molecular biology.
-- TypeDB's transaction system.
-- All basic TypeQL syntax elements.
-- TypeDB Studio's interface.
+- [TypeDB's transaction system](https://typedb.com/docs/manual/queries/transactions).
+- [All basic TypeQL syntax elements](https://typedb.com/docs/typeql/pipelines/).
+- [TypeDB Studio](https://studio.typedb.com).
 
 For more information, please see our [documentation](https://typedb.com/docs/).
 
-## Getting started
+## Setup
 
-Start your TypeDB server and open TypeDB Studio. Make sure you are on a `schema-write` transaction and run the following
-TypeQL file:
+Ensure you have a running TypeDB 3 server. The examples have been tested with TypeDB 3.14.
 
-```define-schema.tql```
+The easiest way to load this example is using TypeDB Console, which can load the schema and data files in one line:
 
-Then switch to a `data-write` transaction and run the following:
+```
+typedb console --username=<username> --address=<address> --command="database create-init drug-discovery <path to schema.tql> <path to data.tql>"
+```
 
-```insert-data.tql```
+The `database create-init` command can also be run interactively if you're already in Console.
 
-Remember to click on the green tick after running each of these scripts to commit the changes to the database.
+### Manual setup
+
+If you want to load the dataset step-by-step, you can do the following:
+
+1. In TypeDB Console, create a database. We'll use `drug-discovery` in this setup.
+2. Open a `schema` transaction.
+3. Load `schema.tql` using `source <path to schema.tql>`.
+4. Commit the transaction and verify no errors appear.
+5. Open a `write` transaction.
+6. Load `data.tql` using `source <path to data.tql>`.
+7. Commit the transaction.
 
 ## Running the examples
 
-To get started, try running the examples. If anything goes wrong, you can run the `insert-data.tql` script again to
-reset everything. All the examples use `data` sessions and `read` transactions, and make heavy use of inference and
-explanations. In order to switch on inference, toggle the "infer" button to on. In order to switch on explanations,
-toggle the "snapshot", "infer", and "explain" buttons to on. After executing a query with explanations switched on,
-double-click on an inferred concept (one with a green outline) to find out how it was inferred from a rule. After using
-the explanations feature, remember to close the transaction with the "×" button before running the next query. Each
-example includes guidance on which concepts to explain and in what order, in order to follow along with the demo. Each
-example also has an accompanying exercise. You can skip them out and all the examples will still run fine. Some are much
-harder than others! All the solutions are in the `solutions.tql` file.
+To get started, try running the examples under `examples/`. All the examples use `read` transactions, so you can run
+them in any order. Each example shows how to call the functions defined in `schema.tql`, then how to trace a result back
+to the stored data it came from.
+
+Each example has an accompanying exercise. You can skip them and all the examples will still run fine. Some are much
+harder than others! All the solutions are in the `exercise-solutions.tql` file.
 
 ## Next steps
 

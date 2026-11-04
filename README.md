@@ -57,7 +57,7 @@ and rule-inference.
 ### [Drug discovery](/use-cases/drug-discovery)
 
 Learn how to use TypeDB to accelerate the drug discovery process. Explore the relations between biomolecules using
-polymorphism and advanced rule-inference strategies, and leverage them to identify potential cancer treatments.
+polymorphism and function composition, and leverage them to identify potential cancer treatments.
 
 ### [Bookstore](/use-cases/bookstore)
 

@@ -4,12 +4,12 @@
 
 match
 $p isa protein, has id "Q9NPB9", has name $n;
+fetch { "name": $n };
 
-# We should see one protein represented by an entity with nine name attributes, which are the two variables we bound in
-# our query. If we look closely at the attributes, we can see that there are actually three types: primary-uniprot-name,
-# alternative-uniprot-name, and uniprot-entry-name. This is because all three of these types are subtypes of name, and
-# so are valid results for the query. This is an example of TypeDB's polymorphism feature at work, where we've
-# constructed a query that will return results of different types.
+# We should see nine name attributes. If we look closely at the schema, we can see that these attributes actually have
+# three types: primary-uniprot-name, alternative-uniprot-name, and uniprot-entry-name. All three are subtypes of name,
+# so they are valid results for the query. This is an example of TypeDB's polymorphism at work: a single query returns
+# results of different types. The same applies to id, which matches the protein's uniprot-id here.
 
 #--------------------------------------------------
 # Exercise 01:
