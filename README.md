@@ -29,6 +29,7 @@ There are some smaller, though still complex, examples that are fully contained 
 * Bookstore: a simple ecommerce-like model of a bookstore, including sample data
 * Social network: a moderately complex model of a social network, including sample data
 * Fraud detection: a credit-card transaction model that surfaces suspect transactions, including sample data
+* Supply chain: a conceptual model of real palm oil trade flows with a seven-role relation, including sample data
 
 These folders contain their own descriptions, instructions, and sample queries.
 
@@ -73,6 +74,13 @@ This example demonstrates how to model a social network using TypeDB 3.0. The sc
 Learn how to use TypeDB to model credit-card transactions and detect suspect ones. The schema captures cardholders, cards,
 banks, merchants, and geographic location, and uses function composition to flag transactions where the cardholder and
 merchant are not at the same place. Includes a complete schema, sample data, and example queries.
+
+### [Supply chain](/use-cases/supply-chain)
+
+A conceptual model of real palm oil trade flows from East Kalimantan, Indonesia, to the EU in 2022, based on open data
+from Trase. Uses abstract supertypes, a seven-role relation with an optional role, and enforced cardinality, key and
+value constraints. It is the dataset of the [Conceptual modeling](https://typedb.com/docs/learn-typedb/conceptual-modeling/)
+crash course. Includes a complete schema, sample data, and example queries.
 
 ## Released datasets
 

@@ -23,6 +23,7 @@ jobs:
           - fraud-detection
           - identity-and-access-management
           - social-network
+          - supply-chain
 
     steps:
     - name: Checkout repository
