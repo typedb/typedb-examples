@@ -22,8 +22,8 @@ jobs:
           - cyber-threat-intelligence
           - fraud-detection
           - identity-and-access-management
-          - palm-oil-supply-chain
           - social-network
+          - supply-chain
 
     steps:
     - name: Checkout repository

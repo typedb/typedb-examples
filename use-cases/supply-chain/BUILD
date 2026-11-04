@@ -20,13 +20,13 @@ package(default_visibility = ["//visibility:public"])
 load("@rules_pkg//:mappings.bzl", "pkg_files")
 
 pkg_files(
-    name = "palm-oil-supply-chain-dataset",
+    name = "supply-chain-dataset",
     srcs = [
         ":schema.tql",
         ":data.tql",
     ],
     renames = {
-        ":schema.tql" : "palm-oil-supply-chain-schema.tql",
-        ":data.tql" : "palm-oil-supply-chain-data.tql",
+        ":schema.tql" : "supply-chain-schema.tql",
+        ":data.tql" : "supply-chain-data.tql",
     },
 )

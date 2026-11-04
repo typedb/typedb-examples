@@ -29,7 +29,7 @@ There are some smaller, though still complex, examples that are fully contained 
 * Bookstore: a simple ecommerce-like model of a bookstore, including sample data
 * Social network: a moderately complex model of a social network, including sample data
 * Fraud detection: a credit-card transaction model that surfaces suspect transactions, including sample data
-* Palm oil supply chain: a conceptual model of real trade flows with a seven-role relation, including sample data
+* Supply chain: a conceptual model of real palm oil trade flows with a seven-role relation, including sample data
 
 These folders contain their own descriptions, instructions, and sample queries.
 
@@ -75,7 +75,7 @@ Learn how to use TypeDB to model credit-card transactions and detect suspect one
 banks, merchants, and geographic location, and uses function composition to flag transactions where the cardholder and
 merchant are not at the same place. Includes a complete schema, sample data, and example queries.
 
-### [Palm oil supply chain](/use-cases/palm-oil-supply-chain)
+### [Supply chain](/use-cases/supply-chain)
 
 A conceptual model of real palm oil trade flows from East Kalimantan, Indonesia, to the EU in 2022, based on open data
 from Trase. Uses abstract supertypes, a seven-role relation with an optional role, and enforced cardinality, key and

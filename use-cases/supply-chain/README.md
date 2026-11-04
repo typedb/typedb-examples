@@ -1,4 +1,4 @@
-# TypeDB Palm Oil Supply Chain Example
+# TypeDB Supply Chain Example
 
 This example is a conceptual model of a real palm oil supply chain: trade flows from East Kalimantan, Indonesia, to the European Union in 2022. Each trade flow links a district of production, a mill, sometimes a refinery, an exporter, an importer, a destination country and a commodity. It also has a volume, a value and a deforestation exposure.
 

@@ -1,4 +1,4 @@
-# All 81 trade flows of the palm oil supply chain example, as one insert query.
+# All 81 trade flows of the supply chain example, as one insert query.
 # Source: Trase, Indonesia palm oil supply chain (2018-2022) v1.2, CC BY 4.0, https://doi.org/10.48650/X83N-7M36
 insert
 
