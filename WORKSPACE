@@ -15,4 +15,6 @@
 # specific language governing permissions and limitations
 # under the License.
 
-# Intentionally empty - dependencies managed via MODULE.bazel
+# This file intentionally left empty.
+# It serves as a workspace root marker for old versions of Bazel.
+# All dependency management is done via MODULE.bazel (Bzlmod).
