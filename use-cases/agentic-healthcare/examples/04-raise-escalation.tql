@@ -1,0 +1,11 @@
+# Raise an escalation to a human clinician instead of resolving a flagged
+# drug interaction autonomously. Backs the agent's "raise_escalation" tool.
+
+match
+    $p isa patient, has patient-id "P-1001";
+    $c isa clinician, has clinician-id "C-02";
+insert
+    escalation (patient: $p, on-call-clinician: $c),
+        has reason "Drug interaction flagged pre-followup: Lisinopril + Potassium Chloride (high)",
+        has raised-at 2026-06-23T10:00:00,
+        has status "open";
