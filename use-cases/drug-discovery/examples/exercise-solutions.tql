@@ -1,95 +1,107 @@
 # Solutions
 
-# The solutions to each of the exercises can be found here. To run the query in a solution: make sure the correct
-# session and transaction type are selected, highlight the intended query, right click and select "Run Selection".
+# The solutions to each of the exercises can be found here. All of them run in a read transaction.
 
 #--------------------------------------------------
 # Exercise 01 solution:
 
 match
 $g isa gene, has id "ACKR4", has id $id;
+fetch { "id": $id };
 
 #--------------------------------------------------
 # Exercise 02 solution:
 
 match
-$p isa protein, has id $p-id;
-$p-id == "O00763";
-$pe ($p, $g) isa protein-encoding;
-$g isa gene, has id $g-id;
+let $g, $p in protein_encodings();
+$p has id "O00763";
+$g has primary-gene-symbol $symbol;
+fetch { "gene": $symbol };
 
-# Double-clicking on the protein-encoding twice causes transcription and translation relations to appear each time, but
-# doing so a third time causes a message to be displayed, indicating that there are no further explanations. This shows
-# that the database contains two splice variants for the encoding of protein O00763 by gene ACACB.
+match
+$p isa protein, has id "O00763";
+transcription (transcribed-gene: $g, synthesised-transcript: $t);
+translation (translated-transcript: $t, synthesised-protein: $p);
+$t has ensembl-transcript-id $transcript;
+fetch { "transcript": $transcript };
+
+# The second query returns two transcripts. This shows that the database contains two splice variants for the encoding
+# of protein O00763 by gene ACACB.
 
 #--------------------------------------------------
 # Exercise 03 solution:
 
 match
-$g isa gene, has id $id;
-$id == "LAP3";
-$ce ($g, $c) isa cell-expression;
-$c isa cell, has name $c-n;
-$tc ($c, $t) isa tissue-composition;
-$t isa tissue, has name $t-n;
-$t-n == "kidney";
+$g isa gene, has id "LAP3";
+cell-expression (expressed-gene: $g, expressing-cell: $c);
+$c has name $c-n;
+tissue-composition (composing-cell: $c, composed-tissue: $t);
+$t has name "kidney";
+fetch { "cell": $c-n };
 
 #--------------------------------------------------
 # Exercise 04 solution:
 
 match
-$t isa tissue, has name "hippocampus";
-$te ($t, $p) isa tissue-enhancement;
-$p isa protein, has function-description $f;
-$pe ($p, $g) isa protein-encoding;
-$g isa gene, has gene-symbol like "LRR.*";
+let $t, $p in tissue_enhancements();
+let $g, $p in protein_encodings();
+$t has name "hippocampus";
+$p has function-description $f;
+$g has gene-symbol $s;
+$s like "LRR.*";
+reduce $symbols = count groupby $f;
+fetch { "description": $f, "lrr-symbols": $symbols };
 
 #--------------------------------------------------
 # Exercise 05 solution:
 
 match
-$g1 isa gene, has gene-symbol $g1-s;
-$pe1 ($g1, $p1) isa protein-encoding;
-$p1 isa protein, has uniprot-id "O60240";
-$ppa ($p1, $p2) isa protein-protein-association;
-$p2 isa protein, has uniprot-id "Q8WTS1";
-$pe2 ($p2, $g2) isa protein-encoding;
-$g2 isa gene, has gene-symbol $g2-s;
+let $p1, $p2 in protein_associations();
+let $g1, $p1 in protein_encodings();
+let $g2, $p2 in protein_encodings();
+$p1 has uniprot-id "O60240";
+$p2 has uniprot-id "Q8WTS1";
+$g1 has primary-gene-symbol $g1-s;
+$g2 has primary-gene-symbol $g2-s;
+fetch { "gene-1": $g1-s, "gene-2": $g2-s };
 
 #--------------------------------------------------
 # Exercise 06 solution:
 
 match
-$v isa virus, has name "MHV";
-$d isa drug, has name $n;
-$pvt ($v, $d) isa potential-virus-treatment;
+let $d, $v in potential_virus_treatments();
+$v has name "MHV";
+$d has dgidb-name $n;
+fetch { "drug": $n };
 
 #--------------------------------------------------
 # Exercise 07 solution:
 
 match
-$di isa disease, has name "Neoplasms";
-$dipi ($di, $p) isa disease-protein-interaction;
-$p isa protein, has primary-uniprot-name $n;
-$drpi ($p, $dr) isa drug-protein-interaction;
-$dr isa drug, has name "CYCLOPHOSPHAMIDE";
+let $dr, $p in drug_protein_interactions();
+let $di, $p in disease_protein_interactions();
+$di has name "Neoplasms";
+$dr has dgidb-name "CYCLOPHOSPHAMIDE";
+$p has primary-uniprot-name $n;
+fetch { "protein": $n };
 
 #--------------------------------------------------
 # Exercise 08 solution:
 
 match
-$di isa disease, has name "Neoplasms";
-$dipi ($di, $p1) isa disease-protein-interaction;
-$p1 isa protein;
-$pp1 ($p1, $pa1) isa pathway-participation;
-$pa1 isa pathway, has name $pa1-n;
-$pp2 ($pa1, $p2) isa pathway-participation;
-$p2 isa protein;
-$pp3 ($p2, $pa2) isa pathway-participation;
-$pa2 isa pathway, has name $pa2-n;
-$pp4 ($pa2, $p3) isa pathway-participation;
-$p3 isa protein;
-$drpi ($p3, $dr) isa drug-protein-interaction;
-$dr isa drug, has name "NIVOLUMAB";
+let $dr, $p1 in drug_protein_interactions();
+let $di, $p3 in disease_protein_interactions();
+pathway-participation (participating-protein: $p1, participated-pathway: $pa1);
+pathway-participation (participating-protein: $p2, participated-pathway: $pa1);
+pathway-participation (participating-protein: $p2, participated-pathway: $pa2);
+pathway-participation (participating-protein: $p3, participated-pathway: $pa2);
+not { $p1 is $p2; };
+not { $p2 is $p3; };
+$di has name "Neoplasms";
+$dr has dgidb-name "NIVOLUMAB";
+$pa1 has name $pa1-n;
+$pa2 has name $pa2-n;
+reduce $paths = count groupby $pa1-n, $pa2-n;
+fetch { "drug-side-pathway": $pa1-n, "disease-side-pathway": $pa2-n };
 
 #--------------------------------------------------

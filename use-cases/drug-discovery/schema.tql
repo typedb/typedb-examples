@@ -1,0 +1,568 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+define
+
+# entities
+
+entity bio-entity @abstract;
+
+entity cell sub bio-entity,
+    owns cell-name @key;
+
+entity tissue sub bio-entity,
+    owns tissue-name @key;
+
+entity gene sub bio-entity,
+    owns primary-gene-symbol @key,
+    owns alternative-gene-symbol @card(0..),
+    owns entrez-id,
+    owns ensembl-gene-id;
+
+entity transcript sub bio-entity,
+    owns ensembl-transcript-id @key;
+
+entity protein sub bio-entity,
+    owns uniprot-id @key,
+    owns uniprot-entry-name,
+    owns primary-uniprot-name,
+    owns alternative-uniprot-name @card(0..),
+    owns function-description;
+
+entity disease sub bio-entity,
+    owns disease-name,
+    owns umls-id @key;
+
+entity drug sub bio-entity,
+    owns dgidb-name,
+    owns chembl-id @key,
+    owns dgidb-claim-name @card(0..),
+    owns drug-claim-source @card(0..);
+
+entity pathway sub bio-entity,
+    owns pathway-name,
+    owns reactome-id @key;
+
+entity organism sub bio-entity,
+    owns organism-name;
+
+entity virus sub bio-entity,
+    owns genbank-id @key,
+    owns virus-name,
+    owns identity-percentage;
+
+entity country,
+    owns country-name;
+
+entity journal,
+    owns journal-name;
+
+entity publication,
+    owns pubmed-id,
+    owns title,
+    owns doi,
+    owns year,
+    owns volume,
+    owns issn;
+
+entity person,
+    owns author-name;
+
+# relations
+
+# dataset bio-relations
+
+relation bio-relation @abstract;
+
+relation transcription sub bio-relation,
+    relates transcribed-gene,
+    relates synthesised-transcript;
+
+gene plays transcription:transcribed-gene;
+transcript plays transcription:synthesised-transcript;
+
+relation translation sub bio-relation,
+    relates translated-transcript,
+    relates synthesised-protein;
+
+transcript plays translation:translated-transcript;
+protein plays translation:synthesised-protein;
+
+relation disease-gene-interaction sub bio-relation,
+    relates interacting-disease,
+    relates interacting-gene,
+    owns disgenet-score;
+
+disease plays disease-gene-interaction:interacting-disease;
+gene plays disease-gene-interaction:interacting-gene;
+
+relation drug-gene-interaction sub bio-relation,
+    relates interacting-gene,
+    relates interacting-drug,
+    owns interaction-type;
+
+gene plays drug-gene-interaction:interacting-gene;
+drug plays drug-gene-interaction:interacting-drug;
+
+relation pathway-participation sub bio-relation,
+    relates participating-protein,
+    relates participated-pathway;
+
+protein plays pathway-participation:participating-protein;
+pathway plays pathway-participation:participated-pathway;
+
+relation organism-protein-association sub bio-relation,
+    relates associated-organism,
+    relates associated-protein;
+
+protein plays organism-protein-association:associated-protein;
+organism plays organism-protein-association:associated-organism;
+
+relation virus-hosting sub bio-relation,
+    relates hosted-virus,
+    relates host-organism;
+
+organism plays virus-hosting:host-organism;
+virus plays virus-hosting:hosted-virus;
+
+relation virus-protein-interaction sub bio-relation,
+    relates interacting-virus,
+    relates targeted-protein;
+
+virus plays virus-protein-interaction:interacting-virus;
+protein plays virus-protein-interaction:targeted-protein;
+
+relation cell-expression sub bio-relation,
+    relates expressing-cell,
+    relates expressed-gene,
+    owns expression-value,
+    owns expression-value-reliability;
+
+cell plays cell-expression:expressing-cell;
+gene plays cell-expression:expressed-gene;
+
+relation tissue-composition sub bio-relation,
+    relates composed-tissue,
+    relates composing-cell;
+
+cell plays tissue-composition:composing-cell;
+tissue plays tissue-composition:composed-tissue;
+
+relation encoded-protein-interaction sub bio-relation,
+    relates encoding-gene @card(2);
+
+gene plays encoded-protein-interaction:encoding-gene;
+
+relation process-localisation sub bio-relation,
+    relates biomolecular-process,
+    relates tissue-context,
+    relates cell-context;
+
+cell plays process-localisation:cell-context;
+tissue plays process-localisation:tissue-context;
+protein-protein-interaction plays process-localisation:biomolecular-process;
+encoded-protein-interaction plays process-localisation:biomolecular-process;
+
+relation protein-protein-interaction sub bio-relation,
+    relates interacting-protein @card(2);
+
+protein plays protein-protein-interaction:interacting-protein;
+
+# dataset semantic relations
+
+relation gene-relation sub bio-relation,
+    relates passive-gene,
+    relates active-gene;
+
+relation gene-inhibition sub gene-relation,
+    relates inhibited-gene as passive-gene,
+    relates inhibiting-gene as active-gene;
+
+gene plays gene-inhibition:inhibited-gene;
+gene plays gene-inhibition:inhibiting-gene;
+
+relation gene-interaction sub gene-relation,
+    relates interacted-gene as passive-gene,
+    relates interacting-gene as active-gene;
+
+gene plays gene-interaction:interacted-gene;
+gene plays gene-interaction:interacting-gene;
+
+relation gene-coexistance sub gene-relation,
+    relates coexisting-gene as passive-gene @card(2);
+
+gene plays gene-coexistance:coexisting-gene;
+
+relation gene-comparison sub gene-relation,
+    relates compared-gene as passive-gene,
+    relates comparing-gene as active-gene;
+
+gene plays gene-comparison:comparing-gene;
+gene plays gene-comparison:compared-gene;
+
+relation gene-stimulation sub gene-relation,
+    relates stimulated-gene as passive-gene,
+    relates stimulating-gene as active-gene;
+
+gene plays gene-stimulation:stimulating-gene;
+gene plays gene-stimulation:stimulated-gene;
+
+relation gene-conversion sub gene-relation,
+    relates converted-gene as passive-gene,
+    relates converting-gene as active-gene;
+
+gene plays gene-conversion:converting-gene;
+gene plays gene-conversion:converted-gene;
+
+relation gene-production sub gene-relation,
+    relates produced-gene as passive-gene,
+    relates producing-gene as active-gene;
+
+gene plays gene-production:producing-gene;
+gene plays gene-production:produced-gene;
+
+relation gene-similarity sub gene-relation,
+    relates similar-gene as passive-gene @card(2);
+
+gene plays gene-similarity:similar-gene;
+
+relation gene-location sub gene-relation,
+    relates located-gene as passive-gene,
+    relates locating-gene as active-gene;
+
+gene plays gene-location:locating-gene;
+gene plays gene-location:located-gene;
+
+relation gene-constitution sub gene-relation,
+    relates constituted-gene as passive-gene,
+    relates constituting-gene as active-gene;
+
+gene plays gene-constitution:constituting-gene;
+gene plays gene-constitution:constituted-gene;
+
+relation gene-disruption sub gene-relation,
+    relates disrupted-gene as passive-gene,
+    relates disrupting-gene as active-gene;
+
+gene plays gene-disruption:disrupting-gene;
+gene plays gene-disruption:disrupted-gene;
+
+relation gene-augmentation sub gene-relation,
+    relates augmented-gene as passive-gene,
+    relates augmenting-gene as active-gene;
+
+gene plays gene-augmentation:augmenting-gene;
+gene plays gene-augmentation:augmented-gene;
+
+relation gene-affection sub gene-relation,
+    relates affected-gene as passive-gene,
+    relates affecting-gene as active-gene;
+
+gene plays gene-affection:affecting-gene;
+gene plays gene-affection:affected-gene;
+
+relation gene-association sub gene-relation,
+    relates associated-gene as passive-gene,
+    relates associating-gene as active-gene;
+
+gene plays gene-association:associated-gene;
+gene plays gene-association:associating-gene;
+
+relation mention,
+    relates mentioning,
+    relates mentioned,
+    owns source,
+    owns sentence-text;
+
+publication plays mention:mentioning;
+gene-inhibition plays mention:mentioned;
+gene-interaction plays mention:mentioned;
+gene-coexistance plays mention:mentioned;
+gene-comparison plays mention:mentioned;
+gene-stimulation plays mention:mentioned;
+gene-conversion plays mention:mentioned;
+gene-production plays mention:mentioned;
+gene-similarity plays mention:mentioned;
+gene-location plays mention:mentioned;
+gene-constitution plays mention:mentioned;
+gene-disruption plays mention:mentioned;
+gene-augmentation plays mention:mentioned;
+gene-affection plays mention:mentioned;
+gene-association plays mention:mentioned;
+
+relation publishing,
+    relates publishing-journal,
+    relates published-publication;
+
+journal plays publishing:publishing-journal;
+publication plays publishing:published-publication;
+
+relation authorship,
+    relates author,
+    relates authored-publication;
+
+publication plays authorship:authored-publication;
+person plays authorship:author;
+
+relation discovery,
+    relates discovered-virus,
+    relates discovering-location;
+
+virus plays discovery:discovered-virus;
+country plays discovery:discovering-location;
+
+# attributes
+
+# id attributes
+
+attribute id @abstract, value string;
+
+attribute publication-id @abstract, sub id;
+attribute doi sub publication-id;
+attribute issn sub publication-id;
+attribute pubmed-id sub publication-id;
+
+attribute gene-id @abstract, sub id;
+attribute entrez-id sub gene-id;
+attribute ensembl-gene-id sub gene-id;
+attribute gene-symbol @abstract, sub gene-id;
+attribute primary-gene-symbol sub gene-symbol;
+attribute alternative-gene-symbol sub gene-symbol;
+
+attribute protein-id @abstract, sub id;
+attribute uniprot-id sub protein-id;
+
+attribute transcript-id @abstract, sub id;
+attribute ensembl-transcript-id sub transcript-id;
+
+attribute disease-id @abstract, sub id;
+attribute umls-id sub disease-id;
+
+attribute virus-id @abstract, sub id;
+attribute genbank-id sub virus-id;
+
+attribute pathway-id @abstract, sub id;
+attribute reactome-id sub pathway-id;
+
+attribute drug-id @abstract, sub id;
+attribute chembl-id sub drug-id;
+
+# name attributes
+
+attribute name @abstract, value string;
+
+attribute disease-name sub name;
+
+attribute protein-name @abstract, sub name;
+attribute uniprot-name @abstract, sub protein-name;
+attribute primary-uniprot-name sub uniprot-name;
+attribute alternative-uniprot-name sub uniprot-name;
+attribute uniprot-entry-name sub protein-name;
+
+attribute journal-name sub name;
+
+attribute cell-name sub name;
+
+attribute pathway-name sub name;
+
+attribute tissue-name sub name;
+
+attribute drug-name @abstract, sub name;
+attribute dgidb-name sub drug-name;
+attribute dgidb-claim-name sub drug-name;
+attribute organism-name sub name;
+
+attribute virus-name sub name;
+
+attribute publication-name @abstract, sub name;
+attribute title sub publication-name;
+
+attribute country-name sub name;
+
+attribute author-name sub name;
+
+# descriptive attributes
+
+attribute source, value string;
+attribute year, value integer;
+attribute volume, value string;
+attribute expression-value, value string;
+attribute expression-value-reliability, value string;
+attribute drug-claim-source, value string;
+attribute identity-percentage, value double;
+attribute function-description, value string;
+attribute disgenet-score, value double;
+attribute interaction-type, value string;
+attribute sentence-text, value string;
+
+# functions
+
+# Each function derives knowledge from stored data at query time. Functions can call one another, so a high-level
+# question such as potential_disease_treatments() composes every function it depends on.
+
+fun protein_encodings() -> { gene, protein }:
+match
+    transcription (transcribed-gene: $g, synthesised-transcript: $t);
+    translation (translated-transcript: $t, synthesised-protein: $p);
+select $g, $p;
+distinct;
+return { $g, $p };
+
+fun tissue_expressions() -> { tissue, gene }:
+match
+    tissue-composition (composed-tissue: $t, composing-cell: $c);
+    cell-expression (expressing-cell: $c, expressed-gene: $g);
+select $t, $g;
+distinct;
+return { $t, $g };
+
+fun disease_protein_interactions() -> { disease, protein }:
+match
+    let $g, $p in protein_encodings();
+    disease-gene-interaction (interacting-gene: $g, interacting-disease: $d);
+select $d, $p;
+distinct;
+return { $d, $p };
+
+fun drug_protein_interactions() -> { drug, protein }:
+match
+    let $g, $p in protein_encodings();
+    drug-gene-interaction (interacting-drug: $d, interacting-gene: $g);
+select $d, $p;
+distinct;
+return { $d, $p };
+
+fun cell_enhancements() -> { cell, protein }:
+match
+    let $g, $p in protein_encodings();
+    cell-expression (expressed-gene: $g, expressing-cell: $c);
+select $c, $p;
+distinct;
+return { $c, $p };
+
+fun tissue_enhancements() -> { tissue, protein }:
+match
+    let $g, $p in protein_encodings();
+    let $t, $g in tissue_expressions();
+select $t, $p;
+distinct;
+return { $t, $p };
+
+fun protein_interactions() -> { protein, protein }:
+match
+    {
+        protein-protein-interaction (interacting-protein: $p1, interacting-protein: $p2);
+    } or {
+        let $g1, $p1 in protein_encodings();
+        let $g2, $p2 in protein_encodings();
+        encoded-protein-interaction (encoding-gene: $g1, encoding-gene: $g2);
+    };
+select $p1, $p2;
+distinct;
+return { $p1, $p2 };
+
+fun protein_associations() -> { protein, protein }:
+match
+    {
+        let $p1, $p2 in protein_interactions();
+    } or {
+        pathway-participation (participating-protein: $p1, participated-pathway: $path);
+        pathway-participation (participating-protein: $p2, participated-pathway: $path);
+    };
+    not { $p1 is $p2; };
+select $p1, $p2;
+distinct;
+return { $p1, $p2 };
+
+fun drug_protein_associations() -> { drug, protein }:
+match
+    {
+        let $d, $p in drug_protein_interactions();
+    } or {
+        let $d, $p2 in drug_protein_interactions();
+        let $p2, $p in protein_associations();
+    };
+select $d, $p;
+distinct;
+return { $d, $p };
+
+fun disease_protein_associations() -> { disease, protein }:
+match
+    {
+        let $d, $p in disease_protein_interactions();
+    } or {
+        let $d, $p2 in disease_protein_interactions();
+        let $p2, $p in protein_associations();
+    };
+select $d, $p;
+distinct;
+return { $d, $p };
+
+fun virus_protein_associations() -> { virus, protein }:
+match
+    {
+        virus-protein-interaction (interacting-virus: $v, targeted-protein: $p);
+    } or {
+        virus-protein-interaction (interacting-virus: $v, targeted-protein: $p2);
+        let $p2, $p in protein_associations();
+    };
+select $v, $p;
+distinct;
+return { $v, $p };
+
+fun potential_disease_treatments() -> { drug, disease }:
+match
+    let $dr, $p in drug_protein_associations();
+    let $di, $p in disease_protein_associations();
+select $dr, $di;
+distinct;
+return { $dr, $di };
+
+fun potential_virus_treatments() -> { drug, virus }:
+match
+    let $d, $p in drug_protein_associations();
+    let $v, $p in virus_protein_associations();
+select $d, $v;
+distinct;
+return { $d, $v };
+
+fun gene_interaction_contexts() -> { encoded-protein-interaction, bio-entity }:
+match
+    $i isa encoded-protein-interaction;
+    {
+        process-localisation (biomolecular-process: $i, cell-context: $context);
+    } or {
+        process-localisation (biomolecular-process: $i, tissue-context: $context);
+    } or {
+        process-localisation (biomolecular-process: $i, cell-context: $c);
+        tissue-composition (composed-tissue: $context, composing-cell: $c);
+    };
+select $i, $context;
+distinct;
+return { $i, $context };
+
+fun protein_interaction_contexts() -> { protein, protein, bio-entity }:
+match
+    let $g1, $p1 in protein_encodings();
+    let $g2, $p2 in protein_encodings();
+    $i isa encoded-protein-interaction (encoding-gene: $g1, encoding-gene: $g2);
+    let $i, $context in gene_interaction_contexts();
+select $p1, $p2, $context;
+distinct;
+return { $p1, $p2, $context };

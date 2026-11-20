@@ -1,0 +1,451 @@
+#
+# Licensed to the Apache Software Foundation (ASF) under one
+# or more contributor license agreements.  See the NOTICE file
+# distributed with this work for additional information
+# regarding copyright ownership.  The ASF licenses this file
+# to you under the Apache License, Version 2.0 (the
+# "License"); you may not use this file except in compliance
+# with the License.  You may obtain a copy of the License at
+#
+#   http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing,
+# software distributed under the License is distributed on an
+# "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+# KIND, either express or implied.  See the License for the
+# specific language governing permissions and limitations
+# under the License.
+#
+
+# A small subset of the TypeDB Bio knowledge graph: https://github.com/typedb-osi/typedb-bio
+
+insert
+  $g_1 isa gene,
+    has primary-gene-symbol "ACKR4",
+    has alternative-gene-symbol "CCBP2",
+    has alternative-gene-symbol "CCR11",
+    has alternative-gene-symbol "CCRL1",
+    has alternative-gene-symbol "VSHK1",
+    has entrez-id "51554";
+  $t_1 isa transcript,
+    has ensembl-transcript-id "ENST00000249887";
+  $p_1 isa protein,
+    has alternative-uniprot-name "CCRL1",
+    has alternative-uniprot-name "CCR-11",
+    has alternative-uniprot-name "CCX CKR",
+    has alternative-uniprot-name "CC-CKR-11",
+    has alternative-uniprot-name "C-C CKR-11",
+    has alternative-uniprot-name "CC chemokine receptor-like 1",
+    has alternative-uniprot-name "C-C chemokine receptor type 11",
+    has uniprot-entry-name "ACKR4_HUMAN",
+    has function-description "FUNCTION: Atypical chemokine receptor that controls chemokine levels and localization via high-affinity chemokine binding that is uncoupled from classic ligand-driven signal transduction cascades, resulting instead in chemokine sequestration, degradation, or transcytosis. Also known as interceptor (internalizing receptor) or chemokine-scavenging receptor or chemokine decoy receptor. Acts as a receptor for chemokines CCL2, CCL8, CCL13, CCL19, CCL21 and CCL25. Chemokine-binding does not activate G-protein-mediated signal transduction but instead induces beta-arrestin recruitment, leading to ligand internalization. Plays an important role in controlling the migration of immune and cancer cells that express chemokine receptors CCR7 and CCR9, by reducing the availability of CCL19, CCL21, and CCL25 through internalization. Negatively regulates CXCR3-induced chemotaxis. Regulates T-cell development in the thymus. {ECO:0000269|PubMed:10706668, ECO:0000269|PubMed:23121557, ECO:0000269|PubMed:23341447}.",
+    has primary-uniprot-name "Atypical chemokine receptor 4",
+    has uniprot-id "Q9NPB9";
+  translation (translated-transcript: $t_1, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_1);
+end;
+
+insert
+  $g_1 isa gene,
+    has primary-gene-symbol "LAP3",
+    has alternative-gene-symbol "PEPS",
+    has alternative-gene-symbol "LAPEP",
+    has ensembl-gene-id "ENSG00000002549",
+    has entrez-id "51056";
+  $c1_1 isa cell,
+    has cell-name "glandular cells";
+  $c2_1 isa cell,
+    has cell-name "lymphoid tissue";
+  $c3_1 isa cell,
+    has cell-name "bowman's capsule";
+  $c4_1 isa cell,
+    has cell-name "distal tubules";
+  $t1_1 isa tissue,
+    has tissue-name "gallbladder";
+  $t3_1 isa tissue,
+    has tissue-name "kidney";
+  $t2_1 isa tissue,
+    has tissue-name "appendix";
+  cell-expression (expressing-cell: $c2_1, expressed-gene: $g_1);
+  cell-expression (expressing-cell: $c3_1, expressed-gene: $g_1);
+  cell-expression (expressing-cell: $c1_1, expressed-gene: $g_1);
+  tissue-composition (composed-tissue: $t3_1, composing-cell: $c4_1);
+  tissue-composition (composed-tissue: $t3_1, composing-cell: $c3_1);
+  tissue-composition (composed-tissue: $t2_1, composing-cell: $c2_1);
+  tissue-composition (composed-tissue: $t1_1, composing-cell: $c1_1);
+  cell-expression (expressing-cell: $c4_1, expressed-gene: $g_1);
+end;
+
+insert
+  $g_1 isa gene,
+    has primary-gene-symbol "M6PR",
+    has alternative-gene-symbol "MPRD",
+    has alternative-gene-symbol "MPR46",
+    has ensembl-gene-id "ENSG00000003056",
+    has entrez-id "4074";
+  $tr_1 isa transcript,
+    has ensembl-transcript-id "ENST00000000412";
+  $p_1 isa protein,
+    has alternative-uniprot-name "CD-MPR",
+    has alternative-uniprot-name "MPR 46",
+    has alternative-uniprot-name "CD Man-6-P receptor",
+    has alternative-uniprot-name "46 kDa mannose 6-phosphate receptor",
+    has uniprot-entry-name "MPRD_HUMAN",
+    has function-description "FUNCTION: Transport of phosphorylated lysosomal enzymes from the Golgi complex and the cell surface to lysosomes. Lysosomal enzymes bearing phosphomannosyl residues bind specifically to mannose-6-phosphate receptors in the Golgi apparatus and the resulting receptor-ligand complex is transported to an acidic prelyosomal compartment where the low pH mediates the dissociation of the complex.",
+    has primary-uniprot-name "Cation-dependent mannose-6-phosphate receptor",
+    has uniprot-id "P20645";
+  $c_1 isa cell,
+    has cell-name "cardiomyocytes";
+  $ti_1 isa tissue,
+    has tissue-name "heart muscle";
+  translation (translated-transcript: $tr_1, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $tr_1);
+  cell-expression (expressing-cell: $c_1, expressed-gene: $g_1);
+  tissue-composition (composed-tissue: $ti_1, composing-cell: $c_1);
+end;
+
+insert
+  $g_1 isa gene,
+    has ensembl-gene-id "ENSG00000079691",
+    has entrez-id "55604",
+    has primary-gene-symbol "CARMIL1",
+    has alternative-gene-symbol "CARMIL",
+    has alternative-gene-symbol "LRRC16",
+    has alternative-gene-symbol "LRRC16A";
+  $g_2 isa gene,
+    has ensembl-gene-id "ENSG00000104866",
+    has entrez-id "284352",
+    has primary-gene-symbol "PPP1R37",
+    has alternative-gene-symbol "LRRC68",
+    has alternative-gene-symbol "KIAA1986";
+  $g_3 isa gene,
+    has ensembl-gene-id "ENSG00000108829",
+    has entrez-id "55379",
+    has primary-gene-symbol "LRRC59",
+    has alternative-gene-symbol "PRO1855";
+  $tr_1 isa transcript,
+    has ensembl-transcript-id "ENST00000329474";
+  $tr_2 isa transcript,
+    has ensembl-transcript-id "ENST00000221462";
+  $tr_3 isa transcript,
+    has ensembl-transcript-id "ENST00000225972";
+  $p_1 isa protein,
+    has uniprot-id "Q5VZK9",
+    has uniprot-entry-name "CARL1_HUMAN",
+    has function-description "FUNCTION: Cell membrane-cytoskeleton-associated protein that plays a role in the regulation of actin polymerization at the barbed end of actin filaments. Prevents F-actin heterodimeric capping protein (CP) activity at the leading edges of migrating cells, and hence generates uncapped barbed ends and enhances actin polymerization, however, seems unable to nucleate filaments (PubMed:16054028). Plays a role in lamellipodial protrusion formations and cell migration (PubMed:19846667). {ECO:0000269|PubMed:16054028, ECO:0000269|PubMed:19846667}.",
+    has primary-uniprot-name "F-actin-uncapping protein LRRC16A",
+    has alternative-uniprot-name "CARMIL homolog",
+    has alternative-uniprot-name "Leucine-rich repeat-containing protein 16A",
+    has alternative-uniprot-name "Capping protein, Arp2/3 and myosin-I linker homolog 1",
+    has alternative-uniprot-name "Capping protein, Arp2/3 and myosin-I linker protein 1",
+    has alternative-uniprot-name "Capping protein regulator and myosin 1 linker protein 1";
+  $p_2 isa protein,
+    has uniprot-id "O75864",
+    has uniprot-entry-name "PPR37_HUMAN",
+    has function-description "FUNCTION: Inhibits phosphatase activity of protein phosphatase 1 (PP1) complexes. {ECO:0000269|PubMed:19389623}.",
+    has primary-uniprot-name "Protein phosphatase 1 regulatory subunit 37",
+    has alternative-uniprot-name "Leucine-rich repeat-containing protein 68";
+  $p_3 isa protein,
+    has uniprot-id "Q96AG4",
+    has uniprot-entry-name "LRC59_HUMAN",
+    has function-description "FUNCTION: Required for nuclear import of FGF1, but not that of FGF2. Might regulate nuclear import of exogenous FGF1 by facilitating interaction with the nuclear import machinery and by transporting cytosolic FGF1 to, and possibly through, the nuclear pores. {ECO:0000269|PubMed:22321063}.",
+    has primary-uniprot-name "Leucine-rich repeat-containing protein 59",
+    has alternative-uniprot-name "p34",
+    has alternative-uniprot-name "Ribosome-binding protein p34";
+  $c_1 isa cell,
+    has cell-name "neuronal cells";
+  $c_2 isa cell,
+    has cell-name "glial cells";
+  $ti_1 isa tissue,
+    has tissue-name "hippocampus";
+  translation (synthesised-protein: $p_1, translated-transcript: $tr_1);
+  cell-expression (expressed-gene: $g_1, expressing-cell: $c_1);
+  tissue-composition (composed-tissue: $ti_1, composing-cell: $c_1);
+  transcription (synthesised-transcript: $tr_1, transcribed-gene: $g_1);
+  translation (synthesised-protein: $p_2, translated-transcript: $tr_2);
+  cell-expression (expressed-gene: $g_2, expressing-cell: $c_1);
+  transcription (synthesised-transcript: $tr_2, transcribed-gene: $g_2);
+  translation (synthesised-protein: $p_3, translated-transcript: $tr_3);
+  cell-expression (expressed-gene: $g_3, expressing-cell: $c_1);
+  transcription (synthesised-transcript: $tr_3, transcribed-gene: $g_3);
+  cell-expression (expressed-gene: $g_1, expressing-cell: $c_2);
+  tissue-composition (composed-tissue: $ti_1, composing-cell: $c_2);
+  cell-expression (expressed-gene: $g_3, expressing-cell: $c_2);
+end;
+
+insert
+  $g2_1 isa gene,
+    has ensembl-gene-id "ENSG00000011198",
+    has entrez-id "51099",
+    has primary-gene-symbol "ABHD5",
+    has alternative-gene-symbol "NCIE2",
+    has alternative-gene-symbol "CGI-58";
+  $g1_1 isa gene,
+    has ensembl-gene-id "ENSG00000166819",
+    has entrez-id "5346",
+    has primary-gene-symbol "PLIN1",
+    has alternative-gene-symbol "PERI",
+    has alternative-gene-symbol "PLIN";
+  $t1_1 isa transcript,
+    has ensembl-transcript-id "ENST00000430628";
+  $t2_1 isa transcript,
+    has ensembl-transcript-id "ENST00000649763";
+  $t1_2 isa transcript,
+    has ensembl-transcript-id "ENST00000300055";
+  $t2_2 isa transcript,
+    has ensembl-transcript-id "ENST00000644371";
+  $p1_1 isa protein,
+    has uniprot-id "O60240",
+    has uniprot-entry-name "PLIN1_HUMAN",
+    has function-description "FUNCTION: Modulator of adipocyte lipid metabolism. Coats lipid storage droplets to protect them from breakdown by hormone-sensitive lipase (HSL). Its absence may result in leanness. Plays a role in unilocular lipid droplet formation by activating CIDEC. Their interaction promotes lipid droplet enlargement and directional net neutral lipid transfer. May modulate lipolysis and triglyceride levels. {ECO:0000269|PubMed:23399566}.",
+    has primary-uniprot-name "Perilipin-1",
+    has alternative-uniprot-name "Lipid droplet-associated protein";
+  $p2_1 isa protein,
+    has uniprot-id "Q8WTS1",
+    has uniprot-entry-name "ABHD5_HUMAN",
+    has function-description "FUNCTION: Coenzyme A-dependent lysophosphatidic acid acyltransferase that catalyzes the transfert of an acyl group on a lysophosphatidic acid (PubMed:18606822). Functions preferentially with 1-oleoyl-lysophosphatidic acid followed by 1-palmitoyl-lysophosphatidic acid, 1-stearoyl-lysophosphatidic acid and 1-arachidonoyl-lysophosphatidic acid as lipid acceptor. Functions preferentially with arachidonoyl-CoA followed by oleoyl-CoA as acyl group donors (By similarity). Functions in phosphatidic acid biosynthesis (PubMed:18606822). May regulate the cellular storage of triacylglycerol through activation of the phospholipase PNPLA2 (PubMed:16679289). Involved in keratinocyte differentiation (PubMed:18832586). Regulates lipid droplet fusion (By similarity). {ECO:0000250|UniProtKB:Q9DBL9, ECO:0000269|PubMed:16679289, ECO:0000269|PubMed:18606822, ECO:0000269|PubMed:18832586}.",
+    has primary-uniprot-name "1-acylglycerol-3-phosphate O-acyltransferase ABHD5",
+    has alternative-uniprot-name "EC 2.3.1.51",
+    has alternative-uniprot-name "Lipid droplet-binding protein CGI-58",
+    has alternative-uniprot-name "Abhydrolase domain-containing protein 5";
+  translation (translated-transcript: $t2_1, synthesised-protein: $p2_1);
+  translation (translated-transcript: $t1_1, synthesised-protein: $p1_1);
+  protein-protein-interaction (interacting-protein: $p2_1, interacting-protein: $p1_1);
+  transcription (transcribed-gene: $g2_1, synthesised-transcript: $t2_1);
+  transcription (transcribed-gene: $g1_1, synthesised-transcript: $t1_1);
+  translation (translated-transcript: $t1_2, synthesised-protein: $p1_1);
+  transcription (transcribed-gene: $g1_1, synthesised-transcript: $t1_2);
+  translation (translated-transcript: $t2_2, synthesised-protein: $p2_1);
+  transcription (transcribed-gene: $g2_1, synthesised-transcript: $t2_2);
+end;
+
+insert
+  $p1_1 isa protein,
+    has alternative-uniprot-name "Ig lambda-7 chain C region",
+    has uniprot-entry-name "IGLC7_HUMAN",
+    has function-description "FUNCTION: Constant region of immunoglobulin light chains. Immunoglobulins, also known as antibodies, are membrane-bound or secreted glycoproteins produced by B lymphocytes. In the recognition phase of humoral immunity, the membrane-bound immunoglobulins serve as receptors which, upon binding of a specific antigen, trigger the clonal expansion and differentiation of B lymphocytes into immunoglobulins-secreting plasma cells. Secreted immunoglobulins mediate the effector phase of humoral immunity, which results in the elimination of bound antigens (PubMed:22158414, PubMed:20176268). The antigen binding site is formed by the variable domain of one heavy chain, together with that of its associated light chain. Thus, each immunoglobulin has two antigen binding sites with remarkable affinity for a particular antigen. The variable domains are assembled by a process called V-(D)-J rearrangement and can then be subjected to somatic hypermutations which, after exposure to antigen and selection, allow affinity maturation for a particular antigen (PubMed:17576170, PubMed:20176268). {ECO:0000303|PubMed:17576170, ECO:0000303|PubMed:20176268, ECO:0000303|PubMed:22158414}.",
+    has primary-uniprot-name "Immunoglobulin lambda constant 7",
+    has uniprot-id "A0M8Q6";
+  $p2_1 isa protein,
+    has alternative-uniprot-name "SSc5D",
+    has alternative-uniprot-name "Soluble scavenger protein with 5 SRCR domains",
+    has uniprot-entry-name "SRCRL_HUMAN",
+    has function-description "FUNCTION: Binds to extracellular matrix proteins. Binds to pathogen-associated molecular patterns (PAMPs) present on the cell walls of Gram-positive and Gram-negative bacteria and fungi, behaving as a pattern recognition receptor (PRR). Induces bacterial and fungal aggregation and subsequent inhibition of PAMP-induced cytokine release. Does not possess intrinsic bactericidal activity. May play a role in the innate defense and homeostasis of certain epithelial surfaces (By similarity). {ECO:0000250}.",
+    has primary-uniprot-name "Soluble scavenger receptor cysteine-rich domain-containing protein SSC5D",
+    has uniprot-id "A1L4H1";
+  $pa_1 isa pathway,
+    has reactome-id "R-HSA-5653656",
+    has pathway-name "Vesicle-mediated transport";
+  $pa_2 isa pathway,
+    has reactome-id "R-HSA-2173782",
+    has pathway-name "Binding and Uptake of Ligands by Scavenger Receptors";
+  pathway-participation (participated-pathway: $pa_1, participating-protein: $p1_1);
+  pathway-participation (participated-pathway: $pa_1, participating-protein: $p2_1);
+  pathway-participation (participated-pathway: $pa_2, participating-protein: $p1_1);
+  pathway-participation (participated-pathway: $pa_2, participating-protein: $p2_1);
+end;
+
+insert
+  $g_1 isa gene,
+    has primary-gene-symbol "NAT2",
+    has alternative-gene-symbol "AAC2",
+    has entrez-id "10";
+  $t_1 isa transcript,
+    has ensembl-transcript-id "ENST00000286479";
+  $p_1 isa protein,
+    has alternative-uniprot-name "PNAT",
+    has alternative-uniprot-name "NAT-2",
+    has alternative-uniprot-name "EC 2.3.1.5",
+    has alternative-uniprot-name "Arylamide acetylase 2",
+    has alternative-uniprot-name "N-acetyltransferase type 2",
+    has alternative-uniprot-name "Polymorphic arylamine N-acetyltransferase",
+    has uniprot-entry-name "ARY2_HUMAN",
+    has function-description "FUNCTION: Participates in the detoxification of a plethora of hydrazine and arylamine drugs. Catalyzes the N- or O-acetylation of various arylamine and heterocyclic amine substrates and is able to bioactivate several known carcinogens.",
+    has primary-uniprot-name "Arylamine N-acetyltransferase 2",
+    has uniprot-id "P11245";
+  $dr_1 isa drug,
+    has dgidb-name "CYCLOPHOSPHAMIDE",
+    has dgidb-claim-name "chembl:CHEMBL88",
+    has drug-claim-source "ChemblDrugs",
+    has chembl-id "chembl:CHEMBL88";
+  $di_1 isa disease,
+    has umls-id "C0027651",
+    has disease-name "Neoplasms";
+  translation (translated-transcript: $t_1, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_1);
+  drug-gene-interaction (interacting-gene: $g_1, interacting-drug: $dr_1);
+  disease-gene-interaction (interacting-disease: $di_1, interacting-gene: $g_1);
+end;
+
+match
+  $di_1 isa disease, has umls-id "C0027651";
+insert
+  $g1_1 isa gene,
+    has primary-gene-symbol "ACACB",
+    has alternative-gene-symbol "ACC2",
+    has alternative-gene-symbol "ACCB",
+    has entrez-id "32";
+  $g2_1 isa gene,
+    has primary-gene-symbol "ARID1A",
+    has alternative-gene-symbol "OSA1",
+    has alternative-gene-symbol "BAF250",
+    has alternative-gene-symbol "C1orf4",
+    has alternative-gene-symbol "BAF250A",
+    has alternative-gene-symbol "SMARCF1",
+    has entrez-id "8289";
+  $t1_1 isa transcript,
+    has ensembl-transcript-id "ENST00000377848";
+  $t1_2 isa transcript,
+    has ensembl-transcript-id "ENST00000338432";
+  $t2_1 isa transcript,
+    has ensembl-transcript-id "ENST00000457599";
+  $t2_2 isa transcript,
+    has ensembl-transcript-id "ENST00000324856";
+  $t2_3 isa transcript,
+    has ensembl-transcript-id "ENST00000374152";
+  $p1_1 isa protein,
+    has alternative-uniprot-name "ACC-beta",
+    has alternative-uniprot-name "EC 6.4.1.2",
+    has uniprot-entry-name "ACACB_HUMAN",
+    has function-description "FUNCTION: Mitochondrial enzyme that catalyzes the carboxylation of acetyl-CoA to malonyl-CoA and plays a central role in fatty acid metabolism (PubMed:16854592, PubMed:19236960, PubMed:20457939, PubMed:20952656, PubMed:19900410, PubMed:26976583). Catalyzes a 2 steps reaction starting with the ATP-dependent carboxylation of the biotin carried by the biotin carboxyl carrier (BCC) domain followed by the transfer of the carboxyl group from carboxylated biotin to acetyl-CoA (PubMed:19236960, PubMed:20457939, PubMed:20952656, PubMed:26976583). Through the production of malonyl-CoA that allosterically inhibits carnitine palmitoyltransferase 1 at the mitochondria, negatively regulates fatty acid oxidation (By similarity). Together with its cytosolic isozyme ACACA, which is involved in de novo fatty acid biosynthesis, promotes lipid storage (By similarity). {ECO:0000250|UniProtKB:E9Q4Z2, ECO:0000269|PubMed:16854592, ECO:0000269|PubMed:19236960, ECO:0000269|PubMed:19900410, ECO:0000269|PubMed:20457939, ECO:0000269|PubMed:20952656, ECO:0000269|PubMed:26976583}.",
+    has primary-uniprot-name "Acetyl-CoA carboxylase 2",
+    has uniprot-id "O00763";
+  $p2_1 isa protein,
+    has alternative-uniprot-name "26S proteasome regulatory subunit S9",
+    has alternative-uniprot-name "26S proteasome regulatory subunit RPN6",
+    has alternative-uniprot-name "26S proteasome regulatory subunit p44.5",
+    has uniprot-entry-name "PSD11_HUMAN",
+    has function-description "FUNCTION: Component of the 26S proteasome, a multiprotein complex involved in the ATP-dependent degradation of ubiquitinated proteins. This complex plays a key role in the maintenance of protein homeostasis by removing misfolded or damaged proteins, which could impair cellular functions, and by removing proteins whose functions are no longer required. Therefore, the proteasome participates in numerous cellular processes, including cell cycle progression, apoptosis, or DNA damage repair. In the complex, PSMD11 is required for proteasome assembly. Plays a key role in increased proteasome activity in embryonic stem cells (ESCs): its high expression in ESCs promotes enhanced assembly of the 26S proteasome, followed by higher proteasome activity. {ECO:0000269|PubMed:1317798, ECO:0000269|PubMed:22972301}.",
+    has primary-uniprot-name "26S proteasome non-ATPase regulatory subunit 11",
+    has uniprot-id "O00231";
+  $p3_1 isa protein,
+    has alternative-uniprot-name "B120",
+    has alternative-uniprot-name "hELD",
+    has alternative-uniprot-name "hOSA1",
+    has alternative-uniprot-name "BAF250",
+    has alternative-uniprot-name "BAF250A",
+    has alternative-uniprot-name "Osa homolog 1",
+    has alternative-uniprot-name "SWI-like protein",
+    has alternative-uniprot-name "BRG1-associated factor 250",
+    has alternative-uniprot-name "BRG1-associated factor 250a",
+    has alternative-uniprot-name "SWI/SNF complex protein p270",
+    has alternative-uniprot-name "ARID domain-containing protein 1A",
+    has alternative-uniprot-name "SWI/SNF-related, matrix-associated, actin-dependent regulator of chromatin subfamily F member 1",
+    has uniprot-entry-name "ARI1A_HUMAN",
+    has function-description "FUNCTION: Involved in transcriptional activation and repression of select genes by chromatin remodeling (alteration of DNA-nucleosome topology). Component of SWI/SNF chromatin remodeling complexes that carry out key enzymatic activities, changing chromatin structure by altering DNA-histone contacts within a nucleosome in an ATP-dependent manner. Binds DNA non-specifically. Belongs to the neural progenitors-specific chromatin remodeling complex (npBAF complex) and the neuron-specific chromatin remodeling complex (nBAF complex). During neural development a switch from a stem/progenitor to a postmitotic chromatin remodeling mechanism occurs as neurons exit the cell cycle and become committed to their adult state. The transition from proliferating neural stem/progenitor cells to postmitotic neurons requires a switch in subunit composition of the npBAF and nBAF complexes. As neural progenitors exit mitosis and differentiate into neurons, npBAF complexes which contain ACTL6A/BAF53A and PHF10/BAF45A, are exchanged for homologous alternative ACTL6B/BAF53B and DPF1/BAF45B or DPF3/BAF45C subunits in neuron-specific complexes (nBAF). The npBAF complex is essential for the self-renewal/proliferative capacity of the multipotent neural stem cells. The nBAF complex along with CREST plays a role regulating the activity of genes essential for dendrite growth (By similarity). {ECO:0000250|UniProtKB:A2BH40, ECO:0000303|PubMed:12672490, ECO:0000303|PubMed:22952240, ECO:0000303|PubMed:26601204}.",
+    has primary-uniprot-name "AT-rich interactive domain-containing protein 1A",
+    has uniprot-id "O14497";
+  $pa1_1 isa pathway,
+    has reactome-id "R-HSA-1430728",
+    has pathway-name "Metabolism";
+  $pa2_1 isa pathway,
+    has reactome-id "R-HSA-74160",
+    has pathway-name "Gene expression (Transcription)";
+  $pa2_2 isa pathway,
+    has reactome-id "R-HSA-212436",
+    has pathway-name "Generic Transcription Pathway";
+  $pa2_3 isa pathway,
+    has reactome-id "R-HSA-73857",
+    has pathway-name "RNA Polymerase II Transcription";
+  $pa2_4 isa pathway,
+    has reactome-id "R-HSA-8878171",
+    has pathway-name "Transcriptional regulation by RUNX1";
+  $dr_1 isa drug,
+    has dgidb-name "NIVOLUMAB",
+    has dgidb-claim-name "Nivolumab",
+    has drug-claim-source "JAX-CKB",
+    has chembl-id "chembl:CHEMBL2108738";
+  pathway-participation (participated-pathway: $pa1_1, participating-protein: $p1_1);
+  pathway-participation (participated-pathway: $pa1_1, participating-protein: $p2_1);
+  translation (translated-transcript: $t1_1, synthesised-protein: $p1_1);
+  transcription (transcribed-gene: $g1_1, synthesised-transcript: $t1_1);
+  disease-gene-interaction (interacting-disease: $di_1, interacting-gene: $g1_1);
+  translation (translated-transcript: $t1_2, synthesised-protein: $p1_1);
+  transcription (transcribed-gene: $g1_1, synthesised-transcript: $t1_2);
+  pathway-participation (participated-pathway: $pa2_1, participating-protein: $p2_1);
+  pathway-participation (participated-pathway: $pa2_1, participating-protein: $p3_1);
+  translation (translated-transcript: $t2_1, synthesised-protein: $p3_1);
+  transcription (transcribed-gene: $g2_1, synthesised-transcript: $t2_1);
+  drug-gene-interaction (interacting-gene: $g2_1, interacting-drug: $dr_1);
+  pathway-participation (participated-pathway: $pa2_2, participating-protein: $p2_1);
+  pathway-participation (participated-pathway: $pa2_2, participating-protein: $p3_1);
+  pathway-participation (participated-pathway: $pa2_3, participating-protein: $p2_1);
+  pathway-participation (participated-pathway: $pa2_3, participating-protein: $p3_1);
+  pathway-participation (participated-pathway: $pa2_4, participating-protein: $p2_1);
+  pathway-participation (participated-pathway: $pa2_4, participating-protein: $p3_1);
+  translation (translated-transcript: $t2_2, synthesised-protein: $p3_1);
+  transcription (transcribed-gene: $g2_1, synthesised-transcript: $t2_2);
+  translation (translated-transcript: $t2_3, synthesised-protein: $p3_1);
+  transcription (transcribed-gene: $g2_1, synthesised-transcript: $t2_3);
+end;
+
+insert
+  $g_1 isa gene,
+    has primary-gene-symbol "RRM2",
+    has alternative-gene-symbol "RR2",
+    has entrez-id "6241";
+  $g_2 isa gene,
+    has primary-gene-symbol "PSMC2",
+    has alternative-gene-symbol "MSS1",
+    has entrez-id "5701";
+  $t_1 isa transcript,
+    has ensembl-transcript-id "ENST00000360566";
+  $t_2 isa transcript,
+    has ensembl-transcript-id "ENST00000641198";
+  $t_3 isa transcript,
+    has ensembl-transcript-id "ENST00000304567";
+  $t_4 isa transcript,
+    has ensembl-transcript-id "ENST00000615152";
+  $t_5 isa transcript,
+    has ensembl-transcript-id "ENST00000292644";
+  $t_6 isa transcript,
+    has ensembl-transcript-id "ENST00000435765";
+  $p_1 isa protein,
+    has alternative-uniprot-name "EC 1.17.4.1",
+    has alternative-uniprot-name "Ribonucleotide reductase small chain",
+    has alternative-uniprot-name "Ribonucleotide reductase small subunit",
+    has uniprot-entry-name "RIR2_HUMAN",
+    has function-description "FUNCTION: Provides the precursors necessary for DNA synthesis. Catalyzes the biosynthesis of deoxyribonucleotides from the corresponding ribonucleotides. Inhibits Wnt signaling.",
+    has primary-uniprot-name "Ribonucleoside-diphosphate reductase subunit M2",
+    has uniprot-id "P31350";
+  $p_2 isa protein,
+    has alternative-uniprot-name "Protein MSS1",
+    has alternative-uniprot-name "Proteasome 26S subunit ATPase 2",
+    has alternative-uniprot-name "26S proteasome AAA-ATPase subunit RPT1",
+    has uniprot-entry-name "PRS7_HUMAN",
+    has function-description "FUNCTION: Component of the 26S proteasome, a multiprotein complex involved in the ATP-dependent degradation of ubiquitinated proteins. This complex plays a key role in the maintenance of protein homeostasis by removing misfolded or damaged proteins, which could impair cellular functions, and by removing proteins whose functions are no longer required. Therefore, the proteasome participates in numerous cellular processes, including cell cycle progression, apoptosis, or DNA damage repair. PSMC2 belongs to the heterohexameric ring of AAA (ATPases associated with diverse cellular activities) proteins that unfolds ubiquitinated target proteins that are concurrently translocated into a proteolytic chamber and degraded into peptides. {ECO:0000269|PubMed:1317798, ECO:0000269|PubMed:9295362}.",
+    has primary-uniprot-name "26S proteasome regulatory subunit 7",
+    has uniprot-id "P35998";
+  $d_1 isa drug,
+    has dgidb-name "CYTARABINE",
+    has dgidb-claim-name "1-BETA-D-ARABINOFURANOSYLCYTOSINE",
+    has drug-claim-source "NCI",
+    has chembl-id "chembl:CHEMBL803";
+  $d_2 isa drug,
+    has dgidb-name "BORTEZOMIB",
+    has dgidb-claim-name "BORTEZOMIB",
+    has dgidb-claim-name "bortezomib",
+    has drug-claim-source "DTC",
+    has drug-claim-source "PharmGKB",
+    has chembl-id "chembl:CHEMBL325041";
+  $v_1 isa virus,
+    has virus-name "MHV",
+    has identity-percentage 50.23,
+    has genbank-id "AC 000192";
+  translation (translated-transcript: $t_1, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_1);
+  drug-gene-interaction (interacting-gene: $g_1, interacting-drug: $d_1);
+  virus-protein-interaction (targeted-protein: $p_1, interacting-virus: $v_1);
+  translation (translated-transcript: $t_2, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_2);
+  translation (translated-transcript: $t_3, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_3);
+  translation (translated-transcript: $t_4, synthesised-protein: $p_1);
+  transcription (transcribed-gene: $g_1, synthesised-transcript: $t_4);
+  translation (translated-transcript: $t_5, synthesised-protein: $p_2);
+  transcription (transcribed-gene: $g_2, synthesised-transcript: $t_5);
+  drug-gene-interaction (interacting-gene: $g_2, interacting-drug: $d_2);
+  virus-protein-interaction (targeted-protein: $p_2, interacting-virus: $v_1);
+  translation (translated-transcript: $t_6, synthesised-protein: $p_2);
+  transcription (transcribed-gene: $g_2, synthesised-transcript: $t_6);
+end;

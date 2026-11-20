@@ -1,33 +1,40 @@
 # Example 07:
 
-# Let's dig deeper into the cyclophosphamide result. To begin with, let's query just that treatment:
+# Let's dig deeper into the cyclophosphamide result. To begin with, let's find the proteins that connect the drug to
+# neoplasms, using the two functions that potential_disease_treatments is built on:
 
 match
-$di isa disease, has name $di-n;
-$dr isa drug, has name $dr-n;
-$pdt ($di, $dr) isa potential-disease-treatment;
-$di-n = "Neoplasms";
-$dr-n = "CYCLOPHOSPHAMIDE";
+let $dr, $p in drug_protein_associations();
+let $di, $p in disease_protein_associations();
+$di has name "Neoplasms";
+$dr has dgidb-name "CYCLOPHOSPHAMIDE";
+$p has uniprot-id $id;
+fetch { "protein": $id };
 
-# If we explain the potential-disease-treatment relation, TypeDB shows us that it was inferred from two associations
-# between neoplasms and cyclophosphamide with a particular protein, via a disease-protein-association and a
-# drug-protein-association respectively, which are themselves inferred. We can then explain those to discover that both
-# neoplasms and cyclophosphamide have a direct interaction with this protein, so the potential treatment is a case of
-# the drug affecting a protein that impacts the spread of the cancer.
-#
-# The interactions with the protein are themselves inferred, and we can dig even deeper to uncover the data that leads
-# to their inference, but this depth of explanation is sufficient to understand how the treatment might work. Obviously,
-# this treatment may not work, but this information serves as a good indicator to begin the first stages of a clinical
-# trial, and is a key step of the drug discovery process. By using inference to identify potential treatments in this
-# way, selection of candidate drugs for trials can be vastly accelerated.
+# We get a single protein, P11245. Neoplasms and cyclophosphamide each have a direct interaction with this protein, so
+# the potential treatment is a case of the drug affecting a protein that impacts the spread of the cancer. We can
+# confirm this with the lower-level interaction functions:
+
+match
+let $dr, $p in drug_protein_interactions();
+let $di, $p in disease_protein_interactions();
+$di has name "Neoplasms";
+$dr has dgidb-name "CYCLOPHOSPHAMIDE";
+$p has uniprot-id $id;
+fetch { "protein": $id };
+
+# We can dig even deeper to uncover the data behind those interactions, but this depth is sufficient to understand how
+# the treatment might work. Obviously, this treatment may not work, but this information serves as a good indicator to
+# begin the first stages of a clinical trial, and is a key step of the drug discovery process. By using functions to
+# identify potential treatments in this way, selection of candidate drugs for trials can be vastly accelerated.
 
 #--------------------------------------------------
 # Exercise 07:
 
 # Write a new query to retrieve the primary-uniprot-name of the protein involved in the potential treatment of neoplasms
 # by cyclophosphamide.
-# Keyword hints: match, isa, has
-# Type hints: disease, disease-name, disease-protein-interaction, protein, primary-uniprot-name,
-# drug-protein-interaction, drug, drug-name
+# Keyword hints: match, has
+# Function hints: disease_protein_interactions, drug_protein_interactions
+# Type hints: primary-uniprot-name, disease-name, dgidb-name
 
 #--------------------------------------------------
