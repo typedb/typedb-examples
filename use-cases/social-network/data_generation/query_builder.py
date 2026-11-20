@@ -76,13 +76,13 @@ class QueryBuilder:
         self._conversations: list[MappedConversation] = list()
         self._viewings: list[Viewing] = list()
 
-        with open("resources/female_names.yml", "r") as file:
+        with open("resources/female_names.yml", "r", encoding="utf-8") as file:
             self._female_names: list[dict[str, Any]] = safe_load(file)
 
-        with open("resources/male_names.yml", "r") as file:
+        with open("resources/male_names.yml", "r", encoding="utf-8") as file:
             self._male_names: list[dict[str, Any]] = safe_load(file)
 
-        with open("resources/last_names.yml", "r") as file:
+        with open("resources/last_names.yml", "r", encoding="utf-8") as file:
             self._last_names: list[dict[str, Any]] = safe_load(file)
 
     @property
@@ -156,6 +156,13 @@ class QueryBuilder:
         for viewing in self._viewings:
             if post.id == viewing.post:
                 yield viewing.profile
+
+    def _content_type(self, content_id: str) -> str:
+        if content_id in self._posts:
+            return "post"
+        if content_id in self._comments:
+            return "comment"
+        return "page"
 
     def _generate_new_uuid(self) -> str:
         return UUID(version=4, int=self._random.getrandbits(128)).hex
@@ -318,7 +325,7 @@ class QueryBuilder:
             f"""$person has can-publish {str(can_publish).lower()};""",
             f"""$person has page-visibility "{page_visibility.value}";""",
             f"""$person has post-visibility "{post_visibility.value}";""",
-            f"""$birth (born: $person) isa birth;""",
+            f"""$birth isa birth, links (born: $person);""",
             f"""$birth has birth-date {birth_date};""",
             f"""$location isa location, links (place: $place, located: $person);""",
             f"""$birth-location isa location, links (place: $birth-place, located: $birth);""",
@@ -681,7 +688,7 @@ class QueryBuilder:
 
         queries = "# comment\n" + " ".join((
             f"""match""",
-            f"""$parent isa content;""",
+            f"""$parent isa {"post" if parent_id in self._posts else "comment"};""",
             f"""$parent has id "{parent_id}";""",
             f"""$profile isa profile;""",
             f"""$profile has id "{author_username}";""",
@@ -876,7 +883,7 @@ class QueryBuilder:
         if parent_id is not None:
             queries += " ".join((
                 f"""match""",
-                f"""$parent isa place;""",
+                f"""$parent isa {parent.type.value};""",
                 f"""$parent has id "{parent_id}";""",
                 f"""insert""",
                 f"""$location isa {place_type.location_type}, links ({place_type.place_role}: $parent, {place_type.located_role}: $place);""",
@@ -1231,7 +1238,7 @@ class QueryBuilder:
 
         queries = "# reaction\n" + " ".join((
             f"""match""",
-            f"""$content isa content;""",
+            f"""$content isa {self._content_type(content.id)};""",
             f"""$content has id "{content.id}";""",
             f"""$profile isa profile;""",
             f"""$profile has id "{profile.id}";""",
@@ -1341,7 +1348,7 @@ class QueryBuilder:
     def _viewing(self, content_id: str, profile_id: str) -> str:
         queries = "# viewing\n" + " ".join((
             f"""match""",
-            f"""$content isa content;""",
+            f"""$content isa {self._content_type(content_id)};""",
             f"""$content has id "{content_id}";""",
             f"""$profile isa profile;""",
             f"""$profile has id "{profile_id}";""",

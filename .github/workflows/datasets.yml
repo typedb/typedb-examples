@@ -33,7 +33,7 @@ jobs:
     - name: Setup TypeDB
       uses: typedb/setup-typedb@1.0.0
       with:
-        typedb_version: 3.5.5
+        typedb_version: 3.14.1
         typedb_args: "--development-mode.enabled=true"
 
     - name: Load dataset
@@ -43,3 +43,34 @@ jobs:
           --command="database create-init ${{ matrix.dataset}} \
           use-cases/${{matrix.dataset}}/schema.tql \
           use-cases/${{matrix.dataset}}/data.tql"
+
+  load-social-network-generated:
+    name: Load social network with generated data
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: use-cases/social-network/data_generation
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Setup TypeDB
+      uses: typedb/setup-typedb@1.0.0
+      with:
+        typedb_version: 3.14.1
+        typedb_args: "--development-mode.enabled=true"
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.13'
+
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+
+    - name: Generate queries
+      run: python query_generator.py
+
+    - name: Load generated dataset
+      run: python query_runner.py

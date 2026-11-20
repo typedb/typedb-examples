@@ -1,9 +1,30 @@
 # Data Generator
 
-Intended to generate new datasets for the social media example.
+Generates a dataset for the social network example and loads it into TypeDB.
 
-** Outdated **
+## Usage
 
-These sources are targeting a TypeDB 2.x version of this example, which uses a slightly different schema (even considering purely syntactic updates)!
+Install the dependencies:
 
-The old schema is retained here in case anyone wishes to understand the difference between the 3.x schema and the old 2.x schema and update the query generator accordingly
+```
+pip install -r requirements.txt
+```
+
+Generate the insert queries. This writes `queries.tql`, with one query per line:
+
+```
+python query_generator.py
+```
+
+Load the schema from `../schema.tql` and the generated queries into a new database:
+
+```
+python query_runner.py
+```
+
+The loader connects to `localhost:1729` as `admin` and creates a database named `social-network-generated`, replacing
+it if it already exists. Override these with the `TYPEDB_ADDRESS`, `TYPEDB_USERNAME`, `TYPEDB_PASSWORD` and
+`TYPEDB_DATABASE` environment variables.
+
+The generator uses a fixed random seed, so it produces the same dataset on every run. Edit `query_generator.py` and
+the files under `resources/` to change what it generates.

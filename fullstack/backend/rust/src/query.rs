@@ -68,26 +68,26 @@ pub fn page_query(id: &str) -> String {
             "postVisibility": (match $page isa profile, has post-visibility $post-visibility; return first $post-visibility;),
             "tags": [match {{ $page isa group, has tag $tag; }} or {{ $page isa organization, has tag $tag; }}; return {{  $tag  }};],
             "friends": [
-                match ($page, $friend) isa friendship; $friend has id $friend-id;
+                match friendship ($page, $friend); $friend has id $friend-id;
                 limit 9;
                 return {{ $friend-id }};
             ],
             "numberOfFriends": (
-                match ($page, $friend) isa friendship;
+                match friendship ($page, $friend);
                 return count;
             ),
             "followers": [
-                match (page: $page, follower: $follower) isa following; $follower has id $follower-id;
+                match following (page: $page, follower: $follower); $follower has id $follower-id;
                 limit 9;
                 return {{ $follower-id }};
             ],
             "numberOfFollowers": (
-                match (page: $page, follower: $follower) isa following;
+                match following (page: $page, follower: $follower);
                 return count;
             ),
             "location": [
                 match
-                    (place: $place, located: $page) isa location;
+                    location (place: $place, located: $page);
                     let $child, $parent = parent_places_linked_list($place);
                 fetch {{
                     "placeName": $child.name,
@@ -106,7 +106,7 @@ pub fn posts_query(page_id: &str) -> String {
         r#"
         match
             $page has id "{page_id}";
-            (page: $page, post: $post) isa posting;
+            posting (page: $page, post: $post);
         fetch {{
             "postText": $post.post-text,
             "postVisibility": $post.post-visibility,
@@ -126,7 +126,7 @@ pub fn posts_query(page_id: &str) -> String {
                 return first $ty;
             ),
             "reactions": [
-                match ($post) isa reaction, has emoji $emoji;
+                match reaction ($post), has emoji $emoji;
                 return {{ $emoji }};
             ],
         }};
@@ -139,7 +139,7 @@ pub fn comments_query(post_id: &str) -> String {
         r#"
         match
             $post has id "{post_id}";
-            ($post, comment: $comment, author: $author) isa commenting;
+            commenting ($post, comment: $comment, author: $author);
         fetch {{
             "commentText": $comment.comment-text,
             "creationTimestamp": $comment.creation-timestamp,
@@ -154,7 +154,7 @@ pub fn comments_query(post_id: &str) -> String {
                 return first $ty;
             ),
             "reactions": [
-                match ($comment) isa reaction, has emoji $emoji;
+                match reaction ($comment), has emoji $emoji;
                 return {{ $emoji }};
             ],
         }};

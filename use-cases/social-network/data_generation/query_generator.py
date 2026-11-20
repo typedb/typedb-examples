@@ -46,15 +46,15 @@ queries = [
     query_builder.city("Montreal", "plc-americas/northern-america/canada/quebec/montreal", "plc-americas/northern-america/canada/quebec"),
 ]
 
-with open("resources/landmarks.txt", "r") as resources_file:
+with open("resources/landmarks.txt", "r", encoding="utf-8") as resources_file:
     for line in resources_file:
         queries.append(query_builder.landmark(line.strip()))
 
-with open("resources/bios.txt", "r") as resource_file:
+with open("resources/bios.txt", "r", encoding="utf-8") as resource_file:
     for bio in resource_file:
         queries.append(query_builder.person(bio.strip()))
 
-with open("resources/organizations.json", "r") as resource_file:
+with open("resources/organizations.json", "r", encoding="utf-8") as resource_file:
     organizations: list[dict[str, Any]] = load(resource_file)
 
     for organization in organizations:
@@ -65,7 +65,7 @@ with open("resources/organizations.json", "r") as resource_file:
             tags=organization["tags"],
         ))
 
-with open("resources/groups.json", "r") as resource_file:
+with open("resources/groups.json", "r", encoding="utf-8") as resource_file:
     groups: list[dict[str, Any]] = load(resource_file)
 
     for group in groups:
@@ -85,7 +85,7 @@ for _ in range(50):
 for _ in range(200):
     queries.append(query_builder.social_relation())
 
-with open("resources/conversations/index.json", "r") as index_file:
+with open("resources/conversations/index.json", "r", encoding="utf-8") as index_file:
     conversation_index: list[dict[str, Any]] = load(index_file)
 
     for entry in conversation_index:
@@ -104,7 +104,7 @@ with open("resources/conversations/index.json", "r") as index_file:
         else:
             location_name = entry["location_name"]
 
-        with open(path, "r") as resource_file:
+        with open(path, "r", encoding="utf-8") as resource_file:
             json_rep: dict[str, Any] = load(resource_file)
             conversation = Conversation.from_json(json_rep, post_type)
             queries += query_builder.conversation(
@@ -142,13 +142,13 @@ queries.append("# badge\n" + " ".join((
     f"""$profile has id "SarahGiven225";""",
     f"""$group isa group;""",
     f"""$group has id "grp-3acaaf82374a4cc9a0397e67926146de";""",
-    f"""$membership (group: $group, member: $profile) isa group-membership;""",
+    f"""$membership isa group-membership, links (group: $group, member: $profile);""",
     f"""insert""",
     f"""$membership has badge "top voice";""",
 )))
 
 
-with open("queries.tql", "w") as output_file:
+with open("queries.tql", "w", encoding="utf-8") as output_file:
     for query in queries:
         output_file.write("\n")
         output_file.write(query)

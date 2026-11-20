@@ -2,7 +2,7 @@
 
 This example models credit-card transactions for fraud analysis: cardholders, the cards and bank accounts they own, the merchants they pay, and the location of each party, so that suspicious transactions can be surfaced with a single query.
 
-It uses TypeDB 3.x and showcases entity/relation modelling, role inheritance, and **functions** (which replace the rules used in older TypeDB versions).
+It uses TypeDB 3.x and showcases entity/relation modelling, role inheritance, and **functions**.
 
 The dataset is adapted from the Kaggle credit-card fraud dataset:
 https://www.kaggle.com/datasets/kartik2112/fraud-detection?select=fraudTrain.csv
@@ -49,7 +49,7 @@ If you prefer to load step-by-step (or are on an older Console):
 
 ### Functions
 
-TypeDB 3.x expresses inference with functions instead of rules:
+The schema defines two functions that derive new facts from stored data:
 
 - `at_same_place($per, $com)` — returns `true` when a person and a company have coordinates with the same longitude and latitude.
 - `transaction_is_safe($tx)` — returns `true` when the cardholder who owns the card used in a transaction is located in the same place as the company being paid. A transaction that is **not** safe is treated as suspect.

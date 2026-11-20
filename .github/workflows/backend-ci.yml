@@ -38,7 +38,7 @@ jobs:
     - name: Setup TypeDB
       uses: typedb/setup-typedb@1.0.0
       with:
-        typedb_version: 3.5.1
+        typedb_version: 3.14.1
         typedb_args: "--development-mode.enabled=true"
 
     - name: Create and initialise database
@@ -55,11 +55,10 @@ jobs:
         java-version: '17'
         distribution: 'temurin'
 
-    - name: Set up Python (Python only)
-      if: matrix.backend == 'python'
-      uses: actions/setup-python@v4
+    - name: Set up Python
+      uses: actions/setup-python@v5
       with:
-        python-version: '3.9'
+        python-version: '3.13'
 
     - name: Install dependencies (Python)
       if: matrix.backend == 'python'

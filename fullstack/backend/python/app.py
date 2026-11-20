@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from typedb.driver import TypeDB, Credentials, DriverOptions, TransactionType
+from typedb.driver import TypeDB, Credentials, DriverOptions, DriverTlsConfig, TransactionType
 import queries
 from flask_cors import CORS
 from config import *
@@ -7,7 +7,8 @@ from config import *
 app = Flask(__name__)
 CORS(app)
 
-typedb = TypeDB.driver(TYPEDB_ADDRESS, Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD), DriverOptions(TYPEDB_TLS_ENABLED, None))
+tls_config = DriverTlsConfig.enabled_with_native_root_ca() if TYPEDB_TLS_ENABLED else DriverTlsConfig.disabled()
+typedb = TypeDB.driver(TYPEDB_ADDRESS, Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD), DriverOptions(tls_config))
 
 @app.route('/')
 def index():

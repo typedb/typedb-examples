@@ -65,25 +65,25 @@ public class Query {
                 "postVisibility": (match $page isa profile, has post-visibility $post-visibility; return first $post-visibility;),
                 "tags": [match { $page isa group, has tag $tag; } or { $page isa organization, has tag $tag; }; return { $tag };],
                 "friends": [
-                    match ($page, $friend) isa friendship; $friend has id $friend-id;
+                    match friendship ($page, $friend); $friend has id $friend-id;
                     limit 9;
                     return { $friend-id };
                 ],
                 "numberOfFriends": (
-                    match ($page, $friend) isa friendship;
+                    match friendship ($page, $friend);
                     return count;
                 ),
                 "followers": [
-                    match (page: $page, follower: $follower) isa following; $follower has id $follower-id;
+                    match following (page: $page, follower: $follower); $follower has id $follower-id;
                     limit 9;
                     return { $follower-id };
                 ],
                 "numberOfFollowers": (
-                    match (page: $page, follower: $follower) isa following;
+                    match following (page: $page, follower: $follower);
                     return count;
                 ),
                 "location": [
-                    match (place: $place, located: $page) isa location;
+                    match location (place: $place, located: $page);
                     let $child, $parent = parent_places_linked_list($place);
                     fetch {
                         "placeName": $child.name,
@@ -99,7 +99,7 @@ public class Query {
     public static final String postsQuery(String pageId) {
         return """
             match $page has id \"""" + pageId + "\";" + """
-            (page: $page, post: $post) isa posting;
+            posting (page: $page, post: $post);
             fetch {
                 "postText": $post.post-text,
                 "postVisibility": $post.post-visibility,
@@ -119,7 +119,7 @@ public class Query {
                     return first $ty;
                 ),
                 "reactions": [
-                    match ($post) isa reaction, has emoji $emoji;
+                    match reaction ($post), has emoji $emoji;
                     return { $emoji };
                 ],
             };
@@ -129,7 +129,7 @@ public class Query {
     public static final String commentsQuery(String postId) {
         return """
             match $post has id \"""" + postId + "\";" + """
-            ($post, comment: $comment, author: $author) isa commenting;
+            commenting ($post, comment: $comment, author: $author);
             fetch {
                 "commentText": $comment.comment-text,
                 "creationTimestamp": $comment.creation-timestamp,
@@ -144,7 +144,7 @@ public class Query {
                     return first $ty;
                 ),
                 "reactions": [
-                    match ($comment) isa reaction, has emoji $emoji;
+                    match reaction ($comment), has emoji $emoji;
                     return { $emoji };
                 ],
             };
