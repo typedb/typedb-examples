@@ -52,8 +52,7 @@ to automate permission inheritance and policy enforcement at the schema level us
 
 ### [Cyber threat intelligence](/use-cases/cyber-threat-intelligence)
 
-Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries
-and rule-inference.
+Learn how to use TypeDB in a cyber threat intelligence (CTI) context in order to identify threats using powerful queries.
 
 ### [Drug discovery](/use-cases/drug-discovery)
 

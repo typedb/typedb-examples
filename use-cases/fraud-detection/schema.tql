@@ -94,9 +94,7 @@ relation geolocate,
 relation locate sub geolocate,
     relates address;
 
-# In TypeDB 3.x rules no longer exist; inference is expressed with functions.
-# These functions reproduce the "is this transaction safe?" logic that the
-# original example expressed with rules.
+# These functions answer "is this transaction safe?" at query time.
 
 # A buyer (cardholder) and a company share a location when the coordinates
 # attached to the person and to the company have the same longitude/latitude.
