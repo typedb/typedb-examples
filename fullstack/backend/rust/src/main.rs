@@ -14,7 +14,7 @@ use serde::Deserialize;
 use serde_json::value::RawValue;
 use serde_with::{NoneAsEmptyString, serde_as};
 use tower_http::cors::{Any, CorsLayer};
-use typedb_driver::{Credentials, DriverOptions, TransactionType, TypeDBDriver};
+use typedb_driver::{Addresses, Credentials, DriverOptions, DriverTlsConfig, TransactionType, TypeDBDriver};
 
 mod config;
 mod query;
@@ -246,11 +246,16 @@ async fn post_create_organization(
 
 #[tokio::main]
 async fn main() {
+    let tls_config = if config::typedb_tls_enabled() {
+        DriverTlsConfig::enabled_with_native_root_ca()
+    } else {
+        DriverTlsConfig::disabled()
+    };
     let driver = Arc::new(
         TypeDBDriver::new(
-            config::typedb_address(),
+            Addresses::try_from_address_str(config::typedb_address()).unwrap(),
             Credentials::new(&config::typedb_username(), &config::typedb_password()),
-            DriverOptions::new(config::typedb_tls_enabled(), None).unwrap(),
+            DriverOptions::new(tls_config),
         )
         .await
         .unwrap(),

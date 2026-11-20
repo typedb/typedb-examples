@@ -3,6 +3,7 @@ package com.example.backendjava;
 import com.typedb.driver.api.Credentials;
 import com.typedb.driver.api.Driver;
 import com.typedb.driver.api.DriverOptions;
+import com.typedb.driver.api.DriverTlsConfig;
 import com.typedb.driver.TypeDB;
 import java.util.Map;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +20,7 @@ public class TypeDBConfig {
 
     @Bean
     public Driver typeDBDriver() {
-        return TypeDB.driver(TYPEDB_ADDRESS, new Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD), new DriverOptions(TYPEDB_TLS_ENABLED, null));
+        DriverTlsConfig tlsConfig = TYPEDB_TLS_ENABLED ? DriverTlsConfig.enabledWithNativeRootCA() : DriverTlsConfig.disabled();
+        return TypeDB.driver(TYPEDB_ADDRESS, new Credentials(TYPEDB_USERNAME, TYPEDB_PASSWORD), new DriverOptions(tlsConfig));
     }
 } 
