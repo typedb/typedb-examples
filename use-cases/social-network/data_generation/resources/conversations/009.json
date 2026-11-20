@@ -1,0 +1,73 @@
+{
+  "username": "@80808",
+  "timestamp": "2022-05-10T14:15:00Z",
+  "body": "I’ve been thinking about starting #yoga. Any recommendations for #beginners? #fitness #wellness",
+  "comments": [
+    {
+      "username": "@90909",
+      "timestamp": "2022-05-10T14:30:00Z",
+      "body": "Start with some YouTube videos! There are a lot of beginner yoga routines out there. I recommend Yoga with Adriene; she has a whole series for beginners.",
+      "comments": [
+        {
+          "username": "@80808",
+          "timestamp": "2022-05-10T14:45:00Z",
+          "body": "@90909 Thanks! I’ve heard of her. I’ll check out her beginner series.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@12321",
+      "timestamp": "2022-05-10T14:50:00Z",
+      "body": "Try to focus on your breathing as much as the poses. Yoga is as much about mindfulness as it is about flexibility.",
+      "comments": [
+        {
+          "username": "@80808",
+          "timestamp": "2022-05-10T15:05:00Z",
+          "body": "@12321 Good tip! I’ll try to keep that in mind. I’m usually pretty bad at staying focused.",
+          "comments": [
+            {
+              "username": "@12321",
+              "timestamp": "2022-05-10T15:20:00Z",
+              "body": "It gets easier with time. Just remember to go slow and don’t be too hard on yourself if your mind wanders.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@45654",
+      "timestamp": "2022-05-10T15:30:00Z",
+      "body": "You might want to invest in a good yoga mat. It makes a big difference in comfort, especially for longer sessions.",
+      "comments": [
+        {
+          "username": "@80808",
+          "timestamp": "2022-05-10T15:45:00Z",
+          "body": "@45654 Any specific brand you recommend? I’m not sure what to look for in a mat.",
+          "comments": [
+            {
+              "username": "@45654",
+              "timestamp": "2022-05-10T16:00:00Z",
+              "body": "Manduka makes some of the best mats, but they’re a bit pricey. If you want something more budget-friendly, try Gaiam. Both are great for beginners.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@78987",
+      "timestamp": "2022-05-10T16:10:00Z",
+      "body": "Make sure to stretch before and after each session. Even though yoga is all about stretching, it’s good to loosen up beforehand to avoid injury.",
+      "comments": [
+        {
+          "username": "@80808",
+          "timestamp": "2022-05-10T16:25:00Z",
+          "body": "@78987 I didn’t realize that! I thought yoga was the stretching. I’ll make sure to warm up.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

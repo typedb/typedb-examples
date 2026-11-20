@@ -1,0 +1,72 @@
+{
+  "username": "@45454",
+  "timestamp": "2023-12-02T14:30:00Z",
+  "body": "Live from the #craftfair! Come hang out while I check out some awesome #handmade goods. What should I look for? #supportlocal #art",
+  "comments": [
+    {
+      "username": "@56565",
+      "timestamp": "2023-12-02T14:35:00Z",
+      "body": "This looks fun! See if you can find any cool pottery—handmade mugs are the best!",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-12-02T14:40:00Z",
+          "body": "@56565 Great idea! Just spotted a booth with some beautiful ceramic mugs. I might have to grab one!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-12-02T14:45:00Z",
+      "body": "Any interesting jewelry? I’m always on the lookout for unique handmade necklaces.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-12-02T14:55:00Z",
+          "body": "@67676 Oh yeah! There’s a booth here with some amazing gemstone necklaces. Really unique designs!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-12-02T15:00:00Z",
+      "body": "Check out any artwork! Handmade prints or paintings would make great holiday gifts.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-12-02T15:10:00Z",
+          "body": "@78787 Good call! I just found a local artist selling watercolor prints of cityscapes. These would make perfect gifts!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-12-02T15:15:00Z",
+      "body": "I always love the candles at craft fairs! See if you can find any cool handmade candles with unique scents.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-12-02T15:25:00Z",
+          "body": "@89898 Found them! There’s a booth with soy candles, and they have scents like ‘Autumn Forest’ and ‘Spiced Chai.’ Smells amazing!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-12-02T15:30:00Z",
+      "body": "Any good food stalls? Craft fairs usually have the best homemade snacks!",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-12-02T15:40:00Z",
+          "body": "@23232 Yes! I just grabbed some homemade fudge and locally made honey. This is definitely the place for snacks!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

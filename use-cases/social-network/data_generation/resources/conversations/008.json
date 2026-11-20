@@ -1,0 +1,73 @@
+{
+  "username": "@20202",
+  "timestamp": "2023-08-15T16:20:00Z",
+  "body": "Thinking about getting a #dog! Any advice on what breed is good for #firsttimeowners? #pets #dogbreeds",
+  "comments": [
+    {
+      "username": "@30303",
+      "timestamp": "2023-08-15T16:35:00Z",
+      "body": "Labradors are great for first-time owners! They’re friendly, easy to train, and good with families.",
+      "comments": [
+        {
+          "username": "@20202",
+          "timestamp": "2023-08-15T16:50:00Z",
+          "body": "@30303 I’ve heard that about Labs! I’ve been considering one. How’s the grooming for them?",
+          "comments": [
+            {
+              "username": "@30303",
+              "timestamp": "2023-08-15T17:00:00Z",
+              "body": "Not too bad! They shed a bit, but regular brushing helps. They don’t need a lot of fancy grooming like some other breeds.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@40404",
+      "timestamp": "2023-08-15T17:10:00Z",
+      "body": "I’d recommend a Golden Retriever. They’re similar to Labs but a little more laid-back. Great for first-time dog owners.",
+      "comments": [
+        {
+          "username": "@50505",
+          "timestamp": "2023-08-15T17:25:00Z",
+          "body": "@40404 Golden Retrievers are awesome! They’re so patient and gentle, especially with kids.",
+          "comments": [
+            {
+              "username": "@40404",
+              "timestamp": "2023-08-15T17:40:00Z",
+              "body": "Yeah, @50505! They’re just big sweethearts. Plus, they’re pretty easy to train, which is a huge bonus.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@60606",
+      "timestamp": "2023-08-15T17:50:00Z",
+      "body": "Don’t forget about adopting from a shelter! Mixed breeds can be fantastic, and you might find the perfect dog without worrying too much about breed specifics.",
+      "comments": [
+        {
+          "username": "@20202",
+          "timestamp": "2023-08-15T18:05:00Z",
+          "body": "@60606 That’s a great idea! I’ve thought about adopting too. Maybe I should check out some local shelters.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@70707",
+      "timestamp": "2023-08-15T18:20:00Z",
+      "body": "Consider a smaller breed like a Beagle or a French Bulldog if space is a concern. They’re lower maintenance and can adapt to apartment living.",
+      "comments": [
+        {
+          "username": "@20202",
+          "timestamp": "2023-08-15T18:35:00Z",
+          "body": "@70707 Good point about space! I don’t have a huge yard, so a smaller breed might actually be a better fit.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

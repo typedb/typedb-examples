@@ -1,0 +1,72 @@
+{
+  "username": "@23232",
+  "timestamp": "2023-12-15T08:30:00Z",
+  "body": "We’re officially #engaged! I proposed last night, and she said yes! It was such a special moment—we couldn’t be happier! #shesaidyes #love",
+  "comments": [
+    {
+      "username": "@34343",
+      "timestamp": "2023-12-15T08:45:00Z",
+      "body": "Congratulations! That’s amazing news! How did you propose?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-15T09:00:00Z",
+          "body": "@34343 Thanks! I proposed during a quiet dinner at home. It was just the two of us, and it felt perfect. She had no idea it was coming!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-12-15T09:10:00Z",
+      "body": "So happy for you both! Did you have the ring picked out for a while, or was it a recent decision?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-15T09:25:00Z",
+          "body": "@45454 I’ve had the ring for a few months now! I was waiting for the right moment, and last night just felt perfect.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-12-15T09:30:00Z",
+      "body": "That’s incredible! Any immediate wedding plans, or are you just soaking in the engagement for now?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-15T09:40:00Z",
+          "body": "@56565 We’re definitely going to take some time to enjoy the engagement before jumping into wedding planning. No rush!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-12-15T09:45:00Z",
+      "body": "Congrats! Do you have a date in mind for the wedding, or is it too soon to say?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-15T09:55:00Z",
+          "body": "@67676 Too soon to say! We’re just enjoying the moment right now. We’ll start thinking about dates after the holidays.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-12-15T10:00:00Z",
+      "body": "Big congratulations to you both! Did you tell your family and friends yet, or are you keeping it a secret for a little while?",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-12-15T10:15:00Z",
+          "body": "@78787 Thank you! We told our families last night, and they’re thrilled! We’ll share the news with friends over the weekend.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

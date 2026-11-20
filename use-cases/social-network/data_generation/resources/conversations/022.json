@@ -1,0 +1,79 @@
+{
+  "username": "@34343",
+  "timestamp": "2023-09-12T09:30:00Z",
+  "body": "First #hike of the season, and the view did not disappoint! #outdoors #nature",
+  "comments": [
+    {
+      "username": "@45454",
+      "timestamp": "2023-09-12T09:45:00Z",
+      "body": "That view is stunning! Where did you go hiking?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-12T10:00:00Z",
+          "body": "@45454 Thanks! It’s up at Pine Ridge Trail. The weather was perfect too.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-09-12T10:15:00Z",
+      "body": "That looks so peaceful. How long was the hike?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-12T10:30:00Z",
+          "body": "@56565 About 8 miles round-trip! Definitely got my steps in for the day.",
+          "comments": [
+            {
+              "username": "@56565",
+              "timestamp": "2023-09-12T10:45:00Z",
+              "body": "@34343 8 miles? Wow, that’s impressive! I bet the view at the top was worth it though.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-09-12T10:50:00Z",
+      "body": "Did you bring any snacks for the hike? I always need a good trail mix halfway through!",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-12T11:05:00Z",
+          "body": "@67676 Haha, of course! Trail mix and some granola bars. Gotta stay fueled for those uphill climbs!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-09-12T11:15:00Z",
+      "body": "The weather looks perfect! Did you go solo or with a group?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-12T11:30:00Z",
+          "body": "@78787 I went with a couple of friends. It’s always more fun when you have people to share the views with!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-09-12T11:35:00Z",
+      "body": "That’s awesome! I’ve been meaning to go hiking, but I’m a total beginner. Any tips for someone just starting out?",
+      "comments": [
+        {
+          "username": "@34343",
+          "timestamp": "2023-09-12T11:50:00Z",
+          "body": "@89898 Just start with shorter hikes and work your way up! And don’t forget water—hydration is key.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

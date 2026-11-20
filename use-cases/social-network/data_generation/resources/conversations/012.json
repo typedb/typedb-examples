@@ -1,0 +1,72 @@
+{
+  "username": "@12121",
+  "timestamp": "2023-11-28T14:00:00Z",
+  "body": "Guess who just finished their first #marathon? I can’t believe I actually did it! The training paid off, and crossing that #finishline felt surreal. #running #fitnessgoals",
+  "comments": [
+    {
+      "username": "@23232",
+      "timestamp": "2023-11-28T14:15:00Z",
+      "body": "Congrats! That’s a huge achievement. How are you feeling now? Totally exhausted or still running on adrenaline?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-28T14:25:00Z",
+          "body": "@23232 Thanks! Definitely a bit of both! My legs are sore, but I’m still buzzing from the excitement. Worth every mile!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-11-28T14:30:00Z",
+      "body": "Amazing! Finishing a marathon is no joke. How was the race atmosphere? Was the crowd cheering you on?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-28T14:40:00Z",
+          "body": "@34343 The atmosphere was incredible! The crowd definitely helped during those tough miles. So many people cheering us on—it was such a boost.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-11-28T14:45:00Z",
+      "body": "That’s awesome! Did you hit a wall at any point, or did the energy just carry you through?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-28T14:55:00Z",
+          "body": "@45454 Oh, I definitely hit a wall around mile 20. It got rough, but I just kept pushing. The last few miles were a mental game for sure.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-11-28T15:00:00Z",
+      "body": "Wow, huge congrats! What was your go-to song during the run to keep you going?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-28T15:10:00Z",
+          "body": "@56565 Thanks! I had *Eye of the Tiger* on repeat during those tough stretches—classic but it worked!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-11-28T15:15:00Z",
+      "body": "Finishing a marathon is a huge accomplishment! Do you think you’ll run another one, or is this a one-time thing?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-11-28T15:25:00Z",
+          "body": "@67676 Honestly, I might do another one! I didn’t think I’d say that, but the whole experience was amazing. I’m already thinking about the next challenge!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

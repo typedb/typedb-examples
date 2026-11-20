@@ -1,0 +1,66 @@
+{
+  "username": "@31415",
+  "timestamp": "2021-06-21T08:20:00Z",
+  "body": "I’m thinking about starting a #vegetablegarden in my backyard. Any advice for a #beginner? #gardening #homegarden",
+  "comments": [
+    {
+      "username": "@27182",
+      "timestamp": "2021-06-21T08:45:00Z",
+      "body": "Start small! It’s easy to get overwhelmed if you plant too much at once. Focus on a few easy crops like tomatoes or lettuce.",
+      "comments": [
+        {
+          "username": "@31415",
+          "timestamp": "2021-06-21T09:00:00Z",
+          "body": "@27182 That’s good advice. I was thinking of planting a lot, but I’ll scale it back for now.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@14142",
+      "timestamp": "2021-06-21T09:10:00Z",
+      "body": "Make sure you check your soil. You might need to add compost or fertilizer depending on where you live.",
+      "comments": [
+        {
+          "username": "@31415",
+          "timestamp": "2021-06-21T09:25:00Z",
+          "body": "@14142 I hadn’t even thought about that. How do I know if my soil is good?",
+          "comments": [
+            {
+              "username": "@14142",
+              "timestamp": "2021-06-21T09:40:00Z",
+              "body": "You can get a soil test kit from most gardening stores. It’ll tell you if you need to adjust the pH or add nutrients.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@16180",
+      "timestamp": "2021-06-21T09:50:00Z",
+      "body": "Watering consistently is key, especially during the summer. Try to water in the morning to prevent diseases.",
+      "comments": [
+        {
+          "username": "@31415",
+          "timestamp": "2021-06-21T10:05:00Z",
+          "body": "@16180 That’s great to know! I’ll make sure to water early. Thanks!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@12345",
+      "timestamp": "2021-06-21T10:20:00Z",
+      "body": "You should try growing herbs like basil or mint. They’re pretty easy and you can use them in cooking right away!",
+      "comments": [
+        {
+          "username": "@31415",
+          "timestamp": "2021-06-21T10:35:00Z",
+          "body": "@12345 I love the idea of growing herbs! I think I’ll try basil. Thanks for the suggestion!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

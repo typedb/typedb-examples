@@ -1,0 +1,72 @@
+{
+  "username": "@45454",
+  "timestamp": "2023-07-28T16:20:00Z",
+  "body": "Just tried #paddleboarding for the first time! I’m surprised I didn’t fall in. What do you think of my balance skills? #watersports #adventure",
+  "comments": [
+    {
+      "username": "@56565",
+      "timestamp": "2023-07-28T16:35:00Z",
+      "body": "You’re a natural! It’s harder than it looks, right? How long did it take you to get the hang of it?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-07-28T16:50:00Z",
+          "body": "@56565 Thanks! It took me about 20 minutes to stop wobbling and actually feel stable. I thought I was going in a few times!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-07-28T17:00:00Z",
+      "body": "That’s impressive! Were you on a lake or in the ocean? I hear waves make it a lot tougher.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-07-28T17:15:00Z",
+          "body": "@67676 I was on a calm lake this time! I’m not ready for ocean waves just yet, haha!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-07-28T17:20:00Z",
+      "body": "You didn’t fall in?! You’ve got better balance than me! Did you have to practice for long?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-07-28T17:35:00Z",
+          "body": "@78787 I managed to stay dry this time! I’m sure it’ll take a few more trips to feel really comfortable, though.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-07-28T17:40:00Z",
+      "body": "Looks like so much fun! Do you think it’s a good workout? I’ve heard it’s great for core strength.",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-07-28T17:55:00Z",
+          "body": "@89898 Definitely! My legs and core were feeling it by the end. Great way to stay active while enjoying the water.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-07-28T18:00:00Z",
+      "body": "Next challenge: yoga on the paddleboard!",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-07-28T18:15:00Z",
+          "body": "@34343 Haha, that’s a whole new level of balance! Maybe once I can stay upright for more than 30 minutes, I’ll give it a try!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

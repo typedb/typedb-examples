@@ -1,0 +1,72 @@
+{
+  "username": "@90909",
+  "timestamp": "2023-02-14T12:20:00Z",
+  "body": "Finally tried making #sushi at home! What do you all think? #homemade #foodie",
+  "comments": [
+    {
+      "username": "@10101",
+      "timestamp": "2023-02-14T12:35:00Z",
+      "body": "That looks amazing! How did it turn out?",
+      "comments": [
+        {
+          "username": "@90909",
+          "timestamp": "2023-02-14T12:50:00Z",
+          "body": "@10101 Not bad for a first try! The rice was a bit tricky, but overall I’m pretty happy with it.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@11111",
+      "timestamp": "2023-02-14T12:55:00Z",
+      "body": "Did you use fresh fish or go with veggies? It looks like something from a restaurant!",
+      "comments": [
+        {
+          "username": "@90909",
+          "timestamp": "2023-02-14T13:10:00Z",
+          "body": "@11111 Thanks! I used a mix of both—some tuna, salmon, and a veggie roll with avocado and cucumber.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@12121",
+      "timestamp": "2023-02-14T13:15:00Z",
+      "body": "Sushi at home? Bold move! Did you have to buy any special equipment for it?",
+      "comments": [
+        {
+          "username": "@90909",
+          "timestamp": "2023-02-14T13:30:00Z",
+          "body": "@12121 Yeah, I got a sushi rolling mat and a really sharp knife—both were essential!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-02-14T13:40:00Z",
+      "body": "That’s so impressive! Did you make the rice yourself? I’ve heard that’s the hardest part to get right.",
+      "comments": [
+        {
+          "username": "@90909",
+          "timestamp": "2023-02-14T13:55:00Z",
+          "body": "@23232 Yup, made the rice from scratch! It took a couple of tries, but I think I got it down by the end.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-02-14T14:05:00Z",
+      "body": "Looks so good! What’s your favorite roll? I need to know what I should try next!",
+      "comments": [
+        {
+          "username": "@90909",
+          "timestamp": "2023-02-14T14:20:00Z",
+          "body": "@34343 Definitely the spicy tuna roll! It’s super flavorful and was surprisingly easy to make.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

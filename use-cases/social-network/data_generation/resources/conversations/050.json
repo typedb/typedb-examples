@@ -1,0 +1,72 @@
+{
+  "username": "@12121",
+  "timestamp": "2023-12-10T14:30:00Z",
+  "body": "Live from the #gym! I’m trying to beat my personal record for #deadlifts today. Tune in for some #fitnessmotivation! Any advice before I go for it? #workout #goals",
+  "comments": [
+    {
+      "username": "@23232",
+      "timestamp": "2023-12-10T14:35:00Z",
+      "body": "You’ve got this! Just make sure to keep your back straight and engage your core during the lift!",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-12-10T14:45:00Z",
+          "body": "@23232 Thanks! Definitely focusing on form—don’t want to mess up my back!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-12-10T14:50:00Z",
+      "body": "Remember to breathe! It’s easy to forget, but controlled breathing will help you power through that lift.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-12-10T15:00:00Z",
+          "body": "@34343 Good reminder! I tend to hold my breath when it gets heavy—gonna focus on breathing properly this time.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-12-10T15:10:00Z",
+      "body": "What weight are you going for? Crush it and don’t rush the lift—control is key!",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-12-10T15:20:00Z",
+          "body": "@45454 I’m going for 300 lbs today! Trying not to rush—slow and steady for sure.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-12-10T15:25:00Z",
+      "body": "Make sure to do a couple of warm-up sets first! You don’t want to jump straight into heavy lifting without warming up properly.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-12-10T15:35:00Z",
+          "body": "@56565 Already did some warm-up sets! Thanks for the tip—feeling ready to go for it now.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-12-10T15:40:00Z",
+      "body": "Good luck! Just picture yourself lifting that weight with ease—it’s all about mindset too!",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-12-10T15:50:00Z",
+          "body": "@67676 Great advice! Going in with a positive mindset. Let’s do this!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

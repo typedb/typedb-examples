@@ -1,0 +1,72 @@
+{
+  "username": "@12121",
+  "timestamp": "2023-04-22T16:00:00Z",
+  "body": "Picked up my new #bike today! Can’t wait to hit the #trails this weekend! #cycling #adventure",
+  "comments": [
+    {
+      "username": "@23232",
+      "timestamp": "2023-04-22T16:15:00Z",
+      "body": "That bike looks awesome! What kind is it?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-04-22T16:30:00Z",
+          "body": "@23232 It’s a mountain bike from Trek! Perfect for off-road trails and a smooth ride.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-04-22T16:35:00Z",
+      "body": "Nice! Are you planning any long rides soon?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-04-22T16:50:00Z",
+          "body": "@34343 Yeah! There’s a 20-mile trail nearby that I’ve been wanting to try out. Gonna test it this weekend!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-04-22T17:00:00Z",
+      "body": "How does it ride? I’ve been thinking about getting a new bike too.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-04-22T17:20:00Z",
+          "body": "@45454 So far, it’s super smooth! The suspension is great, and it’s really lightweight. Definitely recommend it!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-04-22T17:30:00Z",
+      "body": "That color is so sleek! Did you customize it or is that how it came?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-04-22T17:45:00Z",
+          "body": "@56565 Thanks! That’s the stock color, but it’s what caught my eye when I first saw it. Love the matte finish.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-04-22T18:00:00Z",
+      "body": "You’re gonna have a blast on the trails! Just don’t forget your helmet!",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-04-22T18:15:00Z",
+          "body": "@67676 Haha, absolutely! Safety first. Already have my helmet ready to go!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

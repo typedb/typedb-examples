@@ -1,0 +1,72 @@
+{
+  "username": "@56565",
+  "timestamp": "2023-10-22T10:15:00Z",
+  "body": "Caught my #dog trying to 'help' with the #laundry this morning! #doglife #pets",
+  "comments": [
+    {
+      "username": "@67676",
+      "timestamp": "2023-10-22T10:30:00Z",
+      "body": "Haha, this is hilarious! Looks like they’re really into 'helping.' Did they actually get anything folded?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-22T10:45:00Z",
+          "body": "@67676 Not even close! More like unfolding everything I had just folded.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-10-22T10:50:00Z",
+      "body": "This is adorable! What kind of dog do you have?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-22T11:05:00Z",
+          "body": "@78787 Thanks! She’s a golden retriever—always full of energy and always 'helping' where she can!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-10-22T11:15:00Z",
+      "body": "The way she’s wagging her tail like she’s doing a great job is the best part. Does she do this often?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-22T11:30:00Z",
+          "body": "@89898 Haha, yes! Any time laundry is involved, she’s right there pulling socks out of the basket.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@23232",
+      "timestamp": "2023-10-22T11:40:00Z",
+      "body": "My dog does the same thing! They think they’re being so helpful. Have you trained her to actually bring you things?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-22T11:55:00Z",
+          "body": "@23232 I’ve tried, but she gets too distracted and just ends up chewing on whatever she’s supposed to bring me.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-10-22T12:05:00Z",
+      "body": "This made my day! Does she have any other 'chores' she likes to 'help' with?",
+      "comments": [
+        {
+          "username": "@56565",
+          "timestamp": "2023-10-22T12:20:00Z",
+          "body": "@34343 Haha, she loves to 'help' with the vacuuming too—by barking at it the whole time!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

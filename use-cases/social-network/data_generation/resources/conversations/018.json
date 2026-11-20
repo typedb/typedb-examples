@@ -1,0 +1,79 @@
+{
+  "username": "@67676",
+  "timestamp": "2023-07-20T15:30:00Z",
+  "body": "Finally got my new #car! Check it out! #newride #carlover",
+  "comments": [
+    {
+      "username": "@78787",
+      "timestamp": "2023-07-20T15:45:00Z",
+      "body": "Whoa, that looks amazing! Is it as fast as it looks?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-07-20T16:00:00Z",
+          "body": "@78787 It definitely is! Took it for a spin earlier, and I still can’t wipe the grin off my face.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-07-20T16:10:00Z",
+      "body": "That car is a beauty! What’s the first road trip you’re planning?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-07-20T16:25:00Z",
+          "body": "@89898 Thanks! I’m thinking of taking it down the coast next weekend. Perfect excuse for a long drive!",
+          "comments": [
+            {
+              "username": "@89898",
+              "timestamp": "2023-07-20T16:35:00Z",
+              "body": "@67676 Sounds like a perfect plan. Nothing beats a coastal road trip, especially in that car!",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-07-20T16:40:00Z",
+      "body": "That’s a slick ride! What model is it? I’ve been thinking about upgrading my car too.",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-07-20T16:55:00Z",
+          "body": "@56565 It’s the new Turbo X! You should totally go for it. Feels like you’re driving a rocket!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-07-20T17:00:00Z",
+      "body": "Now that’s a car worthy of some serious weekend adventures. I’m picturing you zipping down the highway with the top down!",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-07-20T17:15:00Z",
+          "body": "@45454 Haha, exactly! I might just have to do that once the weather’s nice.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-07-20T17:20:00Z",
+      "body": "Okay, I’m officially jealous! You better give me a ride next time we hang out.",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-07-20T17:30:00Z",
+          "body": "@34343 Deal! You’ll love it—just let me know when you’re free.",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

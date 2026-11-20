@@ -1,0 +1,72 @@
+{
+  "username": "@45454",
+  "timestamp": "2023-08-05T18:20:00Z",
+  "body": "Finally nailed a #kickflip! Been practicing for weeks. Check it out! #skateboarding #tricks",
+  "comments": [
+    {
+      "username": "@56565",
+      "timestamp": "2023-08-05T18:35:00Z",
+      "body": "Nice! That looked super clean! How long did it take you to get it down?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-08-05T18:50:00Z",
+          "body": "@56565 Thanks! It took me about a month of solid practice. There were a lot of falls along the way!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-08-05T18:55:00Z",
+      "body": "Dude, that was smooth! What’s next, learning to ollie up curbs?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-08-05T19:10:00Z",
+          "body": "@67676 Haha, that’s exactly what I’m working on next! Got to get more comfortable riding over obstacles.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@78787",
+      "timestamp": "2023-08-05T19:15:00Z",
+      "body": "You make it look easy! I’ve been trying to learn kickflips for ages. Any tips?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-08-05T19:30:00Z",
+          "body": "@78787 Don’t give up! It’s all about foot placement and committing to the flip. Took me forever to get the timing right!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-08-05T19:40:00Z",
+      "body": "Sick! Where did you learn how to skate? You’ve got some serious skills!",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-08-05T19:55:00Z",
+          "body": "@89898 Thanks! Mostly self-taught, but I watch a lot of tutorials online. YouTube has been a lifesaver!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@90909",
+      "timestamp": "2023-08-05T20:00:00Z",
+      "body": "Kickflip king right here! Are you planning to hit the skatepark soon?",
+      "comments": [
+        {
+          "username": "@45454",
+          "timestamp": "2023-08-05T20:15:00Z",
+          "body": "@90909 Haha, for sure! I’m going this weekend to test it out on some ramps. Should be fun!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

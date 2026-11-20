@@ -1,0 +1,89 @@
+{
+  "username": "@23232",
+  "timestamp": "2023-09-30T10:30:00Z",
+  "body": "I’m thinking of adopting a #pet, but I can’t decide what kind! #petadoption #animallover",
+  "question": "Help me out: What kind of pet should I adopt?",
+  "answers": ["Dog", "Cat", "Bird", "Fish"],
+  "comments": [
+    {
+      "username": "@34343",
+      "timestamp": "2023-09-30T10:45:00Z",
+      "body": "Definitely a dog! They’re loyal and great companions. Plus, they give you a reason to get outside and exercise.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-09-30T11:00:00Z",
+          "body": "@34343 That’s what I’ve been leaning towards! But I’m a little worried about all the time they need for walks and attention.",
+          "comments": [
+            {
+              "username": "@34343",
+              "timestamp": "2023-09-30T11:15:00Z",
+              "body": "@23232 Yeah, they do need a lot of time, but the bond is so worth it. If you have the time, go for it!",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-09-30T11:20:00Z",
+      "body": "Cats all the way! They’re more independent, and you don’t have to take them for walks. Plus, they’re great for cuddles when they feel like it.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-09-30T11:35:00Z",
+          "body": "@45454 That’s true! Cats seem much lower maintenance, but I’ve never had one before. Are they hard to take care of?",
+          "comments": [
+            {
+              "username": "@45454",
+              "timestamp": "2023-09-30T11:50:00Z",
+              "body": "@23232 Not really! Just make sure they have food, water, and a clean litter box, and they’re happy. Super easy compared to dogs.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-09-30T12:00:00Z",
+      "body": "I voted for bird! They’re fun to watch, and some of them can even talk. But they do need a bit of extra attention when it comes to cleaning the cage.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-09-30T12:15:00Z",
+          "body": "@56565 I hadn’t even considered birds, but that’s a good point! Do you think they get lonely if they’re in a cage most of the time?",
+          "comments": [
+            {
+              "username": "@56565",
+              "timestamp": "2023-09-30T12:30:00Z",
+              "body": "@23232 Some birds do, especially the more social ones. You’d need to spend time with them or maybe even get a second bird to keep them company.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-09-30T12:45:00Z",
+      "body": "Fish are a great option if you’re looking for something lower maintenance! They’re calming to watch, and you don’t have to worry about walks or messes.",
+      "comments": [
+        {
+          "username": "@23232",
+          "timestamp": "2023-09-30T13:00:00Z",
+          "body": "@67676 That’s true! Fish seem like a good option if I’m busy. Do they require a lot of upkeep with the tank?",
+          "comments": [
+            {
+              "username": "@67676",
+              "timestamp": "2023-09-30T13:15:00Z",
+              "body": "@23232 Not too much, but you’ll need to clean the tank regularly and check the water quality. Once you get a routine, it’s pretty easy.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

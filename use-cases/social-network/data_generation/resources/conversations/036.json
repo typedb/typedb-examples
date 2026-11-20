@@ -1,0 +1,72 @@
+{
+  "username": "@12121",
+  "timestamp": "2023-06-10T14:00:00Z",
+  "body": "Tried my hand at making homemade #icecream! It didn’t turn out as smooth as I hoped, but it still tastes amazing. Thoughts? #homemade #dessert",
+  "comments": [
+    {
+      "username": "@23232",
+      "timestamp": "2023-06-10T14:15:00Z",
+      "body": "That looks delicious! What flavor did you go for?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-06-10T14:30:00Z",
+          "body": "@23232 Thanks! I made vanilla with some chocolate chunks. Next time, I’m thinking of trying something a bit fancier.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-06-10T14:35:00Z",
+      "body": "I’ve always wanted to make ice cream! Did you use an ice cream maker or go old school?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-06-10T14:50:00Z",
+          "body": "@34343 I used an ice cream maker. It was my first time trying it, so there’s definitely room for improvement!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@45454",
+      "timestamp": "2023-06-10T15:00:00Z",
+      "body": "Looks pretty good to me! How long did it take to freeze?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-06-10T15:15:00Z",
+          "body": "@45454 It took about 4 hours to fully freeze, but the waiting was the hardest part!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@56565",
+      "timestamp": "2023-06-10T15:20:00Z",
+      "body": "Was it easy to get the texture right? I’ve heard homemade ice cream can turn out grainy sometimes.",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-06-10T15:35:00Z",
+          "body": "@56565 Yeah, it was a bit tricky. I think I need to churn it longer next time to get that really smooth texture.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@67676",
+      "timestamp": "2023-06-10T15:45:00Z",
+      "body": "Looks awesome! Any plans to try more adventurous flavors? Maybe some fruit or caramel swirl?",
+      "comments": [
+        {
+          "username": "@12121",
+          "timestamp": "2023-06-10T16:00:00Z",
+          "body": "@67676 Definitely! I’ve got my eye on making a strawberry-basil flavor next. Going to experiment with some fun combos!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

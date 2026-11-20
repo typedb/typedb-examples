@@ -1,0 +1,72 @@
+{
+  "username": "@67676",
+  "timestamp": "2023-11-03T16:45:00Z",
+  "body": "Just finished my first #marathon! Can’t believe I did it! #running #fitnessgoals",
+  "comments": [
+    {
+      "username": "@78787",
+      "timestamp": "2023-11-03T17:00:00Z",
+      "body": "That’s incredible! How do you feel?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-11-03T17:15:00Z",
+          "body": "@78787 Exhausted but so proud! My legs are definitely feeling it though.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@89898",
+      "timestamp": "2023-11-03T17:20:00Z",
+      "body": "Congrats! How long did it take you to finish?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-11-03T17:35:00Z",
+          "body": "@89898 Thanks! I finished in just under 4 hours. Honestly, faster than I expected!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@90909",
+      "timestamp": "2023-11-03T17:40:00Z",
+      "body": "You’re a marathoner now! What’s next? Another race?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-11-03T17:55:00Z",
+          "body": "@90909 Haha, maybe! But for now, I’m just looking forward to some well-deserved rest.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@12121",
+      "timestamp": "2023-11-03T18:05:00Z",
+      "body": "I’m so impressed! How did you train for it?",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-11-03T18:20:00Z",
+          "body": "@12121 I followed a 16-week training plan, and it definitely helped build up my endurance. Consistency is key!",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@34343",
+      "timestamp": "2023-11-03T18:30:00Z",
+      "body": "You’ve inspired me! I’ve been thinking about running a half marathon, but I’m nervous.",
+      "comments": [
+        {
+          "username": "@67676",
+          "timestamp": "2023-11-03T18:45:00Z",
+          "body": "@34343 You should totally do it! Start small and work your way up—you’ll be amazed at what you can accomplish!",
+          "comments": []
+        }
+      ]
+    }
+  ]
+}

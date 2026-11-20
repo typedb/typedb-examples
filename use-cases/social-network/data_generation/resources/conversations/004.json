@@ -1,0 +1,66 @@
+{
+  "username": "@55512",
+  "timestamp": "2020-09-05T18:25:00Z",
+  "body": "Anyone else struggling to find a good #book to read lately? I need some #bookrecommendations! #reading",
+  "comments": [
+    {
+      "username": "@34221",
+      "timestamp": "2020-09-05T18:40:00Z",
+      "body": "I just finished 'The Silent Patient.' It’s a psychological thriller with a crazy twist at the end. Highly recommend it!",
+      "comments": [
+        {
+          "username": "@55512",
+          "timestamp": "2020-09-05T18:55:00Z",
+          "body": "@34221 That sounds exactly like what I’m looking for! Adding it to my list.",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "username": "@77889",
+      "timestamp": "2020-09-05T19:10:00Z",
+      "body": "If you’re into fantasy, try 'Mistborn' by Brandon Sanderson. Great world-building and characters. I couldn’t put it down.",
+      "comments": [
+        {
+          "username": "@33322",
+          "timestamp": "2020-09-05T19:25:00Z",
+          "body": "@77889 'Mistborn' is amazing! Sanderson’s writing is so detailed. The magic system in that series is super cool too.",
+          "comments": [
+            {
+              "username": "@77889",
+              "timestamp": "2020-09-05T19:35:00Z",
+              "body": "@33322 Exactly! The way the magic is tied to metal is so unique. @55512, if you like fantasy, it’s a must-read.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@66788",
+      "timestamp": "2020-09-05T19:50:00Z",
+      "body": "I’m reading 'Sapiens' right now. It’s non-fiction and dives into the history of humankind. If you want something thought-provoking, this one’s for you.",
+      "comments": [
+        {
+          "username": "@55512",
+          "timestamp": "2020-09-05T20:00:00Z",
+          "body": "Thanks @66788! I’ve heard a lot about 'Sapiens,' but I wasn’t sure if it would be too dense. What do you think?",
+          "comments": [
+            {
+              "username": "@66788",
+              "timestamp": "2020-09-05T20:15:00Z",
+              "body": "It’s definitely detailed, but not overwhelming. The way it’s written is really engaging. It covers a lot, but it’s not a tough read.",
+              "comments": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "username": "@99900",
+      "timestamp": "2020-09-05T20:30:00Z",
+      "body": "If you want something lighter and fun, 'The Rosie Project' is a great rom-com with some quirky characters. A really enjoyable read.",
+      "comments": []
+    }
+  ]
+}
