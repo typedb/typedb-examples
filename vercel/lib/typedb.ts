@@ -21,8 +21,8 @@ export const database = process.env.TYPEDB_DATABASE || "vercel_demo";
 
 // One driver per server instance. The driver signs in on its first request and refreshes its token itself,
 // so each cold start signs in once and warm invocations reuse the token.
-// Don't set `tls.rootCAPath`: it loads `node:https` and would break the Edge runtime. TypeDB Cloud uses
-// publicly trusted certificates, so the runtime's default trust store is enough.
+// TypeDB Cloud uses publicly trusted certificates, so no `tls` option is needed. (`tls.rootCAPath` is
+// Node.js-only: leave it unset if you run this on an Edge-style runtime.)
 let driver: TypeDBHttpDriver | undefined;
 
 export function getDriver(): TypeDBHttpDriver {

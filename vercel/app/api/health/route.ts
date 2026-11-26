@@ -1,7 +1,6 @@
 import { getDriver, unwrap } from "@/lib/typedb";
 
-// Runs on the Edge runtime: proof that the HTTP driver needs nothing beyond `fetch`.
-export const runtime = "edge";
+// Checks that the app can reach TypeDB: useful as a first request after deploying.
 export const dynamic = "force-dynamic";
 
 export async function GET() {
@@ -9,7 +8,7 @@ export async function GET() {
   try {
     unwrap(await driver.health());
     const version = unwrap(await driver.version());
-    return Response.json({ ok: true, runtime: "edge", typedb: version });
+    return Response.json({ ok: true, typedb: version });
   } catch (e) {
     return Response.json({ ok: false, error: e instanceof Error ? e.message : String(e) }, { status: 503 });
   }

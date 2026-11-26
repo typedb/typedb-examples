@@ -15,7 +15,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <Link href="/" className="text-2xl font-semibold">
             People &amp; interests
           </Link>
-          <p className="text-sm text-gray-500">Next.js on Vercel, data in TypeDB Cloud.</p>
+          <p className="text-sm text-gray-500">Deployed on Vercel backed by TypeDB.</p>
         </header>
         {children}
       </body>

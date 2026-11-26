@@ -25,7 +25,7 @@ demonstrating a pure-frontend web app connecting directly to a TypeDB backend us
 ### [Next.js on Vercel](vercel)
 
 A minimal, deployable Next.js (App Router) app with a "Deploy to Vercel" button, querying TypeDB Cloud from server
-components, a server action and an Edge route handler using the HTTP driver.
+components, a server action and a route handler using the HTTP driver.
 
 - **Stack:** TypeScript (Next.js, Tailwind), `@typedb/driver-http`
 

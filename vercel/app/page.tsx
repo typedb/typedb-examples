@@ -4,7 +4,6 @@ import { AddPersonForm } from "./add-person-form";
 
 // Query TypeDB on every request rather than at build time.
 export const dynamic = "force-dynamic";
-// export const runtime = "edge"; // works here too: the driver only needs `fetch`
 
 type Person = { name: string; topics: { name: string }[] };
 

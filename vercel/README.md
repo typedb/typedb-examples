@@ -57,14 +57,14 @@ inserts the person and links each chosen topic. Then it calls `revalidatePath("/
 an error.
 
 There are also `app/people/[name]/page.tsx` (a read whose parameter comes from the URL) and `app/api/health/route.ts`
-(`health()` + `version()` on the **Edge** runtime).
+(`health()` + `version()`, a quick connectivity check).
 
 ## Deploy to Vercel
 
 1. Click **Deploy** above (or import the repo in Vercel). Set the four env vars when Vercel asks:
    `TYPEDB_ADDRESS`, `TYPEDB_USERNAME`, `TYPEDB_PASSWORD`, `TYPEDB_DATABASE`.
 2. Run `npm run db:setup` once from your machine against the same cluster (with the same values in `.env.local`).
-3. Open the deployment, then `/api/health`. It should return `{"ok":true,"runtime":"edge",…}`.
+3. Open the deployment, then `/api/health`. It should return `{"ok":true,"typedb":{…}}`.
 
 ## Notes
 
@@ -81,10 +81,9 @@ There are also `app/people/[name]/page.tsx` (a read whose parameter comes from t
 
   Wrap each value with `value()` so it is sent as typed data. A bare JS string is parsed as a TypeQL literal and is
   rejected if it contains a `"`.
-- **Edge or Node.js.** The driver depends only on `fetch`, so it runs on both. `/api/health` sets
-  `runtime = "edge"` to prove this, and `app/page.tsx` works with that line too. Next.js 16 marks the Edge runtime as
-  deprecated and recommends Node.js (the default), which is what the pages use. Don't set the driver's
-  `tls.rootCAPath`: it loads `node:https` and breaks Edge. TypeDB Cloud's certificates are publicly trusted, so you don't need it.
+- **Runtime.** Everything runs on the default Node.js runtime. The driver depends only on `fetch`, so it also runs on
+  Edge-style runtimes (Vercel Edge Middleware, Cloudflare Workers) as long as you leave `tls.rootCAPath` unset, since it
+  needs `node:https`.
 - **Cold starts.** Each new function instance signs in once, on its first query. Warm invocations reuse the token.
 - **One transaction per request.** `read` and `write` use one-shot queries, which open a transaction, run the query,
   commit if needed and close it in a single HTTP call. Use `writeAll` when several writes must be atomic.
