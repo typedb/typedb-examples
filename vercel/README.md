@@ -36,7 +36,6 @@ unchanged) and loads `typedb/seed.tql` only when there are no people yet.
 - `write(tql, given?)` runs one write query and commits it.
 - `writeAll(steps)` runs several queries in one write transaction (`openTransaction` → `query` × n →
   `commitTransaction`), so they commit together or not at all.
-- `value(type, v)` wraps user input as a typed value for a `given` row (see the notes).
 
 **`app/page.tsx`**: a server component, rendered on every request (`dynamic = "force-dynamic"`). It runs one nested fetch:
 
@@ -76,11 +75,11 @@ There are also `app/people/[name]/page.tsx` (a read whose parameter comes from t
 
   ```ts
   await read(`given $name: string; match $p isa person, has name == $name; fetch { "name": $p.name };`,
-             [{ name: value("string", name) }]);
+             [{ name }]);
   ```
 
-  Wrap each value with `value()` so it is sent as typed data. A bare JS string is parsed as a TypeQL literal and is
-  rejected if it contains a `"`.
+  This needs TypeDB 3.15 or later. Older servers parse a plain string given value as a TypeQL literal and reject it
+  if it contains a `"`; send `{ kind: "value", valueType: "string", value: name }` instead.
 - **Runtime.** Everything runs on the default Node.js runtime. The driver depends only on `fetch`, so it also runs on
   Edge-style runtimes (Vercel Edge Middleware, Cloudflare Workers) as long as you leave `tls.rootCAPath` unset, since it
   needs `node:https`.

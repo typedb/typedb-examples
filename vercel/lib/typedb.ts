@@ -7,8 +7,6 @@ import {
   type ConceptDocument,
   type GivenRows,
   type QueryResponse,
-  type Value,
-  type ValueType,
 } from "@typedb/driver-http";
 
 function requireEnv(name: string): string {
@@ -42,11 +40,7 @@ export function unwrap<T extends {} | null>(res: ApiResponse<T>): T {
 
 // User input never gets spliced into TypeQL. Queries declare inputs with a `given` clause
 // (e.g. `given $name: string;`) and the values travel separately as `givenRows`, one object per row,
-// keyed by variable name without the `$`. Wrap each value with `value()` so it is sent as typed data:
-// a bare JS string is read as a TypeQL literal and fails if it contains a double quote.
-export function value(valueType: ValueType, v: string | number | boolean): Value {
-  return { kind: "value", valueType, value: v };
-}
+// keyed by variable name without the `$`, e.g. `[{ name: "Ada" }]`.
 
 /** Runs a `match … fetch` query in its own read transaction and returns the JSON documents. */
 export async function read(tql: string, given?: GivenRows): Promise<ConceptDocument[]> {

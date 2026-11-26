@@ -1,7 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { value, writeAll } from "@/lib/typedb";
+import { writeAll } from "@/lib/typedb";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
 
@@ -21,7 +21,7 @@ export async function addPerson(name: string, topics: string[]): Promise<ActionR
       {
         tql: `given $name: string, $at: datetime;
               insert $p isa person, has name == $name, has created-at == $at;`,
-        given: [{ name: value("string", name), at: value("datetime", createdAt) }],
+        given: [{ name, at: createdAt }],
       },
       ...(topics.length > 0
         ? [{
@@ -29,7 +29,7 @@ export async function addPerson(name: string, topics: string[]): Promise<ActionR
                   match $p isa person, has name == $name;
                         $t isa topic, has name == $topic;
                   insert interest (fan: $p, subject: $t);`,
-            given: topics.map((topic) => ({ name: value("string", name), topic: value("string", topic) })),
+            given: topics.map((topic) => ({ name, topic })),
           }]
         : []),
     ]);

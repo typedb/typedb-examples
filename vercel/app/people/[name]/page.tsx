@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { read, value } from "@/lib/typedb";
+import { read } from "@/lib/typedb";
 
 export const dynamic = "force-dynamic";
 
@@ -21,7 +21,7 @@ export default async function PersonPage({ params }: { params: Promise<{ name: s
          fetch { "name": $t.name };
        ]
      };`,
-    [{ name: value("string", name) }],
+    [{ name }],
   )) as Person[];
   if (!person) notFound();
 
