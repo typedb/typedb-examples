@@ -1,0 +1,17 @@
+insert
+  $ada isa person, has name "Ada", has created-at 2025-01-10T09:00:00;
+  $grace isa person, has name "Grace", has created-at 2025-01-11T10:30:00;
+  $alan isa person, has name "Alan", has created-at 2025-01-12T14:15:00;
+  $edsger isa person, has name "Edsger", has created-at 2025-01-13T16:45:00;
+
+  $graphs isa topic, has name "Graphs";
+  $compilers isa topic, has name "Compilers";
+  $cryptography isa topic, has name "Cryptography";
+  $jazz isa topic, has name "Jazz";
+
+  interest (fan: $ada, subject: $compilers);
+  interest (fan: $ada, subject: $jazz);
+  interest (fan: $grace, subject: $compilers);
+  interest (fan: $alan, subject: $cryptography);
+  interest (fan: $alan, subject: $graphs);
+  interest (fan: $edsger, subject: $graphs);

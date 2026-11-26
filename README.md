@@ -22,6 +22,13 @@ demonstrating a pure-frontend web app connecting directly to a TypeDB backend us
 
 - **Frontend:** TypeScript (React, Vite)
 
+### [Next.js on Vercel](vercel)
+
+A minimal, deployable Next.js (App Router) app with a "Deploy to Vercel" button, querying TypeDB Cloud from server
+components, a server action and an Edge route handler using the HTTP driver.
+
+- **Stack:** TypeScript (Next.js, Tailwind), `@typedb/driver-http`
+
 ## Small Examples
 
 There are some smaller, though still complex, examples that are fully contained in this repository:
