@@ -1,0 +1,55 @@
+name: Vercel example
+
+on:
+  push:
+    paths:
+      - 'vercel/**'
+      - '.github/workflows/vercel.yml'
+  pull_request:
+    paths:
+      - 'vercel/**'
+      - '.github/workflows/vercel.yml'
+
+jobs:
+  setup:
+    name: Load schema and seed data
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: vercel
+    env:
+      TYPEDB_ADDRESS: http://localhost:8000
+      TYPEDB_USERNAME: admin
+      TYPEDB_PASSWORD: password
+      TYPEDB_DATABASE: vercel_demo
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Setup TypeDB
+      uses: typedb/setup-typedb@1.0.0
+      with:
+        typedb_version: 3.15.0
+        typedb_args: "--development-mode.enabled=true"
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: 22
+        cache: npm
+        cache-dependency-path: vercel/package-lock.json
+
+    - name: Install dependencies
+      run: npm ci
+
+    # setup-typedb starts the server in the background without waiting for it.
+    - name: Wait for TypeDB
+      run: timeout 60 sh -c 'until curl -sf $TYPEDB_ADDRESS/v1/health; do sleep 1; done'
+
+    - name: Create database, apply schema and load seed data
+      run: npm run db:setup
+
+    # A second run must find the database and data already present and change nothing.
+    - name: Re-run setup
+      run: npm run db:setup | tee setup.log && grep -q "Data already present" setup.log
