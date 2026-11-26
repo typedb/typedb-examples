@@ -9,9 +9,10 @@ It is the companion repo for the guide *Use TypeDB from Vercel and Next.js*.
 ## Prerequisites
 
 - Node.js 22+
-- A free TypeDB Cloud cluster ([sign up](https://cloud.typedb.com)). From the cluster page you need:
-  - its HTTP address, e.g. `https://<cluster>.cloud.typedb.com:8000`
-  - a username and password
+- TypeDB >= 3.15
+  - You can deploy a free TypeDB Cloud cluster ([sign up](https://cloud.typedb.com)). From the cluster page you need:
+    - its HTTP address, e.g. `https://<cluster>.cloud.typedb.com:8000`
+    - a username and password
 
 ## Setup
 

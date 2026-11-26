@@ -1,6 +1,7 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { isApiError } from "@typedb/driver-http";
 import { writeAll } from "@/lib/typedb";
 
 export type ActionResult = { ok: true } | { ok: false; error: string };
@@ -34,8 +35,7 @@ export async function addPerson(name: string, topics: string[]): Promise<ActionR
         : []),
     ]);
   } catch (e) {
-    const message = e instanceof Error ? e.message : String(e);
-    if (message.includes("[CNT9]")) return { ok: false, error: `"${name}" already exists.` };
+    if (isApiError(e) && e.code === "CNT9") return { ok: false, error: `"${name}" already exists.` };
     console.error(e);
     return { ok: false, error: "Could not save to TypeDB. Check the server logs." };
   }

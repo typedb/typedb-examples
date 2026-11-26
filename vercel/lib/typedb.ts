@@ -32,9 +32,12 @@ export function getDriver(): TypeDBHttpDriver {
   return driver;
 }
 
-/** Returns the success payload of a driver call, or throws the server's error. */
+/**
+ * Returns the success payload of a driver call, or throws the server's error as it is: `{ code, message }`.
+ * Catch it with the driver's `isApiError(e)` and check `e.code`, e.g. `"CNT9"` for a constraint violation.
+ */
 export function unwrap<T extends {} | null>(res: ApiResponse<T>): T {
-  if (isApiErrorResponse(res)) throw new Error(res.err?.message ?? JSON.stringify(res.err));
+  if (isApiErrorResponse(res)) throw res.err;
   return res.ok;
 }
 
