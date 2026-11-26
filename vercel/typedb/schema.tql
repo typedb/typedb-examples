@@ -1,0 +1,17 @@
+define
+
+attribute name, value string;
+attribute created-at, value datetime;
+
+entity person,
+  owns name @key,
+  owns created-at,
+  plays interest:fan;
+
+entity topic,
+  owns name @key,
+  plays interest:subject;
+
+relation interest,
+  relates fan,
+  relates subject;
