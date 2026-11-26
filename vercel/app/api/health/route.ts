@@ -1,5 +1,4 @@
-import { isApiError } from "@typedb/driver-http";
-import { getDriver, unwrap } from "@/lib/typedb";
+import { errorMessage, getDriver, unwrap } from "@/lib/typedb";
 
 // Checks that the app can reach TypeDB: useful as a first request after deploying.
 export const dynamic = "force-dynamic";
@@ -11,6 +10,6 @@ export async function GET() {
     const version = unwrap(await driver.version());
     return Response.json({ ok: true, typedb: version });
   } catch (e) {
-    return Response.json({ ok: false, error: isApiError(e) || e instanceof Error ? e.message : String(e) }, { status: 503 });
+    return Response.json({ ok: false, error: errorMessage(e) }, { status: 503 });
   }
 }

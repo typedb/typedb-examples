@@ -1,27 +1,34 @@
 import Link from "next/link";
-import { read } from "@/lib/typedb";
+import { errorMessage, read } from "@/lib/typedb";
 import { AddPersonForm } from "./add-person-form";
 
 // Query TypeDB on every request rather than at build time.
 export const dynamic = "force-dynamic";
 
 type Person = { name: string; topics: { name: string }[] };
+type Topic = { name: string };
 
 export default async function Home() {
-  const [people, topics] = await Promise.all([
-    read(`
-      match $p isa person, has name $n;
-      sort $n;
-      fetch {
-        "name": $n,
-        "topics": [
-          match interest (fan: $p, subject: $t);
-          fetch { "name": $t.name };
-        ]
-      };
-    `) as Promise<Person[]>,
-    read(`match $t isa topic, has name $n; sort $n; fetch { "name": $n };`) as Promise<{ name: string }[]>,
-  ]);
+  let people: Person[], topics: Topic[];
+  try {
+    [people, topics] = await Promise.all([
+      read(`
+        match $p isa person, has name $n;
+        sort $n;
+        fetch {
+          "name": $n,
+          "topics": [
+            match interest (fan: $p, subject: $t);
+            fetch { "name": $t.name };
+          ]
+        };
+      `) as Promise<Person[]>,
+      read(`match $t isa topic, has name $n; sort $n; fetch { "name": $n };`) as Promise<Topic[]>,
+    ]);
+  } catch (e) {
+    // Show TypeDB's error rather than a generic 500, e.g. when the database hasn't been set up yet.
+    return <pre className="whitespace-pre-wrap text-sm text-red-600">{errorMessage(e)}</pre>;
+  }
 
   return (
     <main className="space-y-8">
